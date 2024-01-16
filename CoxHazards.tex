@@ -3,28 +3,90 @@
 
 \section{Introduction}
 \begin{itemize}
-    \item Cox proportional hazards model
+    \item Cox proportional hazards model - what is it?
+    \item What is my hypothesis: using clinical and imaging features together in a simple cox regression will need to hugher concordance than imaging and clinical data alone
+    \item What is concordance? How is it calculated?
+    \item Examples of cox models in ALS before:
 \end{itemize}
 
 \section{Methods}
 \begin{itemize}
-    \item Experiment details
+    \item Clinical Data:
+    \begin{itemize}
+        \item Milan data: sample size, some partients died and some were censored and we're given the censor date
+        \item Features: age at visit, alsfrsr, diagnostic delay, age at diagnosis. Imaging
+        \item What preprocessing was done:
+    \end{itemize}
+    \item Imaging Data:
+    \begin{itemize}
+        \item MRI within 12 months of diagnosis
+        \item Synthsegged into regions - give the regions
+        \item Normalised (z-score I think, check this)
+        \item Not all the regions were input into the model - give the regions and why (too many features)
+    \end{itemize}
+    \item Demographics of the sample: table
+    \item Experiment details: how the cox model was trained and tested - python package, parameter choices, etc
+    \begin{itemize}
+        \item Kaplan meier plots: tertile split
+        \item Stratified by sex
+    \end{itemize}
 \end{itemize}
 
 \section{Results}
 
-\section{Discussion}
+Clinical-only:
 \begin{itemize}
-    \item What can we take away from this?
-    \item Limitations
+    \item Table of results with all results in it
+    \item What are the significant features and their p-values: none
+    \item Hazard ratio plot
+    \item Kaplan Meier plot
+\end{itemize}
+
+Imaging-only:
+\begin{itemize}
+    \item Table of results with all results in it
+    \item What are the significant features and their p-values: lateral ventricle and brain stem
+    \item Hazard ratio plot
+    \item Kaplan Meier plot
+\end{itemize}
+
+Clinical and imaging:
+\begin{itemize}
+    \item Table of results with all results in it
+    \item What are the significant features and their p-values: ALSFRSr, brain stem, diagnostic delay
+    \item Hazard ratio plot
+    \item Kaplan Meier plot
+\end{itemize}
+
+\section{Discussion}
+
+Do these results make sense?:
+\begin{itemize}
+    \item Clinical-only: interesting no significant features, maybe not enough features
+    \item Imaging-only: both significant features and their hazard ratios make sense given the literature (citations)
+    \item Clinical and imaging: significant features and their hazard ratios make sense given the literature (citations)
+\end{itemize}
+
+Differences between inputs:
+\begin{itemize}
+    \item Higher concordance with clinical and imaging together as opposed to each by themselves. Better AIC as well.
+    \item Different significant features for clinical and imaging alone and together. Why?
+\end{itemize}
+
+Limitations:
+\begin{itemize}
+    \item Small-ish sample size
+    \item However, colinearity of features doesn't diminish the results
+\end{itemize}
+
+Take home message:
+\begin{itemize}
+    \item Using imaging-derived feature with clinical features increases concordance, more information into the model is better, makes the clinical measure significant as well when it wasn't before
+    \item Would this result also be sustained when using more sophisticated machine learning models? Instinct says yes because they can handle more features and more complex relationships between features
 \end{itemize}
 
 \section{Conclusion}
 \begin{itemize}
-    \item Link to next chapter:
-    \begin{itemize}
-        \item Using imaging-derived feature with clinical features increases concordance
-        \item Other results: ....
-        \item What if we used more sophisticated machine learning models?
-    \end{itemize}
+    \item Link to next chapter: we've shown that using imaging and clinical together is better than using them alone
+    \item Let's see if we can improve on this by using more sophisticated machine learning models
 \end{itemize}
