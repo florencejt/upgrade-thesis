@@ -2,17 +2,62 @@
 \label{fusilli_on_mnd}
 
 \section{Introduction}
+\begin{itemize}
+    \item We've seen the results of fusilli on open data
+    \item Now let's do it on MND data
+    \item How different is MND to PD and AD? *Look this up* - what might we expect to see?
+    \item Hypothesis: multimodal data fusion is useful for predicting survival in MND when deployed at the diagnostic appointment
+    \item Motivation - why is this useful? Implications if multimodal data fusion is better, imaging doesn't have to be just used for differential diagnosis and can play a role in prognosis, which is important for clinical trials and patient care.
+\end{itemize}
+
+\section{Data}
+\begin{itemize}
+    \item Where is the data coming from? Milan and the UK
+    \item Tabular-tabular data fusion. Why?
+    \item Sample size is too small for effective deep learning with 3D MRI or 2D slices of MRI
+    \item Instead we'll look at extracted brain volumes
+    \item Why might this be useful anyway? It's more accessible than raw MRI data for use in hospitals and clinics, potentially easier to interpret with explainable AI than deep learning, where the features are extracted automatically
+\end{itemize}
+
+\subsection{Clinical Data}
+\begin{itemize}
+    \item Inclusion criteria
+    \item Features
+    \item Demographics
+\end{itemize}
+
+\subsection{Imaging Data}
+\begin{itemize}
+    \item Inclusion criteria: how far away from diagnosis was the MRI?
+    \item Segmentation using SynthSeg - what is synthseg?
+    \item Features
+\end{itemize}
 
 \section{Methods}
+\begin{itemize}
+    \item What are we predicting? Long vs short survival split on the median
+    \item What methods are we using? All the tabular-tabular fusion methods available in fusilli, plus a baseline of just using the clinical data or just using the imaging data
+    \item K-fold cross validation
+    \item To improve the stability of the results, we retrained and reevaluated the models until the mean of the performance of the repetitions converged to *include percentage here*
+    \item Metrics: AUROC and accuracy
+\end{itemize}
 
 \section{Results}
+Model comparison figure.
 
 \section{Discussion}
+\subsection{What does it mean??}
+Interpreting the results.
+
+\subsection{Limitations}
 \begin{itemize}
     \item Limitations on sample size
+    \item Predictive task of classification rather than regression: what if we used a regression task instead? Would that be more useful? It's a harder task so may require more data
+    \item Limitation on using extracted brain volumes rather than raw MRI: what if the regions we've chosen aren't the most important ones? Subcortical regions have shown to have a role in MND, but we haven't included them here. *Look this up - the thalamus stuff*
 \end{itemize}
 
 \section{Conclusion}
+First look at multimodal data fusion in MND. What does it mean? What are the implications? What are the next steps?
 \begin{itemize}
     \item If imaging + clinical is useful
     \begin{itemize}
