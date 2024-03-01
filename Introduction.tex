@@ -1,27 +1,46 @@
 \chapter{Introduction}
 \label{introduction}
 
+\textbf{Motor neuron disease}
 \begin{itemize}
-\item MND
-\item Data fusion
-\item Could they work together?
+    \item What is MND?
+    \item What are the different types of MND?
+    \item What are the symptoms of MND?
+    \item What are the causes of MND?
+    \item What are the treatments for MND?
+    \item What is the prognosis for MND?
+    \item What is the epidemiology of MND?
 \end{itemize}
+
+\textbf{Imaging in MND}
+\begin{itemize}
+    \item Only used in the clinical pathway for diagnosis: Ruling out ALS mimics, El Escorial scale, imaging to rule out other conditions
+    \item Neuroimaging-derived measures have been shown to be associated with patient prognosis - insert citations here
+    \item Machine learning for images, and specifically medical imaging, has been shown to be useful for prognosis in other diseases, and to some extent for MND
+    \item A growing area of machine learning is multimodal data fusion, where different types of data are combined to improve the performance of the model.
+    \item Imaging has not been included yet into the clinical pathway for prognosis, but perhaps it has a role to play when combined with clinical data through multimodal data fusion AI
+\end{itemize}
+
+\textbf{This work}
+This work aims to create a prognostic tool for MND using multimodal data fusion AI, combining clinical, imaging and other data types together at the diagnostic appointment
+
 
 \section{Motivation}
 
 \begin{itemize}
-    \item Why MND?
-    \item Why imaging?
-    \item Why prognosis?
-    \item Why data fusion?
+    \item Why MND prognosis? Patients want it, good for clinical trial stratification, good for planning treatment
+    \item Why imaging? Already being taken at diagnosis for differential diagnosis, might as well use it for prognosis - healthcare economics, no extra data collection. Also has shown promise in the literature. A lot fo machine learnign literature on imaging too - good for deep learning because it's so big and complex.
+    \item Why data fusion? MND is multifactorial, so it makes sense to use all the data available to us. Also, it's a growing area of machine learning, and has shown promise in other diseases.
 \end{itemize}
 
 \section{Project Aims}
 
 \begin{enumerate}
-    \item Aim 1
-    \item Aim 2
-    \item Aim 3
+    \item Aim 1: investigate value of imaging in non-ML data fusion prognosis
+    \item Aim 2: explore methods for multimodal data fusion in the literature and apply to larger multimodal neurodegenerative disease datasets
+    \item Aim 3: apply to MND prognosis prediction with clinical and imaging data: find the value of imaging and the best way to use it (whole brain, regions of interest, texture analysis, etc
+    \item Aim 4: Add more modalities such as fluid biomarkers and NLP from radiological reports
+    \item Aim 4: Create the optimal multimodal data fusion model for MND prognosis and assess added values of different modalities
 \end{enumerate}
 
 \section{Upgrade Thesis Outline}
