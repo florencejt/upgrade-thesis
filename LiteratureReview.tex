@@ -1,16 +1,32 @@
 \chapter{Literature Review}
 \label{literature_review}
 
-Introduction to the lit review: will be looking at motor neuron disease and prognostic factors associated with it including clinical data, imaging, genetics, and fluid biomarkers.
-Then we will look at machine learning techniques to predict prognosis in MND using each of these data types, and finally looking at how these data have been combined in multimodal machine learning models.
-
-MND is multifactorial and affects multiple aspects of a patients life: motor, cognitive, behavioural.
-Therefore it is also multifactorial in its prognosis: there are many factors that can affect how long a patient will live with MND, and many different ways to measure this.
-
+This chapter contains a review of literature on prognosis of motor neuron disease, looking at both prognostic factors from various data types, and also attempts to predict prognosis using machine learning.
 
 \section{Clinical prognostic factors}
 
+How can prognosis be measured? Survival, rate of progression, future ALSFRS-R, future need for therapies.
+
 \subsection{Non-genetic}
+
+A large meta-analysis in 2021 collated research studies on non-genetic prognostic factors in ALS associated with survival risk~\cite{suPredictorsSurvivalPatients2021}.
+The review calculated and reported the hazard ratios (HRs) for each factor which had at least 3 studies reporting on it. Heterogeniety was assessed using the I-squared statistic, and sensitivity analysis was performed to assess the robustness of the results.
+None of the sensitivity analyses showed a significant change in the results, and the authors concluded that the results were robust.
+
+Starting with demographic factors, the meta-analysis found a higher age of symptom onset is associated with a higher risk of death (HR = 1.03)~\cite{suPredictorsSurvivalPatients2021}. However, age of onset is an imprecise measure because it is diffiuclt for patients to pinpoint their exact date of symptom onset, since symptoms often arise gradually.
+It is common in clinical records for the onset date to be the first date of the month or even the first day of the year if the patient is having trouble remembering. Nevertheless, the harmful effect of older age at onset is consistent with much of literature (FIND CITATIONS HERE).
+The meta-analysis also found that single, as opposed to married, patients have a worse prognosis (HR = 1.73), and that being a current smoker (HR=1.37) or a former smoker (HR=1.16) are both negative prognostic factors~\cite{suPredictorsSurvivalPatients2021}.
+
+Rapid weight loss is a common feature of MND because of difficulties eating and swallowing, decreased appetite, and loss of muscle mass. A higher body-mass index (BMI) at diagnosis is associated with a lower risk of death (HR = 0.97) from 17 different studies in the meta-analysis ~\cite{suPredictorsSurvivalPatients2021}.
+Another smaller meta-analysis specifically on BMI also found that higher BMI at baseline is protective HR=0.96)~\cite{dardiotisBodyMassIndex2018}, also backed up by a large population study of 1,809 patients from China (BMI >= 25 kg/m2, HR=0.36)~\cite{gaoEpidemiologyFactorsPredicting2021}.
+However, there are some studies that have found no association between baseline BMI and survival, rather that the most important BMI prognostic factor is the rate of change in BMI~\cite{jawaidDecreaseBodyMass2010}.
+Specifically, a decrease in BMI both 5 years and 10 years before symptom onset has been associated with shorter survival, in a study of N=381 ALS patients~\cite{goutmanBodyMassIndex2023}.
+Since BMI is a simplistic measure that fails to capture body composition~\cite{rothmanBMIrelatedErrorsMeasurement2008}, Lindauer and colleagues used MRI of the knees and diaphragm to measure levels of subcutaneous and visceral fat in 62 ALS patients.
+They found that higher subcutaneous fat is associated with higher ALSFRS-R and lower rate of ALSFRS-R decrease~\cite{lindauerAdiposeTissueDistribution2013}. Visceral fat was not associated with either measures.
+
+The appearance of cognitive and behavioural impairment can also have an impact on survival.
+Executive dysfunction, the inability to manage cognitive tasks, is associated with fast disease progression~\cite{elaminExecutiveDysfunctionNegative2011} and shorter survival in the meta-analysis (HR=2.1)~\cite{suPredictorsSurvivalPatients2021}.
+Moreover, the meta-analysis found that the presence of FTD (HR=2.98) and non-specific dementia (HR=1.41) are both associated with shorter survival~\cite{suPredictorsSurvivalPatients2021}.
 
 \subsection{Genetic}
 
