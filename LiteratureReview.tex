@@ -5,7 +5,7 @@ This chapter contains a review of literature on prognosis of motor neuron diseas
 
 \section{Clinical prognostic factors}
 
-How can prognosis be measured? Survival, rate of progression, future ALSFRS-R, future need for therapies.
+How can prognosis be measured? Survival, rate of progression, future ALSFRS-R, future need for therapies, composite end point of NIV, tracheostomy, and death.
 
 \subsection{Non-genetic}
 
@@ -40,7 +40,7 @@ A higher ALSFRS-R at baseline is associated with longer survival (HR=0.96), and 
 The rate of decline in ALSFRS-R from onset to diagnosis is also called the progression rate to baseline, or PRB, and is calculated as
 \begin{equation}
     PRB = \frac{48-\textnormal{ALSFRS-R}(t_{diag})}{t_{diag}-t_{onset}},
-\end{equation}
+\end{equation}\label{eq:PRB}
 where $t_{diag}$ and $t_{onset}$ are the dates of MND diagnosis and symptom onset respectively, and 48 is the maximum score of ALSFRS-R.
 
 Other clinical factors associated with shorter survival are lower forced vital capacity (FVC), and a shorter time between symptom onset and diagnosis~\cite{suPredictorsSurvivalPatients2021}.
@@ -58,7 +58,36 @@ Finally, the meta-analysis found that taking Riluzole is associated with longer 
 
 \subsection{Genetic}
 
+Genetic testing after diagnosis is becoming more common now that the extent of the genetic contribution to MND is better understood and that therapeutics are being developed to target specific genetic mutations~\cite{efnstaskforceondiagnosisandmanagementofamyotrophiclateralsclerosis:EFNSGuidelinesClinical2012}.
+Increased data availability of genetic markers has led to a number of studies on the prognostic value of genetic markers in MND.
+A network meta-analysis on genetic factors associated with survival in ALS found that the C9orf72 repeat expansion is associated with shorter survival compared to no known variants (HR=1.6)~\cite{suGeneticFactorsSurvival2022}.
+This is consistent with another study of cohort of 1,245 ALS patients that found that, in a multivariable Cox regression model, the C9orf72 repeat expansion is associated with shorter survival (HR=1.65)~\cite{chioAssociationCopresencePathogenic2023}.
+Also associated with shorter survival is ATXN2, a CAG repeat expansion usually associated with spinal onset ALS (HR=3.6), and a mutated FUS (fused in sarcoma) (HR=1.8)~\cite{suGeneticFactorsSurvival2022}.
+
 \subsection{Tools for Prognosis}
+
+There are limited clinical tools for prognosis prediction in MND. The most common way for progression to be assessed is through the progression rate in Equation~\ref{eq:PRB}, which can be generalised to the progression rate to any time point, not just diagnosis.
+Extrapolating this progression rate to predict future ALSFRS-R scores is a common way to predict future progression, called the "pre-slope model", but it is not a perfect method since it assumes that ALSFRS-R decline is linear.
+
+To overcome these issues, the D50 model was developed, which fits a sigmoidal curve to a patient's ALSFRS-R timepoints, yielding an individualised prediction of future ALSFRS-R scores
+~\cite{poesenNeurofilamentMarkersALS2017, steinbachApplyingD50Disease2020}.
+The D50 model can provide a measure of disease aggressiveness, which is the estimated rate of functional loss from the sigmoidal curve, and disease accummulation, which is the patient's position on the D50 curve independent of time.
+
+A non-linear extension of the D50 model was proposed by Ramamoorthy and colleagues, where Gaussian processes are used to non-parametrically cluster patients into non-linear ALSFRS-R trajectories~\cite{ramamoorthyIdentifyingPatternsAmyotrophic2022}.
+In their model development, they found that many of the patients in their cohort had non-linear ALSFRS-R trajectories (convex, concave, sigmoidal) and that the slope of ALSFRS-R in the first year of the disease is not sufficient to accurately predict future ALSFRS-R scores.
+
+Finally, a popular model for predicting survival probability in ALS is the ENCALS model~\cite{westenengPrognosisPatientsAmyotrophic2018}.
+Using data from 14 European ALS centres and over 11,000 patient records, Westeneng and colleagues developed a multivariable Royston-Parmar model to predict a survival probability function for an individual ALS patient from baseline information.
+They selected the predictors through backward elimination and bootstapping, and predictors present in more than 70\% of the bootstrapped models were included in the final model.
+The harmful predictors included in the final model are bulbar onset (HR=1.71), age of onset (HR=1.03), El Escorial definite ALS (HR=1.47), higher PRB (HR=6.33), presence of FTD (HR=1.34), and C9orf72 repeat expansion (HR=1.45).
+The protective predictors are a longer diagnostic delay (HR=0.52) and a higher FVC (HR=0.99).
+
+The ENCALS model is available by request of medical doctors, and was validated using a leave-one-site-out protocol.
+The authors demonstrated the model's ability to predict survival by using data from Stephen Hawking, a famous physicist who lived with ALS for a startling 55 years after diagnosis, and found that the model predicted his survival probability well.
+The predicted probability of surviving over 10 years was 94\% and the interquartile range of predicted year of death was 1981 to 2011, which is consistent with the year of Stephen Hawking's tracheostomy in 1985 (which is the endpoint of the model's prediction: NIV for more than 23 hours a day, tracheostomy, or death).
+
+
+
 
 \section{Imaging prognostic factors}
 
