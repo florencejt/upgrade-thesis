@@ -3,11 +3,11 @@
 
 This chapter contains a review of literature on prognosis of motor neuron disease, looking at both prognostic factors from various data types, and also attempts to predict prognosis using machine learning.
 
-\section{Clinical prognostic factors}
+\section{Prognostic Factors}
 
 How can prognosis be measured? Survival, rate of progression, future ALSFRS-R, future need for therapies, composite end point of NIV, tracheostomy, and death.
 
-\subsection{Non-genetic}
+\subsection{Clinical}
 
 A large meta-analysis in 2021 collated research studies on non-genetic prognostic factors in ALS associated with survival risk~\cite{suPredictorsSurvivalPatients2021}.
 The review calculated and reported the hazard ratios (HRs) for each factor which had at least 3 studies reporting on it. Heterogeniety was assessed using the I-squared statistic, and sensitivity analysis was performed to assess the robustness of the results.
@@ -64,32 +64,32 @@ A network meta-analysis on genetic factors associated with survival in ALS found
 This is consistent with another study of cohort of 1,245 ALS patients that found that, in a multivariable Cox regression model, the C9orf72 repeat expansion is associated with shorter survival (HR=1.65)~\cite{chioAssociationCopresencePathogenic2023}.
 Also associated with shorter survival is ATXN2, a CAG repeat expansion usually associated with spinal onset ALS (HR=3.6), and a mutated FUS (fused in sarcoma) (HR=1.8)~\cite{suGeneticFactorsSurvival2022}.
 
-\subsection{Tools for Prognosis}
+%\subsubsection*{Tools for Prognosis}
+%
+%There are limited clinical tools for prognosis prediction in MND. The most common way for progression to be assessed is through the progression rate in Equation~\ref{eq:PRB}, which can be generalised to the progression rate to any time point, not just diagnosis.
+%Extrapolating this progression rate to predict future ALSFRS-R scores is a common way to predict future progression, called the "pre-slope model", but it is not a perfect method since it assumes that ALSFRS-R decline is linear.
+%
+%To overcome these issues, the D50 model was developed, which fits a sigmoidal curve to a patient's ALSFRS-R timepoints, yielding an individualised prediction of future ALSFRS-R scores
+%~\cite{poesenNeurofilamentMarkersALS2017, steinbachApplyingD50Disease2020}.
+%The D50 model can provide a measure of disease aggressiveness, which is the estimated rate of functional loss from the sigmoidal curve, and disease accummulation, which is the patient's position on the D50 curve independent of time.
+%
+%A non-linear extension of the D50 model was proposed by Ramamoorthy and colleagues, where Gaussian processes are used to non-parametrically cluster patients into non-linear ALSFRS-R trajectories~\cite{ramamoorthyIdentifyingPatternsAmyotrophic2022}.
+%In their model development, they found that many of the patients in their cohort had non-linear ALSFRS-R trajectories (convex, concave, sigmoidal) and that the slope of ALSFRS-R in the first year of the disease is not sufficient to accurately predict future ALSFRS-R scores.
+%
+%Finally, a popular model for predicting survival probability in ALS is the ENCALS model~\cite{westenengPrognosisPatientsAmyotrophic2018}.
+%Using data from 14 European ALS centres and over 11,000 patient records, Westeneng and colleagues developed a multivariable Royston-Parmar model to predict a survival probability function for an individual ALS patient from baseline information.
+%They selected the predictors through backward elimination and bootstapping, and predictors present in more than 70\% of the bootstrapped models were included in the final model.
+%The harmful predictors included in the final model are bulbar onset (HR=1.71), age of onset (HR=1.03), El Escorial definite ALS (HR=1.47), higher PRB (HR=6.33), presence of FTD (HR=1.34), and C9orf72 repeat expansion (HR=1.45).
+%The protective predictors are a longer diagnostic delay (HR=0.52) and a higher FVC (HR=0.99).
+%
+%The ENCALS model is available by request of medical doctors, and was validated using a leave-one-site-out protocol.
+%The authors demonstrated the model's ability to predict survival by using data from Stephen Hawking, a famous physicist who lived with ALS for a startling 55 years after diagnosis, and found that the model predicted his survival probability well.
+%The predicted probability of surviving over 10 years was 94\% and the interquartile range of predicted year of death was 1981 to 2011, which is consistent with the year of Stephen Hawking's tracheostomy in 1985 (which is the endpoint of the model's prediction: NIV for more than 23 hours a day, tracheostomy, or death).
+%
 
-There are limited clinical tools for prognosis prediction in MND. The most common way for progression to be assessed is through the progression rate in Equation~\ref{eq:PRB}, which can be generalised to the progression rate to any time point, not just diagnosis.
-Extrapolating this progression rate to predict future ALSFRS-R scores is a common way to predict future progression, called the "pre-slope model", but it is not a perfect method since it assumes that ALSFRS-R decline is linear.
-
-To overcome these issues, the D50 model was developed, which fits a sigmoidal curve to a patient's ALSFRS-R timepoints, yielding an individualised prediction of future ALSFRS-R scores
-~\cite{poesenNeurofilamentMarkersALS2017, steinbachApplyingD50Disease2020}.
-The D50 model can provide a measure of disease aggressiveness, which is the estimated rate of functional loss from the sigmoidal curve, and disease accummulation, which is the patient's position on the D50 curve independent of time.
-
-A non-linear extension of the D50 model was proposed by Ramamoorthy and colleagues, where Gaussian processes are used to non-parametrically cluster patients into non-linear ALSFRS-R trajectories~\cite{ramamoorthyIdentifyingPatternsAmyotrophic2022}.
-In their model development, they found that many of the patients in their cohort had non-linear ALSFRS-R trajectories (convex, concave, sigmoidal) and that the slope of ALSFRS-R in the first year of the disease is not sufficient to accurately predict future ALSFRS-R scores.
-
-Finally, a popular model for predicting survival probability in ALS is the ENCALS model~\cite{westenengPrognosisPatientsAmyotrophic2018}.
-Using data from 14 European ALS centres and over 11,000 patient records, Westeneng and colleagues developed a multivariable Royston-Parmar model to predict a survival probability function for an individual ALS patient from baseline information.
-They selected the predictors through backward elimination and bootstapping, and predictors present in more than 70\% of the bootstrapped models were included in the final model.
-The harmful predictors included in the final model are bulbar onset (HR=1.71), age of onset (HR=1.03), El Escorial definite ALS (HR=1.47), higher PRB (HR=6.33), presence of FTD (HR=1.34), and C9orf72 repeat expansion (HR=1.45).
-The protective predictors are a longer diagnostic delay (HR=0.52) and a higher FVC (HR=0.99).
-
-The ENCALS model is available by request of medical doctors, and was validated using a leave-one-site-out protocol.
-The authors demonstrated the model's ability to predict survival by using data from Stephen Hawking, a famous physicist who lived with ALS for a startling 55 years after diagnosis, and found that the model predicted his survival probability well.
-The predicted probability of surviving over 10 years was 94\% and the interquartile range of predicted year of death was 1981 to 2011, which is consistent with the year of Stephen Hawking's tracheostomy in 1985 (which is the endpoint of the model's prediction: NIV for more than 23 hours a day, tracheostomy, or death).
 
 
-
-
-\section{Imaging prognostic factors}
+\subsection{Neuroimaging}
 
 Structural MRI of the brain is often conducted as part of the differential diagnosis of MND, in order to rule out mimic diseases.
 Imaging is not used for prognosis and progression monitoring clinically because, as the disease progresses, it becomes difficult and uncomfortable for the patient to lie still in the MRI scanner, and the MRI signal is sensitive to motion artefacts.
@@ -105,8 +105,6 @@ Prognosis is studied in ALS by looking at the relationship between imaging measu
 These measures of progression include ALSFRS-R, the rate of decline in ALSFRS-R, and survival time (comparing short and long survivors, for example).
 Although, correlating imaging measures with ALSFRS-R and extracting prognostic meaning is not an ideal methodology because the ALSFRS-R is a measure dominated by the effects of lower motor neuron degeneration, which is not well captured in brain MRI~\cite{bedeLessonsALSImaging2014}.
 
-\subsection{Neuroimaging}
-
 In this section, we are explore brain regions implicated in MND prognosis, grouped by their location in the brain.
 However, some studies have focused on overall brain structure differences by totalling the volume of all grey matter (GM) or white matter (WM) in the brain, and found that lower total baseline GM volume is associated with faster progression (N=29)~\cite{elmendiliAssociationBrainUpper2023}.
 When the GM was parcellated further, the only discriminating factor in ROC analysis between fast and slow progressors was the cortical GM volume.
@@ -118,6 +116,7 @@ However, Trojsi and colleagues found no differences in GM or WM damage between f
 In their study, the only difference between fast and slow progressors was in functional connectivity, where fast progressors had decreased functional connectivity in the motor and extra-motor networks, and increase functional connectivity in the salience network.
 This inconsistency of findings is common in ALS imaging studies, and is likely due to the small sample sizes and the inconsistency of progression measures used in the studies.
 
+\subsubsection*{Motor Cortex and Corticospinal Tract}
 MND is characterised by upper and lower motor neuron degeneration, so changes in the motor cortex and the corticospinal tract (CST) are expected to be affected by the disease.
 Particularly in the motor cortex, the motor band sign has been implicated in affecting prognosis, and the motor band sign is a signal attenuation or hypointensity in the shape of a ribbon at the posterior border of the precentral gyrus, which is seen on T2-weighted MRI and also on susceptibility-weighted imaging (SWI) and quantitative susceptibility mapping (QSM)~\cite{bollHypointensityMotorCortex2019}.
 Motor band sign intensity was found to be a predictor of shorter survival in a study of 73 ALS patients (HR=2.97)~\cite{rizzoDiagnosticPrognosticValue2020}, and the difference in motor band sign intensity after 18-month followup was significantly correlated with ALSFRS-R disease progression, but only in a study of 7 patients~\cite{bollHypointensityMotorCortex2019}.
@@ -133,12 +132,14 @@ White matter tracts other than the CST have also been found to be associated wit
 Similar to the CST, high FA has been found to be a protective factor in prognosis in the posterior limb of the internal capsule (as well as low MD, N=41)~\cite{grolezMRICervicalSpinal2018} and in the right superior longitudinal fascicle (as well as low RD, N=60)~\cite{menkeWidespreadGreyMatter2014}.
 When disease aggressivness has been estimated by the D50 model, studies have found that higher disease aggressiveness is associated with cerebral white matter density decreases in tracts connecting the frontal, parietal, and occipital lobes (N=85)~\cite{steinbachApplyingD50Disease2020}, and with MD and AD elevations in the fronto-parietal tract (N=145)~\cite{steinbachDiseaseAggressivenessSignatures2021}.
 
+\subsubsection*{Cortical Thickness}
 Cortical thickness (CT) is another measure of brain structure that has been associated with prognosis in MND, and is the distance between the pial surface and the grey-white matter boundary, and is often measured using T1-weighted MRI.
 CT loss has been associated with faster progression in MND, in the temporal lobe (N=20, N=45)~\cite{dambrosioFrontotemporalCorticalThinning2014, verstraeteStructuralMRIReveals2012} and in the frontal lobe (N=45)~\cite{verstraeteStructuralMRIReveals2012}.
 However, when considering a measure of disease aggressiveness estimated from the D50 model, Dieckmann and colleagues found no association with CT volumes at baseline in a cohort of 100 ALS patients~\cite{dieckmannCorticalSubcorticalGrey2022}.
 A caveat to that finding is that they did not include any patients with cognitive deficits, so the results may not be generalisable to the whole ALS population since cognitive deficits are common in ALS.
 An interesting finding from Burgh and colleagues (N=292) found that longer survivors had widespread cortical thinning at diagnosis, but this stayed constant over time, whereas short survivors had less CT thinning at diagnosis, but then more extensive changes to CT over time (N=292)~\cite{burghMultimodalLongitudinalStudy2020}.
 
+\subsubsection*{Subcortical Structures}
 Subcortical structures in the brain that have been associated with ALS prognosis are the thalamus, the basal ganglia, and the amygdala.
 Atrophy in the thalamus has been associated with faster decline of ALSFRS-R (N=67)~\cite{sendaStructuralMRICorrelates2017}, and right thalamus volume was the only subcortical brain region with significant association with disease aggressivness from D50 model (N=100)~\cite{dieckmannCorticalSubcorticalGrey2022}.
 Additionally, texture analysis metrics from SWI in the left thalamus were significantly correlated with progression rate (N=17)~\cite{johnsQuantifyingChangesSusceptibility2019}.
@@ -148,6 +149,7 @@ Shorter survival in a cohort of 112 ALS patients has been associated with an ove
 Finally, in a cohort of 157 patients, Ishaque and colleagues found significant texture changes, derived from texture analysis on DTI, in the basal ganglia and hippocampus of short surviving patients, but not in longer surviving patients~\cite{ishaqueEvaluatingCerebralCorrelates2018}.
 The longer surviving patients had texture changes restricted to motor regions.
 
+\subsubsection*{Hippocampus}
 Further studies have looked at the hippocampus with mixed results.
 A smaller hippocampus was associated with shorter survival in the Cox model of 112 patients~\cite{westenengSubcorticalStructuresAmyotrophic2015}, but this significance was lost when adjusted for age of onset, as with the basal ganglia and amygdala.
 Abdulla and colleagues found no correlation between hippocampal volume and ALSFRS-R or rate of decline in ALSFRS-R (N=58)~\cite{abdullaHippocampalDegenerationPatients2014}, and Muller and colleagues found no correlation between hippocampal FA and ALSFRS-R (N=253)~\cite{mullerLargescaleMulticentreCerebral2016}.
@@ -155,6 +157,7 @@ Dieckmann and colleagues found that decreased bilateral hippocampal volume was a
 Progression rates significantly negatively correlated with local shape distances in the right hippocampus in a cohort of 32 ALS patients, meaning that the more the shape of the right hippocampus deviates from the average shape, the faster the progression rate~\cite{taeShapeAnalysisSubcortical2020}.
 Finally, Stoppel and colleagues found that increased hippocampal activation in resting-state fMRI was associated with lower ALSFRS-R, meaning a more advanced disease (N=14)~\cite{stoppelStructuralFunctionalHallmarks2014}.
 
+\subsubsection*{Frontal Lobe}
 Since ALS is closely related to FTD, the frontal lobe and fronto-temporal lobe have been studied in relation to prognosis in MND.
 GM atrophy in the frontotemporal lobe has been associated with medium and fast progression in a study of 67 patients, and this was not seen in slow-progressing patients~\cite{sendaStructuralMRICorrelates2017}.
 Additionally, decreased FA in the frontotemporal lobe has been associated with rapid progression in the same study~\cite{sendaStructuralMRICorrelates2017}.
@@ -162,14 +165,18 @@ This result was also found in the frontol lobe, where a faster decline in FA was
 However, Muller and colleagues found no correlation between frontol areas FA and ALSFRS-R (N=253)~\cite{mullerLargescaleMulticentreCerebral2016}.
 Finally, fast progressors have decreased functional connectivity in middle frontal gyri and paracentral lobule (N=45)~\cite{trojsiRestingStateFunctional2021}, and ALSFRS-R correlated with reduced connectivity in left sensorimotor cortex (N=26)~\cite{agostaSensorimotorFunctionalConnectivity2011}.
 
+\subsubsection*{Ventricles}
 Ventricles are enlarged when the brain atrophies, and larger ventricular volume has been associated with lower baseline ALSFRS-R in a study of 112 patients~\cite{westenengSubcorticalStructuresAmyotrophic2015}.
 
+\subsubsection*{Brain Stem}
 The brain stem is another area of the brain with mixed results in relation to prognosis in MND.
 Since the brain stem is involed in the regulation of breathing, and the most common cause of death in MND is respiratory failure, it is expected that the brain stem would be a candidate prognostic marker in MND.
 Baseline medulla oblongata volume significantly predicted short versus long survival in a cohort of 60 ALS patients~\cite{milellaMedullaOblongataVolume2022}.
 However, Steinbach and colleagues found that brain stem GM density has no affect on aggressivess disease from D50~\cite{steinbachApplyingD50Disease2020}, and no correlation between brain stem FA and ALSFRS-R was found in a study of 253 patients~\cite{mullerLargescaleMulticentreCerebral2016}.
 
-Finally, brain age has been associated with prognosis in MND. Brain age is a measure of how much the brain has aged compared to the average brain of the same chronological age, and is calculated using machine learning models trained on healthy brain MRI data.
+\subsubsection*{Other measures}
+Finally, other imaging measures have been associated with prognosis in MND.
+For one, brain age is a measure of how much the brain has aged compared to the average brain of the same chronological age, and is calculated using machine learning models trained on healthy brain MRI data.
 An increased brain age, meaning the brain looks older than it should, has been associated with faster progression in a study of 112 patients~\cite{hermannCognitiveBehaviouralNot2022}.
 Interestingly, significant brain age changes were only found in ALS patients with cognitive and behavioural impairment, and not in those without. This could signify that obvious brain changes are only seen in patients with cognitive and behavioural impairment, and that the brain changes in patients without cognitive and behavioural impairment are more subtle.
 Many of the imaging studies discussed in this section either did not include patients with cognitive and behavioural impairment, or did not report on the presence of cognitive and behavioural impairment, so this could be a confounding factor in the results of these studies.
@@ -191,13 +198,36 @@ In a study of 43 ALS patients, Branco and colleagues found significant corelatio
 Moreover, Grolez and colleagues found that a smaller reduction in cervical spine volume over 3 months is associated with longer survival in a study of 41 patients~\cite{grolezMRICervicalSpinal2018}.
 However, in a study of 218 MND patients, including ALS, PLS, and PMA, the CSA of the cervical spine only correlated with the baseline ALSFRS-R of PLS and PMA patients, although there was no longitudinal spinal atrophy for the PLS patients~\cite{vanderburghCrosssectionalLongitudinalAssessment2019}.
 
-\section{Fluid Biomarkers prognostic factors}
+\subsection{Fluids}
+
+\subsection{Prognostic Models}
+There are limited clinical tools for prognosis prediction in MND. The most common way for progression to be assessed is through the progression rate in Equation~\ref{eq:PRB}, which can be generalised to the progression rate to any time point, not just diagnosis.
+Extrapolating this progression rate to predict future ALSFRS-R scores is a common way to predict future progression, called the "pre-slope model", but it is not a perfect method since it assumes that ALSFRS-R decline is linear.
+
+To overcome these issues, the D50 model was developed, which fits a sigmoidal curve to a patient's ALSFRS-R timepoints, yielding an individualised prediction of future ALSFRS-R scores
+~\cite{poesenNeurofilamentMarkersALS2017, steinbachApplyingD50Disease2020}.
+The D50 model can provide a measure of disease aggressiveness, which is the estimated rate of functional loss from the sigmoidal curve, and disease accummulation, which is the patient's position on the D50 curve independent of time.
+
+A non-linear extension of the D50 model was proposed by Ramamoorthy and colleagues, where Gaussian processes are used to non-parametrically cluster patients into non-linear ALSFRS-R trajectories~\cite{ramamoorthyIdentifyingPatternsAmyotrophic2022}.
+In their model development, they found that many of the patients in their cohort had non-linear ALSFRS-R trajectories (convex, concave, sigmoidal) and that the slope of ALSFRS-R in the first year of the disease is not sufficient to accurately predict future ALSFRS-R scores.
+
+Finally, a popular model for predicting survival probability in ALS is the ENCALS model~\cite{westenengPrognosisPatientsAmyotrophic2018}.
+Using data from 14 European ALS centres and over 11,000 patient records, Westeneng and colleagues developed a multivariable Royston-Parmar model to predict a survival probability function for an individual ALS patient from baseline information.
+They selected the predictors through backward elimination and bootstapping, and predictors present in more than 70\% of the bootstrapped models were included in the final model.
+The harmful predictors included in the final model are bulbar onset (HR=1.71), age of onset (HR=1.03), El Escorial definite ALS (HR=1.47), higher PRB (HR=6.33), presence of FTD (HR=1.34), and C9orf72 repeat expansion (HR=1.45).
+The protective predictors are a longer diagnostic delay (HR=0.52) and a higher FVC (HR=0.99).
+
+The ENCALS model is available by request of medical doctors, and was validated using a leave-one-site-out protocol.
+The authors demonstrated the model's ability to predict survival by using data from Stephen Hawking, a famous physicist who lived with ALS for a startling 55 years after diagnosis, and found that the model predicted his survival probability well.
+The predicted probability of surviving over 10 years was 94\% and the interquartile range of predicted year of death was 1981 to 2011, which is consistent with the year of Stephen Hawking's tracheostomy in 1985 (which is the endpoint of the model's prediction: NIV for more than 23 hours a day, tracheostomy, or death).
 
 
-\section{Machine Learning with clinical data}
+\section{Machine Learning for Prognosis}
+
 
 Link to previous section: we know a lot of prognostic factors in MND, could tools be developed for clinicans to use these factors to automate or improve clinical decisions like diagnosis and prognosis?
 
+\subsection{Machine Learning Introduction}
 
 \begin{itemize}
     \item What is machine learning?
@@ -215,14 +245,16 @@ What are people trying to predict: ALSFRS, combined endpoint, death, clustering 
 
 Challenges: PROACT and Prize4Life, IDPP CLEF
 
-\subsection{Classical ML prognosis}
+\subsection{With clinical data}
 
-\subsection{Deep Learning prognosis}
+\subsubsection*{Classical ML prognosis}
 
-\section{Machine Learning with imaging data}
+\subsubsection*{Deep Learning prognosis}
+
+\subsection{With imaging data}
 
 
-\section{Machine Learning with multimodal data}
+\subsection{With multimodal data}
 
 The papers that use multimodal data and machine learning for MND.
 \begin{itemize}
