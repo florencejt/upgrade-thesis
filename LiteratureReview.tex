@@ -87,6 +87,25 @@ Also associated with shorter survival is ATXN2, a CAG repeat expansion usually a
 %The predicted probability of surviving over 10 years was 94\% and the interquartile range of predicted year of death was 1981 to 2011, which is consistent with the year of Stephen Hawking's tracheostomy in 1985 (which is the endpoint of the model's prediction: NIV for more than 23 hours a day, tracheostomy, or death).
 %
 
+\subsection{Fluids}
+
+Fluid biomarkers are measurements of proteins, metabolites, or other molecules in the blood/serum, cerebrospinal fluid (CSF), or urine that can be used to diagnose and monitor disease.
+
+From the meta-analysis of non-genetic progostic factors, higher levels of creatine kinase and creatinine in serum indicate longer survival, with HR=0.68 and HR=0.64 respectively~\cite{suPredictorsSurvivalPatients2021}.
+Harmful fluid factors in this meta-analysis  include higher levels of neurofilament light chain (NfL) in CSF (HR=6.8), NfL in serum (HR=3.7) and albumin in serum (HR=1.52).
+
+The most studied fluid biomarker in MND is NfL, which is a protein that is released into the CSF and blood during neuroaxonal injury, which occurs in neurodegeneration.
+NfL is best measured in CSF, and the CSF is extracted by performing a lumbar puncture on the patient, which is an invasive procedure and difficult to perform when the patient is further progressed in the disease~\cite{sturmeyBloodBiomarkersALS2022}.
+However, NfL can also be measured in blood, although it is harder to detect because the concentration is lower than in CSF. This is also reflected in the hazard ratios for NfL in the meta-analysis, where the HR for NfL in CSF is higher than in serum.
+
+NfL levels are elevated in ALS patients compared to healthy controls, but they are also elevated in other neurodegenerative diseases~\cite{huangLongitudinalBiomarkersAmyotrophic2020}.
+The levels of NfL rise presymptomatically in ALS~\cite{benatarValidationSerumNeurofilaments2020}, and studies have shown that NfL concentrations plateau around a year after symptom onset~\cite{benatarNeurofilamentsPresymptomaticALS2019, benatarValidationSerumNeurofilaments2020, thompsonMulticentreAppraisalAmyotrophic2022}.
+
+In a review by Irwin and colleagues, they showed that the general consensus in the literature among over 20 studies is that higher baseline NfL concentration is associated with shorter survival~\cite{irwinFluidBiomarkersAmyotrophic2024}, although there is less consistency in results when correlating NfL with clinical measures such as ALSFRS-R.
+
+Dreger and colleagues investigated the association between NfL and D50-derived disease aggressiveness and disease accumulation in a cohort of 156 ALS patients~\cite{dregerCerebrospinalFluidNeurofilament2021}.
+They found that higher baseline NfL was significantly associated with higher disease aggressiveness, independent of gender, site of onset, and disease accumulation. The independent association of NfL with disease accumulation corroborates the idea that NfL plateaus quickly after onset, and so has limited staging value.
+These significant associations were influenced by age, presence of dementia, and the laboratory where the NfL was measured, which highlights the importance of considering these factors when interpreting NfL results.
 
 
 \subsection{Neuroimaging}
@@ -198,7 +217,6 @@ In a study of 43 ALS patients, Branco and colleagues found significant corelatio
 Moreover, Grolez and colleagues found that a smaller reduction in cervical spine volume over 3 months is associated with longer survival in a study of 41 patients~\cite{grolezMRICervicalSpinal2018}.
 However, in a study of 218 MND patients, including ALS, PLS, and PMA, the CSA of the cervical spine only correlated with the baseline ALSFRS-R of PLS and PMA patients, although there was no longitudinal spinal atrophy for the PLS patients~\cite{vanderburghCrosssectionalLongitudinalAssessment2019}.
 
-\subsection{Fluids}
 
 \subsection{Prognostic Models}
 There are limited clinical tools for prognosis prediction in MND. The most common way for progression to be assessed is through the progression rate in Equation~\ref{eq:PRB}, which can be generalised to the progression rate to any time point, not just diagnosis.
@@ -227,7 +245,6 @@ The predicted probability of surviving over 10 years was 94\% and the interquart
 
 Link to previous section: we know a lot of prognostic factors in MND, could tools be developed for clinicans to use these factors to automate or improve clinical decisions like diagnosis and prognosis?
 
-\subsection{Machine Learning Introduction}
 
 \begin{itemize}
     \item What is machine learning?
@@ -245,16 +262,16 @@ What are people trying to predict: ALSFRS, combined endpoint, death, clustering 
 
 Challenges: PROACT and Prize4Life, IDPP CLEF
 
-\subsection{With clinical data}
+\subsection{Clinical}
 
 \subsubsection*{Classical ML prognosis}
 
 \subsubsection*{Deep Learning prognosis}
 
-\subsection{With imaging data}
+\subsection{Imaging}
 
 
-\subsection{With multimodal data}
+\subsection{Multimodal}
 
 The papers that use multimodal data and machine learning for MND.
 \begin{itemize}
