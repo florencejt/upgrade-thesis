@@ -1,16 +1,20 @@
 \chapter{Literature Review}
 \label{literature_review}
 
-This chapter contains a review of literature on prognosis of motor neuron disease, looking at both prognostic factors from various data types, and also attempts to predict prognosis using machine learning.
+This chapter contains a review of literature on prognosis of MND, looking at both prognostic factors from various data types, and also attempts to predict prognosis using machine learning.
 
 \section{Prognostic Factors}
 
-How can prognosis be measured? Survival, rate of progression, future ALSFRS-R, future need for therapies, composite end point of NIV, tracheostomy, and death.
+Prognosis is the prediction of the course of a disease, and is important for both patients and clinicians.
+For patients, prognosis can help them to plan their lives and make decisions about their care, and for clinicians, prognosis can help them to make decisions about treatment and care, and to plan clinical trials.
+Prognosis, however, can be defined in different ways, and the definition of prognosis can depend on the disease.
+In MND research, prognosis is often defined as survival time, but it can also be defined as the rate of progression of the disease, future functional ability, the future need for therapies, or a combination of these~\cite{papaizMachineLearningSolutions2022, tavazziArtificialIntelligenceStatistical2023}.
 
 \subsection{Clinical}
 
 A large meta-analysis in 2021 collated research studies on non-genetic prognostic factors in ALS associated with survival risk~\cite{suPredictorsSurvivalPatients2021}.
-The review calculated and reported the hazard ratios (HRs) for each factor which had at least 3 studies reporting on it. Heterogeniety was assessed using the I-squared statistic, and sensitivity analysis was performed to assess the robustness of the results.
+The review calculated and reported the hazard ratios (HRs) for each factor which had at least 3 studies reporting on it, derived from Cox Proportional Hazards (CPH) models.
+Heterogeniety was assessed using the I-squared statistic, and sensitivity analysis was performed to assess the robustness of the results.
 None of the sensitivity analyses showed a significant change in the results, and the authors concluded that the results were robust.
 
 Starting with demographic factors, the meta-analysis found a higher age of symptom onset is associated with a higher risk of death (HR = 1.03)~\cite{suPredictorsSurvivalPatients2021}. However, age of onset is an imprecise measure because it is diffiuclt for patients to pinpoint their exact date of symptom onset, since symptoms often arise gradually.
@@ -61,7 +65,7 @@ Finally, the meta-analysis found that taking Riluzole is associated with longer 
 Genetic testing after diagnosis is becoming more common now that the extent of the genetic contribution to MND is better understood and that therapeutics are being developed to target specific genetic mutations~\cite{efnstaskforceondiagnosisandmanagementofamyotrophiclateralsclerosis:EFNSGuidelinesClinical2012}.
 Increased data availability of genetic markers has led to a number of studies on the prognostic value of genetic markers in MND.
 A network meta-analysis on genetic factors associated with survival in ALS found that the C9orf72 repeat expansion is associated with shorter survival compared to no known variants (HR=1.6)~\cite{suGeneticFactorsSurvival2022}.
-This is consistent with another study of cohort of 1,245 ALS patients that found that, in a multivariable Cox regression model, the C9orf72 repeat expansion is associated with shorter survival (HR=1.65)~\cite{chioAssociationCopresencePathogenic2023}.
+This is consistent with another study of cohort of 1,245 ALS patients that found that, in a multivariable CPH regression model, the C9orf72 repeat expansion is associated with shorter survival (HR=1.65)~\cite{chioAssociationCopresencePathogenic2023}.
 Also associated with shorter survival is ATXN2, a CAG repeat expansion usually associated with spinal onset ALS (HR=3.6), and a mutated FUS (fused in sarcoma) (HR=1.8)~\cite{suGeneticFactorsSurvival2022}.
 
 \subsection{Fluids}
@@ -141,13 +145,13 @@ Atrophy in the thalamus has been associated with faster decline of ALSFRS-R (N=6
 Additionally, texture analysis metrics from SWI in the left thalamus were significantly correlated with progression rate (N=17)~\cite{johnsQuantifyingChangesSusceptibility2019}.
 
 In the basal ganglia, GM atrophy in the left caudate and right putamen (N=17)~\cite{agostaLongitudinalAssessmentGrey2009} and the caudate nucleus (N=67)~\cite{sendaStructuralMRICorrelates2017} have been associated with faster progression.
-Shorter survival in a cohort of 112 ALS patients has been associated with an overall smaller basal ganglia and a smaller amygdala at baseline in a Cox model~\cite{westenengSubcorticalStructuresAmyotrophic2015}. However, when adjusted for age of onset, these significances were lost.
+Shorter survival in a cohort of 112 ALS patients has been associated with an overall smaller basal ganglia and a smaller amygdala at baseline in a CPH model~\cite{westenengSubcorticalStructuresAmyotrophic2015}. However, when adjusted for age of onset, these significances were lost.
 Finally, in a cohort of 157 patients, Ishaque and colleagues found significant texture changes, derived from texture analysis on DTI, in the basal ganglia and hippocampus of short surviving patients, but not in longer surviving patients~\cite{ishaqueEvaluatingCerebralCorrelates2018}.
 The longer surviving patients had texture changes restricted to motor regions.
 
 \subsubsection*{Hippocampus}
 Further studies have looked at the hippocampus with mixed results.
-A smaller hippocampus was associated with shorter survival in the Cox model of 112 patients~\cite{westenengSubcorticalStructuresAmyotrophic2015}, but this significance was lost when adjusted for age of onset, as with the basal ganglia and amygdala.
+A smaller hippocampus was associated with shorter survival in the CPH model of 112 patients~\cite{westenengSubcorticalStructuresAmyotrophic2015}, but this significance was lost when adjusted for age of onset, as with the basal ganglia and amygdala.
 Abdulla and colleagues found no correlation between hippocampal volume and ALSFRS-R or rate of decline in ALSFRS-R (N=58)~\cite{abdullaHippocampalDegenerationPatients2014}, and Muller and colleagues found no correlation between hippocampal FA and ALSFRS-R (N=253)~\cite{mullerLargescaleMulticentreCerebral2016}.
 Dieckmann and colleagues found that decreased bilateral hippocampal volume was associated with disease accumulation, but not disease aggressiveness, in a cohort of 100 ALS patients~\cite{dieckmannCorticalSubcorticalGrey2022}.
 Progression rates significantly negatively correlated with local shape distances in the right hippocampus in a cohort of 32 ALS patients, meaning that the more the shape of the right hippocampus deviates from the average shape, the faster the progression rate~\cite{taeShapeAnalysisSubcortical2020}.
@@ -178,7 +182,7 @@ Interestingly, significant brain age changes were only found in ALS patients wit
 Many of the imaging studies discussed in this section either did not include patients with cognitive and behavioural impairment, or did not report on the presence of cognitive and behavioural impairment, so this could be a confounding factor in the results of these studies.
 
 Magnetic resonance spectroscopy (MRS) is a technique that can be used to measure the concentration of metabolites in the brain, and has been used to study prognosis in MND.
-The N-acetylaspartate (NAA) to choline (Cho) ratio is a measure of neuronal health, and lower NAA/Cho in the primary motor cortex has been associated with shorter survival in a Cox hazard survival analysis of 63 patients~\cite{kalraCerebralDegenerationPredicts2006}.
+The N-acetylaspartate (NAA) to choline (Cho) ratio is a measure of neuronal health, and lower NAA/Cho in the primary motor cortex has been associated with shorter survival in a CPH analysis of 63 patients~\cite{kalraCerebralDegenerationPredicts2006}.
 Even when ALSFRS-R and FVC were included in the model, NAA/Cho was the significant predictor of survival (HR=0.14).
 
 In summary, advanced imaging studies provide valuable insights into the diverse structural and functional associations of MND prognosis.
@@ -219,23 +223,15 @@ The predicted probability of surviving over 10 years was 94\% and the interquart
 
 \section{Machine Learning for Prognosis}
 
+We have seen that prognostic factors have been identified in MND, and that there are a number of prognostic models that have been developed.
+However, the prognostic models are not widely used in clinical practice, and there is a need for more accurate and generalisable models to be developed.
+Machine learning (ML) is a potential solution to this problem.
 
-Link to previous section: we know a lot of prognostic factors in MND, could tools be developed for clinicans to use these factors to automate or improve clinical decisions like diagnosis and prognosis?
+By ML, we mean the use of algorithms to learn from data and make predictions or decisions.
+A subset of ML is deep learning, which is a type of ML that uses neural networks to learn from data.
+``Classical ML`` refers to ML models that are not deep learning models, and includes models such as random forests, support vector machines, and linear regression.
 
-
-\begin{itemize}
-    \item What is machine learning?
-    \item How is it different to statistics?
-    \item What are the different types of machine learning?
-    \begin{itemize}
-        \item Supervised learning
-        \item Unsupervised learning
-    \end{itemize}
-    \item In MND it can be done for prognosis: which is what we're looking at but also for diagnosis
-    \item Honourable mention of some studies that have used machine learning for diagnosis
-\end{itemize}
-
-
+In this section, we discuss the literature on ML for MND prognosis using clinical data, imaging data, or a combination of both.
 
 \subsection{Clinical}
 
@@ -312,101 +308,58 @@ This could be a useful future direction for ML in MND prognosis, and could be a 
 
 % point of section: less work has been done on imaging, and mostly done with derived features to help with small sample size issues
 % imaging by itself has been shown to have limited usefulness
+Machine learning has had success within imaging studies of neurodegenerative diseases with large sample sizes, such as Alzheimer's disease (cite ADNI) and Parkinson's disease (cite PPMI), but less so in MND.
+Sample sizes are small in MND, and deep learning with images larger cohorts to train the models, due to the complexity of the models and the need for a large number of parameters to be estimated.
+Only a few studies have investigated MND progression using imaging independently of clinical data, and these studies have all used derived features from the images, such as FA from DTI, or cortical thickness from T1-weighted MRI, in order to avoid the small sample size issue with deep learning.
 
-ML in MND with imaging is a diagnosis-heavy environment: shout-out to kushol 2023 who used vision transformer with structural MRI to predict ALS vs HC
-- there is a lot of work in other diseases using state of the art machine learning with images
-- processing images requires a lot of data because it needs more complex architectures to learn from the data
+Two ways that imaging has been used in MND prognosis is to predict baseline progression rate using white matter connectivity from DTI~\cite{liDisruptionWhiteMatter2021}, and to classify patients into neuropathological disease stages using DTI-derived features of the ALS-associated tracts~\cite{behlerMultivariateBayesianClassification2022}.
+However, these studies have limited clinical usefulness, since it is not necessary to predict a baseline progression rate, and the neuropathological disease stage was not associated with the popular clinical staging systems, King's and MiToS .
 
-Only a few studies have used imaging in isolation to clinical data
-- extracted features only
+Querin and colleagues used FA of the spinal cord and spinal cord atrophy to predict survival in a CPH model, and found that MRI parameters were more predictive than clinical features, albeit in a small cohort of 49 patients~\cite{querinSpinalCordMultiparametric2017}.
 
-Li et al predicting fast vs slow baseline progression rate from connectivity, which is not clinically useful but backs up non-ML studies.
-The SVM had balanced accuracy of 85\% that top contributing connection was left hippocampus to right thalamus, corroborating the involvement of subcortical regions in MND
-
-Behler et al 2022 used bayesian classification with FA values in tracts associated in the pTDP-43 stages to assign patients to stages.
-Again, limited clinical application, shown by there being no association between the DTI pTDP-43 stage and King's or MiToS staging systems
-
-Thome 2022 used a random forest to classify between ALS and HC with structural and rs-fMRI, and then looked at associations with the classification-important features with progression rate and symptom duration.
-Found no associations.
-
-The most promising imaging study was querin 2017 who used FA of spinal cord and spinal cord atrophy in a cox survival model.
-Found that MRI parameters were more predictive than clinical features, albeit in a small cohort of 49 patients
-
-Conclusions are that imaging by itself has not really been used to predict prognosis - more investigated for diagnosis and understanding the disease.
-And even then, it has shown limited usefulness, which is surprising given the wealth of prognostic factors found in neuroimaging studies in the previous section.
-Perhaps the small sample sizes in these studies are limiting the usefulness of the imaging data, and that the imaging data needs to be combined with clinical data to be useful.
+In summary, imaging studies in MND have focused on diagnosis and disease understanding rather than prognosis prediction.
+Despite the many prognostic factors identified in neuroimaging studies, the limited sample sizes in MND imaging research limits the utility of imaging data alone.
 
 \subsection{Multimodal}
 
-Maybe the imaging papers didn't work so well because they left out prognostic factors that have been shown to be important in the literature.
-What if we combined the imaging data with the clinical data?
+A potential solution to the unoptimal use of imaging data in MND prognosis is to combine the imaging data with the clinical data, increasing the amount of information available to the model.
+This integration can be achieved through multimodal data fusion, where the data from different modalities are combined into a single model.
 
-This can be done through a process called multimodal data fusion, where the data from different modalities is combined into a single model.
-% Background on data fusion from JOSS paper?
+Multimodal data fusion is suited to MND because it is so multifactorial, as well as being a complex and heterogeneous disease, which would benefit from the integration of different data sources to capture the complexity of the disease.
+Using ML, especially deep learning, could help understand the underlying multifactorial mechanisms of MND progression through the interactions between the different modalities within the model.
+Additionally, with limited consensus on imaging prognostic factors in MND, a data-driven approach with guidance from clinical data could help to identify the most important imaging features for prognosis.
+So far, all of the studies with multimodal data fusion in MND have relied on extracted features from the imaging, rather than the images themselves.
+However, it is possible to use the images themselves in a multimodal model, and this is a promising future direction for MND prognosis.
 
-Why would we want to do that for motor neuron disease
-- multifactorial
-    - already seen that in the prognostic factors listed above
-    - no huge consensus on imaging factors so doing a data-driven approach with guidance from clinical data could help
-- using machine learning could help understand underlying multifactorial mechanisms of MND progression
+A simple way to combine clinical and imaging data is to concatenate the features from the different modalities into a single model, and this has been done in a few studies of MND prognosis.
+This can only be done when the features are of the same dimensionality.
+For example, it would not be possible to concatenate a 1D vector of ALSFRS-R scores with a 3D image of the brain without losing the spatial information of the image, but it would be possible to concatenate a 1D vector of ALSFRS-R scores with a 1D vector of FA values from the CST.
+However, with concatenation comes the curse of dimensionality, where the number of features in the model becomes too large for the sample size, and the model overfits the training data.
+This is a common pitfall in multimodal data fusion, and can be avoided by using dimensionality reduction techniques, such as princpal component analysis (PCA) or deep learning methods, to reduce the number of features in the model.
 
-There have been a few studies that have used multimodal data for MND prognosis.
+Kuan and colleagues found that a multimodal survival model of clinical and cortical thickness features performed the same as a clinical-only model in predicting survival at multiple time points~\cite{kuanAccuratePersonalizedSurvival2023}.
+Similarly, Schuster and colleagues used concatenated clinical and MRI-derived features in a logistic ridge regression model to predict survival at 18 months after diagnosis~\cite{schusterSurvivalPredictionAmyotrophic2017}.
+During training, the model performed best with clinical data and MRI, but during testing, the model performed identically with clinical data alone.
+Since the test size was small (n=12), the model may have overfit the training data, and the lack of improvement in the testing set could be due to the curse of dimensionality from the added MRI features.
+The identical test performance of the clinical-only and multimodal model may suggest that the imaging data was not useful in the model, but it is also possible that the imaging data was useful, but the concatenation method was not optimal.
 
-All of the studies have used features extracted from imaging, rather than the images themselves.
+Other studies have used more advanced methods of multimodal data fusion, such as multimodal dimensionality reduction to lower the dimensionality of the joint data.
+Behler and colleagues used PCA on concatenated features of cognitive, oculomotor, and DTI to cluster patients into neuropathological disease stages~\cite{behlerMultimodalVivoStaging2022}.
+As mentioned earlier in a related study by the authors, this method had limited clinical usefulness, but it is a promising approach for understanding the interactions between the different modalities in MND.
+Kmetzsch and colleagues used a deep learning unsupervised method called a variational autoencoder to lower the dimensions of joint miRNA and structural MRI extracted volumes to predict disease progression in FTD, ALS, and ALS-FTD patients~\cite{kmetzschDiseaseProgressionScore2022a}.
+They found that different modalities were important at different stages of the disease.
+This insight is an example of how multimodal data fusion can unveil more about the disease than unimodal data alone.
 
-Papers that have concatenated clinical and imaging measures into their models:
+The final multimodal data fusion method used in MND prognosis is supervised deep learning.
+Van der Burgh and colleagues classifed 135 sporadic ALS patients into short, medium, and long survival using clinical characteristics, structural MRI extracted features, and diffusion-weighted imaging extracted features~\cite{vanderburghDeepLearningPredictions2017}.
+Their model was comprised of 3 unimodal neural networks, which were trained separately to predict survival classification, and a fourth neural network that took the outputs of the 3 trained unimodal models.
+They found that the multimodal model performed better than the unimodal models, and that the distributions of the multimodal model's performance were statistically significantly better than the unimodal models.
+However, an innapropriate statistical test was used to compare the performance distributions.
+Nevertheless, the study showed that multimodal data fusion improved MND prognosis, and that deep learning is a promising method for this task.
+This work was extended by Meier and colleagues, who added another modality of simulated TDP-43 accumulation levels, and found that this improved the performance of the model~\cite{meierConnectomeBasedPropagation2020}.
+An improvement that could be made to their data fusion method would be to train the 3 unimodal neural networks and the fourth neural network altogether, rather than training the unimodal models separately and then concatenating their outputs.
+This would allow the model to learn more complex relationships between the data by allowing the intermediate weights and feature maps of the different modalities to interact.
 
-Schuster 2017 classified patients as surviving or not surviving 18 months after diagnosis
-- features chosen by comparing to healthy controls - is this the best way?
-- training set performed best with clinical data and MRI, but testing set performed the same
-    - small test size of n=12
-- imaging and clinical data concatenated into a logistic ridge regression
-- since the sample size was small, including more features may have led the model to overfit the training data, hence the lack of improvement in the testing set
-- however, the clinical + mri model not being markedly worse is a good sign for the usefulness of imaging data, because it's possible that with a larger sample size, the imaging data would have been more useful
-
-Kuan 2023
-- n=172
-- predicting probability of survival at multiple time points
-- comparing clinical only, cortical thickness only, and both: concatenated before ML survival models
-- best model was clinical only, but not statistically significantly better
-
-Concatenation is a common pitfall when including data from two sources: curse of dimensionality
-- there are data fusion methods to combat this
-- what if we lowered the dimensionality of the data before using it in the model?
-
-Dimensionality reduction:
-Behler 2022
-- PCA on concatenated features of cognitive, oculomotor, and DTI to cluster patients into neuropathological disease stages
-- although this has limited clinical benefit, since neuropathological disease stage isn't useful in clinic and DTI is rarely obtained
-    - using clustering allows for seeing interactions between the different modalities
-    - which is important when doing multimodal data fusion because the different modalities may interact in complex ways that can't be captured by simple concatenation
-
-Kmetzsch 2022
-- a deep learning unsupervised method called a variational autoencoder
-- mainly focused on disease progression of FTD
-- using miRNA and T1w extracted volumes
-- Variational autoencoder to lower the dimensions of the joint data
-- Found that different modalities were more important at different stages of the disease
-    - assessing added values of modalities unveils more about the disease
-
-Supervised deep learning:
-For example, van der Burgh 2017
-- classifying 135 sporadic ALS patients into short, medium, and long survival
-- using clinical characteristics, T1W extracted features, DWI extracted features
-- fusion was done by training 3 unimodal neural networks separately, then concatenating their outputs as the input into a final neural network, which was trained on the output classifications of the training set
-- multimodal model model performed better than unimodal models: 84\% accuracy compared to unimodal models hovering between 60 and 70\%
-- they found that by repeating the training and testing multiple times, the distributions of the multimodal model's performance was statistically significantly better than the unimodal models
-    - although they used an innapropriate statistical test for this (they used the number of repeats instead of the sample size)
-- a limitation of their study is that the 3 unimodal models were trained separately and then concatenated
-    - the intermediate weights and feature maps of the different modalities never interact
-    - training the models altogether might allow the model to learn more complex relationships between the data and improve performance further
-
-Extended with random walker in Meier 2020
-- model was extended by adding another modality of simulated TDP-43 accumulation levels, which improved the performance
-
-
-In conclusion, multimodal data fusion is a promising approach for MND prognosis, and has been shown to improve performance in some studies.
-The method of data fusion is important, and concatenation is a common pitfall with small sample sizes that can be avoided with dimensionality reduction techniques and deep learning.
-
-Next section: need to understand the predictors of survival in our dataset and see if they match up with literature
-
+In conclusion, prognosis prediction in MND is a complex task with many different approaches and features that can be used.
+The literature is afflicted with small sample sizes, inconsistent findings, and unclear clinical relevance, but multimodal data fusion is a promising approach for MND prognosis, and has been shown to improve performance in some studies, with the method of data fusion being important.
+Furthermore, there are many more multimodal data fusion methods that have not been explored in MND, such as graph neural networks and attention mechanisms, which could be key in accurately predicting MND prognosis.
