@@ -64,29 +64,6 @@ A network meta-analysis on genetic factors associated with survival in ALS found
 This is consistent with another study of cohort of 1,245 ALS patients that found that, in a multivariable Cox regression model, the C9orf72 repeat expansion is associated with shorter survival (HR=1.65)~\cite{chioAssociationCopresencePathogenic2023}.
 Also associated with shorter survival is ATXN2, a CAG repeat expansion usually associated with spinal onset ALS (HR=3.6), and a mutated FUS (fused in sarcoma) (HR=1.8)~\cite{suGeneticFactorsSurvival2022}.
 
-%\subsubsection*{Tools for Prognosis}
-%
-%There are limited clinical tools for prognosis prediction in MND. The most common way for progression to be assessed is through the progression rate in Equation~\ref{eq:PRB}, which can be generalised to the progression rate to any time point, not just diagnosis.
-%Extrapolating this progression rate to predict future ALSFRS-R scores is a common way to predict future progression, called the "pre-slope model", but it is not a perfect method since it assumes that ALSFRS-R decline is linear.
-%
-%To overcome these issues, the D50 model was developed, which fits a sigmoidal curve to a patient's ALSFRS-R timepoints, yielding an individualised prediction of future ALSFRS-R scores
-%~\cite{poesenNeurofilamentMarkersALS2017, steinbachApplyingD50Disease2020}.
-%The D50 model can provide a measure of disease aggressiveness, which is the estimated rate of functional loss from the sigmoidal curve, and disease accummulation, which is the patient's position on the D50 curve independent of time.
-%
-%A non-linear extension of the D50 model was proposed by Ramamoorthy and colleagues, where Gaussian processes are used to non-parametrically cluster patients into non-linear ALSFRS-R trajectories~\cite{ramamoorthyIdentifyingPatternsAmyotrophic2022}.
-%In their model development, they found that many of the patients in their cohort had non-linear ALSFRS-R trajectories (convex, concave, sigmoidal) and that the slope of ALSFRS-R in the first year of the disease is not sufficient to accurately predict future ALSFRS-R scores.
-%
-%Finally, a popular model for predicting survival probability in ALS is the ENCALS model~\cite{westenengPrognosisPatientsAmyotrophic2018}.
-%Using data from 14 European ALS centres and over 11,000 patient records, Westeneng and colleagues developed a multivariable Royston-Parmar model to predict a survival probability function for an individual ALS patient from baseline information.
-%They selected the predictors through backward elimination and bootstapping, and predictors present in more than 70\% of the bootstrapped models were included in the final model.
-%The harmful predictors included in the final model are bulbar onset (HR=1.71), age of onset (HR=1.03), El Escorial definite ALS (HR=1.47), higher PRB (HR=6.33), presence of FTD (HR=1.34), and C9orf72 repeat expansion (HR=1.45).
-%The protective predictors are a longer diagnostic delay (HR=0.52) and a higher FVC (HR=0.99).
-%
-%The ENCALS model is available by request of medical doctors, and was validated using a leave-one-site-out protocol.
-%The authors demonstrated the model's ability to predict survival by using data from Stephen Hawking, a famous physicist who lived with ALS for a startling 55 years after diagnosis, and found that the model predicted his survival probability well.
-%The predicted probability of surviving over 10 years was 94\% and the interquartile range of predicted year of death was 1981 to 2011, which is consistent with the year of Stephen Hawking's tracheostomy in 1985 (which is the endpoint of the model's prediction: NIV for more than 23 hours a day, tracheostomy, or death).
-%
-
 \subsection{Fluids}
 
 Fluid biomarkers are measurements of proteins, metabolites, or other molecules in the blood/serum, cerebrospinal fluid (CSF), or urine that can be used to diagnose and monitor disease.
@@ -220,7 +197,7 @@ However, in a study of 218 MND patients, including ALS, PLS, and PMA, the CSA of
 
 \subsection{Prognostic Models}
 There are limited clinical tools for prognosis prediction in MND. The most common way for progression to be assessed is through the progression rate in Equation~\ref{eq:PRB}, which can be generalised to the progression rate to any time point, not just diagnosis.
-Extrapolating this progression rate to predict future ALSFRS-R scores is a common way to predict future progression, called the "pre-slope model", but it is not a perfect method since it assumes that ALSFRS-R decline is linear.
+Extrapolating this progression rate to predict future ALSFRS-R scores is a common way to predict future progression, called the ``pre-slope model``, but it is not a perfect method since it assumes that ALSFRS-R decline is linear.
 
 To overcome these issues, the D50 model was developed, which fits a sigmoidal curve to a patient's ALSFRS-R timepoints, yielding an individualised prediction of future ALSFRS-R scores
 ~\cite{poesenNeurofilamentMarkersALS2017, steinbachApplyingD50Disease2020}.
@@ -258,32 +235,178 @@ Link to previous section: we know a lot of prognostic factors in MND, could tool
     \item Honourable mention of some studies that have used machine learning for diagnosis
 \end{itemize}
 
-What are people trying to predict: ALSFRS, combined endpoint, death, clustering etc.
 
-Challenges: PROACT and Prize4Life, IDPP CLEF
 
 \subsection{Clinical}
 
-\subsubsection*{Classical ML prognosis}
+% point of section: lots of ML has been done on MND with very varied designs and outcomes, with pros and cons to each
+% Call to action: there is less focus on predicting actual survival
 
-\subsubsection*{Deep Learning prognosis}
+As mentioned earlier, prognosis can be defined as the prediction of the future course of a disease.
+In context of MND, prognosis could be future ALSFRS-R scores, progression rate, survival time, or predicting time until a treatment is needed.
+
+Predicting future progression rate, as calculated by the slope between the ALSFRS-R scores, is a popular prediction task in ML prognosis.
+In 2011, a challenge was set called the DREAM Phil Bowen Prize4Life ALS Prediction Challenge, which asked entrants to use 3 months of clinical trials data to predict the progression rate in the next 9 months, measured as the slope between the ALSFRS-R scores at month 3 and at month 12~\cite{kuffnerCrowdsourcedAnalysisClinical2015}.
+The dataset accompanying this challenge was the PRO-ACT database, which is the largest publicly available dataset of clinical trials data in MND with over 8,500 patients from multiple trials~\cite{atassiPROACTDatabaseDesign2014}.
+This dataset has been widely used in ML studies for MND prognosis because of its size and longitudinal nature.
+However, the data is taken from clinical trials, where and he patients were subject to strict inclusion and exclusion criteria, leading to younger patients wih fewer functional impairments.
+This limits the generalisability of the results to the whole MND population.
+
+% point of paragraph: challenge kicked off ML for prognosis properly, found that tree-based models performed the best, deep learning still not useful. however, unideal study
+The challenge had 37 entries and the results were summarised by Küffner and colleagues~\cite{kuffnerCrowdsourcedAnalysisClinical2015}, who concluded that random forest and tree-based decision models performed the best in predicting future progression rate~\cite{hothornRandomForest4LifeRandomForest2014}.
+By comparing models and results from the entries, some interesting findings emerged, such as high variability in individual ALSFRSr scores being a strong predictor of progression rate~\cite{hothornRandomForest4LifeRandomForest2014} and previously unidentified progression biomarkers such as blood pressures and uric acid.
+Ensemble models, which are a combination of predictions from multiple models, have shown promise in the PRO-ACT data as well in a post-challenge study of 17 classical ML models ~\cite{turabiehMachineLearningEmpowered2024}.
+Since the challenge took place before deep learning became as popular as it is now, Pancotti and colleagues revisited the challenge in 2022 using deep learning models~\cite{pancottiDeepLearningMethods2022}, finding that deep learning performed similarly to classical ML models.
+It is possible that more data or a different task is needed to show the benefit of deep learning in MND prognosis.
+
+% weird to predict a linear slope using ML, especially a slope over 9 months which smooths out a lot of the individual patient trajectories
+While the Prize4Life challenge was a great catalyst for ML research in MND, there are limitations in predicting a rate of functional decline over 9 months.
+Condensing 9 months of progression into a single slope may oversimplify the disease course, and training ML models to predict a linear slope may not be the best approach, especially since Ramamoorthy and colleagues showed how non-linear ALSFRS-R trajectories are very common~\cite{ramamoorthyIdentifyingPatternsAmyotrophic2022}.
+
+% taylor et al predicting just future alsfrs-r, not the slope, and comparing to pre-slope model which assumes linear decline
+
+Instead using PRO-ACT to predict progression rate, Taylor and colleagues predicted future ALSFRS-R scores using random forests~\cite{taylorPredictingDiseaseProgression2016}.
+They found that random forest performed better than the pre-slope model, especially when predicting later into the disease course.
+This shows the usefulness of a non-linear model in predicting functional decline in MND .
+
+% point of paragraph: what about classifying by fast or slow progression?
+Predicting fast versus slow progression is another common prognosis task, where labels ``fast`` or ``slow`` are assigned to patients by imposing some threshold on the progression rate~\cite{ongPredictingFunctionalDecline2017, dinabduljabbarPredictingAmyotrophicLateral2023}.
+Performance is usually better in this task than predicting the actual progression rate, because the task is less granular and the classes are more balanced.
+Additionally, stratifying patients by progression rate can be used as part of the model's pipeline.
+Pires and colleagues found that they could improve the accuracy of predicting need for NIV by stratifying patients into low, medium, and high progression rate, and then training separate models for each strata~\cite{piresPredictingNoninvasiveVentilation2018}.
+Similarly, Halbersberg and colleagues clustered patients by ``deterioration patterns`` based on their early ALSFRS-R scores, and trained separate classifiers for each cluster~\cite{halbersbergTemporalModelingDeterioration2019}.
+The success of these stratification approaches suggests that the heterogeneity of MND may be too great for a single model to predict progression rate accurately, and that stratifying patients into groups may be a better approach.
+
+However, the threshold for fast and slow progression is arbitrary, and the threshold used in these studies may not be the same as the threshold used in a clinical setting.
+A more data-driven way of grouping patients is to use clustering, which is a type of unsupervised learning where the model groups patients into clusters based on their features.
+Grollemund and colleagues used UMAP (uniform manifold approximation and projection) to reduce the dimensionality of patient data, and then coarsely divided the lower-dimensional space (or latent space) into three tiers of 1-year survival risk~\cite{grollemundDevelopmentValidation1year2020}.
+They found that this approach outperformed random forest and logistic regression in predicting 1-year survival, even though the latent space had no knowledge of the survival times of the patients in the training data.
+
+Another goal in MND prognosis is to predict time to treatment, such as time to NIV or time to PEG (percutaneous endoscopic gastrostromy).
+The IDPP Clef challenge is a recent challenge in 2022 that focused on predicting risks of clinical events and timings in MND, and included a dataset of 2559 patients from Italy and Portugal~\cite{guazzoOverviewIDPPCLEF2022}.
+The challenge resulted in 4 papers, which all found that it was comparatively simple to predict the risk of clinical events, but not the timing of the events~\cite{brancoHierarchicalModellingALS2022, mannionPredictingRiskTime2022, trescatoBaselineMachineLearning2022, pancottiMultiEventSurvivalPrediction2022}.
+Other attempts at predicting time to treatment have focused on predicting time to NIV, often classifying patients into those who will need NIV within 3 months, 3 to 6 months, and 6 to 12 months~\cite{carreiroPrognosticModelsBased2015, pereiraPredictingAssistedVentilation2019}.
+The timing of medical interventions is a difficult task to predict because different clinics have different treatment strategies and different interpretations of the same clinical guidelines.
+Predicting the assessment outcomes that lead to the decision to start treatment may be a more useful task.
+
+% point of paragraph: machine learning approaches can be improved with explainability and setting logical rules, to make up for the small sample sizes
+Models can also be made more clinically relevant by incorporating logical rules and explainability methods.
+Tavazzi and colleagues used a dynamic bayesian network to simulate disease course according to the MiToS staging system~\cite{tavazziPredictingFunctionalImpairment2022}.
+They applied clinical and biological logic to their graphical model by not letting impossible relationships between variables exist, such as the medical centre being dependent on the patient's sex.
+This allows the model to learn from the data, but also to be guided by clinical and biological sense.
+Additionally, the graph structure of the model can be used to explore dependencies between variables, and to identify which variables are most important in predicting the future disease course.
+
+Explainable models are important in MND prognosis because of the small sample sizes and the need for clinical sense in the predictions.
+Müller and colleagues used a deep learning longitudinal neural network to predict respiratory impairment in MND, and then used SHAP (SHapley Additive exPlanations) to explain the model's predictions~\cite{mullerExplainableModelsDisease2021}.
+When looking at the most important features in the model through an explainability method called Shapley values, they found that better swallowing function indicated quicker respiratory decline, which is clinically unintuitive.
+This brought the model's predictions into question, and shows the importance of explainability methods in MND prognosis.
+
+Overall, predicting MND prognosis with ML and clinical data is a difficult task with many ways to approach it.
+It is important to check that the model's predictions make sense in the context of the disease, and to consider the clinical relevance of the predictions.
+In a survey of 242 Dutch ALS patients, when asked whether they would prefer to be told their predicted survival time or a survival category (slow, medium, fast), the majority of patients preferred the exact survival time~\cite{westenengPrognosisPatientsAmyotrophic2018} (supplementary materials).
+However, none of the ML studies have attempted to predict exact survival time.
+This could be a useful future direction for ML in MND prognosis, and could be a task more relevant to the patients than predicting progression rate.
+
 
 \subsection{Imaging}
 
+% point of section: less work has been done on imaging, and mostly done with derived features to help with small sample size issues
+% imaging by itself has been shown to have limited usefulness
+
+ML in MND with imaging is a diagnosis-heavy environment: shout-out to kushol 2023 who used vision transformer with structural MRI to predict ALS vs HC
+- there is a lot of work in other diseases using state of the art machine learning with images
+- processing images requires a lot of data because it needs more complex architectures to learn from the data
+
+Only a few studies have used imaging in isolation to clinical data
+- extracted features only
+
+Li et al predicting fast vs slow baseline progression rate from connectivity, which is not clinically useful but backs up non-ML studies.
+The SVM had balanced accuracy of 85\% that top contributing connection was left hippocampus to right thalamus, corroborating the involvement of subcortical regions in MND
+
+Behler et al 2022 used bayesian classification with FA values in tracts associated in the pTDP-43 stages to assign patients to stages.
+Again, limited clinical application, shown by there being no association between the DTI pTDP-43 stage and King's or MiToS staging systems
+
+Thome 2022 used a random forest to classify between ALS and HC with structural and rs-fMRI, and then looked at associations with the classification-important features with progression rate and symptom duration.
+Found no associations.
+
+The most promising imaging study was querin 2017 who used FA of spinal cord and spinal cord atrophy in a cox survival model.
+Found that MRI parameters were more predictive than clinical features, albeit in a small cohort of 49 patients
+
+Conclusions are that imaging by itself has not really been used to predict prognosis - more investigated for diagnosis and understanding the disease.
+And even then, it has shown limited usefulness, which is surprising given the wealth of prognostic factors found in neuroimaging studies in the previous section.
+Perhaps the small sample sizes in these studies are limiting the usefulness of the imaging data, and that the imaging data needs to be combined with clinical data to be useful.
 
 \subsection{Multimodal}
 
-The papers that use multimodal data and machine learning for MND.
-\begin{itemize}
-    \item Neurodegenerative diseases are multifactorial and sometimes obscure
-    \item Example of handedness linked to site of onset and CST marker
-    \item Data fusion can help us understand them and the underlying mechanisms
-    \item What about using both clinical and imaging data?
-    \item This is known as multimodal data fusion methods
-    \item Only done a few times in MND
-\end{itemize}
+Maybe the imaging papers didn't work so well because they left out prognostic factors that have been shown to be important in the literature.
+What if we combined the imaging data with the clinical data?
 
-Examples are thin on the ground so we're going to look at diagnosis as well as prognosis.
+This can be done through a process called multimodal data fusion, where the data from different modalities is combined into a single model.
+% Background on data fusion from JOSS paper?
+
+Why would we want to do that for motor neuron disease
+- multifactorial
+    - already seen that in the prognostic factors listed above
+    - no huge consensus on imaging factors so doing a data-driven approach with guidance from clinical data could help
+- using machine learning could help understand underlying multifactorial mechanisms of MND progression
+
+There have been a few studies that have used multimodal data for MND prognosis.
+
+All of the studies have used features extracted from imaging, rather than the images themselves.
+
+Papers that have concatenated clinical and imaging measures into their models:
+
+Schuster 2017 classified patients as surviving or not surviving 18 months after diagnosis
+- features chosen by comparing to healthy controls - is this the best way?
+- training set performed best with clinical data and MRI, but testing set performed the same
+    - small test size of n=12
+- imaging and clinical data concatenated into a logistic ridge regression
+- since the sample size was small, including more features may have led the model to overfit the training data, hence the lack of improvement in the testing set
+- however, the clinical + mri model not being markedly worse is a good sign for the usefulness of imaging data, because it's possible that with a larger sample size, the imaging data would have been more useful
+
+Kuan 2023
+- n=172
+- predicting probability of survival at multiple time points
+- comparing clinical only, cortical thickness only, and both: concatenated before ML survival models
+- best model was clinical only, but not statistically significantly better
+
+Concatenation is a common pitfall when including data from two sources: curse of dimensionality
+- there are data fusion methods to combat this
+- what if we lowered the dimensionality of the data before using it in the model?
+
+Dimensionality reduction:
+Behler 2022
+- PCA on concatenated features of cognitive, oculomotor, and DTI to cluster patients into neuropathological disease stages
+- although this has limited clinical benefit, since neuropathological disease stage isn't useful in clinic and DTI is rarely obtained
+    - using clustering allows for seeing interactions between the different modalities
+    - which is important when doing multimodal data fusion because the different modalities may interact in complex ways that can't be captured by simple concatenation
+
+Kmetzsch 2022
+- a deep learning unsupervised method called a variational autoencoder
+- mainly focused on disease progression of FTD
+- using miRNA and T1w extracted volumes
+- Variational autoencoder to lower the dimensions of the joint data
+- Found that different modalities were more important at different stages of the disease
+    - assessing added values of modalities unveils more about the disease
+
+Supervised deep learning:
+For example, van der Burgh 2017
+- classifying 135 sporadic ALS patients into short, medium, and long survival
+- using clinical characteristics, T1W extracted features, DWI extracted features
+- fusion was done by training 3 unimodal neural networks separately, then concatenating their outputs as the input into a final neural network, which was trained on the output classifications of the training set
+- multimodal model model performed better than unimodal models: 84\% accuracy compared to unimodal models hovering between 60 and 70\%
+- they found that by repeating the training and testing multiple times, the distributions of the multimodal model's performance was statistically significantly better than the unimodal models
+    - although they used an innapropriate statistical test for this (they used the number of repeats instead of the sample size)
+- a limitation of their study is that the 3 unimodal models were trained separately and then concatenated
+    - the intermediate weights and feature maps of the different modalities never interact
+    - training the models altogether might allow the model to learn more complex relationships between the data and improve performance further
+
+Extended with random walker in Meier 2020
+- model was extended by adding another modality of simulated TDP-43 accumulation levels, which improved the performance
 
 
+In conclusion, multimodal data fusion is a promising approach for MND prognosis, and has been shown to improve performance in some studies.
+The method of data fusion is important, and concatenation is a common pitfall with small sample sizes that can be avoided with dimensionality reduction techniques and deep learning.
+
+Next section: need to understand the predictors of survival in our dataset and see if they match up with literature
 

@@ -10,25 +10,44 @@
     \item Motivation - why is this useful? Implications if multimodal data fusion is better, imaging doesn't have to be just used for differential diagnosis and can play a role in prognosis, which is important for clinical trials and patient care.
 \end{itemize}
 
+The aim of this work is to assess the added value of brain ROI volumes in MND prognosis prediction.
+We hypothesise that the combination of clinical and imaging data will improve the prediction of survival in MND patients.
+We will do this by using the fusilli package to compare the performance of different tabular-tabular multimodal data fusion methods.
+
 \section{Data}
-\begin{itemize}
-    \item Where is the data coming from? Milan and the UK
-    \item Tabular-tabular data fusion. Why?
-    \item Sample size is too small for effective deep learning with 3D MRI or 2D slices of MRI
-    \item Instead we'll look at extracted brain volumes
-    \item Why might this be useful anyway? It's more accessible than raw MRI data for use in hospitals and clinics, potentially easier to interpret with explainable AI than deep learning, where the features are extracted automatically
-\end{itemize}
+
+ALS Biomarker's study and Opsedale San Raffaele.
+We are using clinical data and brain volumes.
+
+%\begin{itemize}
+%    \item Where is the data coming from? Milan and the UK
+%    \item Tabular-tabular data fusion. Why?
+%    \item Sample size is too small for effective deep learning with 3D MRI or 2D slices of MRI
+%    \item Instead we'll look at extracted brain volumes
+%    \item Why might this be useful anyway? It's more accessible than raw MRI data for use in hospitals and clinics, potentially easier to interpret with explainable AI than deep learning, where the features are extracted automatically
+%\end{itemize}
+
+Inclusion criteria:
+- Diagnosis of MND
+- Non-missing age, sex, date of diagnosis, date of death, date of onset, features of FTD, ALSFRS-R
+- MRI within 12 months of diagnosis (either side)
+    - Why within 12 months? Trade-off between having the MRI close to the diagnosis and having enough data to work with
+
+Clinical data features:
+- Following the same features as the ENCALS model, and working with what we have available
+- sex, bulbar onset, signs of FTD, ALSFRSr, ALS subtype, diagnostic delay, age at diagnosis
+
+Milan date of death is death or tracheostomy
 
 \subsection{Clinical Data}
 \begin{itemize}
     \item Inclusion criteria
     \item Features
-    \item Demographics
 \end{itemize}
 
 \subsection{Imaging Data}
 \begin{itemize}
-    \item Inclusion criteria: how far away from diagnosis was the MRI?
+    \item Inclusion criteria: how far away from diagnosis was the MRI? Within 12 months of the diagnosis
     \item Segmentation using SynthSeg - what is synthseg?
     \item Features
 \end{itemize}
