@@ -88,13 +88,11 @@ Higher baseline NfL concentration is associated with shorter survival, concluded
 Dreger and colleagues also found that higher baseline NfL was significantly associated with higher disease aggressiveness, independent of disease accumulation, as estimated by the D50 model~\cite{dregerCerebrospinalFluidNeurofilament2021}.
 
 \subsection{Neuroimaging}
-
-Structural MRI of the brain is often conducted as part of the differential diagnosis of MND, in order to rule out mimic diseases.
-Imaging is not used for progression monitoring in clinic because, as the disease progresses, it becomes difficult for the patient to undergo an MRI scan.
-Therefore, the majority of imaging studies in MND are cross-sectional at baseline.
+Structural MRI is conducted during diagnosis to rule out mimic diseases, but it is not used for monitoring progression due to difficulties in scanning as the disease progresses.
+Consequently, the majority of imaging studies in MND are cross-sectional at baseline.
 This section will discuss the associations between brain imaging measures and prognosis in MND, with the caveat that the vast majority of these studies are only on ALS patients.
 
-Limitations that affect most ALS imaging studies are small sample sizes and poor patient characterisation, meaning that information on clinical phenotypes and genetic status is often missing, which could have affected the significance of results~\cite{bedeLessonsALSImaging2014}.
+ALS imaging studies often suffer from small sample sizes and inadequate patient characterisation, meaning that information on clinical phenotypes and genetic status is often missing, potentially affecting result significance~\cite{bedeLessonsALSImaging2014}.
 Furthermore, many studies correlate brain imaging measures with ALSFRS-R, which is a measure dominated by the effects of lower motor neuron degeneration~\cite{bedeLessonsALSImaging2014}.
 These limitations result in a large array of inconsistent findings in the literature.
 In this section, we are explore brain regions implicated in MND prognosis, grouped by their location in the brain.
@@ -167,34 +165,36 @@ While findings from neuroimaging highlight the consistent involvement of various
 \subsection{Spinal Cord Imaging}
 
 Imaging of the spinal cord can also be conducted during the differential diagnosis to rule out alternative pathologies~\cite{elmendiliSpinalCordImaging2019}.
-Due to its small axial size and the proximity of the lungs and heart, the spinal cord is difficult to image and is affected by many movement artefacts.
-Although it is usually qualitatively interpreted, the cross section area (CSA) of the spinal cord has been quantitatively measured in a number of studies, and has been associated with prognosis in MND.
+The spinal cord is difficult to image and is affected by many movement artefacts due to its small axial size and the proximity of the lungs and heart.
+Although it is usually qualitatively interpreted clinically, the cross section area (CSA) of the spinal cord has been quantitatively measured in a number of studies, and has been associated with prognosis in MND.
 
-In a study of 43 ALS patients, Branco and colleagues found significant corelations between baseline ALSFRS-R and cervical spine CSA, and also between disease duration and CSA~\cite{brancoSpinalCordAtrophy2014}.
+In a study of 43 ALS patients, Branco and colleagues found significant correlations between baseline ALSFRS-R and cervical spine CSA, and also between disease duration and CSA~\cite{brancoSpinalCordAtrophy2014}.
 Moreover, Grolez and colleagues found that a smaller reduction in cervical spine volume over 3 months is associated with longer survival in a study of 41 patients~\cite{grolezMRICervicalSpinal2018}.
 However, in a study of 218 MND patients, including ALS, PLS, and PMA, the CSA of the cervical spine only correlated with the baseline ALSFRS-R of PLS and PMA patients, although there was no longitudinal spinal atrophy for the PLS patients~\cite{vanderburghCrosssectionalLongitudinalAssessment2019}.
 
 
 \subsection{Prognostic Models}
-There are limited clinical tools for prognosis prediction in MND. The most common way for progression to be assessed is through the progression rate in Equation~\ref{eq:PRB}, which can be generalised to the progression rate to any time point, not just diagnosis.
-Extrapolating this progression rate to predict future ALSFRS-R scores is a common way to predict future progression, called the ``pre-slope model``, but it is not a perfect method since it assumes that ALSFRS-R decline is linear.
+There are limited clinical tools for prognosis prediction in MND .
+The most common way for progression to be assessed is through the rate of decline of ALSFRS-R .
+Extrapolating this progression rate to predict future ALSFRS-R scores is called the ``pre-slope model``, but it is limited by the assumption that ALSFRS-R decline is linear.
 
-To overcome these issues, the D50 model was developed, which fits a sigmoidal curve to a patient's ALSFRS-R timepoints, yielding an individualised prediction of future ALSFRS-R scores
-~\cite{poesenNeurofilamentMarkersALS2017, steinbachApplyingD50Disease2020}.
-The D50 model can provide a measure of disease aggressiveness, which is the estimated rate of functional loss from the sigmoidal curve, and disease accummulation, which is the patient's position on the D50 curve independent of time.
+The D50 model assumes ALSFRS-R decline is sigmoidal, and works by fitting a sigmoidal curve to a patient's ALSFRS-R timepoints, yielding an individualised prediction of future ALSFRS-R scores~\cite{poesenNeurofilamentMarkersALS2017, steinbachApplyingD50Disease2020}.
+``Disease aggressiveness`` and ``disease accumulation`` are two measures derived from the D50 model, which are the estimated rate of functional loss and the patient's position on the D50 curve independent of time, respectively.
 
 A non-linear extension of the D50 model was proposed by Ramamoorthy and colleagues, where Gaussian processes are used to non-parametrically cluster patients into non-linear ALSFRS-R trajectories~\cite{ramamoorthyIdentifyingPatternsAmyotrophic2022}.
-In their model development, they found that many of the patients in their cohort had non-linear ALSFRS-R trajectories (convex, concave, sigmoidal) and that the slope of ALSFRS-R in the first year of the disease is not sufficient to accurately predict future ALSFRS-R scores.
+They found that many of the patients in their cohort had non-linear ALSFRS-R trajectories (convex, concave, sigmoidal).
+%and that the slope of ALSFRS-R in the first year of the disease is not sufficient to accurately predict future ALSFRS-R scores.
 
-Finally, a popular model for predicting survival probability in ALS is the ENCALS model~\cite{westenengPrognosisPatientsAmyotrophic2018}.
-Using data from 14 European ALS centres and over 11,000 patient records, Westeneng and colleagues developed a multivariable Royston-Parmar model to predict a survival probability function for an individual ALS patient from baseline information.
-They selected the predictors through backward elimination and bootstapping, and predictors present in more than 70\% of the bootstrapped models were included in the final model.
+%Finally, a popular model for predicting survival probability in ALS is the ENCALS model~\cite{westenengPrognosisPatientsAmyotrophic2018}.
+%Using data from 14 European ALS centres and over 11,000 patient records,
+Westeneng and colleagues developed the ENCALS model, a multivariable Royston-Parmar model, to predict a survival probability function for an individual ALS patient using data from 14 European ALS centres and over 11,000 patient records~\cite{westenengPrognosisPatientsAmyotrophic2018}.
+%They selected the predictors through backward elimination and bootstapping, and predictors present in more than 70\% of the bootstrapped models were included in the final model.
 The harmful predictors included in the final model are bulbar onset (HR=1.71), age of onset (HR=1.03), El Escorial definite ALS (HR=1.47), higher PRB (HR=6.33), presence of FTD (HR=1.34), and C9orf72 repeat expansion (HR=1.45).
 The protective predictors are a longer diagnostic delay (HR=0.52) and a higher FVC (HR=0.99).
 
-The ENCALS model is available by request of medical doctors, and was validated using a leave-one-site-out protocol.
-The authors demonstrated the model's ability to predict survival by using data from Stephen Hawking, a famous physicist who lived with ALS for a startling 55 years after diagnosis, and found that the model predicted his survival probability well.
-The predicted probability of surviving over 10 years was 94\% and the interquartile range of predicted year of death was 1981 to 2011, which is consistent with the year of Stephen Hawking's tracheostomy in 1985 (which is the endpoint of the model's prediction: NIV for more than 23 hours a day, tracheostomy, or death).
+%The ENCALS model is available by request of medical doctors, and was validated using a leave-one-site-out protocol.
+%The authors demonstrated the model's ability to predict survival by using data from Stephen Hawking, a famous physicist who lived with ALS for a startling 55 years after diagnosis, and found that the model predicted his survival probability well.
+%The predicted probability of surviving over 10 years was 94\% and the interquartile range of predicted year of death was 1981 to 2011, which is consistent with the year of Stephen Hawking's tracheostomy in 1985 (which is the endpoint of the model's prediction: NIV for more than 23 hours a day, tracheostomy, or death).
 
 
 \section{Machine Learning for Prognosis}
