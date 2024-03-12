@@ -132,7 +132,7 @@ Additionally, basal ganglia gray matter atrophy in the left caudate and right pu
 Initial smaller basal ganglia and amygdala volumes predict shorter survival, although significance diminishes with age of onset adjustment~\cite{westenengSubcorticalStructuresAmyotrophic2015}.
 Furthermore, texture changes in the basal ganglia and hippocampus, detected via DTI analysis, are notable in short-term survivors~\cite{ishaqueEvaluatingCerebralCorrelates2018}.
 
-The GM volumes of subcortical structures have been associated with cognitive impairment in other diseases (cite Yi Relation between..).
+The GM volumes of subcortical structures have been associated with cognitive impairment in other diseases~\cite{yiRelationSubcorticalGrey2016}.
 The association between subcortical structures and prognosis in MND could be confounded by the presence of cognitive and behavioural impairment, which is not always reported in the studies and is a prognostic factor in MND~\cite{suPredictorsSurvivalPatients2021}.
 
 \subsubsection*{Hippocampus}
@@ -284,12 +284,13 @@ This presents a potential future direction for ML in MND prognosis, which could 
 
 % point of section: less work has been done on imaging, and mostly done with derived features to help with small sample size issues
 % imaging by itself has been shown to have limited usefulness
-Machine learning has had success within imaging studies of neurodegenerative diseases with large sample sizes, such as Alzheimer's disease (cite ADNI) and Parkinson's disease (cite PPMI), but less so in MND.
-Sample sizes are small in MND, and deep learning with images larger cohorts to train the models, due to the complexity of the models and the need for a large number of parameters to be estimated.
-Only a few studies have investigated MND progression using imaging independently of clinical data, and these studies have all used derived features from the images, such as FA from DTI, or cortical thickness from T1-weighted MRI, in order to avoid the small sample size issue with deep learning.
+Machine learning has had success within imaging studies of neurodegenerative diseases, such as Alzheimer's disease~\cite{petersenAlzheimerDiseaseNeuroimaging2010} and Parkinson's disease~\cite{marekParkinsonProgressionMarkers2018}, but less so in MND due to comparatively small sample sizes.
+Sample sizes are small in MND, and
+Computer vision ML models require larger cohorts to train the models, due to the complexity of the models and the need for a large number of parameters to be estimated.
+Few studies have investigated MND progression using imaging independently of clinical data, often addressing the small sample size issue by using image-derived features instead.
 
-Two ways that imaging has been used in MND prognosis is to predict baseline progression rate using white matter connectivity from DTI~\cite{liDisruptionWhiteMatter2021}, and to classify patients into neuropathological disease stages using DTI-derived features of the ALS-associated tracts~\cite{behlerMultivariateBayesianClassification2022}.
-However, these studies have limited clinical usefulness, since it is not necessary to predict a baseline progression rate, and the neuropathological disease stage was not associated with the popular clinical staging systems, King's and MiToS .
+Imaging has been used to predict baseline progression rate using white matter connectivity from DTI~\cite{liDisruptionWhiteMatter2021}, and to classify patients into neuropathological disease stages using DTI features of ALS-associated tracts~\cite{behlerMultivariateBayesianClassification2022}.
+Both of these studies have limited clinical usefulness, since it is not necessary to predict a baseline progression rate, and the neuropathological disease stage was not associated with the popular clinical staging systems, King's and MiToS .
 
 Querin and colleagues used FA of the spinal cord and spinal cord atrophy to predict survival in a CPH model, and found that MRI parameters were more predictive than clinical features, albeit in a small cohort of 49 patients~\cite{querinSpinalCordMultiparametric2017}.
 
@@ -298,43 +299,49 @@ Despite the many prognostic factors identified in neuroimaging studies, the limi
 
 \subsection{Multimodal}
 
-A potential solution to the unoptimal use of imaging data in MND prognosis is to combine the imaging data with the clinical data, increasing the amount of information available to the model.
-This integration can be achieved through multimodal data fusion, where the data from different modalities are combined into a single model.
-
-Multimodal data fusion is suited to MND because it is so multifactorial, as well as being a complex and heterogeneous disease, which would benefit from the integration of different data sources to capture the complexity of the disease.
-Using ML, especially deep learning, could help understand the underlying multifactorial mechanisms of MND progression through the interactions between the different modalities within the model.
-Additionally, with limited consensus on imaging prognostic factors in MND, a data-driven approach with guidance from clinical data could help to identify the most important imaging features for prognosis.
+Combining imaging and clinical data could increase the amount of information available to a model and address the suboptimal use of imaging data in MND prognosis.
+Multimodal data fusion is a technique that combines data from various modalities into a single model in order to accomplish this integration.
+Due to its multifactorial nature and complexity, MND is a good candidate for multimodal data fusion.
+Integrating different data sources using ML could help to fully capture the complexity of the disease, and to understand the underlying multifactorial mechanisms of MND progression through the interactions between the different modalities within the model.
+Furthermore, with limited consensus on imaging prognostic markers in MND, a data-driven strategy guided by clinical data could aid in identifying the most essential imaging findings for prognosis.
 So far, all of the studies with multimodal data fusion in MND have relied on extracted features from the imaging, rather than the images themselves.
 However, it is possible to use the images themselves in a multimodal model, and this is a promising future direction for MND prognosis.
 
-A simple way to combine clinical and imaging data is to concatenate the features from the different modalities into a single model, and this has been done in a few studies of MND prognosis.
-This can only be done when the features are of the same dimensionality.
-For example, it would not be possible to concatenate a 1D vector of ALSFRS-R scores with a 3D image of the brain without losing the spatial information of the image, but it would be possible to concatenate a 1D vector of ALSFRS-R scores with a 1D vector of FA values from the CST.
-However, with concatenation comes the curse of dimensionality, where the number of features in the model becomes too large for the sample size, and the model overfits the training data.
-This is a common pitfall in multimodal data fusion, and can be avoided by using dimensionality reduction techniques, such as princpal component analysis (PCA) or deep learning methods, to reduce the number of features in the model.
 
-Kuan and colleagues found that a multimodal survival model of clinical and cortical thickness features performed the same as a clinical-only model in predicting survival at multiple time points~\cite{kuanAccuratePersonalizedSurvival2023}.
-Similarly, Schuster and colleagues used concatenated clinical and MRI-derived features in a logistic ridge regression model to predict survival at 18 months after diagnosis~\cite{schusterSurvivalPredictionAmyotrophic2017}.
-During training, the model performed best with clinical data and MRI, but during testing, the model performed identically with clinical data alone.
-Since the test size was small (n=12), the model may have overfit the training data, and the lack of improvement in the testing set could be due to the curse of dimensionality from the added MRI features.
-The identical test performance of the clinical-only and multimodal model may suggest that the imaging data was not useful in the model, but it is also possible that the imaging data was useful, but the concatenation method was not optimal.
+Combining clinical and imaging data involves concatenating features from different modalities into a single model, feasible when features share the same dimensionality.
+However, this introduces the curse of dimensionality, potentially leading to overfitting.
+Kuan and colleagues found a concatenation multimodal survival model performed similarly to a clinical-only model in predicting survival, while Schuster and colleagues showed identical test performance between clinical-only and concatenation multimodal models, possibly due to overfitting and the curse of dimensionality.
+This suggests the concatenation method may have limitations in utilizing imaging data effectively.
 
-Other studies have used more advanced methods of multimodal data fusion, such as multimodal dimensionality reduction to lower the dimensionality of the joint data.
+%A simple way to combine clinical and imaging data is to concatenate the features from the different modalities into a single model, feasible only when features share the same dimensionality, such as combining a 1D vector of ALSFRS-R scores with a 1D vector of FA values from the CST, as opposed to a 3D brain image.
+%However, concatenation introduces the curse of dimensionality, which occurs when the number of features in the model exceeds the sample size, causing the model to overfit the training data.
+%This can be addressed by employing dimensionality reduction techniques to reduce the number of features in the model.
+%
+%Kuan and colleagues found that a multimodal survival model of clinical and cortical thickness features performed the same as a clinical-only model in predicting survival at multiple time points~\cite{kuanAccuratePersonalizedSurvival2023}.
+%Similarly, Schuster and colleagues used concatenated clinical and MRI-derived features in a logistic ridge regression model to predict survival 18 months post-diagnosis~\cite{schusterSurvivalPredictionAmyotrophic2017}.
+%Despite performing best with clinical data and MRI during training, the model exhibited identical performance with clinical data alone during testing, probably due to overfitting and the curse of dimensionality caused by the extra MRI features in the small test size (N$=12$).
+%The identical test performance of the clinical-only and multimodal models suggests that the imaging data's utility may have been limited by the concatenation method's suboptimal performance.
+To mitigate the limitations of concatenation, other studies have used more advanced methods of multimodal data fusion, such as multimodal dimensionality reduction of the joint data.
 Behler and colleagues used PCA on concatenated features of cognitive, oculomotor, and DTI to cluster patients into neuropathological disease stages~\cite{behlerMultimodalVivoStaging2022}.
-As mentioned earlier in a related study by the authors, this method had limited clinical usefulness, but it is a promising approach for understanding the interactions between the different modalities in MND.
+%As mentioned earlier in a related study by the authors, this method had limited clinical usefulness, but it is a promising approach for understanding the interactions between the different modalities in MND.
 Kmetzsch and colleagues used a deep learning unsupervised method called a variational autoencoder to lower the dimensions of joint miRNA and structural MRI extracted volumes to predict disease progression in FTD, ALS, and ALS-FTD patients~\cite{kmetzschDiseaseProgressionScore2022a}.
 They found that different modalities were important at different stages of the disease.
 This insight is an example of how multimodal data fusion can unveil more about the disease than unimodal data alone.
 
-The final multimodal data fusion method used in MND prognosis is supervised deep learning.
-Van der Burgh and colleagues classifed 135 sporadic ALS patients into short, medium, and long survival using clinical characteristics, structural MRI extracted features, and diffusion-weighted imaging extracted features~\cite{vanderburghDeepLearningPredictions2017}.
-Their model was comprised of 3 unimodal neural networks, which were trained separately to predict survival classification, and a fourth neural network that took the outputs of the 3 trained unimodal models.
-They found that the multimodal model performed better than the unimodal models, and that the distributions of the multimodal model's performance were statistically significantly better than the unimodal models.
+%The final multimodal data fusion method used in MND prognosis is supervised deep learning.
+%Van der Burgh and colleagues classifed 135 sporadic ALS patients into short, medium, and long survival using clinical characteristics, structural MRI extracted features, and diffusion-weighted imaging extracted features~\cite{vanderburghDeepLearningPredictions2017}.
+%Their model was comprised of 3 unimodal neural networks, which were trained separately to predict survival classification, and a fourth neural network that took the outputs of the 3 trained unimodal models.
+%They found that the multimodal model performed better than the unimodal models, and that the distributions of the multimodal model's performance were statistically significantly better than the unimodal models.
+%However, an innapropriate statistical test was used to compare the performance distributions.
+%Nevertheless, the study showed that multimodal data fusion improved MND prognosis, and that deep learning is a promising method for this task.
+%This work was extended by Meier and colleagues, who added another modality of simulated TDP-43 accumulation levels, and found that this improved the performance of the model~\cite{meierConnectomeBasedPropagation2020}.
+Supervised deep learning is a multimodal data fusion method used in MND prognosis.
+Van der Burgh and colleagues classified sporadic ALS patients into survival categories using clinical characteristics, structural MRI, and diffusion-weighted imaging features~\cite{vanderburghDeepLearningPredictions2017}, and a later extension added simulated TDP-43 accumulation levels~\cite{meierConnectomeBasedPropagation2020}.
+Their model comprised three unimodal neural networks trained separately and a fourth neural network integrating their outputs, showing significantly improved performance compared to unimodal models.
 However, an innapropriate statistical test was used to compare the performance distributions.
-Nevertheless, the study showed that multimodal data fusion improved MND prognosis, and that deep learning is a promising method for this task.
-This work was extended by Meier and colleagues, who added another modality of simulated TDP-43 accumulation levels, and found that this improved the performance of the model~\cite{meierConnectomeBasedPropagation2020}.
-An improvement that could be made to their data fusion method would be to train the 3 unimodal neural networks and the fourth neural network altogether, rather than training the unimodal models separately and then concatenating their outputs.
-This would allow the model to learn more complex relationships between the data by allowing the intermediate weights and feature maps of the different modalities to interact.
+An improved approach could involve training all neural networks together, allowing the intermediate weights and feature maps of the different modalities to interact.
+%An improvement that could be made to their data fusion method would be to train the 3 unimodal neural networks and the fourth neural network altogether, rather than training the unimodal models separately and then concatenating their outputs.
+%This would allow the model to learn more complex relationships between the data by allowing the intermediate weights and feature maps of the different modalities to interact.
 
 In conclusion, prognosis prediction in MND is a complex task with many different approaches and features that can be used.
 The literature is afflicted with small sample sizes, inconsistent findings, and unclear clinical relevance, but multimodal data fusion is a promising approach for MND prognosis, and has been shown to improve performance in some studies, with the method of data fusion being important.
