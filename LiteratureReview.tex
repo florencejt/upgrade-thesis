@@ -5,60 +5,56 @@ This chapter contains a review of literature on prognosis of MND, looking at bot
 
 \section{Prognostic Factors}
 
-Prognosis is the prediction of the course of a disease, and is important for both patients and clinicians.
-For patients, prognosis can help them to plan their lives and make decisions about their care, and for clinicians, prognosis can help them to make decisions about treatment and care, and to plan clinical trials.
-Prognosis, however, can be defined in different ways, and the definition of prognosis can depend on the disease.
 In MND research, prognosis is often defined as survival time, but it can also be defined as the rate of progression of the disease, future functional ability, the future need for therapies, or a combination of these~\cite{papaizMachineLearningSolutions2022, tavazziArtificialIntelligenceStatistical2023}.
+In this section, we will review the literature on prognostic factors in MND, and we will group the factors into four categories: clinical, genetic, fluids, and imaging.
 
 \subsection{Clinical}
 
-A large meta-analysis in 2021 collated research studies on non-genetic prognostic factors in ALS associated with survival risk~\cite{suPredictorsSurvivalPatients2021}.
-The review calculated and reported the hazard ratios (HRs) for each factor which had at least 3 studies reporting on it, derived from Cox Proportional Hazards (CPH) models.
-Heterogeniety was assessed using the I-squared statistic, and sensitivity analysis was performed to assess the robustness of the results.
-None of the sensitivity analyses showed a significant change in the results, and the authors concluded that the results were robust.
+A large meta-analysis in 2021 collated research studies on non-genetic factors associated with survival risk in ALS~\cite{suPredictorsSurvivalPatients2021}.
+Hazard ratios (HRs), derived from Cox Proportional Hazards (CPH) models, were calculated for each factor which had at least 3 studies reporting on it.
+The authors conducted sensitivity analyses and heterogeneity analyses to assess the validity of their findings, and found them to be robust.
 
-Starting with demographic factors, the meta-analysis found a higher age of symptom onset is associated with a higher risk of death (HR = 1.03)~\cite{suPredictorsSurvivalPatients2021}. However, age of onset is an imprecise measure because it is diffiuclt for patients to pinpoint their exact date of symptom onset, since symptoms often arise gradually.
-It is common in clinical records for the onset date to be the first date of the month or even the first day of the year if the patient is having trouble remembering. Nevertheless, the harmful effect of older age at onset is consistent with much of literature (FIND CITATIONS HERE).
-The meta-analysis also found that single, as opposed to married, patients have a worse prognosis (HR = 1.73), and that being a current smoker (HR=1.37) or a former smoker (HR=1.16) are both negative prognostic factors~\cite{suPredictorsSurvivalPatients2021}.
-
-Rapid weight loss is a common feature of MND because of difficulties eating and swallowing, decreased appetite, and loss of muscle mass. A higher body-mass index (BMI) at diagnosis is associated with a lower risk of death (HR = 0.97) from 17 different studies in the meta-analysis ~\cite{suPredictorsSurvivalPatients2021}.
-Another smaller meta-analysis specifically on BMI also found that higher BMI at baseline is protective HR=0.96)~\cite{dardiotisBodyMassIndex2018}, also backed up by a large population study of 1,809 patients from China (BMI >= 25 kg/m2, HR=0.36)~\cite{gaoEpidemiologyFactorsPredicting2021}.
-However, there are some studies that have found no association between baseline BMI and survival, rather that the most important BMI prognostic factor is the rate of change in BMI~\cite{jawaidDecreaseBodyMass2010}.
-Specifically, a decrease in BMI both 5 years and 10 years before symptom onset has been associated with shorter survival, in a study of N=381 ALS patients~\cite{goutmanBodyMassIndex2023}.
-Since BMI is a simplistic measure that fails to capture body composition~\cite{rothmanBMIrelatedErrorsMeasurement2008}, Lindauer and colleagues used MRI of the knees and diaphragm to measure levels of subcutaneous and visceral fat in 62 ALS patients.
-They found that higher subcutaneous fat is associated with higher ALSFRS-R and lower rate of ALSFRS-R decrease~\cite{lindauerAdiposeTissueDistribution2013}. Visceral fat was not associated with either measures.
-
-The appearance of cognitive and behavioural impairment can also have an impact on survival.
-Executive dysfunction, the inability to manage cognitive tasks, is associated with fast disease progression~\cite{elaminExecutiveDysfunctionNegative2011} and shorter survival in the meta-analysis (HR=2.1)~\cite{suPredictorsSurvivalPatients2021}.
-Moreover, the meta-analysis found that the presence of FTD (HR=2.98) and non-specific dementia (HR=1.41) are both associated with shorter survival~\cite{suPredictorsSurvivalPatients2021}.
-
-The El Escorial criteria are used to diagnose ALS, and a patient being assigned to the "probable" category as opposed to the "definite" category is associated with longer survival (HR=0.73), and "possible" is associated with even longer survival (HR=0.60)~\cite{suPredictorsSurvivalPatients2021}.
-Definite ALS patients progressing faster also found in a large multi-centre study~\cite{westenengPrognosisPatientsAmyotrophic2018}. However, in the large Chinese cohort of 1,809 patients, there was no significant relationshop between El Escorial and survival~\cite{gaoEpidemiologyFactorsPredicting2021}.
-
-The meta-analysis also considered the association of survival with site of onset, where motor symptoms first appear.
-In comparison with spinal onset, which is the most typical ALS onset site, both respiratory onset (HR=2.2) and bulbar onset (HR=1.35), meaning the first symptoms are in the mouth and throat, are associated with shorter survival~\cite{suPredictorsSurvivalPatients2021}.
-The onset sites that are protective compared to spinal onset are flail arm or leg onset (HR=0.61) and predominantly upper or lower motor neuron (pUMN or pLMN) (HR=0.32).
-The speed of progression of the disease is also a prognostic factor. Fujimura-Kiyono and colleagues found that, in a cohort of 150 sporadic ALS patients, a shorter interval between the first motor onset and the next site involvement is associated with shorter survival, independent of what those onset sites are~\cite{fujimura-kiyonoOnsetSpreadingPatterns2011a}.
-
-A higher ALSFRS-R at baseline is associated with longer survival (HR=0.96), and a higher rate of decline in ALSFRS-R from onset to diagnosis is associated with shorter survival (HR=1.48 for categorical, HR=2.37 continuous)~\cite{suPredictorsSurvivalPatients2021}.
-The rate of decline in ALSFRS-R from onset to diagnosis is also called the progression rate to baseline, or PRB, and is calculated as
+% Factors that are pretty clearly associated with shorter survival
+Some of the factors associated with shorter survival in ALS are well established in the literature.
+Clinical information about how the disease first presents is a strong indicator of prognosis.
+Firstly, an older age of symptom onset is associated with a higher risk of death~\cite{suPredictorsSurvivalPatients2021}.
+However, it is common in clinical records for the onset date to be the first date of the month or even the first day of the year if the patient cannot remember the exact date, which leads to age of onset being an imperfect measure.
+Furthermore, a shorter delay between symptom onset and diagnosis is associated with shorter survival~\cite{suPredictorsSurvivalPatients2021} because a shorter delay suggests that the disease is fast-progressing and more obvious to clinicians to diagnose.
+A delay of more than one year indicates longer survival (HR=0.39)~\cite{suPredictorsSurvivalPatients2021} and another study showed a delay of less than one year indicates shorter survival (HR=3.43)~\cite{gaoEpidemiologyFactorsPredicting2021}.
+% site of onset
+Both the site of symptom onset and the speed at which motor symptoms spreads to other sites are associated with survival.
+Compared to the most common onset site, spinal, Su and colleagues found that bulbar onset (HR=1.35) and respiratory onset (HR=2.2) are associated with shorter survival~\cite{suPredictorsSurvivalPatients2021}.
+A short interval between the first motor onset and the next site involvement is also associated with shorter survival~\cite{fujimura-kiyonoOnsetSpreadingPatterns2011a}, and the speed of motor symptom progression is a prognostic factor independent of the sites themselves.
+% dementia
+Extra-motor symptoms are also associated with shorter survival.
+Executive dysfunction, the appearance of frontotemporal dementia (FTD), and non-specific dementia are all associated with shorter survival and faster disease progression~\cite{suPredictorsSurvivalPatients2021, elaminExecutiveDysfunctionNegative2011}.
+% alsfrs and prb
+Both a smaller ALSFRS-R at diagnosis and a faster rate of ALSFRS-R decline are associated with short survival~\cite{suPredictorsSurvivalPatients2021}.
+he rate of decline in ALSFRS-R from onset to diagnosis is also called the progression rate to baseline, or PRB, and is calculated as
 \begin{equation}
     PRB = \frac{48-\textnormal{ALSFRS-R}(t_{diag})}{t_{diag}-t_{onset}},
 \end{equation}\label{eq:PRB}
 where $t_{diag}$ and $t_{onset}$ are the dates of MND diagnosis and symptom onset respectively, and 48 is the maximum score of ALSFRS-R.
+% riluzole, fvc
+Finally, taking Riluzole is associated with longer survival (HR=0.80), and lower forced vital capacity (FVC) is associated with shorter survival~\cite{suPredictorsSurvivalPatients2021}.
 
-Other clinical factors associated with shorter survival are lower forced vital capacity (FVC), and a shorter time between symptom onset and diagnosis~\cite{suPredictorsSurvivalPatients2021}.
-When the diagnostic delay is longer than one year, Su and colleagues found it to be associated with longer survival in their meta-analysis (HR=0.39)~\cite{suPredictorsSurvivalPatients2021}, and results from the large Chinese cohort agree that an onset shorter than one year is harmful to survival risk (HR=3.43).
-This is probably because the longer the delay, the more likely it is that the patient has a slowly progressing form of MND that is not obviously ALS in diagnostic tests.
+% more contentious factors with mixed findings
+\newline Due to the heterogeneity of MND, there are factors that have mixed associations in the literature.
+% el escorial
+The El Escorial criteria, used to assist ALS diagnosis, assigns patients into categories associated with the confidence of the diagnosis, from ``definite`` to ``possible``~\cite{ludolphRevisionEscorialCriteria2015}.
+``Definite`` ALS patients have been found to progress faster than ``probable`` or ``possible`` patients in the meta-analysis and a large multi-centre study~\cite{suPredictorsSurvivalPatients2021, westenengPrognosisPatientsAmyotrophic2018}.
+However, in a large cohort of 1,809 Chinese patients, there was no significant relationship between El Escorial and survival~\cite{gaoEpidemiologyFactorsPredicting2021}.
+% bmi
+MND is frequently accompanied by rapid weight loss due to feeding and swallowing difficulties, appetite loss, and muscle mass atrophy.
+A higher body-mass index (BMI) at diagnosis is associated with longer survival in the meta-analysis (HR=0.97)~\cite{suPredictorsSurvivalPatients2021}, also supported by smaller meta-analysis~\cite{dardiotisBodyMassIndex2018} and a large population study~\cite{gaoEpidemiologyFactorsPredicting2021}.
+On the other hand, some studies found that baseline BMI was not important, but rather the rate of BMI decline is a better prognostic factor, both years before disease onset~\cite{goutmanBodyMassIndex2023} and after diagnosis~\cite{jawaidDecreaseBodyMass2010}.
+More precise measures of body composition, such as MRI of the knees and diaphragm, have found that higher subcutaneous fat is associated with higher ALSFRS-R and lower rate of ALSFRS-R decrease~\cite{lindauerAdiposeTissueDistribution2013}.
+% statins
+Statins, a drug that inhibits cholesterol synthesis, has been studied as a prognostic factor in MND.
+Su and colleagues found no significant effect on survival in their meta-analysis, from three papers reporting non-significant HRs~\cite{suPredictorsSurvivalPatients2021}.
+However, Weisskopf and colleagues found that taking low-potency statins for short durations before diagnosis is protective for survival, but this effect is lost when the duration of statin use is over 3 or the potency of the statin is higher~\cite{weisskopfStatinMedicationsAmyotrophic2022}.
+They suggest that statins might protect ALS survival if used for shorter durations and at lower doses, indicating less severe cardiovascular conditions that could harm survival.
 
-Statins, a drug used to inhibit cholesterol synthesis, has also been investigated as a prognostic factor in MND.
-Su and colleagues found that taking or not taking statins has no significant effect on survival, based on 3 papers that all reported non-significant HRs~\cite{suPredictorsSurvivalPatients2021}.
-However, a study published after the meta-analysis looked not only at statin use but also at the dose of statins and the duration of statin use.
-Weisskopf and colleagues found that, in a cohort of 948 ALS patients, taking statins for under 3 years is protective for survival (HR=0.77), but that there is no significant protection or harm when the duration of statin use is over 3 years~\cite{weisskopfStatinMedicationsAmyotrophic2022}.
-Additionally, they found that taking low-potency statins compared to not taking any statins is protective for survival (HR=0.82), but they found no signficant effects with higher-dose statins.
-They concluded that the statins may have a protective effect on ALS survival, if the underlying reasons for taking statins do not necessitate high dose and long duration of use, which would imply a more severe cardiovascular condition that may be harmful to survival.
-
-Finally, the meta-analysis found that taking Riluzole is associated with longer survival (HR=0.80)~\cite{suPredictorsSurvivalPatients2021}.
 
 \subsection{Genetic}
 
