@@ -201,13 +201,11 @@ The protective predictors are a longer diagnostic delay (HR=0.52) and a higher F
 
 We have seen that prognostic factors have been identified in MND, and that there are a number of prognostic models that have been developed.
 However, the prognostic models are not widely used in clinical practice, and there is a need for more accurate and generalisable models to be developed.
-Machine learning (ML) is a potential solution to this problem.
-
-By ML, we mean the use of algorithms to learn from data and make predictions or decisions.
-A subset of ML is deep learning, which is a type of ML that uses neural networks to learn from data.
-``Classical ML`` refers to ML models that are not deep learning models, and includes models such as random forests, support vector machines, and linear regression.
-
+Machine learning (ML) is
+A potential solution to this problem is machine learning (ML), which is the use of algorithms to learn from data and make predictions or decisions.
 In this section, we discuss the literature on ML for MND prognosis using clinical data, imaging data, or a combination of both.
+%A subset of ML is deep learning, which is a type of ML that uses neural networks to learn from data.
+%``Classical ML`` refers to ML models that are not deep learning models, and includes models such as random forests, support vector machines, and linear regression.
 
 \subsection{Clinical}
 
@@ -217,68 +215,70 @@ In this section, we discuss the literature on ML for MND prognosis using clinica
 As mentioned earlier, prognosis can be defined as the prediction of the future course of a disease.
 In context of MND, prognosis could be future ALSFRS-R scores, progression rate, survival time, or predicting time until a treatment is needed.
 
-Predicting future progression rate, as calculated by the slope between the ALSFRS-R scores, is a popular prediction task in ML prognosis.
-In 2011, a challenge was set called the DREAM Phil Bowen Prize4Life ALS Prediction Challenge, which asked entrants to use 3 months of clinical trials data to predict the progression rate in the next 9 months, measured as the slope between the ALSFRS-R scores at month 3 and at month 12~\cite{kuffnerCrowdsourcedAnalysisClinical2015}.
-The dataset accompanying this challenge was the PRO-ACT database, which is the largest publicly available dataset of clinical trials data in MND with over 8,500 patients from multiple trials~\cite{atassiPROACTDatabaseDesign2014}.
-This dataset has been widely used in ML studies for MND prognosis because of its size and longitudinal nature.
-However, the data is taken from clinical trials, where and he patients were subject to strict inclusion and exclusion criteria, leading to younger patients wih fewer functional impairments.
-This limits the generalisability of the results to the whole MND population.
+A popular prediction task in ML prognosis is predicting future progression rate, as calculated by the slope between ALSFRS-R scores.
+In 2011, the DREAM Phil Bowen Prize4Life ALS Prediction Challenge tasked entrants to use 3 months of clinical trials data to predict the progression rate over the following 9 months~\cite{kuffnerCrowdsourcedAnalysisClinical2015}.
+This challenge used the PRO-ACT database, which is the largest publicly available dataset of clinical trials data in MND with over 8,500 patients from multiple trials~\cite{atassiPROACTDatabaseDesign2014}.
+Although widely used in ML studies, the trials' inclusion and exclusion criteria led to younger patients with fewer functional impairments, and so results using PRO-ACT have limited generalisability to the MND population.
+
 
 % point of paragraph: challenge kicked off ML for prognosis properly, found that tree-based models performed the best, deep learning still not useful. however, unideal study
-The challenge had 37 entries and the results were summarised by Küffner and colleagues~\cite{kuffnerCrowdsourcedAnalysisClinical2015}, who concluded that random forest and tree-based decision models performed the best in predicting future progression rate~\cite{hothornRandomForest4LifeRandomForest2014}.
-By comparing models and results from the entries, some interesting findings emerged, such as high variability in individual ALSFRSr scores being a strong predictor of progression rate~\cite{hothornRandomForest4LifeRandomForest2014} and previously unidentified progression biomarkers such as blood pressures and uric acid.
-Ensemble models, which are a combination of predictions from multiple models, have shown promise in the PRO-ACT data as well in a post-challenge study of 17 classical ML models ~\cite{turabiehMachineLearningEmpowered2024}.
-Since the challenge took place before deep learning became as popular as it is now, Pancotti and colleagues revisited the challenge in 2022 using deep learning models~\cite{pancottiDeepLearningMethods2022}, finding that deep learning performed similarly to classical ML models.
-It is possible that more data or a different task is needed to show the benefit of deep learning in MND prognosis.
+The challenge results reported that random forest and tree-based decision models performed the best~\cite{kuffnerCrowdsourcedAnalysisClinical2015}, and a post-challenge study found highest performance with ensembles of classical ML models~\cite{turabiehMachineLearningEmpowered2024}.
+Some unexpected findings emerged, such as a high variability in individual ALSFRSr scores being a strong predictor of progression rate~\cite{hothornRandomForest4LifeRandomForest2014} and previously unidentified progression biomarkers such as blood pressures and uric acid.
+%The challenge had 37 entries and the results were summarised by Küffner and colleagues~\cite{kuffnerCrowdsourcedAnalysisClinical2015}, who concluded that random forest and tree-based decision models performed the best in predicting future progression rate~\cite{hothornRandomForest4LifeRandomForest2014}.
+%By comparing models and results from the entries, some interesting findings emerged, such as high variability in individual ALSFRSr scores being a strong predictor of progression rate~\cite{hothornRandomForest4LifeRandomForest2014} and previously unidentified progression biomarkers such as blood pressures and uric acid.
+%Ensemble models, which are a combination of predictions from multiple models, have shown promise in the PRO-ACT data as well in a post-challenge study of 17 classical ML models ~\cite{turabiehMachineLearningEmpowered2024}.
+A 2022 revisit using deep learning models found similar performance to classical ML, suggesting further data or tasks may be needed to demonstrate deep learning's benefits \cite{pancottiDeepLearningMethods2022}.
 
 % weird to predict a linear slope using ML, especially a slope over 9 months which smooths out a lot of the individual patient trajectories
-While the Prize4Life challenge was a great catalyst for ML research in MND, there are limitations in predicting a rate of functional decline over 9 months.
-Condensing 9 months of progression into a single slope may oversimplify the disease course, and training ML models to predict a linear slope may not be the best approach, especially since Ramamoorthy and colleagues showed how non-linear ALSFRS-R trajectories are very common~\cite{ramamoorthyIdentifyingPatternsAmyotrophic2022}.
+While the Prize4Life challenge was a great catalyst for ML research in MND, predicting linear decline over 9 months is a flawed task.
+Condensing 9 months of progression into a single slope oversimplifies the disease course, as evidenced by Ramamoorthy and colleagues finding how non-linear ALSFRS-R trajectories are very common~\cite{ramamoorthyIdentifyingPatternsAmyotrophic2022}.
+Furthermore, random forests outperform the pre-slope model in predicting future ALSFRS-R scores, showing that models capable of non-linear calculations are needed for predicting functional decline.
 
 % taylor et al predicting just future alsfrs-r, not the slope, and comparing to pre-slope model which assumes linear decline
 
-Instead using PRO-ACT to predict progression rate, Taylor and colleagues predicted future ALSFRS-R scores using random forests~\cite{taylorPredictingDiseaseProgression2016}.
-They found that random forest performed better than the pre-slope model, especially when predicting later into the disease course.
-This shows the usefulness of a non-linear model in predicting functional decline in MND .
+%Instead using PRO-ACT to predict progression rate, Taylor and colleagues predicted future ALSFRS-R scores using random forests~\cite{taylorPredictingDiseaseProgression2016}.
+%They found that random forest performed better than the pre-slope model, especially when predicting later into the disease course.
+%This shows the usefulness of a non-linear model in predicting functional decline in MND .
 
 % point of paragraph: what about classifying by fast or slow progression?
-Predicting fast versus slow progression is another common prognosis task, where labels ``fast`` or ``slow`` are assigned to patients by imposing some threshold on the progression rate~\cite{ongPredictingFunctionalDecline2017, dinabduljabbarPredictingAmyotrophicLateral2023}.
-Performance is usually better in this task than predicting the actual progression rate, because the task is less granular and the classes are more balanced.
-Additionally, stratifying patients by progression rate can be used as part of the model's pipeline.
-Pires and colleagues found that they could improve the accuracy of predicting need for NIV by stratifying patients into low, medium, and high progression rate, and then training separate models for each strata~\cite{piresPredictingNoninvasiveVentilation2018}.
-Similarly, Halbersberg and colleagues clustered patients by ``deterioration patterns`` based on their early ALSFRS-R scores, and trained separate classifiers for each cluster~\cite{halbersbergTemporalModelingDeterioration2019}.
-The success of these stratification approaches suggests that the heterogeneity of MND may be too great for a single model to predict progression rate accurately, and that stratifying patients into groups may be a better approach.
 
-However, the threshold for fast and slow progression is arbitrary, and the threshold used in these studies may not be the same as the threshold used in a clinical setting.
+Predicting fast versus slow progression in MND is a common task where patients are labelled based on progression rates~\cite{ongPredictingFunctionalDecline2017, dinabduljabbarPredictingAmyotrophicLateral2023}.
+This task often outperforms predicting actual progression rates due to its less granular nature.
+Training separate models on patient subgroups has also shown to improve performance, either by stratifying on progression rate~\cite{piresPredictingNoninvasiveVentilation2018} or on deterioration pattern~\cite{halbersbergTemporalModelingDeterioration2019}.
+%Using this stratification as part of the model pipeline, Pires and colleagues found that they could improve prediction accuracy by training separate models for slow, medium, and fast progressing patients~\cite{piresPredictingNoninvasiveVentilation2018}.
+%Similarly, Halbersberg and colleagues clustered patients by ``deterioration patterns``, and trained separate classifiers for each cluster~\cite{halbersbergTemporalModelingDeterioration2019}.
+The success of these stratification approaches suggests that the heterogeneity of MND may be too great for a single model to predict progression rate accurately.
+
+%However, the threshold for fast and slow progression is arbitrary, and the threshold used in these studies may not be the same as the threshold used in a clinical setting.
 A more data-driven way of grouping patients is to use clustering, which is a type of unsupervised learning where the model groups patients into clusters based on their features.
-Grollemund and colleagues used UMAP (uniform manifold approximation and projection) to reduce the dimensionality of patient data, and then coarsely divided the lower-dimensional space (or latent space) into three tiers of 1-year survival risk~\cite{grollemundDevelopmentValidation1year2020}.
+Grollemund and colleagues used UMAP (uniform manifold approximation and projection) to reduce the dimensionality of patient data, and then coarsely divided the lower-dimensional space into tiers of 1-year survival risk~\cite{grollemundDevelopmentValidation1year2020}.
 They found that this approach outperformed random forest and logistic regression in predicting 1-year survival, even though the latent space had no knowledge of the survival times of the patients in the training data.
 
 Another goal in MND prognosis is to predict time to treatment, such as time to NIV or time to PEG (percutaneous endoscopic gastrostromy).
-The IDPP Clef challenge is a recent challenge in 2022 that focused on predicting risks of clinical events and timings in MND, and included a dataset of 2559 patients from Italy and Portugal~\cite{guazzoOverviewIDPPCLEF2022}.
-The challenge resulted in 4 papers, which all found that it was comparatively simple to predict the risk of clinical events, but not the timing of the events~\cite{brancoHierarchicalModellingALS2022, mannionPredictingRiskTime2022, trescatoBaselineMachineLearning2022, pancottiMultiEventSurvivalPrediction2022}.
-Other attempts at predicting time to treatment have focused on predicting time to NIV, often classifying patients into those who will need NIV within 3 months, 3 to 6 months, and 6 to 12 months~\cite{carreiroPrognosticModelsBased2015, pereiraPredictingAssistedVentilation2019}.
-The timing of medical interventions is a difficult task to predict because different clinics have different treatment strategies and different interpretations of the same clinical guidelines.
+The IDPP Clef challenge is a recent challenge in 2022 that focused on predicting risks of clinical events and timings in MND~\cite{guazzoOverviewIDPPCLEF2022}.
+The 4 resulting papers all found that it was comparatively simple to predict the risk of clinical events, but not the timings~\cite{brancoHierarchicalModellingALS2022, mannionPredictingRiskTime2022, trescatoBaselineMachineLearning2022, pancottiMultiEventSurvivalPrediction2022}.
+Other attempts at predicting time to treatment have focused on only predicting time to NIV~\cite{carreiroPrognosticModelsBased2015, pereiraPredictingAssistedVentilation2019}.
+However, predicting the timing of medical interventions is a difficult task due to varying clinic strategies and interpretations of clinical guidelines.
 Predicting the assessment outcomes that lead to the decision to start treatment may be a more useful task.
 
 % point of paragraph: machine learning approaches can be improved with explainability and setting logical rules, to make up for the small sample sizes
-Models can also be made more clinically relevant by incorporating logical rules and explainability methods.
-Tavazzi and colleagues used a dynamic bayesian network to simulate disease course according to the MiToS staging system~\cite{tavazziPredictingFunctionalImpairment2022}.
-They applied clinical and biological logic to their graphical model by not letting impossible relationships between variables exist, such as the medical centre being dependent on the patient's sex.
-This allows the model to learn from the data, but also to be guided by clinical and biological sense.
-Additionally, the graph structure of the model can be used to explore dependencies between variables, and to identify which variables are most important in predicting the future disease course.
+Integrating logical rules and explainability methods enhances the clinical relevance of models in MND prognosis.
+Tavazzi and colleagues used a dynamic bayesian network to simulate disease course according to the MiToS staging system, incorporating clinical and biological logic into their model~\cite{tavazziPredictingFunctionalImpairment2022}.
+This allows the model to not only learn from the data, but also to be guided by clinical and biological sense, which should mitigate spurious conclusions after training.
+%Additionally, the graph structure of the model can be used to explore dependencies between variables, and to identify which variables are most important in predicting the future disease course.
 
-Explainable models are important in MND prognosis because of the small sample sizes and the need for clinical sense in the predictions.
-Müller and colleagues used a deep learning longitudinal neural network to predict respiratory impairment in MND, and then used SHAP (SHapley Additive exPlanations) to explain the model's predictions~\cite{mullerExplainableModelsDisease2021}.
-When looking at the most important features in the model through an explainability method called Shapley values, they found that better swallowing function indicated quicker respiratory decline, which is clinically unintuitive.
-This brought the model's predictions into question, and shows the importance of explainability methods in MND prognosis.
+%Explainable models are important in MND prognosis because of the small sample sizes and the need for clinical sense in the predictions.
+Müller and colleagues used a deep learning longitudinal neural network to predict respiratory impairment in MND~\cite{mullerExplainableModelsDisease2021}.
+To overcome the ``black-box`` nature of deep learning methods, they employed an explainability method to find the most important features in the model.
+They found that their model had learned clinically unintuitive relationships, which brought the model's predictions into question.
+This shows the importance of explainability methods in MND prognosis, and the need for the model's predictions to make sense in the context of the disease.
 
-Overall, predicting MND prognosis with ML and clinical data is a difficult task with many ways to approach it.
-It is important to check that the model's predictions make sense in the context of the disease, and to consider the clinical relevance of the predictions.
-In a survey of 242 Dutch ALS patients, when asked whether they would prefer to be told their predicted survival time or a survival category (slow, medium, fast), the majority of patients preferred the exact survival time~\cite{westenengPrognosisPatientsAmyotrophic2018} (supplementary materials).
+
+In predicting MND prognosis with ML and clinical data, there are various approaches to consider.
+It is crucial to ensure that the model's predictions align with the disease context and to assess their clinical relevance.
+A survey of 242 Dutch ALS patients revealed a preference for knowing their exact survival time over a survival category (slow, medium, fast)~\cite{westenengPrognosisPatientsAmyotrophic2018}.
 However, none of the ML studies have attempted to predict exact survival time.
-This could be a useful future direction for ML in MND prognosis, and could be a task more relevant to the patients than predicting progression rate.
-
+This presents a potential future direction for ML in MND prognosis, which could be more meaningful to patients than predicting progression rate.
 
 \subsection{Imaging}
 
