@@ -139,7 +139,9 @@ More models were found in the literature than were included in Fusilli due to th
 Moreover, unimodal benchmarks were included in Fusilli to allow for comparison between the multimodal models and unimodal models.
 
 \begin{table}[!ht]
-    \caption{}
+    \caption{A list of the models included in Fusilli v1.2.3, categorised by their fusion method and modalities.
+    References are included where applicable, although the Fusilli implementation is not a direct copy of the referenced model, and may have been modified to fit the package's requirements.
+    \textbf{Acronyms}: GNN = Graph Neural Network, MCVAE = Multi-Channel Variational Autoencoder.}
     \label{}
     \centering
     \begin{tabular}{|p{8cm}ll|}
@@ -148,34 +150,34 @@ Moreover, unimodal benchmarks were included in Fusilli to allow for comparison b
         Tabular1 uni-modal & Unimodal & Tabular Only \\ \hline
         Tabular2 uni-modal & Unimodal & Tabular Only \\ \hline
         Image unimodal & Unimodal & Image Only \\ \hline
-        Activation function map fusion \cite{chenMDFNetApplicationMultimodal2023} & Operation & Tabular-tabular \\ \hline 
-        Activation function and tabular self-attention \cite{chenMDFNetApplicationMultimodal2023} & Operation & Tabular-tabular \\ \hline 
+        Activation function map fusion~\cite{chenMDFNetApplicationMultimodal2023} & Operation & Tabular-tabular \\ \hline
+        Activation function and tabular self-attention~\cite{chenMDFNetApplicationMultimodal2023} & Operation & Tabular-tabular \\ \hline
         Concatenating tabular data & Operation & Tabular-tabular \\ \hline 
-        Concatenating tabular feature maps \cite{gaoReducingUncertaintyCancer2022} & Operation & Tabular-tabular \\ \hline 
+        Concatenating tabular feature maps~\cite{gaoReducingUncertaintyCancer2022} & Operation & Tabular-tabular \\ \hline
         Tabular decision & Operation & Tabular-tabular \\ \hline 
-        Channel-wise multiplication net (tabular) \cite{duanmuPredictionPathologicalComplete2020}  & Attention & Tabular-tabular \\ \hline 
-        Tabular Crossmodal multi-head attention \cite{golovanevskyMultimodalAttentionbasedDeep2022}  & Attention & Tabular-tabular \\ \hline 
-        Attention-weighted GNN \cite{bintsiMultimodalBrainAge2023} & Graph & Tabular-tabular \\ \hline 
+        Channel-wise multiplication net (tabular)~\cite{duanmuPredictionPathologicalComplete2020}  & Attention & Tabular-tabular \\ \hline
+        Tabular Crossmodal multi-head attention~\cite{golovanevskyMultimodalAttentionbasedDeep2022}  & Attention & Tabular-tabular \\ \hline
+        Attention-weighted GNN~\cite{bintsiMultimodalBrainAge2023} & Graph & Tabular-tabular \\ \hline
         Edge Correlation GNN & Graph & Tabular-tabular \\ \hline 
-        MCVAE Tabular \cite{antelmiSparseMultiChannelVariational2019}  & Subspace & Tabular-tabular \\ \hline 
-        Concatenating tabular data with image feature maps \cite{liFusingMetadataDermoscopy2020}  & Operation & Tabular-image \\ \hline 
-        Concatenating tabular and image feature maps \cite{gaoReducingUncertaintyCancer2022} & Operation & Tabular-image \\ \hline 
+        MCVAE Tabular~\cite{antelmiSparseMultiChannelVariational2019}  & Subspace & Tabular-tabular \\ \hline
+        Concatenating tabular data with image feature maps~\cite{liFusingMetadataDermoscopy2020}  & Operation & Tabular-image \\ \hline
+        Concatenating tabular and image feature maps~\cite{gaoReducingUncertaintyCancer2022} & Operation & Tabular-image \\ \hline
         Image decision fusion & Operation & Tabular-image \\ \hline 
-        Channel-wise Image attention \cite{duanmuPredictionPathologicalComplete2020} & Attention & Tabular-image \\ \hline 
-        Crossmodal multi-head attention \cite{golovanevskyMultimodalAttentionbasedDeep2022} & Attention & Tabular-image \\ \hline 
-        Trained Together Latent Image + Tabular Data \cite{zhaoMultimodalDeepLearning2022} & Subspace & Tabular-image \\ \hline 
-        Pretrained Latent Image + Tabular Data \cite{zhaoMultimodalDeepLearning2022} & Subspace & Tabular-image \\ \hline 
-        Denoising tabular autoencoder with image maps \cite{yanRicherFusionNetwork2021} & Subspace & Tabular-image \\ \hline
+        Channel-wise Image attention~\cite{duanmuPredictionPathologicalComplete2020} & Attention & Tabular-image \\ \hline
+        Crossmodal multi-head attention~\cite{golovanevskyMultimodalAttentionbasedDeep2022} & Attention & Tabular-image \\ \hline
+        Trained Together Latent Image + Tabular Data~\cite{zhaoMultimodalDeepLearning2022} & Subspace & Tabular-image \\ \hline
+        Pretrained Latent Image + Tabular Data~\cite{zhaoMultimodalDeepLearning2022} & Subspace & Tabular-image \\ \hline
+        Denoising tabular autoencoder with image maps~\cite{yanRicherFusionNetwork2021} & Subspace & Tabular-image \\ \hline
     \end{tabular}
 \end{table}
 
 
 \section{Results}
 
-
-
-
-\subsection{Diagram of workflow}
+Fusilli version 1.0 was published on 30th November 2023, and has since been updated to version 1.2.3.
+Currently, Fusilli is under review for publication in the Journal of Open Source Software (JOSS).
+The package has been well-received on GitHub, with 134 stars and 12 forks at the time of writing, meaning that it has been favourited by 134 users and specially cloned by 12 users for their own modifications.
+I wrote an article on Medium about Fusilli, which has been read by 243 people, and two articles have been written about Fusilli by other people.
 
 \subsection{Example usage and outputs}
 Quick-start script with comments going through each line
@@ -185,20 +187,21 @@ Figures with output figures from the example notebooks
 \subsection{Documentation}
 Examples, templates for contributing, etc
 
-
-\subsection{Reception}
-\begin{itemize}
-    \item JOSS paper - under review 
-    \item GitHub stars and forks and articles
-\end{itemize}
-
 \section{Discussion}
+
+Good outcomes:
 \begin{itemize}
     \item Implemented a wide variety of models
     \item It will help people to know if data fusion is useful for their task and, if so, which model is best for their task
-    \item Limitation and future work: Data inputs - images have to be .pt files and tabular data has to be .csv files. Would be nice to extend data inputs to be jpegs or niis for people less comfortable with Python.
-    \item Limitation and future work: Only 2 modalities - could be extended to more
 \end{itemize}
+
+Fusilli has a number of limitations, most of which I hope to address with future updates to the software.
+Firstly, Fusilli only supports two modalities, which is a limitation for tasks that may benefit from more than two modalities.
+For example, in the context of MND prognosis prediction, using different types of MRI images (e.g. T1-weighted, T2-weighted, diffusion tensor imaging) could be beneficial, but Fusilli currently only supports one type of image alongside clinical information.
+Moreover, Fusilli only supports inputting image data the form of PyTorch .pt files, which requires the user to do some pre-processing of their data.
+This is a limitation for users who may not be comfortable with Python, and would prefer to input their data in the form of JPEGs or NiFTI files, for example.
+Fusilli also only supports regression and classification tasks, and does not support other tasks such as time-to-event analysis.
+Finally, although the models included in Fusilli are popular and cover a wide variety of architectures, there are many more models in the literature that could be included in Fusilli, and I hope to include these.
 
 \section{Conclusion}
 TBC...
