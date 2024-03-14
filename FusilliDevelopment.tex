@@ -8,52 +8,30 @@ This chapter discusses multimodal data fusion in more detail and describe the de
 
 \section{Introduction}
 
-Multimodal data fusion is the process of combining data from different sources to make predictions or decisions.
+Multimodal data fusion is the process of combining data from different sources to make predictions or decisions, often through the use of deep learning.
 The goal of combining different modalities is to improve the performance of a model by leveraging the relevant information from each modality and fusing them in a way that improves the model's performance.
-The application areas of multimodal data fusion are wide-reaching, including agriculture, disaster management, robotics, healthcare, and many others.
+There are many research fields where multimodal data fusion is used, such as in agriculture to predict crop yields and detect diseases~\cite{s.s.gopiMultimodalMachineLearning2023, patilRiceFusionMultimodalityData2022}, in disaster management to analyse response scenarios from audio and social media posts~\cite{algiriyageMultisourceMultimodalData2021}, and in robotics to help direct the robots with multiple sensors~\cite{duanMultimodalSensorsMLBased2022}.
+Moreover, the types of models used in multimodal data fusion can vary a lot, from geometric deep learning to relatively simple neural network architectures~\cite{cuiDeepMultimodalFusion2022}.
 
+In the context of my PhD, I am investigating multimodal data fusion for MND prognosis prediction.
+There has been minimal research on deep learning for prognosis prediction in MND~\cite{pancottiDeepLearningMethods2022, mullerExplainableModelsDisease2021}, and only one model created for deep-learning based multimodal data fusion~\cite{vanderburghDeepLearningPredictions2017}.
+However, there are many data fusion models that have been used in other fields that could be directly applicable to MND .
+There have been systematic reviews on the topic of data fusion that compare models, but only qualitatively~\cite{cuiDeepMultimodalFusion2022, gaoSurveyDeepLearning2020, stahlschmidtMultimodalDeepLearning2022, yanDeepMultiviewLearning2021}.
+Therefore, with limited knowledge from literature on the best models for MND data, it is important to experiment with a wide variety of models to find the best one for the task.
 
-Describing multimodal data fusion:
-\begin{itemize}
-    \item This is an area of research called multimodal data fusion but it can be called more names than that: multi-view, cross-heterogeneous, etc
-    \item The application areas of multimodal data fusion are very wide reaching: agriculture, disaster management, robotics, healthcare etc
-    \item Additionally, the types of models used in multimodal data fusion can vary a lot, from geometric deep learning to relatively simple neural network architectures.
-\end{itemize}
+Obtaining this wide variety of models to experiment with, however, is not a straightforward process for a number of reasons.
+Firstly, the terminology used to describe what I have chosen to call ``multimodal data fusion`` varies widely, with terms such as but not limited to multi-view, cross-heterogeneous, multi-source, and integrated learning.
+Secondly, the studies that introduce these models often do not include code for the reader to run the model.
+Morever, when code is included, it is often written in different languages, with varying guidance, quality, and maintenance.
 
-What did I want to do with data fusion:
-\begin{itemize}
-    \item Multimodal data fusion is such a large field with many applications
-    \item We saw in the lit review sections on machine learning that deep learning has not been done much with MND, and deep-learning data fusion has been done once by van der Burgh
-    \item and deep learning data fusion has not been done with tabular and image data in MND
-    \item For my PhD's overall goal of applying multimodal data fusion to motor neuron disease, it is important to have an understanding of the different models and their performances
-    \item This would require a large amount of experimentation and analysis, which would be difficult to do manually
-    \item So I wanted to compare different fusion methods to see what worked best
-\end{itemize}
+A way to address these problems is to create a curated collection of models for somebody interested in multimodal data fusion to consult.
+As far as I am aware, there are three Python packages that house collections of deep learning based data fusion models: ``Multi-view-AE``~\cite{aguilaMultiviewAEPythonPackage2023}, ``CCA-Zoo``~\cite{chapmanCCAZooCollectionRegularized2021}, and ``pytorch-widedeep``~\cite{zaurinPytorchwidedeepFlexiblePackage2023}.
+However, each of these packages only includes models with specific frameworks (autoencoders, CCA, and Google's ``wide and deep`` models, respectively), which limits the variety of models available for comparison.
 
-Issues I came across when starting to look at models:
-\begin{itemize}
-    \item Difficulty finding models in the first place: called different names
-    \item As I kept looking, I kept finding lots of and lots of models with different architectures   
-    \item Not all papers include code
-    \item Code is not standardised - written in different languages, varying availability, varying guidance
-    \item There are some collections/repos but not what I was looking for
-\end{itemize}
+Therefore, I aimed to develop a Python package for training and comparing multimodal data fusion models with any architecture.
+This Python package is named Fusilli, as a portmanteau of ``fuse easily``.
 
-Aims of this work:
-\begin{itemize}
-    \item To create a bank of models that can be used for multimodal data fusion
-    \item To create a standardised way of comparing models
-    \item Make it open source for others to use who are in similar positions to me
-\end{itemize}
-
-Chapter aims:
-\begin{itemize}
-    \item To describe the development of Fusilli
-    \item To describe the design choices made in developing Fusilli
-    \item To describe the implemented models in Fusilli
-    \item To describe the testing of Fusilli
-    \item To describe the reception of Fusilli
-\end{itemize}
+This chapter will detail the development of Fusilli, including the design choices made, the implemented models, and the outcomes of the project.
 
 \section{Fusion Methods}
 
