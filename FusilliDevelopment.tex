@@ -41,20 +41,16 @@ Fusilli works by taking the user's multimodal data and training it on a variety 
 
 \subsection{Software Design Choices}
 
-Before developing Fusilli, the following design goals were set to ensure the package would be useful for a wide range of users and tasks, as well as for my own research.\newline
-
+Before developing Fusilli, the following design goals were set to ensure the package would be useful for a wide range of users and tasks, as well as for my own research.\newline\newline
 \noindent\textbf{Modularity}: Fusilli should be modular, meaning that the various functionalities within the package should be independent of each other.
-This would allow for easy addition of new models in the future and easy adjustments to the package's functionality.\newline
-
+This would allow for easy addition of new models in the future and easy adjustments to the package's functionality.\newline\newline
 \noindent\textbf{Beginner-friendly and expert-friendly}:  Fusilli should be beginner-friendly, with users able to compare the different models without needing expertise in deep learning or Python programming.
 This would make it different from other similar packages, which require the user to set up their own experiments.
 
-On the other hand, Fusilli should also be expert-friendly, with users who are more capable being able to change the training parameters, modify the models, and access the trained models for further experiments.\newline
-
+On the other hand, Fusilli should also be expert-friendly, with users who are more capable being able to change the training parameters, modify the models, and access the trained models for further experiments.\newline\newline
 \noindent\textbf{Wide applicability}:
 Fusilli should include a wide variety of models, to ensure that the best model for a given task can be found.
-Moreover, this would ensure that the package is useful for a wide range of users, as different users may have different requirements for model architectures based on their task and data.\newline
-
+Moreover, this would ensure that the package is useful for a wide range of users, as different users may have different requirements for model architectures based on their task and data.\newline\newline
 \noindent\textbf{Support for two modalities}: The models in Fusilli will support data fusion between either two types of tabular data (e.g. clinical data and brain region volumes data) or between an image and tabular data (e.g. MRI images and clinical data).
 Again, for wide applicability, Fusilli should be able to handle two-dimensional and three-dimensional images, and tabular data of any size.\newline
 
@@ -67,25 +63,28 @@ From the literature, these are the most common tasks for multimodal data fusion,
 Fusilli was implemented in Python, using the PyTorch and PyTorch Lightning libraries for deep learning.
 This is because PyTorch is a popular library for deep learning, and is known for its flexibility and ease of use.
 
-The user must specify:
-\begin{itemize}\itemsep{-0.5em}
-    \item Data: The user's data, which must be in the form of a .csv file for tabular data, and .pt files for images.
-    \item Task: The task that the user wants to perform, which can be either regression or classification (binary or multiclass).
-    \item Models: The models that the user wants to compare, which can be any of the models included in Fusilli.
-    \item Output: The output directory for the trained models and the results of the experiments.
+\noindent The user must specify:
+\begin{itemize}
+  \setlength\itemsep{-0.5em}
+    \item \textbf{Data}: The user's data, which must be in the form of a .csv file for tabular data, and .pt files for images.
+    \item \textbf{Task}: The task that the user wants to perform, which can be either regression or classification (binary or multiclass).
+    \item \textbf{Models}: The models that the user wants to compare, which can be any of the models included in Fusilli.
+    \item \textbf{Output}: The output directory for the trained models and the results of the experiments.
 \end{itemize}
 
-The user can also specify experiment specifics, which are set to default values if not specified.
+\noindent The user can also specify experiment specifics, which are set to default values if not specified.
 These are:
-\begin{itemize}\itemsep{-0.5em}
+\begin{itemize}
+    \setlength\itemsep{-0.5em}
     \item Training and validation data splits.
     \item Maximum number of epochs to train for, including early stopping.
     \item Any model hyperparameters or architectures that the user wants to modify.
     \item Batch size.
 \end{itemize}
 
-After the user has specified these, the user calls two functions in Fusilli to train the models:
-\begin{itemize}\itemsep{-0.5em}
+\noindent After the user has specified these, the user calls two functions in Fusilli to train the models:
+\begin{itemize}
+\setlength\itemsep{-0.5em}
     \item \texttt{prepare\_fusion\_data()}: This function prepares the data for training, including splitting it into training and validation sets and running any model-specific data preparation steps.
     \item \texttt{train\_and\_save\_models()}: This function trains the models on the user's data, and outputs the trained models.
 \end{itemize}
