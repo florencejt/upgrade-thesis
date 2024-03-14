@@ -13,16 +13,20 @@ The goal of combining different modalities is to improve the performance of a mo
 There are many research fields where multimodal data fusion is used, such as in agriculture to predict crop yields and detect diseases~\cite{s.s.gopiMultimodalMachineLearning2023, patilRiceFusionMultimodalityData2022}, in disaster management to analyse response scenarios from audio and social media posts~\cite{algiriyageMultisourceMultimodalData2021}, and in robotics to help direct the robots with multiple sensors~\cite{duanMultimodalSensorsMLBased2022}.
 Moreover, the types of models used in multimodal data fusion can vary a lot, from geometric deep learning to relatively simple neural network architectures~\cite{cuiDeepMultimodalFusion2022}.
 
-In the context of my PhD, I am investigating multimodal data fusion for MND prognosis prediction.
-There has been minimal research on deep learning for prognosis prediction in MND~\cite{pancottiDeepLearningMethods2022, mullerExplainableModelsDisease2021}, and only one model created for deep-learning based multimodal data fusion~\cite{vanderburghDeepLearningPredictions2017}.
-However, there are many data fusion models that have been used in other fields that could be directly applicable to MND .
-There have been systematic reviews on the topic of data fusion that compare models, but only qualitatively~\cite{cuiDeepMultimodalFusion2022, gaoSurveyDeepLearning2020, stahlschmidtMultimodalDeepLearning2022, yanDeepMultiviewLearning2021}.
-Therefore, with limited knowledge from literature on the best models for MND data, it is important to experiment with a wide variety of models to find the best one for the task.
+%In the context of my PhD, I am investigating multimodal data fusion for MND prognosis prediction.
+%There has been minimal research on deep learning for prognosis prediction in MND~\cite{pancottiDeepLearningMethods2022, mullerExplainableModelsDisease2021}, and only one model created for deep-learning based multimodal data fusion~\cite{vanderburghDeepLearningPredictions2017}.
+%However, there are many data fusion models that have been used in other fields that could be directly applicable to MND .
+%There have been systematic reviews on the topic of data fusion that compare models, but only qualitatively~\cite{cuiDeepMultimodalFusion2022, gaoSurveyDeepLearning2020, stahlschmidtMultimodalDeepLearning2022, yanDeepMultiviewLearning2021}.
+%Therefore, with limited knowledge from literature on the best models for MND data, it is important to experiment with a wide variety of models to find the best one for the task.
 
-Obtaining this wide variety of models to experiment with, however, is not a straightforward process for a number of reasons.
-Firstly, the terminology used to describe what I have chosen to call ``multimodal data fusion`` varies widely, with terms such as but not limited to multi-view, cross-heterogeneous, multi-source, and integrated learning.
-Secondly, the studies that introduce these models often do not include code for the reader to run the model.
-Morever, when code is included, it is often written in different languages, with varying guidance, quality, and maintenance.
+My PhD investigates multimodal data fusion for predicting MND prognosis, an area with minimal deep learning research~\cite{pancottiDeepLearningMethods2022, mullerExplainableModelsDisease2021} and only one model specially-created for deep-learning based multimodal data fusion~\cite{vanderburghDeepLearningPredictions2017}.
+Despite systematic reviews on the topic attempting qualitative comparison between models~\cite{cuiDeepMultimodalFusion2022, gaoSurveyDeepLearning2020, stahlschmidtMultimodalDeepLearning2022, yanDeepMultiviewLearning2021}, a lack of quantitative comparison necessitates experimentation with many models from other fields to identify the most effective for MND prognosis prediction.
+
+%Obtaining this wide variety of models to experiment with, however, is not a straightforward process for a number of reasons.
+%Firstly, the terminology used to describe what I have chosen to call ``multimodal data fusion`` varies widely, with terms such as but not limited to multi-view, cross-heterogeneous, multi-source, and integrated learning.
+%Secondly, the studies that introduce these models often do not include code for the reader to run the model.
+%Morever, when code is included, it is often written in different languages, with varying guidance, quality, and maintenance.
+However, acquring a diverse range of models for experimentation is made difficult by the use of variable terminology and the common absence of maintained, quality code available in studies.
 
 A way to address these problems is to create a curated collection of models for somebody interested in multimodal data fusion to consult.
 As far as I am aware, there are three Python packages that house collections of deep learning based data fusion models: ``Multi-view-AE``~\cite{aguilaMultiviewAEPythonPackage2023}, ``CCA-Zoo``~\cite{chapmanCCAZooCollectionRegularized2021}, and ``pytorch-widedeep``~\cite{zaurinPytorchwidedeepFlexiblePackage2023}.
