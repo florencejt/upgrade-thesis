@@ -35,12 +35,13 @@ However, each of these packages only includes models with specific frameworks (a
 
 Therefore, I aimed to develop a Python package for training and comparing multimodal data fusion models with any architecture.
 This Python package is named Fusilli, as a portmanteau of ``fuse easily``.
+Fusilli works by taking the user's multimodal data and training it on a variety of models, and then comparing the models' performances.
 
-\section{Development}
+\section{Development and Implementation}
 
 \subsection{Software Design Choices}
 
-Before designing Fusilli, the following design goals were set to ensure the package would be useful for a wide range of users and tasks, as well as for my own research.\newline
+Before developing Fusilli, the following design goals were set to ensure the package would be useful for a wide range of users and tasks, as well as for my own research.\newline
 
 \noindent\textbf{Modularity}: Fusilli should be modular, meaning that the various functionalities within the package should be independent of each other.
 This would allow for easy addition of new models in the future and easy adjustments to the package's functionality.\newline
@@ -66,20 +67,31 @@ From the literature, these are the most common tasks for multimodal data fusion,
 Fusilli was implemented in Python, using the PyTorch and PyTorch Lightning libraries for deep learning.
 This is because PyTorch is a popular library for deep learning, and is known for its flexibility and ease of use.
 
-The only input that Fusilli requires is the user's data, what task they want to perform, and what models they want to compare.
-
-\noindent\textbf{Experiment setup}: The experiment setup is the part of Fusilli that allows the user to define the experiment they want to run.
-The user defines:
-\begin{itemize}
-    \item The task they want to perform (regression or classification).
-    \item Their data.
-    \item The model (or models) they want to train.
-    \item Any hyperparameters or model architectures they want to change.
-    \item Experiment specifics, such as training and validation data splits, and the number of epochs to train for.
+The user must specify:
+\begin{itemize}\itemsep{-0.5em}
+    \item Data: The user's data, which must be in the form of a .csv file for tabular data, and .pt files for images.
+    \item Task: The task that the user wants to perform, which can be either regression or classification (binary or multiclass).
+    \item Models: The models that the user wants to compare, which can be any of the models included in Fusilli.
+    \item Output: The output directory for the trained models and the results of the experiments.
 \end{itemize}
 
-\noindent\textbf{Data preparation}: Different models may require different data preparation steps.
+The user can also specify experiment specifics, which are set to default values if not specified.
+These are:
+\begin{itemize}\itemsep{-0.5em}
+    \item Training and validation data splits.
+    \item Maximum number of epochs to train for, including early stopping.
+    \item Any model hyperparameters or architectures that the user wants to modify.
+    \item Batch size.
+\end{itemize}
 
+After the user has specified these, the user calls two functions in Fusilli to train the models:
+\begin{itemize}\itemsep{-0.5em}
+    \item \texttt{prepare\_fusion\_data()}: This function prepares the data for training, including splitting it into training and validation sets and running any model-specific data preparation steps.
+    \item \texttt{train\_and\_save\_models()}: This function trains the models on the user's data, and outputs the trained models.
+\end{itemize}
+
+Finally, the user can call functions to evaluate a single model or compare the models, which will output the performance of the models on the user's validation data or external test data.
+The evaluation figures are saved in the output directory, and the user can also access the trained models for further analysis.
 
 \subsection{Fusion Methods}
 
