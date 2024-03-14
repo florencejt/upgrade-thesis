@@ -1,9 +1,10 @@
 \chapter{Fusilli: Developing a Data Fusion Python Library}
 \label{fusilli_development}
 
-\textbf{Linking sentence from Cox chapter}: 
+\textbf{Linking sentence from Cox chapter:
 We've seen how multimodal data affects a survival Cox model in MND.
-What about machine learning for multimodal data?
+What about machine learning for multimodal data?}
+
 This chapter discusses multimodal data fusion in more detail and describe the development of Fusilli, a Python package for multimodal data fusion experimentation and analysis.
 
 \section{Introduction}
@@ -35,14 +36,35 @@ However, each of these packages only includes models with specific frameworks (a
 Therefore, I aimed to develop a Python package for training and comparing multimodal data fusion models with any architecture.
 This Python package is named Fusilli, as a portmanteau of ``fuse easily``.
 
-This chapter will detail the development of Fusilli, including the design choices made, the implemented models, and the outcomes of the project.
+\section{Development}
 
-\section{Fusion Methods}
+\subsection{Software Design Choices}
 
-\subsection{Different types of models}
+Before designing Fusilli, I had the following design goals to ensure the package would be useful for a wide range of users and tasks, as well as for my own research.
 
-Talk about the review paper and the categories
+\subsubsubsection*{Modularity}
+Fusilli should be modular, meaning that the various functionalities within the package should be independent of each other.
+This would allow for easy addition of new models in the future and easy adjustments to the package's functionality.
 
+\subsubsubsection*{Beginner-friendly and expert-friendly}
+
+Fusilli should be beginner-friendly, with users able to compare the different models without needing expertise in deep learning or Python programming.
+This would make it different from other similar packages, which require the user to set up their own experiments.
+
+On the other hand, Fusilli should also be expert-friendly, with users who are more capable being able to change the training parameters, modify the models, and access the trained models for further experiments.
+
+\subsubsubsection*{Wide applicability}
+Fusilli should include a wide variety of models, to ensure that the best model for a given task can be found.
+Moreover, this would ensure that the package is useful for a wide range of users, as different users may have different requirements for model architectures based on their task and data.
+
+
+\subsection{Fusion Methods}
+
+Finding the models
+Literature search - what words I used, not just healthcare but it came up a lot
+
+
+Categorising the models - cui et al
 \begin{itemize}
     \item Gathered models and then categorised them according to Cui et al. paper - a paper about diagnosis and prognosis deep learning multi modal fusion models.
     \item The paper included many models with different architectures and categorised based off underlying architecture.
@@ -51,31 +73,19 @@ Talk about the review paper and the categories
     \item Some models can fall into multiple categories, so chose the category that best described the model.
 \end{itemize}
 
+Which ones did I implement and why
 
-\subsection{Finding the models}
-Literature search - what words I used, not just healthcare but it came up a lot 
 
-\subsection{Models included}
 
 Table of models, and benchmarks (uni-modal)
 
 Link to documentation with diagrams of models
 
-\section{Software Design}
-
-\subsection{Design Goals}
-List in bullet points the design goals of fusilli and how they were met: 
-\begin{enumerate}
-    \item Modularity: Easily add models in the future and easy adjustments
-    \item Beginner-friendly: default parameters for people who don't know how to do deep learning coding, also extensive documentation
-    \item Expert-friendly: for people who are more familiar with deep learning, they should be able to change the training parameters, modify the models, access trained models for further experiments
-    \item Wide-ranging: include a wide variety of models
-    \item Widely-applicable: all models to be used for different tasks, all image dimensions and tabular data
-    \item Open-source: want people to contribute with their own models. To make sure it doesn't break when people do this, it needs testing. 
-\end{enumerate}
-
 
 \section{Results}
+
+
+
 
 \subsection{Diagram of workflow}
 
