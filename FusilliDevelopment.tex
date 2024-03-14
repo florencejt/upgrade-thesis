@@ -94,26 +94,38 @@ The evaluation figures are saved in the output directory, and the user can also 
 
 \subsection{Fusion Methods}
 
-Finding the models
-Literature search - what words I used, not just healthcare but it came up a lot
+A literature search was conducted to find models that could be included in Fusilli.
+The search criteria aimed to capture papers that mentioned machine learning, multimodality, and image and tabular data, with variants of these terms used to capture a wide range of papers.
+The resulting papers were checked for relevance and papers were discarded which use the same model as another paper, which happened frequently.
 
-
-Categorising the models - cui et al
+The models were categorised based on the taxonomy defined by Cui and colleagues in their review on data fusion methods for diagnosis and prognosis~\cite{cuiDeepMultimodalFusion2022}.
+This taxonomy includes the following categories:
 \begin{itemize}
-    \item Gathered models and then categorised them according to Cui et al. paper - a paper about diagnosis and prognosis deep learning multi modal fusion models.
-    \item The paper included many models with different architectures and categorised based off underlying architecture.
-    \item Usually categorisations are broad with early, late, and intermediate fusion but this paper had more categories which was useful for me.
-    \item \textbf{Categories figure}
-    \item Some models can fall into multiple categories, so chose the category that best described the model.
+\setlength\itemsep{-0.5em}
+    \item \textbf{Operation-based}: Models that fuse data based on operations such as concatenation, addition, or multiplication.
+    This can be done at any point in the model, such as at the input, hidden layers, or output.
+    \item \textbf{Attention-based}: Models that use attention mechanisms to weight the importance of different modalities.
+    \item \textbf{Graph-based}: Models with a graph structure, such as graph convolutional networks.
+    \item \textbf{Subspace-based}: Models that project the data into a joint lower-dimensional space, possibly with deep learning methods such as autoencoders.
+    \item \textbf{Tensor-based}: Models that use tensor operations to fuse the data to capture inter- and intra-modality correlations.
 \end{itemize}
 
-Which ones did I implement and why
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/cui_diagram}
+    \caption{Fusilli's architecture-based taxonomy of multimodal data fusion models. Diagram taken from Cui et al.~\cite{cuiDeepMultimodalFusion2022}.}
+    \label{fig:fusilli_taxonomy}
+\end{figure}
 
+Figure~\ref{fig:fusilli_taxonomy} shows the architecture-based taxonomy of multimodal data fusion models, taken from Cui et al.~\cite{cuiDeepMultimodalFusion2022}.
 
+Another common categorisation is ``early``, ``intermediate``, and ``late`` fusion, which refers to the point in the model where the data is fused.
+However, this categorisation is too simplistic for the variety of models architectures in Fusilli, and so the architecture-based taxonomy was chosen for its more detailed categories.
 
-Table of models, and benchmarks (uni-modal)
+More models were found in the literature than were included in Fusilli due to the time constraints of the project, but the models included in Fusilli were chosen based on their popularity, availability of code, and the variety of architectures they represent.
+Moreover, unimodal benchmarks were included in Fusilli to allow for comparison between the multimodal models and unimodal models.
 
-Link to documentation with diagrams of models
+\noindent \texbf{Table of the models with link to documentation in the caption}
 
 
 \section{Results}
