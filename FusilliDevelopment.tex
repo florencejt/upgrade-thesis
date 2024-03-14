@@ -1,37 +1,63 @@
-\chapter{Fusilli Development}
+\chapter{Fusilli: Developing a Data Fusion Python Library}
 \label{fusilli_development}
 
-\section{Introduction}
-Moving on from the Cox hazard model, how can deep learning be used to explore the added value of multiple input data modalities rather than relatively simple models
+\textbf{Linking sentence from Cox chapter}: 
+We've seen how multimodal data affects a survival Cox model in MND.
+What about machine learning for multimodal data?
+This chapter discusses multimodal data fusion in more detail and describe the development of Fusilli, a Python package for multimodal data fusion experimentation and analysis.
 
-\subsection{Motivation}
+\section{Introduction}
+
+
+Describing multimodal data fusion:
 \begin{itemize}
     \item This is an area of research called multimodal data fusion but it can be called more names than that: multi-view, cross-heterogeneous, etc
     \item The application areas of multimodal data fusion are very wide reaching: agriculture, disaster management, robotics, healthcare etc
     \item Additionally, the types of models used in multimodal data fusion can vary a lot, from geometric deep learning to relatively simple neural network architectures.
-    \item Because of the variety of applications and models, there is a lack of standardisation in the field and no understanding on what is the best model for a given task
+\end{itemize}
+
+What did I want to do with data fusion:
+\begin{itemize}
+    \item Multimodal data fusion is such a large field with many applications
+    \item We saw in the lit review sections on machine learning that deep learning has not been done much with MND, and deep-learning data fusion has been done once by van der Burgh
+    \item and deep learning data fusion has not been done with tabular and image data in MND
     \item For my PhD's overall goal of applying multimodal data fusion to motor neuron disease, it is important to have an understanding of the different models and their performances
     \item This would require a large amount of experimentation and analysis, which would be difficult to do manually
-    \item Therefore, I developed a Python package called Fusilli to automate the process of multimodal data fusion experimentation and analysis
+    \item So I wanted to compare different fusion methods to see what worked best
 \end{itemize}
 
-\subsection{Current State of the Art}
+Issues I came across when starting to look at models:
 \begin{itemize}
-    \item A lot of papers have no code included - without code, it is difficult to reproduce results and compare models
-    \item Some papers include code with their models - written in different languages, varying availability, varying guidance, definitely too many for people to go through and find all of them themselves
-    \item There are some collections of non-deep learning models - limited in scope and not very flexible
-    \item There are some collections of deep learning models - limitations of not a complete pipeline so might be difficult for people without coding expertise
-    \item Also the methods are very architecture specific (CCA, wide and deep, autoencoder) so not getting a full picture of the field
-    \item Gap in the literature is a complete pipeline for training and evaluating a wide variety of deep learning models for multimodal data fusion
+    \item Difficulty finding models in the first place: called different names
+    \item As I kept looking, I kept finding lots of and lots of models with different architectures   
+    \item Not all papers include code
+    \item Code is not standardised - written in different languages, varying availability, varying guidance
+    \item There are some collections/repos but not what I was looking for
 \end{itemize}
 
+Aims of this work:
+\begin{itemize}
+    \item To create a bank of models that can be used for multimodal data fusion
+    \item To create a standardised way of comparing models
+    \item Make it open source for others to use who are in similar positions to me
+\end{itemize}
+
+Chapter aims:
+\begin{itemize}
+    \item To describe the development of Fusilli
+    \item To describe the design choices made in developing Fusilli
+    \item To describe the implemented models in Fusilli
+    \item To describe the testing of Fusilli
+    \item To describe the reception of Fusilli
+\end{itemize}
 
 \section{Fusion Methods}
-\subsection{Finding the models}
+
+\subsection{Different types of models}
+
+Talk about the review paper and the categories
+
 \begin{itemize}
-    \item Finding models to put in Fusilli: did a literature search for tabular and image multimodal data fusion models
-    \item I'm looking at tabular-tabular fusion and tabular-image fusion because my data is clinical and MRI, but the application of fusilli doesn't have to be limited to this.
-    \item Tabular-tabular fusion may not seem multimodal but the tabular data can be thought of as a different modality to the tabular data because it is often collected at a different time and in a different way such as clinical information and extracted brain volumes.
     \item Gathered models and then categorised them according to Cui et al. paper - a paper about diagnosis and prognosis deep learning multi modal fusion models.
     \item The paper included many models with different architectures and categorised based off underlying architecture.
     \item Usually categorisations are broad with early, late, and intermediate fusion but this paper had more categories which was useful for me.
@@ -39,31 +65,47 @@ Moving on from the Cox hazard model, how can deep learning be used to explore th
     \item Some models can fall into multiple categories, so chose the category that best described the model.
 \end{itemize}
 
-\section{Software Design Choices}
-\begin{itemize}
-    \item Now will go through the design choices made while developing fusilli to make achieving the goal of simple comparison of models easier.
-    \item A complete pipeline: the goal was a minimal number of steps to take to reach performance metrics while still retaining flexibility and transparency for the user. For example, the user should be able to access the trained models the data points from the outputs.
-    \item Prediction tasks: regression and classification (binary and multiclass) - common machine learning tasks that are not domain-specific.
-    \item Model modifications: important for aligning models best with different data e.g. making models more complex for higher res MRI
-    \item Training modification: the idea for fusilli is for people to have default training parameters so no knowledge is necessary, but for the most accurate model comparison for people more familiar with deep learning, they should be able to change the training parameters.
-    \item PyTorch and PyTorch Lightning: I chose them because they are some of the most popular deep learning frameworks and they are very flexible. This is important because I wanted to be able to implement a wide variety of models and a lot of the models online will have been written in pytorch.
-    \item Benchmark unimodal models: I wanted to include unimodal models in fusilli because it is important to know if multimodal data fusion is useful for a given task. If it is not, then there is no point in using multimodal data fusion.
-\end{itemize}
+
+\subsection{Finding the models}
+Literature search - what words I used, not just healthcare but it came up a lot 
+
+\subsection{Models included}
+
+Table of models, and benchmarks (uni-modal)
+
+Link to documentation with diagrams of models
+
+\section{Software Design}
+
+\subsection{Design Goals}
+List in bullet points the design goals of fusilli and how they were met: 
+\begin{enumerate}
+    \item Modularity: Easily add models in the future and easy adjustments
+    \item Beginner-friendly: default parameters for people who don't know how to do deep learning coding, also extensive documentation
+    \item Expert-friendly: for people who are more familiar with deep learning, they should be able to change the training parameters, modify the models, access trained models for further experiments
+    \item Wide-ranging: include a wide variety of models
+    \item Widely-applicable: all models to be used for different tasks, all image dimensions and tabular data
+    \item Open-source: want people to contribute with their own models. To make sure it doesn't break when people do this, it needs testing. 
+\end{enumerate}
+
 
 \section{Results}
-\subsection{Implemented models}
-Table of models implemented in fusilli in supplementary material?
+
+\subsection{Diagram of workflow}
 
 \subsection{Example usage and outputs}
 Quick-start script with comments going through each line
 
+Figures with output figures from the example notebooks
+
 \subsection{Documentation}
 Examples, templates for contributing, etc
 
+
 \subsection{Reception}
 \begin{itemize}
-    \item JOSS paper
-    \item GitHub stars
+    \item JOSS paper - under review 
+    \item GitHub stars and forks and articles
 \end{itemize}
 
 \section{Discussion}
@@ -75,10 +117,11 @@ Examples, templates for contributing, etc
 \end{itemize}
 
 \section{Conclusion}
-\begin{itemize}
-    \item Fusilli is a Python package for multimodal data fusion experimentation and analysis, specifically tackling the problem of lack of ways to compare models and lack of standardisation in the field.
-    \item I specifically made it for my PhD in fusing different data modalities in MND prognosis prediction
-    \item Link to next chapter on PPMI, ADNI, MIMIC: data fusion can be applied to any task where there are multiple data modalities describing one thing
-    \item Before going into MND, is there a clear benefit to different types of multimodal data fusion? Is there a consensus on the best approaches for different tasks?
-    \item MND sample size is small so we want to make sure we're using the best models by testing them on larger datasets with different applications
-\end{itemize}
+TBC...
+% \begin{itemize}
+%     \item Fusilli is a Python package for multimodal data fusion experimentation and analysis, specifically tackling the problem of lack of ways to compare models and lack of standardisation in the field.
+%     \item I specifically made it for my PhD in fusing different data modalities in MND prognosis prediction
+%     \item Link to next chapter on PPMI, ADNI, MIMIC: data fusion can be applied to any task where there are multiple data modalities describing one thing
+%     \item Before going into MND, is there a clear benefit to different types of multimodal data fusion? Is there a consensus on the best approaches for different tasks?
+%     \item MND sample size is small so we want to make sure we're using the best models by testing them on larger datasets with different applications
+% \end{itemize}
