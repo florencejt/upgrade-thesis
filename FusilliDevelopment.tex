@@ -113,25 +113,41 @@ The search criteria aimed to capture papers that mentioned machine learning, mul
 The resulting papers were checked for relevance and papers were discarded which use the same model as another paper, which happened frequently.
 
 The models were categorised based on the taxonomy defined by Cui and colleagues in their review on data fusion methods for diagnosis and prognosis~\cite{cuiDeepMultimodalFusion2022}.
-This taxonomy includes the following categories:
-\begin{itemize}
-\setlength\itemsep{-0.5em}
-    \item \textbf{Operation-based}: Models that fuse data based on operations such as concatenation, addition, or multiplication.
-    This can be done at any point in the model, such as at the input, hidden layers, or output.
-    \item \textbf{Attention-based}: Models that use attention mechanisms to weight the importance of different modalities.
-    \item \textbf{Graph-based}: Models with a graph structure, such as graph convolutional networks.
-    \item \textbf{Subspace-based}: Models that project the data into a joint lower-dimensional space, possibly with deep learning methods such as autoencoders.
-    \item \textbf{Tensor-based}: Models that use tensor operations to fuse the data to capture inter- and intra-modality correlations.
-\end{itemize}
+Figure~\ref{fig:fusilli_taxonomy} is a diagram taken from the review, which shows the general architecture differences between the models, and Table~\ref{tab:fusilli_taxonomy} includes descriptions of the categories.
 
-\begin{figure}[h]
+\begin{table}
+    \centering
+    \caption{Descriptions of data fusion model categories used in Fusilli, first proposed by Cui and colleagues~\cite{cuiDeepMultimodalFusion2022}.}
+    \label{tab:fusilli_taxonomy}
+    \begin{tabular}{|p{0.25\textwidth}p{0.7\textwidth}|}
+        \hline
+        \textbf{Category} & \textbf{Description} \\ \hline
+        \textbf{Operation-based} & Models that fuse data based on operations such as concatenation, addition, or multiplication. This can be done at any point in the model, such as at the input, hidden layers, or output. \\ \hline
+        \textbf{Attention-based} & Models that use attention mechanisms to weight the importance of different modalities. \\ \hline
+        \textbf{Graph-based} & Models with a graph structure, such as graph convolutional networks. \\ \hline
+        \textbf{Subspace-based} & Models that project the data into a joint lower-dimensional space, possibly with deep learning methods such as autoencoders. \\ \hline
+        \textbf{Tensor-based} & Models that use tensor operations to fuse the data to capture inter- and intra-modality correlations. \\ \hline
+    \end{tabular}
+\end{table}
+
+%\begin{itemize}
+%\setlength\itemsep{-0.5em}
+%    \item \textbf{Operation-based}: Models that fuse data based on operations such as concatenation, addition, or multiplication.
+%    This can be done at any point in the model, such as at the input, hidden layers, or output.
+%    \item \textbf{Attention-based}: Models that use attention mechanisms to weight the importance of different modalities.
+%    \item \textbf{Graph-based}: Models with a graph structure, such as graph convolutional networks.
+%    \item \textbf{Subspace-based}: Models that project the data into a joint lower-dimensional space, possibly with deep learning methods such as autoencoders.
+%    \item \textbf{Tensor-based}: Models that use tensor operations to fuse the data to capture inter- and intra-modality correlations.
+%\end{itemize}
+
+\begin{figure}
     \centering
     \includegraphics[width=\textwidth]{figures/cui_diagram}
-    \caption{Fusilli's architecture-based taxonomy of multimodal data fusion models. Diagram taken from Cui et al.~\cite{cuiDeepMultimodalFusion2022}.}
+    \caption{Cui and colleagues' diagram of the architecture-based taxonomy of multimodal data fusion models used in Fusilli~\cite{cuiDeepMultimodalFusion2022}.}
     \label{fig:fusilli_taxonomy}
 \end{figure}
 
-Figure~\ref{fig:fusilli_taxonomy} shows the architecture-based taxonomy of multimodal data fusion models, taken from Cui et al.~\cite{cuiDeepMultimodalFusion2022}.
+%Figure~\ref{fig:fusilli_taxonomy} shows the architecture-based taxonomy of multimodal data fusion models, taken from Cui et al.~\cite{cuiDeepMultimodalFusion2022}.
 
 Another common categorisation is ``early``, ``intermediate``, and ``late`` fusion, which refers to the point in the model where the data is fused.
 However, this categorisation is too simplistic for the variety of models architectures in Fusilli, and so the architecture-based taxonomy was chosen for its more detailed categories.
