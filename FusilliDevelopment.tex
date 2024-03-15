@@ -179,11 +179,9 @@ Currently, Fusilli is under review for publication in the Journal of Open Source
 The package has been well-received on GitHub, having been favourited by 134 users and specially cloned by 12 users for their own modifications, which is a lot of attention for a package that has only been available for a few months.
 Moreover, I wrote an article on Medium about Fusilli, which has been read by 243 people, and two articles have been written about Fusilli by other people.
 
-\subsection{Documentation}
-
 Fusilli is documented using Sphinx, a Python documentation generator.
-
-Model explanations: Diagrams were created for each model in Fusilli, in order for the model architectures to be easily compared with similar drawing styles.
+Figure~\ref{fig:fusillidocs} shows an overview of the documentation, which includes tutorials for getting started, guidance for more advanced users, example Python scripts which run the models on simple data, a guide for people to contribute their own models, and the source code documentations.
+The page ``Fusion Model Explanations``, shown in Figure~\ref{fig:fusillidocs}B, has a diagram and a text explanation for each model in Fusilli, which is useful for users to understand and compare the models' architectures with a standardised diagram style.
 
 \begin{figure}
     \centering
@@ -191,18 +189,16 @@ Model explanations: Diagrams were created for each model in Fusilli, in order fo
     \caption{Overview of the Fusilli documentation. \\
     \textbf{A}: The home page of the documentation, showing the logo and the diagram explaining Fusilli's purpose.\\
     \textbf{B}: Two examples of the fusion model explanations, complete with diagram and description with reference to source paper. \\
-    \textbf{C}: The sidebar of the Fusilli documentation, which shows tutorials for getting started, guidance for more advanced users, example Python scripts which run the models on simple data, a guide for people to contribute their own models, and the source code documentations.
+    \textbf{C}: The sidebar of the Fusilli documentation showing all the pages available.
     }
     \label{fig:fusillidocs}
 \end{figure}
 
-Examples, templates for contributing, etc
+Figures~\ref{fig:fusillioutputs}A, B, and C show the figures output by Fusilli after training, validating, and comparing the models respectively.
+The format of the figures depends on the prediction task and the type of training used, with the figures shown being for a binary classification task with 5-fold cross validation.
+If the user chooses to use train-test split training, the comparison figure is a bar chart instead of a violin plot.
+Additionally, if the user trains a regression model, the performance evaluation will be a scatter plot of the predicted values against the true values.
 
-
-\subsection{Example usage and outputs}
-Quick-start script with comments going through each line
-
-Figures with output figures from the example notebooks
 
 \begin{figure}
     \centering
@@ -218,11 +214,9 @@ Figures with output figures from the example notebooks
 
 \section{Discussion}
 
-Good outcomes:
-\begin{itemize}
-    \item Implemented a wide variety of models
-    \item It will help people to know if data fusion is useful for their task and, if so, which model is best for their task
-\end{itemize}
+Overall, Fusilli achieves the goals set out at the beginning of the project.
+It has had interest from both beginners and experts, and there has been interest from people in different fields, such as thermal imaging.
+Additionally, a hackathon project was run during the 2023 Centre for Medical Imaging Hackathon, where participants aimed to add new models to Fusilli, which was a success with two new models being added and more in development.
 
 Fusilli has a number of limitations, most of which I hope to address with future updates to the software.
 Firstly, Fusilli only supports two modalities, which is a limitation for tasks that may benefit from more than two modalities.
@@ -233,6 +227,10 @@ Fusilli also only supports regression and classification tasks, and does not sup
 Finally, although the models included in Fusilli are popular and cover a wide variety of architectures, there are many more models in the literature that could be included in Fusilli, and I hope to include these.
 
 \section{Conclusion}
+% Link to using fusilli on MND
+In conclusion, Fusilli is a Python package for multimodal data fusion experimentation and analysis, specifically tackling the problem of lack of ways to compare models and lack of standardisation in the field.
+I specifically made it for my PhD in fusing different data modalities in MND prognosis prediction.
+The next chapter will discuss the application of Fusilli to MND prognosis prediction, using tabular-tabular fusion of clinical information and brain region volumes.
 % \begin{itemize}
 %     \item Fusilli is a Python package for multimodal data fusion experimentation and analysis, specifically tackling the problem of lack of ways to compare models and lack of standardisation in the field.
 %     \item I specifically made it for my PhD in fusing different data modalities in MND prognosis prediction
