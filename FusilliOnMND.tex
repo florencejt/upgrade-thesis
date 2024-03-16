@@ -2,62 +2,39 @@
 \label{fusilli_on_mnd}
 
 \section{Introduction}
-\begin{itemize}
-    \item We've seen the results of fusilli on open data
-    \item Now let's do it on MND data
-    \item How different is MND to PD and AD? *Look this up* - what might we expect to see?
-    \item Hypothesis: multimodal data fusion is useful for predicting survival in MND when deployed at the diagnostic appointment
-    \item Motivation - why is this useful? Implications if multimodal data fusion is better, imaging doesn't have to be just used for differential diagnosis and can play a role in prognosis, which is important for clinical trials and patient care.
-\end{itemize}
-
-The aim of this work is to assess the added value of brain ROI volumes in MND prognosis prediction.
-We hypothesise that the combination of clinical and imaging data will improve the prediction of survival in MND patients.
-We will do this by using the fusilli package to compare the performance of different tabular-tabular multimodal data fusion methods.
+Only one deep learning model has been used to predict survival in MND through clinical data and neuroimaging data~\cite{vanderburghDeepLearningPredictions2017}.
+This lack of research in multimodal data fusion in MND makes it difficult to conclude whether multimodal data is useful in predicting survival in MND .
+Additionally, we have shown that there are many different multimodal data fusion methods available.
+In Chapter~\ref{fusilli_development}, we developed a package called Fusilli to compare the performance of different multimodal data fusion methods, approximately half of which are designed to combine two tabular modalities.
+In this chapter, we will use Fusilli to compare the performance of different tabular-tabular multimodal data fusion methods on predicting survival in MND patients using clinical and imaging extracted features data.
+The aims of this work are to, firstly, assess the effect of different data fusion model architectures on prognostic performance, and secondly, to assess the value of baseline clinical and neuroimaging data in MND prognosis prediction.
 
 \section{Data}
 
-ALS Biomarker's study and Opsedale San Raffaele.
-We are using clinical data and brain volumes.
+The data used in this analysis is from two studies: University College London Queen's Square Institute of Neurology's ALS Biomarkers Study~\cite{UKMNDCSG} and Ospedale San Raffaele's MND cohort.
+Both of these datasets contain clinical data from the diagnostic visit and brain MRI data.
 
-Inclusion criteria:
-- Diagnosis of MND
-- Non-missing age, sex, date of diagnosis, date of death, date of onset, features of FTD, ALSFRS-R
-- MRI within 12 months of diagnosis (either side)
-    - Why within 12 months? Trade-off between having the MRI close to the diagnosis and having enough data to work with
+For patients to be included in the analysis, they must have a diagnosis of MND and have an outcome of interest (death or tracheostomy).
+In the ALS Biomarkers Study, the outcome of interest is death, whereas in the Ospedale San Raffaele's MND cohort, the outcome of interest is death or tracheostomy.
+Unfortunately, the Ospedale San Raffaele's MND cohort does not specify the date of death, so we have assumed that the date of death is the date of tracheostomy.
 
-Clinical data features:
-- Following the same features as the ENCALS model, and working with what we have available
-- sex, bulbar onset, signs of FTD, ALSFRSr, ALS subtype, diagnostic delay, age at diagnosis
+Patients in this analysis must have non-missing data for age at diagnosis, sex, date of diagnosis, date of death, date of symptom onset, site of onset, and baseline ALSFRS-R .
+Additionally, patients must have a T1-weighted or T2-weighted MRI within 12 months before or after their date of diagnosis.
 
-Milan date of death is death or tracheostomy
-
-Statistically significant differences between the sites: \textbf{List them here}
-Why didn't we do any site-specific analysis or correction?
-- Wanted to see how the model would perform in a real-world setting
-- Not enough data to do one site
+The final dataset contains 110 MND patients.
+The patients in the cohort were split into two groups based on the median survival time: short survival group (less than 24 months) and long survival group (more than 24 months).
 
 \subsection{Clinical Data}
-\begin{itemize}
-    \item Inclusion criteria
-    \item Features
-    \item If C9 was missing we assumed it was negative, same with FTD
-\end{itemize}
 
-\subsection{Imaging Data}
-\begin{itemize}
-    \item Inclusion criteria: how far away from diagnosis was the MRI? Within 12 months of the diagnosis
-    \item Segmentation using SynthSeg - what is synthseg?
-    \item Features
-\end{itemize}
-
-\subsection{Group differences}
-
-Splitting between long and short survival groups based on the median survival time of the cohort.
-
-Table for clinical demographics differences
+The clinical variables chosen to be included in the analysis are based on the variables used in the ENCALS model~\cite{westenengPrognosisPatientsAmyotrophic2018} described in Chapter~\ref{literature_review}.
+El Escorial criteria and FVC were not included in the analysis as they were not available in the Ospedale San Raffaele's MND cohort.
+Features with missing data after the inclusion criteria were applied were features of FTD and presence of C9orf72 mutation.
+Where these features were missing, they were assumed to be negative.
+Moreover, where the MND type was missing, it was assumed to be ALS, as it is the most common.
 
 \begin{table}
     \centering
+    \label{tab:clinical_demographics}
     \caption{Differences in clinical demographics between the long and short survival groups.}
     \begin{tabular}{|p{5cm}|llll|}
     \hline
@@ -73,10 +50,55 @@ Table for clinical demographics differences
      Diagnostic Delay (months), mean (SD)                 & 12.5 (12.0) & 10.0 (9.8) & 14.9 (13.4) & \textbf{0.031}     \\\hline
      Age at Diagnosis (years), mean (SD)                   & 63.2 (11.8) & 69.1 (9.1) & 57.3 (11.3) & \textbf{\ensuremath{<}0.001 }   \\\hline
      Rate of ALSFRSr decline (points/month), mean (SD)       & 1.4 (1.7)   & 2.0 (2.2)  & 0.9 (0.7)   & \textbf{0.001}     \\\hline
+     Survival (months), mean (SD)                         & 29.3 (23.2) & 12.3 (6.4) & 46.4 (21.3) & \ensuremath{<}0.001    \\\hline
     \end{tabular}
 \end{table}
 
-List the synthseg demographic differences in prose
+Table~\ref{tab:clinical_demographics} shows the clinical features included in this analysis and statistical differences between the long and short survival groups.
+The longer survival group had significantly fewer patients with FTD, a longer diagnostic delay, a younger age at diagnosis, and a slower rate of decline in ALSFRS-R .
+These differences are consistent with the literature on factors associated with survival in MND~\cite{suPredictorsSurvivalPatients2021}.
+
+\begin{table}
+    \centering
+    \caption{Differences in clinical demographics between the two sites.}
+    \label{tab:clinical_demographics_site}
+    \begin{tabular}{|p{5cm}|llll|}
+    \hline
+                                                       & Overall     & ALS Biomarkers Study       & Ospedale San Raffaele       & P-Value   \\
+    \hline
+     n                                                   & 110         & 46          & 64          &           \\ \hline
+     Sex (Male), n (\%)                                & 52 (47.3)   & 26 (56.5)   & 26 (40.6)   & 0.146     \\\hline
+     Site of Onset (Bulbar), n (\%)                       & 31 (28.2)   & 20 (43.5)   & 11 (17.2)   & \textbf{0.005}     \\\hline
+     Frontotemporal Dementia, n (\%)                   & 32 (29.1)   & 16 (34.8)   & 16 (25.0)   & 0.367     \\\hline
+     C9orf72 Mutation, n (\%)                            & 7 (6.4)     & 3 (6.5)     & 4 (6.2)   & 1.000     \\\hline
+     ALSFRSr, mean (SD)                              & 37.5 (7.2)  & 34.1 (8.4)  & 40.0 (5.0)  & \textbf{\ensuremath{<}0.001}    \\\hline
+     MND Type (ALS), n (\%)                            & 96 (87.3)   & 44 (95.7)   & 52 (81.2)   & 0.052     \\\hline
+     Diagnostic Delay (months), mean (SD)              &     & 12.5 (12.0) & 11.9 (10.2) & 12.8 (13.2) & 0.682     \\\hline
+     Age at Diagnosis (years), mean (SD)               &     & 63.2 (11.8) & 66.2 (12.1) & 61.1 (11.1) & \textbf{0.028}     \\\hline
+     Rate of ALSFRSr decline (points/month), mean (SD) &     & 1.4 (1.7)   & 1.9 (2.3)   & 1.0 (1.1)   & \textbf{0.017}     \\\hline
+     Survival (months), mean (SD)                      &     & 29.3 (23.2) & 24.3 (26.8) & 33.0 (19.6) & 0.066     \\
+    \hline
+    \end{tabular}
+\end{table}
+
+Table~\ref{tab:clinical_demographics_site} shows the group differences between the two data sites.
+The cohort from Ospedale San Raffaele had a significantly lower proportion of bulbar onset patients, a higher mean baseline ALSFRS-R score, a lower mean age at diagnosis, and a slower rate of decline in ALSFRS-R .
+
+Statistically significant differences between the sites: \textbf{List them here}
+Why didn't we do any site-specific analysis or correction?
+- Wanted to see how the model would perform in a real-world setting
+- Not enough data to do one site
+
+\subsection{Imaging Data}
+Regional brain volumes were extracted from the MRI using SynthSeg~\cite{billotSynthSegDomainRandomisation2021}, a modality-agnostic deep-learning segmentation tool.
+A modality agnostic tool was chosen to overcome the inconsistency in MRI protocols within the ALS Biomarkers Study and between the ALS Biomarkers Study and Ospedale San Raffaele's MND cohort.
+SynthSeg returns the volumes of 33 regions of the brain, which, apart from intra-cranial volume, were used as features in this analysis.
+The region volumes were z-score normalised across the entire cohort.
+
+The left and right volumes were summed to simplify the comparison of regional brain volumes between the long and short survival groups, but the left and right volumes were kept separate for the main analysis.
+The long survival group had significantly larger volumes in the cerebellum white matter and cortex, thalamus, caudate, putamen, pallidum, brain stem, hippocampus, amygdala, accumbens area, and ventral diencephalon.
+The short survival group had significantly larger volumes in the cerebrospinal fluid, 3rd ventricle, lateral ventricle, and inferior lateral ventricle.
+
 
 \section{Methods}
 \begin{itemize}
@@ -98,9 +120,10 @@ Interpreting the results.
 \begin{itemize}
     \item Limitations on sample size
     \item Predictive task of classification rather than regression: what if we used a regression task instead? Would that be more useful? It's a harder task so may require more data
-    \item Limitation on using extracted brain volumes rather than raw MRI: what if the regions we've chosen aren't the most important ones? Subcortical regions have shown to have a role in MND, but we haven't included them here. *Look this up - the thalamus stuff*
+    \item Limitation on using extracted brain volumes rather than raw MRI: what if the regions we've chosen aren't the most important ones? Subcortical regions have shown to have a role in MND, but we haven't included them here. *Look this up - the thalamus stuff*. However, whole image may introduce bias because further progressed patients may have worse quality scans.
     \item Two sites put together without harmonisation
     \item Using whole ALSFRS-R rather than individual components - not possible to get with Milan data
+    \item Needs more hyperparameter tuning of the different models to see if they can be improved. Next steps would be to test different network architectures and hyperparameters to see if the results can be improved.
 \end{itemize}
 
 \section{Conclusion}
