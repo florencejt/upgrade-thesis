@@ -19,14 +19,6 @@ We will do this by using the fusilli package to compare the performance of diffe
 ALS Biomarker's study and Opsedale San Raffaele.
 We are using clinical data and brain volumes.
 
-%\begin{itemize}
-%    \item Where is the data coming from? Milan and the UK
-%    \item Tabular-tabular data fusion. Why?
-%    \item Sample size is too small for effective deep learning with 3D MRI or 2D slices of MRI
-%    \item Instead we'll look at extracted brain volumes
-%    \item Why might this be useful anyway? It's more accessible than raw MRI data for use in hospitals and clinics, potentially easier to interpret with explainable AI than deep learning, where the features are extracted automatically
-%\end{itemize}
-
 Inclusion criteria:
 - Diagnosis of MND
 - Non-missing age, sex, date of diagnosis, date of death, date of onset, features of FTD, ALSFRS-R
@@ -39,10 +31,16 @@ Clinical data features:
 
 Milan date of death is death or tracheostomy
 
+Statistically significant differences between the sites: \textbf{List them here}
+Why didn't we do any site-specific analysis or correction?
+- Wanted to see how the model would perform in a real-world setting
+- Not enough data to do one site
+
 \subsection{Clinical Data}
 \begin{itemize}
     \item Inclusion criteria
     \item Features
+    \item If C9 was missing we assumed it was negative, same with FTD
 \end{itemize}
 
 \subsection{Imaging Data}
@@ -51,6 +49,40 @@ Milan date of death is death or tracheostomy
     \item Segmentation using SynthSeg - what is synthseg?
     \item Features
 \end{itemize}
+
+\subsection{Group differences}
+
+Splitting between long and short survival groups based on the median survival time of the cohort.
+
+Table for clinical demographics differences
+
+\begin{table}
+    \centering
+    \caption{Differences in clinical demographics between the long and short survival groups.}
+    \begin{tabular}{lllllll}
+    \hline
+                                                       &     & Missing   & Overall     & 0.0        & 1.0         & P-Value   \\
+    \hline
+     n                                                 &     &           & 110         & 55         & 55          &           \\
+     Sex (Male), n (\%)                                 & 0.0 & 0         & 52 (47.3)   & 27 (49.1)  & 25 (45.5)   & 0.849     \\
+                                                       & 1.0 &           & 58 (52.7)   & 28 (50.9)  & 30 (54.5)   &           \\
+     Site of Onset (Bulbar), n (\%)                     & 0   & 0         & 79 (71.8)   & 35 (63.6)  & 44 (80.0)   & 0.090     \\
+                                                       & 1   &           & 31 (28.2)   & 20 (36.4)  & 11 (20.0)   &           \\
+     Frontotemporal Dementia, n (\%)                    & 0.0 & 0         & 78 (70.9)   & 31 (56.4)  & 47 (85.5)   & 0.002     \\
+                                                       & 1.0 &           & 32 (29.1)   & 24 (43.6)  & 8 (14.5)    &           \\
+     C9orf72 Mutation, n (\%)                           & 0.0 & 0         & 103 (93.6)  & 53 (96.4)  & 50 (90.9)   & 0.438     \\
+                                                       & 1.0 &           & 7 (6.4)     & 2 (3.6)    & 5 (9.1)     &           \\
+     ALSFRSr, mean (SD)                                &     & 0         & 37.5 (7.2)  & 36.3 (7.2) & 38.7 (7.0)  & 0.081     \\
+     MND Type (ALS), n (\%)                             & 0   & 0         & 14 (12.7)   & 4 (7.3)    & 10 (18.2)   & 0.153     \\
+                                                       & 1   &           & 96 (87.3)   & 51 (92.7)  & 45 (81.8)   &           \\
+     Diagnostic Delay (months), mean (SD)              &     & 0         & 12.5 (12.0) & 10.0 (9.8) & 14.9 (13.4) & 0.031     \\
+     Age at Diagnosis (years), mean (SD)               &     & 0         & 63.2 (11.8) & 69.1 (9.1) & 57.3 (11.3) & \ensuremath{<}0.001    \\
+     Rate of ALSFRSr decline (points/month), mean (SD) &     & 0         & 1.4 (1.7)   & 2.0 (2.2)  & 0.9 (0.7)   & 0.001     \\
+    \hline
+    \end{tabular}
+\end{table}
+
+List the synthseg demographic differences in prose
 
 \section{Methods}
 \begin{itemize}
@@ -73,6 +105,8 @@ Interpreting the results.
     \item Limitations on sample size
     \item Predictive task of classification rather than regression: what if we used a regression task instead? Would that be more useful? It's a harder task so may require more data
     \item Limitation on using extracted brain volumes rather than raw MRI: what if the regions we've chosen aren't the most important ones? Subcortical regions have shown to have a role in MND, but we haven't included them here. *Look this up - the thalamus stuff*
+    \item Two sites put together without harmonisation
+    \item Using whole ALSFRS-R rather than individual components - not possible to get with Milan data
 \end{itemize}
 
 \section{Conclusion}
