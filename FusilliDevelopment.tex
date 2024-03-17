@@ -30,11 +30,11 @@ Despite systematic reviews on the topic attempting qualitative comparison betwee
 However, acquring a diverse range of models for experimentation is made difficult by the use of variable terminology and the common absence of maintained, quality code available in studies.
 
 A way to address these problems is to create a curated collection of models for somebody interested in multimodal data fusion to consult.
-As far as I am aware, there are three Python packages that house collections of deep learning based data fusion models: ``Multi-view-AE``~\cite{aguilaMultiviewAEPythonPackage2023}, ``CCA-Zoo``~\cite{chapmanCCAZooCollectionRegularized2021}, and ``pytorch-widedeep``~\cite{zaurinPytorchwidedeepFlexiblePackage2023}.
-However, each of these packages only includes models with specific frameworks (autoencoders, CCA, and Google's ``wide and deep`` models, respectively), which limits the variety of models available for comparison.
+As far as I am aware, there are three Python packages that house collections of deep learning based data fusion models: ``Multi-view-AE''~\cite{aguilaMultiviewAEPythonPackage2023}, ``CCA-Zoo"~\cite{chapmanCCAZooCollectionRegularized2021}, and ``pytorch-widedeep"~\cite{zaurinPytorchwidedeepFlexiblePackage2023}.
+However, each of these packages only includes models with specific frameworks (autoencoders, CCA, and Google's ``wide and deep" models, respectively), which limits the variety of models available for comparison.
 
 Therefore, I aimed to develop a Python package for training and comparing multimodal data fusion models with any architecture.
-This Python package is named Fusilli, as a portmanteau of ``fuse easily``.
+This Python package is named Fusilli, as a portmanteau of ``fuse easily".
 Fusilli works by taking the user's multimodal data and training it on a variety of models, and then comparing the models' performances.
 
 \section{Development and Implementation}
@@ -109,11 +109,11 @@ The evaluation figures are saved in the output directory, and the user can also 
 \subsection{Fusion Methods}
 
 A literature search was conducted to find models that could be included in Fusilli.
-The search criteria aimed to capture papers that mentioned machine learning, multimodality, and image and tabular data, with variants of these terms used to capture a wide range of papers.
+The search criteria aimed to return papers that mentioned machine learning, multimodality, and image and tabular data, with variants of these terms used to capture a wide range of papers.
 The resulting papers were checked for relevance and papers were discarded which use the same model as another paper, which happened frequently.
 
 The models were categorised based on the taxonomy defined by Cui and colleagues in their review on data fusion methods for diagnosis and prognosis~\cite{cuiDeepMultimodalFusion2022}.
-Figure~\ref{fig:fusilli_taxonomy} is a diagram taken from the review, which shows the general architecture differences between the models, and Table~\ref{tab:fusilli_taxonomy} includes descriptions of the categories.
+Figure~\ref{fig:fusilli_taxonomy} is a diagram taken from the review, which shows the general architecture differences between the categories, and Table~\ref{tab:fusilli_taxonomy} includes descriptions of the categories.
 
 \begin{table}
     \centering
@@ -149,8 +149,8 @@ Figure~\ref{fig:fusilli_taxonomy} is a diagram taken from the review, which show
 
 %Figure~\ref{fig:fusilli_taxonomy} shows the architecture-based taxonomy of multimodal data fusion models, taken from Cui et al.~\cite{cuiDeepMultimodalFusion2022}.
 
-Another common categorisation is ``early``, ``intermediate``, and ``late`` fusion, which refers to the point in the model where the data is fused.
-However, this categorisation is too simplistic for the variety of models architectures in Fusilli, and so the architecture-based taxonomy was chosen for its more detailed categories.
+Another common categorisation is ``early", ``intermediate", and ``late" fusion, which refers to the point in the model where the data is fused.
+However, this categorisation is too simplistic for the variety of models architectures in Fusilli, and so the architecture-based taxonomy was chosen.
 
 More models were found in the literature than were included in Fusilli due to the time constraints of the project, but the models included in Fusilli were chosen based on their popularity, availability of code, and the variety of architectures they represent.
 Moreover, unimodal benchmarks were included in Fusilli to allow for comparison between the multimodal models and unimodal models.
@@ -192,7 +192,7 @@ Moreover, unimodal benchmarks were included in Fusilli to allow for comparison b
 
 Fusilli version 1.0.0 was published on 30th November 2023, and has since been updated to version 1.2.3.
 Currently, Fusilli is under review for publication in the Journal of Open Source Software (JOSS).
-The package has been well-received on GitHub, having been favourited by 134 users and specially cloned by 12 users for their own modifications, which is a lot of attention for a package that has only been available for a few months.
+The package has been well-received on GitHub, having been favourited by 138 users and specially cloned by 12 users for their own modifications, which is a lot of attention for a package that has only been available for a few months.
 Moreover, I wrote an article on Medium about Fusilli, which has been read by 243 people, and two articles have been written about Fusilli by other people.
 
 Fusilli is documented using Sphinx, a Python documentation generator.
