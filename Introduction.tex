@@ -65,40 +65,57 @@ Common therapies for MND, such as gastrostomy, weight maintenance, and non-invas
 In the UK, Riluzole is the primary treatment, potentially offering benefits in advanced stages, with a demonstrated increase in median survival by 3 months~\cite{millerRiluzoleAmyotrophicLateral2012, hinchcliffeRiluzoleRealworldEvidence2017}.
 Outside the UK, Edaravone shows promise in slowing disease progression but faces scrutiny regarding trial criteria and safety~\cite{witzelSafetyEffectivenessLongterm2022}.
 
-\noindent Imaging in MND:
-\begin{itemize}
-    \item Only used in the clinical pathway for diagnosis: Ruling out ALS mimics, El Escorial scale, imaging to rule out other conditions
-    \item Neuroimaging-derived measures have been shown to be associated with patient prognosis - insert citations here
-    \item Machine learning for images, and specifically medical imaging, has been shown to be useful for prognosis in other diseases, and to some extent for MND
-    \item Imaging can be difficult in MND later in the disease due to muscle atrophy and difficulty in positioning as well as swallowing and saliva problems
-    \item A growing area of machine learning is multimodal data fusion, where different types of data are combined to improve the performance of the model.
-    \item Imaging has not been included yet into the clinical pathway for prognosis, but perhaps it has a role to play when combined with clinical data through multimodal data fusion AI
-\end{itemize}
 
+Imaging, such as brain magnetic resonance imaging (MRI) and spinal MRI, is currently used in the clinical pathway for MND diagnosis to rule out mimicking diseases.
+Although not used for prognosis clinically, neuroimaging-derived measures have been shown to be associated with patient survival and progression~\cite{mullerLargescaleMulticentreCerebral2016,agostaMRIPredictorsLongterm2010}.
+Machine learning (ML) is a growing area of research in medical imaging, and its application to neuroimaging been shown to be useful for prognosis in other diseases~\cite{gerratyMachineLearningParkinson2023}.
+Moreover, ML has been applied to clinical data for MND prognosis, with some success~\cite{grollemundMachineLearningAmyotrophic2019, papaizMachineLearningSolutions2022}.
 
-
-This work aims to create a prognostic tool for MND using multimodal data fusion AI, combining clinical, imaging and other data types together at the diagnostic appointment
-
+The work presented in this thesis explores the creation of a machine learning model for MND prognosis prediction using clinical and imaging data from the diagnostic appointment.
+The combination of clinical and imaging data is known as \texit{multimodal data fusion}, and is a growing area of machine learning research, in the medical imaging field and beyond~\cite{cuiDeepMultimodalFusion2022, mohsenArtificialIntelligencebasedMethods2022}.
 
 \section{Motivation}
 
-Prognosis is the prediction of the course of a disease, and is important for both patients and clinicians.
-For patients, prognosis can help them to plan their lives and make decisions about their care, and for clinicians, prognosis can help them to make decisions about treatment and care, and to plan clinical trials.
 
-\begin{itemize}
-    \item Why MND prognosis? Patients want it, good for clinical trial stratification, good for planning treatment
-    \item Why imaging? Already being taken at diagnosis for differential diagnosis, might as well use it for prognosis - healthcare economics, no extra data collection. Also has shown promise in the literature. A lot fo machine learnign literature on imaging too - good for deep learning because it's so big and complex.
-    \item Why data fusion? MND is multifactorial, so it makes sense to use all the data available to us. Also, it's a growing area of machine learning, and has shown promise in other diseases.
-\end{itemize}
+Prognosis is the prediction of the course of a disease, and is important for both patients and clinicians.
+For patients, an accurate prognosis can help them to plan their lives and feel empowered to make decisions about their care~\cite{talbotClinicalToolPredicting2016, vaneenennaamDiscussingPersonalizedPrognosis2021}.
+For clinical use, prognosis can be used to stratify patients for clinical trials in order to investigate how different treatments affect different patient groups~\cite{berryImprovedStratificationALS2018}.
+Additionally, a predicted disease course could be used as an outcome measure for clinical trials~\cite{kiernanImprovingClinicalTrial2021}.
+
+Imaging from the diagnostic appointment is a potentially valuable source of data for prognosis prediction.
+Applying imaging for this purpose would not require any extra data collection, as it is already being taken for differential diagnosis.
+Morever, a baseline scan is easier for patients to undergo than a scan once their disease has progressed, due to the physical limitations of progressed MND .
+
+% Combingin with clinical data is a good idea because there is already good evidence of clinical prognostic factors, and imaging could add to this in a data driven way
+Since MND is multifactorial and complex, investigating the value of all available data for prognosis is a logical step.
+Clinical prognostic factors for MND are well established~\cite{suPredictorsSurvivalPatients2021}.
+Combining these known clinical factors with imaging data could provide a more accurate prognosis than using clinical or imaging factors alone, because these ML approaches are designed to find complex patterns in large datasets that traditional statistical methods may miss.
+
+%\begin{itemize}
+%    \item Why MND prognosis? Patients want it, good for clinical trial stratification, good for planning treatment
+%    \item Why imaging? Already being taken at diagnosis for differential diagnosis, might as well use it for prognosis - healthcare economics, no extra data collection. Also has shown promise in the literature. A lot fo machine learnign literature on imaging too - good for deep learning because it's so big and complex.
+%    \item Baseline data because difficult for patients to be scanned once their disease has progressed
+%    \item Why data fusion? MND is multifactorial, so it makes sense to use all the data available to us. Also, it's a growing area of machine learning, and has shown promise in other diseases.
+%\end{itemize}
 
 \section{Project Aims}
 
-\begin{enumerate}
-    \item Aim 1: investigate value of imaging in non-ML data fusion prognosis
-    \item Aim 2: explore methods for multimodal data fusion in the literature and apply to larger multimodal neurodegenerative disease datasets
-    \item Aim 3: apply to MND prognosis prediction with clinical and imaging data: find the value of imaging and the best way to use it (whole brain, regions of interest, texture analysis, etc
-    \item Aim 4: Add more modalities such as fluid biomarkers and NLP from radiological reports
-    \item Aim 5: Create the optimal multimodal data fusion model for MND prognosis and assess added values of different modalities
+The aims of this project are as follows:
+
+\begin{enumerate}[label=Aim \arabic*:]
+    \item To identify factors that are associated with MND prognosis and assess the value of imaging in survival analysis without machine learning.
+    \item To explore methods already developed for multimodal data fusion in the literature.
+    \item To apply and compare multimodal data fusion methods to MND prognosis prediction with clinical and imaging-derived features.
+    \item To investigate the added value of different imaging modalities and preprocessing methods, such as subregion segmentation, texture analysis, and whole brain analysis, in multimodal data fusion for MND prognosis prediction.
+    \item To develop the optimal multimodal data fusion model further by adding the capability to include more data modalities, such as fluid biomarkers and natural language processing (NLP) from radiological reports.
+    \item To assess how the performance of the proposed prognostic model compares to existing models and clinical prognostic factors, and to assess its suitability to different prognostic tasks, such as stratifying patients for clinical trials or predicting treatment need.
 \end{enumerate}
 
+
 \section{Upgrade Thesis Outline}
+
+Chapter~\ref{literature_review} provides a literature review of multimodal prognostic factors in MND, machine learning for MND prognosis, and multimodal methods applied to MND.
+Chapter~\ref{cox_proportional_hazards_model} presents the results of Aim 1, identifying survival factors in our dataset through Cox proportional hazards models.
+Chapter~\ref{fusilli_development} describes multimodal data fusion in more detail and outlines the development and design of a Python package, Fusilli, for training, evaluating, and comparing multimodal data fusion methods, and presents the results of Aim 2.
+Chapter~\ref{fusilli_on_mnd} presents the results of Aim 3, applying Fusilli to MND prognosis prediction with clinical and imaging data.
+Finally, Chapter~\ref{conclusions_and_future_work} summarises the findings of this thesis and outlines future work.
