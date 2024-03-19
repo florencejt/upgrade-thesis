@@ -9,73 +9,107 @@
     \item Examples of cox models in ALS before:
 \end{itemize}
 
-\section{Methods}
+\section{Data}
+
+Data
+- who, when, where
+- dependent variable: time to death, censored by date of censorship if given or date of last data update
+
+Clinical data - which features included, how were they preprocessed
+
+Imaging data - which features included, how were they preprocessed
 \begin{itemize}
-    \item Clinical Data:
-    \begin{itemize}
-        \item Milan data: sample size, some partients died and some were censored and we're given the censor date
-        \item Features: age at visit, alsfrsr, diagnostic delay, age at diagnosis. Imaging
-        \item What preprocessing was done:
-    \end{itemize}
-    \item Imaging Data:
-    \begin{itemize}
-        \item MRI within 12 months of diagnosis
-        \item Synthsegged into regions - give the regions
-        \item Normalised (z-score I think, check this)
-        \item Not all the regions were input into the model - give the regions and why (too many features)
-    \end{itemize}
-    \item Demographics of the sample: table
-    \item Experiment details: how the cox model was trained and tested - python package, parameter choices, etc
-    \begin{itemize}
-        \item Kaplan meier plots: tertile split
-        \item Stratified by sex
-    \end{itemize}
+    \item MRI within 12 months of diagnosis
+    \item Synthsegged into regions - give the regions
+    \item Normalised (z-score I think, check this)
+    \item Not all the regions were input into the model - give the regions and why (too many features)
 \end{itemize}
+
+Demographics
+
+\section{Methods}
+
+What model am I using: Cox proportional hazards model
+
+Python package lifelines
+
+What experiments am I running? univariable, clinical only, imaging only, clinical and imaging
+
+How am I assessing proportionality of hazards: Schoenfeld residuals
+
+How am I assessing fit: concordance, AIC, log-likelihood
 
 \section{Results}
 
+Univariable
+- list the significant features and their HRs and CIs
+
 Clinical-only:
 \begin{itemize}
-    \item Table of results with all results in it
-    \item What are the significant features and their p-values: none
+    \item Including all clinical features: list the results and say that proportional hazards were broken by diagnosis age (p=0.002) and diagnostic delay (p=0.038)
+    \item Doing univariable screening gives same significant factors and same broken assumptions
     \item Hazard ratio plot
     \item Kaplan Meier plot
 \end{itemize}
 
 Imaging-only:
 \begin{itemize}
-    \item Table of results with all results in it
-    \item What are the significant features and their p-values: lateral ventricle and brain stem
+    \item With all features - proportional hazards broken by CSF (p=0.005) and cerebral white matter (p=0.0325)
+    \item List significant features
+    \item Significant features include cerebral white matter which was not significant in the unvariable model
+    \item Because of high colinearity, we also ran the model with only the univariable significant features - no proportional hazards broken
+    \item Link to table with those results and list new significant features: brain stem ,csf, amygdala, lateral ventricles, caudate, thalamus
     \item Hazard ratio plot
     \item Kaplan Meier plot
 \end{itemize}
 
 Clinical and imaging:
 \begin{itemize}
-    \item Table of results with all results in it
-    \item What are the significant features and their p-values: ALSFRSr, brain stem, diagnostic delay
+    \item Significant features and their hazard ratios for all features included - alsfrsr, als, cerebral white matter (harmful)
+    \item Proportional hazards broken by sex, bulbar onset, and cwm - all of which are univariable insignificant
+    \item Ran again with uni significant features - no proportional hazards broken
+    \item ALSFRS-R, ALS, amygdala, lateral ventricles
     \item Hazard ratio plot
     \item Kaplan Meier plot
 \end{itemize}
 
 \section{Discussion}
 
-Do these results make sense?:
+Univariable model:
 \begin{itemize}
-    \item Clinical-only: interesting no significant features, maybe not enough features
-    \item Imaging-only: both significant features and their hazard ratios make sense given the literature (citations)
-    \item Clinical and imaging: significant features and their hazard ratios make sense given the literature (citations)
+    \item Discuss the logic of the significant features
+    \item What are the limitations of a univariable model - doesn't take into account the relationships between features
 \end{itemize}
 
-Differences between inputs:
+Clinical model:
 \begin{itemize}
-    \item Higher concordance with clinical and imaging together as opposed to each by themselves. Better AIC as well.
-    \item Different significant features for clinical and imaging alone and together. Why?
+    \item Proportional hazards were broken by diagnosis age and diagnostic delay
+    \item Why are we ok with this? Because we have a relatively small sample size, stratifying the model may lead to worse results than just including the features and acknowledging the violation
+    \item And the hazard directions are consistent with the literature, so the model isn't completely wrong
+    \item Talk about the significant features and their hazard ratios - do they make sense
+    \item What about features that weren't significant - surprising? Not surprising? Look at demographics table
+\end{itemize}
+
+Imaging model:
+\begin{itemize}
+    \item Significant features include cerebral white matter which was not significant in the unvariable model
+    \item With the univariable model, more features were significant, and all were clinically intuitive apart from thalamus
+    \item Protective in univariable, hazard in multivariable - why? could be to do with the high collinearity still in the model
+\end{itemize}
+
+Clinical and imaging model:
+\begin{itemize}
+    \item proportional hazards fixed with uni significant features and resulting features are all clinically intuitive, although amygdala being significant over more intuitive features is surprising
+    \item Two clinical and two imaging features were significant - shows that the imaging features are adding information to the model
+    \item Talk about each significant feature
+    \item Fit statistics: fit improved with multimodal features - this could be just because we're adding more features, but it could also be because we're adding more information
 \end{itemize}
 
 Limitations:
 \begin{itemize}
     \item Small-ish sample size
+    \item Multi-site without harmonisation
+    \item Univariable screening - a controversial approach.
     \item However, colinearity of features doesn't diminish the results
 \end{itemize}
 
