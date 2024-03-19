@@ -58,23 +58,25 @@ Moreover, where the MND type was missing, it was assumed to be ALS, as it is the
 
 \begin{table}
     \centering
-    \caption{Differences in clinical demographics between the two data sites: the ALS Biomarkers Study from University College London and Ospedale San Raffaele. PRB is progression rate to baseline, calculated as the rate of decline of ALSFRS-R between symptom onset and diagnosis.}
+    \caption{Differences in clinical demographics between the two data sites: the ALS Biomarkers Study from University College London and Ospedale San Raffaele.
+    PRB is progression rate to baseline, calculated as the rate of decline of ALSFRS-R between symptom onset and diagnosis.
+    *Chi-square test, \textdagger Fisher's exact test, \ddagger Two-sample t-test.}
     \label{tab:clinical_demographics_site}
     \begin{tabular}{|p{4cm}|llll|}
     \hline
                                                        & Overall     & \makecell[l]{ALS Biomarkers \\ Study}       & \makecell[l]{Ospedale \\San Raffaele}       & P-Value   \\
     \hline
      n                                                   & 110         & 46          & 64          &           \\ \hline
-     Sex (Male), n (\%)                                & 52 (47.3)   & 26 (56.5)   & 26 (40.6)   & 0.146     \\\hline
-     Bulbar Onset, n (\%)                       & 31 (28.2)   & 20 (43.5)   & 11 (17.2)   & \textbf{0.005}     \\\hline
-     FTD, n (\%)                   & 32 (29.1)   & 16 (34.8)   & 16 (25.0)   & 0.367     \\\hline
-     C9orf72, n (\%)                            & 7 (6.4)     & 3 (6.5)     & 4 (6.2)   & 1.000     \\\hline
-     ALSFRSr, mean (SD)                              & 37.5 (7.2)  & 34.1 (8.4)  & 40.0 (5.0)  & \textbf{\ensuremath{<}0.001}    \\\hline
-     ALS, n (\%)                            & 96 (87.3)   & 44 (95.7)   & 52 (81.2)   & 0.052     \\\hline
-     \makecell[l]{Diagnostic Delay \\(months), mean (SD)}              & 12.5 (12.0) & 11.9 (10.2) & 12.8 (13.2) & 0.682     \\\hline
-     \makecell[l]{Age at Diagnosis\\(years), mean (SD)}                 & 63.2 (11.8) & 66.2 (12.1) & 61.1 (11.1) & \textbf{0.028}     \\\hline
-     \makecell[l]{PRB (points/month), \\mean (SD)}   & 1.4 (1.7)   & 1.9 (2.3)   & 1.0 (1.1)   & \textbf{0.017}     \\\hline
-     \makecell[l]{Survival (months), \\mean (SD)}                        & 29.3 (23.2) & 24.3 (26.8) & 33.0 (19.6) & 0.066     \\
+     Sex (Male), n (\%)                                & 52 (47.3)   & 26 (56.5)   & 26 (40.6)   & 0.146*     \\\hline
+     Bulbar Onset, n (\%)                       & 31 (28.2)   & 20 (43.5)   & 11 (17.2)   & \textbf{0.005}*     \\\hline
+     FTD, n (\%)                   & 32 (29.1)   & 16 (34.8)   & 16 (25.0)   & 0.367*     \\\hline
+     C9orf72, n (\%)                            & 7 (6.4)     & 3 (6.5)     & 4 (6.2)   & 1.000*     \\\hline
+     ALSFRSr, mean (SD)                              & 37.5 (7.2)  & 34.1 (8.4)  & 40.0 (5.0)  & \textbf{\ensuremath{<}0.001}\textdagger    \\\hline
+     ALS, n (\%)                            & 96 (87.3)   & 44 (95.7)   & 52 (81.2)   & 0.052\ddagger     \\\hline
+     \makecell[l]{Diagnostic Delay \\(months), mean (SD)}              & 12.5 (12.0) & 11.9 (10.2) & 12.8 (13.2) & 0.682*     \\\hline
+     \makecell[l]{Age at Diagnosis\\(years), mean (SD)}                 & 63.2 (11.8) & 66.2 (12.1) & 61.1 (11.1) & \textbf{0.028}\ddagger     \\\hline
+     \makecell[l]{PRB (points/month), \\mean (SD)}   & 1.4 (1.7)   & 1.9 (2.3)   & 1.0 (1.1)   & \textbf{0.017}\ddagger     \\\hline
+     \makecell[l]{Survival (months), \\mean (SD)}                        & 29.3 (23.2) & 24.3 (26.8) & 33.0 (19.6) & 0.066\ddagger     \\
     \hline
     \end{tabular}
 \end{table}
@@ -93,8 +95,9 @@ Why didn't we do any site-specific analysis or correction?
 - Not enough data to do one site
 
 \subsection{Imaging Data}
-Regional brain volumes were extracted from the MRI using SynthSeg~\cite{billotSynthSegDomainRandomisation2021}, a modality-agnostic deep-learning segmentation tool.
-A modality agnostic tool was chosen to overcome the inconsistency in MRI protocols within the ALS Biomarkers Study and between the ALS Biomarkers Study and Ospedale San Raffaele's MND cohort.
+The same segmentation pipeline used in Chapter~\ref{cox_proportional_hazards_model} was used for this analysis also: using SynthSeg to segment MRI conducted within 12 months before or after diagnosis.
+%Regional brain volumes were extracted from the MRI using SynthSeg~\cite{billotSynthSegDomainRandomisation2021}, a modality-agnostic deep-learning segmentation tool.
+%A modality agnostic tool was chosen to overcome the inconsistency in MRI protocols within the ALS Biomarkers Study and between the ALS Biomarkers Study and Ospedale San Raffaele's MND cohort.
 SynthSeg returns the volumes of 33 regions of the brain, which, apart from intra-cranial volume, were used as features in this analysis.
 The region volumes were z-score normalised across the entire cohort.
 
