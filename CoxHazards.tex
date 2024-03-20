@@ -141,63 +141,88 @@ The multimodal multivariable models resulted in the best fit metrics, both when 
 \section{Discussion}
 
 
-Logic of significant factors
+The univariably-significant clinical factors in this analysis were consistent with the existing literature.
+However, having a bulbar site of onset was not significantly associated with survival, which was surprising, as bulbar onset is often associated with a poorer prognosis in MND and was found to be significant in a meta-analysis of survival factors~\cite{suPredictorsSurvivalPatients2021}.
+27.2\% of the patients in this analysis had a bulbar site of onset, which is consistent with the general MND population~\cite{feldmanAmyotrophicLateralSclerosis2022}, so it is unlikely that the lack of significance was due to a small sample size.
+Our analysis categorised patients as having a bulbar or non-bulbar site of onset, but a respiratory site of onset is associated with a poorer prognosis than bulbar onset~\cite{suPredictorsSurvivalPatients2021}, so it is possible that the lack of significance was due to the categorisation of the site of onset.
+Future work could investigate the relationship between the site of onset and survival in MND by using a more granular categorisation of the site of onset, such as bulbar, respiratory, and limb onset.
 
-Bulbar onset not part of it 
-
-Limitations of univariable
-
-\begin{itemize}
-    \item Discuss the logic of the significant features
-    \item bulbar onset not a signficant factor which is surprising, but could be to do with  a fairly high proportion of our cohort having bulbar onset, and maybe testing for respiratory onset would be better
-    \item What are the limitations of a univariable model - doesn't take into account the relationships between features
-\end{itemize}
-
-Clinical model:
+However, in general, a univariable model is not the ideal model for survival analysis of a multi-factorial disease like MND, as it does not account for the effects of other variables on the outcome.
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.75\linewidth]{figures/clinical_correlation.png}
+    \includegraphics[width=0.75\linewidth]{figures/clinical_correlation}
     \caption{Correlation between the clinical features input into the Cox proportional hazards survival model, as calculated by Pearson's correlation coefficient.}
     \label{fig:clinicalcorrelation}
 \end{figure}
 
-\begin{itemize}
-    \item Proportional hazards were broken by diagnosis age and diagnostic delay
-    \item Same features significant with univariable screening
-    \item Why are we ok with this? Because we have a relatively small sample size, stratifying the model may lead to worse results than just including the features and acknowledging the violation
-    \item And the hazard directions are consistent with the literature, so the model isn't completely wrong
-    \item Hazard ratios make sense
-    \item FTD and diagnostic delay lost significance - could be that the other factors that were significant account for the survival risk from these factors. For example, FTD and age at diagnosis are positively correlated in our cohort, so perhaps only one was needed to be kept to keep the effect on survival. Likewise, ALS MND and diagnostic delay are negatively correlated, which could explain why harmful ALS MND remained significant but protective diagnostic delay lost significance.
-\end{itemize}
+The multivariable models all resulted in broken proportional hazards assumptions, which were fixed by screening the input variables by their univariable significance.
+This approach is not without controversy, as it is possible that features that are not significant univariably are significant in the multivariable model.
+However, we did not find this to be the case in our analysis, since the screened imaging and multimodal models resulted in more significant features than the unscreened models.
 
-Imaging model:
-\begin{itemize}
-    \item Significant features include cerebral white matter which was not significant in the unvariable model
-    \item With the univariable model, more features were significant, and all were clinically intuitive apart from thalamus
-    \item Protective in univariable, hazard in multivariable - why? could be to do with the high collinearity still in the model
-\end{itemize}
+The multivariable imaging model resulted in some clinically unintuitive results, such as reported significantly harmful effects of larger cerebral white matter volume and larger volume of the thalamus.
+In the univariable analysis, larger thalamus volume was significantly protective, and larger cerebral white matter volume was not significantly associated with survival.
+Moreover, previous work suggests that atrophy in the thalamus suggests faster disease progression, although this is not necessarily associated with survival~\cite{sendaStructuralMRICorrelates2017,dieckmannCorticalSubcorticalGrey2022}.
+By its nature, the regional brain volumes are highly correlated, which increases the risk of collinearity in the model.
+Collinearity can lead to unstable estimates of the coefficients, and possibly explain a variable effect switching from harmful to protective or vice versa.
 
-Clinical and imaging model:
-\begin{itemize}
-    \item proportional hazards fixed with uni significant features and resulting features are all clinically intuitive, although amygdala being significant over more intuitive features is surprising
-    \item Two clinical and two imaging features were significant - shows that the imaging features are adding information to the model
-    \item Talk about each significant feature
-    \item Fit statistics: fit improved with multimodal features - this could be just because we're adding more features, but it could also be because we're adding more information
-\end{itemize}
+One way to mitigate the effect of collinearity in the model is to use dimensionality reduction techniques, such as principal component analysis (PCA), to reduce the number of features in the model.
+Westeneng and colleagues used this technique to group the brain into larger regions based on their principal components before applying to a survival analysis model~\cite{westenengSubcorticalStructuresAmyotrophic2015}.
+
+Diagnostic delay and FTD lost significance in the multivariable clinical model (both screened and unscreened) when age at diagnosis was included.
+This lost significance could be explained by the correlations in the clinical features, shown in Figure~\ref{fig:clinicalcorrelation}.
+In multivariable models, the features that are correlated with other features are less likely to be significant, because the effect of the correlated features is already accounted for by the significant features.
+Figure~\ref{fig:clinicalcorrelation} shows that age at diagnosis is the most positively correlated with FTD, which could explain why FTD lost significance in the clinical model when age at diagnosis was included, and age at diagnosis remained significant.
+Moreover, diagnostic delay is the most negatively correlated with ALS MND, which resulted in diagnostic delay losing significance, even though it was significant univariably.
+
+The presence of the amygdala in the final multimodal significant features is interesting, since brain regions which are more commonly associated with MND, such as the brain stem, were not significant.
+This could, again, be explained by the correlations between the features included in the model.
+Figure~\ref{fig:multimodalcorrelations} in the appendices shows that the most negative correlation between FTD and a brain region is with the amygdala (
+coefficient of -0.40), which could explain why FTD lost significance in the clinical model when the amygdala was included.
+Moreover, the brain stem is highly correlated with the amygdala (coefficient of 0.60), which could explain why the brain stem lost significance in the multimodal model, even though it is implicated in lower motor neuron degeneration in MND .
+
+Another example of this is that the age at diagnosis was not significant in the multimodal model, even though it was significant in the clinical model.
+Inspecting the correlations between the clinical features and the brain volumes found that age at diagnosis is correlated with lateral ventricle volume (coefficient of 0.49), which could explain why age at diagnosis lost significance in the multimodal model when lateral ventricle volume was included.
+
+The absence of these clinical variables in the imaging multivariable CPH may have led to the model picking up on brain structure not directly influencing survival, but markers of clinical features that are influencing survival.
+For example, older age at diagnosis, which is associated with brain atrophy, and FTD, which is associated with limbic atrophy leading to three limbic structures being found as significant: thalamus, amygdala, and caudate.
+The multimodal CPH mitigated the effect of the model picking up on brain structure not directly influencing survival, because we included the clinical features that are influencing survival into the model as well.
+However, the trade-off was that the collinearity within the brain volumes but also between the brain volumes and the clinical features was high, which could mean that individual volumes are picked out as significant over clinical features and vice versa, even if both are influencing survival.
+
+Finally the fit statistics in Table~\ref{tab:coxfitmetrics} show that the fit improved with multimodal features.
+Although adding more features to a survival model is likely to increase its fit metrics, AIC also considers the number of features in the model in its calculation, so it can be concluded that the multimodal features are adding more information to the model than the clinical or imaging features alone.
+
+%\begin{itemize}
+%    \item It could also be that the model is picking up on brain structure not directly influencing survival, but markers of clinical features that are influencing survival, such as older age at diagnosis, which is associated with brain atrophy, and FTD, which is associated with limbic atrophy.
+%    \item Interesting that limbic structures were being picked up as significant: thalamus, amygdala, and caudate. This could be because they are involved with cognitive and behavioural changes, which is a significant factor in MND survival, and was shown to be significant univariably with co-presence of FTD.
+%\end{itemize}
+%
+%This correlation-driven loss of significance was also seen in the multimodal models.
+%\begin{itemize}
+%    \item Combining the clinical and imaging measures into one model should mitigate the effect of the model picking up on brain structure not directly influencing survival, because we will be including the clinical features that are influencing survival into the model as well
+%%    \item Remaining clinical features are consistent with literature, but age at diagnosis was no longer significant.
+%%    \item A marker of an aging brain is general atrophy, which can be shown by larger lateral ventricles, so it's possible that the model is picking up on the same information from the brain structure as it is from the age at diagnosis, because the lateral ventricles are significant in the multimodal model.
+%%    \item Inspecting the correlations between the features found that age at diagnosis is correlated with lateral ventricle volume (coefficient of 0.49).
+%%    \item Moreover, FTD has the most negative correlation with amygdala out of all the brain regions (coefficient of -0.40), which could explain why FTD lost significance in the clinical model when amygdala was included.
+%%    \item Surprising that the brain stem is not significant in the multimodal model, because it is often implicated in MND survival but it has high correlation with the amygdala (0.6) so this is likely why it lost significance.
+%    \item Fit statistics: fit improved with multimodal features - this could be just because we're adding more features, but it could also be because we're adding more information. AIC takes number of features into account, so it's not just that we're adding more features in the multimodal model.
+%\end{itemize}
+
 
 Limitations:
 \begin{itemize}
-    \item Small-ish sample size
-    \item Multi-site without harmonisation
-    \item Univariable screening - a controversial approach.
-    \item However, colinearity of features doesn't diminish the results
+    \item Small-ish sample size - some of the results may be because of cohort-specific factors, such as including non-ALS MND patients which could be skewing the results. Future work would be to increase the sample size.
+    \item Multi-site without harmonisation - could be that the results are due to site-specific factors, such as MRI protocols and patient populations, that are not accounted for in the analysis
+    \item Scans not generally taken at the same time as diagnosis - MND is a fast moving disease and the brain could have changed significantly between the time of the scan and the time of diagnosis, which could mean that the brain volumes are not representative of the patient's brain at the time of diagnosis. However, this was a trade off between sample size and data quality. When we increase the sample sizes, we can look at scans taken closer to diagnosis to see if the results are consistent.
+    \item Univariable screening - a controversial approach. It is possible that features that are not significant univariably are significant in the multivariable model. However, we did not find this to be the case in our analysis, and the proportional hazards assumptions were fixed by screening the features, which could mean that the univariable screening was a valid approach in this case.
+    \item Collinearity of the brain volumes was high, which could mean that individual volumes are picked out as significant over others just because they are correlated, even if both are influencing survival. A way around this could be to do dimensionality reduction on the brain volumes, such as PCA, to get a more independent set of features that describe more broader areas of the brain, like in~\cite{westenengSubcorticalStructuresAmyotrophic2015}.
+    \item Summing left and right regions - could be that the left and right regions are not the same, and summing them could be losing information. However, this was done to reduce the dimensionality of the brain volumes, and the regions were chosen because they are implicated in MND pathology.
 \end{itemize}
 
 Take home message:
 \begin{itemize}
     \item Using imaging-derived feature with clinical features increases concordance, more information into the model is better, makes the clinical measure significant as well when it wasn't before
-    \item Would this result also be sustained when using more sophisticated machine learning models? Instinct says yes because they can handle more features and more complex relationships between features
+    \item Would this result also be sustained when using more sophisticated machine learning models? Instinct says yes because they can handle more features and more complex relationships between features - perhaps collinearity of the brain volumes would not be such an issue
 \end{itemize}
 
 \section{Conclusion}
