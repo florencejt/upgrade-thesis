@@ -136,7 +136,7 @@ Screening input variables by their univariable significance resulted in a CPH th
 Higher baseline ALSFRS-R (HR=0.69) and larger amygdala volume (HR=0.62) were significantly protective, and ALS MND (HR=2.11) and larger lateral ventricle volume (HR=1.56) were significantly harmful.
 
 Table~\ref{tab:coxfitmetrics} shows the metrics of model fit for the multivariable CPH models.
-The multimodal multivariable models resulted in the best fit metrics, both when considering all the models and also when considering only the univariable-screeened models and the ``all variable" models.
+The multimodal multivariable models resulted in the best fit metrics, both when considering all the models and also when considering only the univariable-screened models and the ``all variable" models.
 
 \section{Discussion}
 
@@ -155,7 +155,12 @@ Limitations of univariable
 
 Clinical model:
 
-
+\begin{figure}
+    \centering
+    \includegraphics[width=0.75\linewidth]{figures/clinical_correlation.png}
+    \caption{Correlation between the clinical features input into the Cox proportional hazards survival model, as calculated by Pearson's correlation coefficient.}
+    \label{fig:clinicalcorrelation}
+\end{figure}
 
 \begin{itemize}
     \item Proportional hazards were broken by diagnosis age and diagnostic delay
