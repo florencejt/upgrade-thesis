@@ -207,26 +207,35 @@ Although adding more features to a survival model is likely to increase its fit 
 %%    \item Surprising that the brain stem is not significant in the multimodal model, because it is often implicated in MND survival but it has high correlation with the amygdala (0.6) so this is likely why it lost significance.
 %    \item Fit statistics: fit improved with multimodal features - this could be just because we're adding more features, but it could also be because we're adding more information. AIC takes number of features into account, so it's not just that we're adding more features in the multimodal model.
 %\end{itemize}
+\subsection{Limitations}
+The counter-intuitive results in the imaging multivariable model were likely due to limitations in this analysis.
+Firstly, the sample size was relatively small ($n=125$), which could mean that the results were due to cohort-specific factors.
+Moreover, the data came from two studies and multiple sites, and no harmonisation was performed to account for site-specific factors, although an argument could be made that removing site-specific factors could remove important information about the disease.
+Further work could be done to investigate the effect of the sites on the results, such as by including site as a variable in the model.
 
+Secondly, the scans were not generally taken at the same time as diagnosis, which could mean that the brain volumes are not representative of the patient's brain at the time when the clinical features were recorded.
+MND is a fast-progressing disease and allowing for 12 months either side of diagnosis for including the scan is a wide window.
+However, this wide window was a trade-off between sample size and data quality.
+In the future, we aim to increase the sample size, which would allow us to look at scans taken closer to diagnosis to check the consistency of the results.
 
-Limitations:
-\begin{itemize}
-    \item Small-ish sample size - some of the results may be because of cohort-specific factors, such as including non-ALS MND patients which could be skewing the results. Future work would be to increase the sample size.
-    \item Multi-site without harmonisation - could be that the results are due to site-specific factors, such as MRI protocols and patient populations, that are not accounted for in the analysis
-    \item Scans not generally taken at the same time as diagnosis - MND is a fast moving disease and the brain could have changed significantly between the time of the scan and the time of diagnosis, which could mean that the brain volumes are not representative of the patient's brain at the time of diagnosis. However, this was a trade off between sample size and data quality. When we increase the sample sizes, we can look at scans taken closer to diagnosis to see if the results are consistent.
-    \item Univariable screening - a controversial approach. It is possible that features that are not significant univariably are significant in the multivariable model. However, we did not find this to be the case in our analysis, and the proportional hazards assumptions were fixed by screening the features, which could mean that the univariable screening was a valid approach in this case.
-    \item Collinearity of the brain volumes was high, which could mean that individual volumes are picked out as significant over others just because they are correlated, even if both are influencing survival. A way around this could be to do dimensionality reduction on the brain volumes, such as PCA, to get a more independent set of features that describe more broader areas of the brain, like in~\cite{westenengSubcorticalStructuresAmyotrophic2015}.
-    \item Summing left and right regions - could be that the left and right regions are not the same, and summing them could be losing information. However, this was done to reduce the dimensionality of the brain volumes, and the regions were chosen because they are implicated in MND pathology.
-\end{itemize}
+The collinearity of the brain volumes introduced instability into the model.
+The summing of the left and right regions was done to mitigate this, but this could have also introduced information loss if the left and right regions were not equally important to survival.
+Future work to mitigate this further would be to implement dimensionality reduction techniques before inputting the brain volumes into the model.
 
-Take home message:
-\begin{itemize}
-    \item Using imaging-derived feature with clinical features increases concordance, more information into the model is better, makes the clinical measure significant as well when it wasn't before
-    \item Would this result also be sustained when using more sophisticated machine learning models? Instinct says yes because they can handle more features and more complex relationships between features - perhaps collinearity of the brain volumes would not be such an issue
-\end{itemize}
+Finally, the univariable screening of the features could have introduced bias into the model, as it is possible that features that are not significant univariably are significant in the multivariable model.
+Although we did not find this to be the case, there are other ways to attempt to fix the proportional hazards assumption, such as using time-dependent covariates or stratifying the model by a variable, and there are other ways to screen the features, such as using a LASSO regression to select the most important features.
+
+%Take home message:
+%\begin{itemize}
+%    \item Using imaging-derived feature with clinical features increases concordance, more information into the model is better, makes the clinical measure significant as well when it wasn't before
+%    \item Would this result also be sustained when using more sophisticated machine learning models? Instinct says yes because they can handle more features and more complex relationships between features - perhaps collinearity of the brain volumes would not be such an issue
+%\end{itemize}
 
 \section{Conclusion}
-\begin{itemize}
-    \item Link to next chapter: we've shown that using imaging and clinical together is better than using them alone
-    \item Let's see if we can improve on this by using more sophisticated machine learning models
-\end{itemize}
+
+In this chapter, we have shown that both brain region volumes and clinical features were significantly associated with survival in MND, and that including both data modalities in a survival model increased the model's fit metrics.
+The clinical features that were significantly associated with survival were consistent with the existing literature, but some of the imaging features were not, until the clinical features were included in the model.
+This suggests that incorporating imaging-derived features with clinical features is a valuable approach to survival analysis in MND, and that the multimodal model is more informative than the clinical or imaging models alone.
+
+The issues encountered during the analysis were likely due to the collinearity of the brain volumes and the correlations between the brain volumes and the clinical features.
+Future work will aim to address these issues by extending this analysis to include dimensionality reduction and improved clinical characterisation of the patients, as well as increased sample size.
