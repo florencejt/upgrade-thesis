@@ -6,16 +6,17 @@
 Many of the clinical and imaging features that were found to be associated with survival in Chapter~\ref{literature_review} were found using the Cox proportional hazards (CPH) model.
 CPH is a survival analysis model that is used to investigate the relationship between the time to an event and the factors that may influence it.
 
-As a first step in my investigation into the predictive power of clinical and imaging features in MND, I will use a CPH model to investigate the relationship between the time to death and the clinical and neuroimaging features that I have extracted from the ALS Biomarkers Study and Ospedale San Raffaele's MND cohort.
+As a first step in my investigation into the predictive power of clinical and imaging features in MND, I used a CPH model to investigate the relationship between the time to death and the clinical and neuroimaging features that were extracted from the ALS Biomarkers Study and Ospedale San Raffaele MND cohorts.
 
-Querin and colleagues used a multivariable CPH to compare the predictive power of clinical and spinal cord imaging features in ALS in a cohort of 49 ALS patients, and concluded that spinal MRI measures were more predictive than clinical measures~\cite{querinSpinalCordMultiparametric2017}.
+Previously, Querin and colleagues used a multivariable CPH to compare the predictive power of clinical and spinal cord imaging features in ALS in a cohort of 49 ALS patients, and concluded that spinal MRI measures were more predictive than clinical measures~\cite{querinSpinalCordMultiparametric2017}.
+In this chapter, univariable, unimodal multivariable, and multimodal multivariable CPH models were used to investigate the relationship between the time to death and the clinical and imaging features in a larger cohort of 125 MND patients.
 
-\begin{itemize}
-    \item Cox proportional hazards model - what is it?
-    \item What is my hypothesis: using clinical and imaging features together in a simple cox regression will need to hugher concordance than imaging and clinical data alone
-    \item What is concordance? How is it calculated?
-    \item Examples of cox models in ALS before:
-\end{itemize}
+%\begin{itemize}
+%    \item Cox proportional hazards model - what is it?
+%    \item What is my hypothesis: using clinical and imaging features together in a simple cox regression will need to hugher concordance than imaging and clinical data alone
+%    \item What is concordance? How is it calculated?
+%    \item Examples of cox models in ALS before:
+%\end{itemize}
 
 \section{Data}
 
@@ -26,6 +27,7 @@ The outcome of interest in this analysis is time to death, censored by date of c
 The Ospedale San Raffaele cohort defines their endpoint as death or tracheostomy, but the ALS Biomarkers Study only defines their endpoint as death.
 
 The clinical features in this study are the patient's sex, baseline ALSFRS-R, diagnostic delay, age at diagnosis, site of onset (categorised as bulbar and non-bulbar), signs of FTD, and their MND subtype (categorised as ALS and non-ALS).
+These features were chosen for their clinical relevance to survival in MND and their availability in both datasets.
 
 Patients were excluded if they did not have a T1- or T2-weighted MRI within 12 months before or after an MND diagnosis.
 Regional brain volumes were extracted from the MRI using SynthSeg~\cite{billotSynthSegDomainRandomisation2021}, a modality-agnostic deep-learning segmentation tool.
@@ -35,11 +37,11 @@ The remaining regions were z-score normalised.
 
 \begin{table}
 \centering
-\caption{}
+\caption{Demographics and clinical characteristics of the patients included in the analysis. ALSFRSr: ALS Functional Rating Scale-Revised.}
 \label{tab:coxdemographics}
 \begin{tabular}{|ll|}
 \hline
-              Variable                          &      \\
+              \textbf{Variable}                          &      \\
 \hline
  n                               & 125         \\\hline
  Sex, n (\%)          & \\
@@ -65,19 +67,35 @@ The remaining regions were z-score normalised.
 \end{tabular}
 \end{table}
 
-The demographics and clinical characteristics of the patients who were included in the analysis are shown in Table TABLE.
+The demographics and clinical characteristics of the patients who were included in the analysis are shown in Table~\ref{tab:coxdemographics}.
+Out of the 125 patients, 21 were censored and 104 died during the study period.
+Censored patients were those who were still alive at the end of the study period (or at the time of data download: 5th March 2024) or who were lost to follow-up before the end of the study period.
 
 \section{Methods}
 
-What model am I using: Cox proportional hazards model
+A CPH model is expressed as
+\begin{equation}\label{eq:coxhazard}
+    h(t) = h_0(t) \exp{(\beta_1 X_1 + \beta_2 X_2 + ... + \beta_n X_n)},
+\end{equation}
+where $t$ is the survival time, $h(t)$ is the hazard function, $\bold{X}$ are the variables investigated, $h_0(t)$ is the baseline hazard if all the variables were 0.
+The hazard ratios (HRs) are represented as $\beta$, with $\beta_1$ being the hazard ratio for the variable $X_1$.
+A HR larger than 1 indicates the variable is associated with a poorer prognosis, or increased risk of the event, which is death in this CPH application.
+The assumption of proportional hazards is that each individual in the analysis has the same hazard function, but the hazard functions are scaled by a constant factor, which is not dependent on time.
+The Python package, lifelines, was used to implement the CPH models and to test the proportional hazards assumption (citation here).
+Since the aim of this analysis was to see how multimodal data affects survival analysis of MND, four models were run:
+\begin{itemize}
+\setlength\itemsep{-0.5em}
+    \item Univariable model: each feature was tested individually to see if it was associated with survival without adjusting for other features.
+    \item Clinical-only model: multivariable model with only clinical features.
+    \item Imaging-only model: multivariable model with only imaging features.
+    \item Clinical and imaging model: multivariable model with both clinical and imaging features.
+\end{itemize}
 
-Python package lifelines
+%The models we used were not stratified by any variables, as the sample size was relatively small and stratifying the model may lead to less informative results than just including the features and acknowledging the violation of the proportional hazards assumption.
 
-What experiments am I running? univariable, clinical only, imaging only, clinical and imaging
+The CPH models estimated the hazard ratios and their 95\% confidence intervals for each variable, with significance level set at $p<0.05$.
 
-How am I assessing proportionality of hazards: Schoenfeld residuals
-
-How am I assessing fit: concordance, AIC, log-likelihood
+The quality of models fit to the data was assessed using the concordance index, which is a measure of how well the model predicts the order of the survival times, and the Akaike Information Criterion (AIC), which is a measure of the model's goodness of fit balanced with its complexity.
 
 \section{Results}
 
