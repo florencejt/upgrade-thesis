@@ -81,14 +81,14 @@ where $t$ is the survival time, $h(t)$ is the hazard function, $\bold{X}$ are th
 The hazard ratios (HRs) are represented as $\beta$, with $\beta_1$ being the hazard ratio for the variable $X_1$.
 A HR larger than 1 indicates the variable is associated with a poorer prognosis, or increased risk of the event, which is death in this CPH application.
 The assumption of proportional hazards is that each individual in the analysis has the same hazard function, but the hazard functions are scaled by a constant factor, which is not dependent on time.
-The Python package, lifelines, was used to implement the CPH models and to test the proportional hazards assumption (citation here).
+The Python package, lifelines, was used to implement the CPH models and to test the proportional hazards assumption~\cite{davidson-pilonLifelinesSurvivalAnalysis2019}.
 Since the aim of this analysis was to see how multimodal data affects survival analysis of MND, four models were run:
 \begin{enumerate}
 \setlength\itemsep{-0.5em}
-    \item Univariable model: each feature was tested individually to see if it was associated with survival without adjusting for other features.
-    \item Clinical-only model: multivariable model with only clinical features.
-    \item Imaging-only model: multivariable model with only imaging features.
-    \item Clinical and imaging model: multivariable model with both clinical and imaging features.
+    \item \textbf{Univariable model}: each feature was tested individually to see if it was associated with survival without adjusting for other features.
+    \item \textbf{Clinical multivariable model}: multivariable model with only clinical features.
+    \item \textbf{Imaging multivariable model}: multivariable model with only imaging features.
+    \item \textbf{Multimodal multivariable model}: multivariable model with both clinical and imaging features.
 \end{enumerate}
 
 %The models we used were not stratified by any variables, as the sample size was relatively small and stratifying the model may lead to less informative results than just including the features and acknowledging the violation of the proportional hazards assumption.
