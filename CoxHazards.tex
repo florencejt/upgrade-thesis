@@ -83,13 +83,13 @@ A HR larger than 1 indicates the variable is associated with a poorer prognosis,
 The assumption of proportional hazards is that each individual in the analysis has the same hazard function, but the hazard functions are scaled by a constant factor, which is not dependent on time.
 The Python package, lifelines, was used to implement the CPH models and to test the proportional hazards assumption (citation here).
 Since the aim of this analysis was to see how multimodal data affects survival analysis of MND, four models were run:
-\begin{itemize}
+\begin{enumerate}
 \setlength\itemsep{-0.5em}
     \item Univariable model: each feature was tested individually to see if it was associated with survival without adjusting for other features.
     \item Clinical-only model: multivariable model with only clinical features.
     \item Imaging-only model: multivariable model with only imaging features.
     \item Clinical and imaging model: multivariable model with both clinical and imaging features.
-\end{itemize}
+\end{enumerate}
 
 %The models we used were not stratified by any variables, as the sample size was relatively small and stratifying the model may lead to less informative results than just including the features and acknowledging the violation of the proportional hazards assumption.
 
@@ -99,55 +99,71 @@ The quality of models fit to the data was assessed using the concordance index, 
 
 \section{Results}
 
+\subsection{Univariable}
+
 \input{tables/coxtables}
 
-Univariable
-- list the significant features and their HRs and CIs
+Table~\ref{tab:allfeatures_cox} shows the HRs, confidence intervals, and significance $p$ values of the features in the univariable CPH, multivariable clinical CPH, multivariable imaging CPH, and multivariable multimodal CPH.
+The significantly harmful univariable factors are an older age of diagnosis (HR=1.48), co-presence of FTD (HR=1.58), having ALS MND (HR=2.40), and larger volumes in CSF (HR=1.40) and lateral ventricles (HR=1.58).
+Significantly protective factors include higher baseline ALSFRS-R (HR=0.70), a longer diagnostic delay (0.77), and larger volumes in the brain stem (HR=0.66), hippocampus (HR=0.59), amygdala (HR=0.59), thalamus (HR=0.78), caudate (HR=0.77), putamen (HR=0.72), pallidum (HR=0.75) and cerebellum cortex (HR=0.71).
+The only features included that did not significantly affect survival were sex, bulbar site of onset, cerebral white matter volume, cerebellum white matter volume, and cerebral cortex volume.
 
-Clinical-only:
-\begin{itemize}
-    \item Including all clinical features: list the results and say that proportional hazards were broken by diagnosis age (p=0.002) and diagnostic delay (p=0.038)
-    \item Doing univariable screening gives same significant factors and same broken assumptions
-    \item Hazard ratio plot
-    \item Kaplan Meier plot
-\end{itemize}
 
-Imaging-only:
-\begin{itemize}
-    \item With all features - proportional hazards broken by CSF (p=0.005) and cerebral white matter (p=0.0325)
-    \item List significant features
-    \item Significant features include cerebral white matter which was not significant in the unvariable model
-    \item Because of high colinearity, we also ran the model with only the univariable significant features - no proportional hazards broken
-    \item Link to table with those results and list new significant features: brain stem ,csf, amygdala, lateral ventricles, caudate, thalamus
-    \item Hazard ratio plot
-    \item Kaplan Meier plot
-\end{itemize}
+\subsection{Multivariable}
 
-Clinical and imaging:
-\begin{itemize}
-    \item Significant features and their hazard ratios for all features included - alsfrsr, als, cerebral white matter (harmful)
-    \item Proportional hazards broken by sex, bulbar onset, and cwm - all of which are univariable insignificant
-    \item Ran again with uni significant features - no proportional hazards broken
-    \item ALSFRS-R, ALS, amygdala, lateral ventricles
-    \item Hazard ratio plot
-    \item Kaplan Meier plot
-\end{itemize}
+\subsubsection{Clinical}
+When the clinical features were input into a multivariable CPH, baseline ALSFRS-R was a significant protective factor (HR=0.62), and ALS MND and older age at diagnosis were significantly harmful (HRs of 1.96 and 1.53). 
+Diagnostic delay and co-presence of FTD were no longer significant in the multivariable CPH.
+
+The proportional hazards assumptions were broken by age at diagnosis ($p=0.002$) and diagnostic delay ($p=0.038$).
+In an effort to correct the broken assumptions, another multivariable CPH was fit with only the univariably-significant clinical factors.
+Table~\ref{tab:unieatures_cox} shows the results from the univariable-screened CPH models.
+This fixed the broken proportional hazards assumptions and the same factors remained significant: high baseline ALSFRS-R (HR=0.64), age at diagnosis (HR=1.52), and ALS MND (HR=2.01).
+
+
+\subsubsection{Imaging}
+The multivariable imaging CPH resulted in three significant survival factors: lateral ventricles (harmful, HR=1.52), cerebral white matter (harmful, HR=2.35), and caudate (protective, HR=0.62).
+However, the cerebral white matter and CSF variables broke the CPH assumptions ($p=0.0325$ and $0.005$ respectively).
+
+When only the univariably-significant imaging factors are input into a multivariable CPH, more factors were significantly associated with survival, shown in Table~\ref{tab:unieatures_cox}.
+Higher volumes of the brain stem (HR=0.67), amygdala (HR=0.65), and caudate (HR=0.64) were protective, and higher volumes of the CSF (HR=1.33), lateral ventricles (HR=1.63), and thalamus (HR=1.74) were harmful.
+
+\subsubsection{Multimodal}
+Only three factors were significant in the multimodal multivariable CPH: baseline ALSFRS-R (HR=0.68), ALS MND (HR=2.32), and cerebral white matter volume (HR=2.43).
+The proportional hazards assumption was broken by sex ($p=0.0069$), bulbar site of onset ($p=0.0298$), and cerebral white matter ($p=0.0497$).
+
+Screening input variables by their univariable significance resulted in a CPH that had no broken assumptions and four significant survival factors: two clinical and two imaging.
+Higher baseline ALSFRS-R (HR=0.69) and larger amygdala volume (HR=0.62) were significantly protective, and ALS MND (HR=2.11) and larger lateral ventricle volume (HR=1.56) were significantly harmful.
+
+Table~\ref{tab:coxfitmetrics} shows the metrics of model fit for the multivariable CPH models.
+The multimodal multivariable models resulted in the best fit metrics, both when considering all the models and also when considering only the univariable-screeened models and the ``all variable" models.
 
 \section{Discussion}
 
-Univariable model:
+
+Logic of significant factors
+
+Bulbar onset not part of it 
+
+Limitations of univariable
+
 \begin{itemize}
     \item Discuss the logic of the significant features
+    \item bulbar onset not a signficant factor which is surprising, but could be to do with  a fairly high proportion of our cohort having bulbar onset, and maybe testing for respiratory onset would be better
     \item What are the limitations of a univariable model - doesn't take into account the relationships between features
 \end{itemize}
 
 Clinical model:
+
+
+
 \begin{itemize}
     \item Proportional hazards were broken by diagnosis age and diagnostic delay
+    \item Same features significant with univariable screening
     \item Why are we ok with this? Because we have a relatively small sample size, stratifying the model may lead to worse results than just including the features and acknowledging the violation
     \item And the hazard directions are consistent with the literature, so the model isn't completely wrong
-    \item Talk about the significant features and their hazard ratios - do they make sense
-    \item What about features that weren't significant - surprising? Not surprising? Look at demographics table
+    \item Hazard ratios make sense
+    \item FTD and diagnostic delay lost significance - could be that the other factors that were significant account for the survival risk from these factors. For example, FTD and age at diagnosis are positively correlated in our cohort, so perhaps only one was needed to be kept to keep the effect on survival. Likewise, ALS MND and diagnostic delay are negatively correlated, which could explain why harmful ALS MND remained significant but protective diagnostic delay lost significance.
 \end{itemize}
 
 Imaging model:
