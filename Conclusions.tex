@@ -14,19 +14,47 @@
 
 \subsection{Fusilli}
 
+In Chapter~\ref{fusilli_development}, I detailed the development of Fusilli, my Python library for easy comparison of multimodal data fusion methods.
+Even though Fusilli is now finished and released for anybody to use in their personal projects, for my future PhD chapters, using Fusilli will greatly speed up my analysis and experimentation.
+
 \subsection{Fusilli with MND data}
+
+My first experimentation with Fusilli for MND prognosis prediction is shown in Chapter~\ref{fusilli_on_mnd}.
 
 \section{Future Work}
 
-\subsection{Illustrating Fusilli capabilities with multimodal medical data}
-\begin{itemize}
-    \item Applying two sources of multimodal data to fusilli show finish off its development chapter ready for a thesis chapter
-    \item Either ADNI or PPMI for neurodegenerative diseases, and MIMIC CXR for critical care
-    \item Halfway through data download and done some preliminary analysis
-    \item Feasibility: I have access to the data, and running the fusilli pipeline is quick
-\end{itemize}
+I have split the possible future work sections into roughly three chapters.
+Most of the work described here relies on the availability of a larger sample size of data from MND cohorts.
+Currently, my supervisory team and I are liaising with other researchers for access to more data, as well as applying for access to MRI scans from UCLH (University College London Hospitals), which correspond to subjects in ALS Biomarkers Study.
 
-\subsection{Extending work on applying Fusilli to MND prognosis prediction}
+Moreover, I am undertaking a research visit to Charité - Universitätsmedizin Berlin in April and May of 2024, where I will be working on extending Fusilli's capabilities and applying Fusilli to multimodal medical data on mental health and addiction disorders.
+I will be making connections and collaborating with researchers at Charité, and while I am there, I hope to visit MND clinics in Berlin to improve my understanding of other areas of MND clinical research.
+
+\subsection{Applying Fusilli to multimodal medical data: MND and other applications}
+
+The next step in my PhD is to continue to apply Fusilli to MND data, especially with larger sample sizes and more tuning of hyperparameters.
+I will also apply Fusilli to other multimodal medical datasets to round out the development of the library, by showing what Fusilli can do in multiple applications.
+
+\subsubsection*{Illustrating Fusilli capabilities with multimodal medical data}
+
+Although Chapter~\ref{fusilli_development} showed the whole development journey of Fusilli, a valuable addition to the narrative would be to show how Fusilli can be used in practice.
+My plan is to use Fusilli ``out-of-the-box" on two multimodal medical datasets: one on neurodegenerative diseases and one on critical care chest X-rays.
+
+In terms of feasibility, I already have access to ADNI (Alzheimer's Disease Neuroimaging Initiative) and PPMI (Parkinson's Progression Markers Initiative) data for neurodegenerative diseases, and MIMIC CXR (Medical Information Mart for Intensive Care - Chest X-ray) data for critical care.
+
+To finish this analysis off, I will first need to download the data, for which I will ask for assistance from colleagues at Centre for Medical Image Computing (CMIC) who have used these datasets before.
+Secondly, I will need to preprocess the data by dealing with data missingness in clinical data and running preprocessing pipelines on the imaging data: segmentation and registration for MRI data, and preprocessing for chest X-ray data.
+Next, I will choose a task to apply Fusilli to, such as prognosis prediction or disease classification, and I will seek clinical advice on the most appropriate task for each dataset.
+Finally, I will run the Fusilli pipeline on the data, and analyse the results.
+
+\subsubsection*{Extending work on applying Fusilli to MND prognosis prediction}
+
+In Chapter~\ref{fusilli_on_mnd}, I showed the first application of Fusilli to MND data.
+The next step is to extend this work by using more data from collaborations and the ALS Biomarkers Study, and by fine-tuning the parameters and architectures of the fusion models.
+I plan to do this alongside applying non-MND data to Fusilli, as described above.
+
+
+
 \begin{itemize}
     \item Extending the work in Chapter~\ref{fusilli_on_mnd}
     \item Doing this alongside project 1
@@ -46,9 +74,11 @@
 
 \subsection{Final project options}
 
-\subsubsection{Sensitive analysis of Fusilli prognosis prediction on varying prognosis definitions}
+\subsubsection*{Sensitive analysis of Fusilli prognosis prediction on varying prognosis definitions}
 
-\subsubsection{Adding spinal cord MRI data to Fusilli prognosis prediction}
+Looking at different prognosis outcomes, such as survival, ALSFRS-R decline, or other measures of disease progression, could provide a more nuanced understanding of the performance of Fusilli.
+
+\subsubsection*{Adding spinal cord MRI data to Fusilli prognosis prediction}
 Dependent on data availability
 \begin{itemize}
     \item Motivation: spinal cord is important in MND, example papers to show this
@@ -57,8 +87,16 @@ Dependent on data availability
 
 \subsubsection{Adding radiological report derived features to Fusilli prognosis prediction}
 Dependent on data availability
-
 \section{Timeline}
+
+\begin{figure}
+    \centering
+    \hspace*{-0.1\textwidth}
+    \includegraphics[width=1.2\textwidth]{figures/gantt_chart}
+    \caption{Gantt chart showing the timeline for the remaining work in my PhD}
+    \label{fig:gantt_chart}
+\end{figure}
+
 \begin{itemize}
     \item What have I done so far? Papers and conference submissions
     \item Outcomes for the rest of my PhD
