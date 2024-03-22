@@ -121,10 +121,36 @@ Model comparison figure.
 
 \begin{figure}
     \centering
-    \includegraphics[width=\textwidth](figures/both_site_together_balanced_accuracy_violin)
-    \caption{Balanced accuracy of the different models on the MND data.}
-    \label{fig:balanced_accuracy}
+    \hspace*{-2cm}
+    \includegraphics[width=1.2\linewidth]{figures/both_sites_together_balanced_accuracy_violin.png}
+    \caption{Balanced accuracies of test set and validation set when sites trained together.}
+    \label{fig:trainedtogetherviolin}
 \end{figure}
+
+
+\begin{table}[h]
+\centering
+\caption{Means and standard deviations of test metrics over repetitions of training on both sites. Bold is the best metric model.}
+\label{tab:mnd_results}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{lrrrrr} 
+
+ & \multicolumn{5}{c}{\textbf{Performance metric: mean (standard deviation)}} \\
+\textbf{Method} & Balanced Accuracy & AUROC & Precision & Recall & F1 \\ \hline
+Clinical Only & 0.680 (0.025) & 0.748 (0.052) & \textbf{0.870 (0.044)} & 0.493 (0.049) & 0.627 (0.040) \\
+Extracted Volumes Only & 0.583 (0.041) & 0.619 (0.038) & 0.695 (0.029) & 0.718 (0.101) & 0.703 (0.057) \\
+Intermediate Concatenation & 0.606 (0.044) & 0.663 (0.029) & 0.708 (0.030) & \textbf{0.764 (0.036)} & \textbf{0.735 (0.029)} \\
+Early Concatenation & \textbf{0.703 (0.023)} & \textbf{0.815 (0.014)} & 0.846 (0.018) & 0.598 (0.065) & 0.698 (0.044) \\
+Channelwise Attention & 0.576 (0.047) & 0.596 (0.052) & 0.730 (0.059) & 0.486 (0.193) & 0.558 (0.137) \\
+Crossmodal Attention & 0.562 (0.028) & 0.610 (0.041) & 0.681 (0.025) & 0.720 (0.079) & 0.697 (0.032) \\
+Decision Fusion & 0.589 (0.040) & 0.647 (0.042) & 0.737 (0.030) & 0.488 (0.166) & 0.567 (0.141) \\
+Multi-channel VAE & 0.648 (0.049) & 0.727 (0.048) & 0.833 (0.075) & 0.474 (0.084) & 0.597 (0.073) \\
+Activation and Attention & 0.652 (0.061) & 0.712 (0.093) & 0.772 (0.237) & 0.451 (0.158) & 0.566 (0.186) \\
+Activation Function & 0.680 (0.039) & 0.744 (0.054) & 0.868 (0.048) & 0.493 (0.620) & 0.626 (0.057) \\
+
+\end{tabular}
+}
+\end{table}
 
 
 \subsection{Training together}
@@ -137,8 +163,8 @@ Table
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.8\textwidth](figures/violinplot_site_effect)
-    \caption{Effect of training on one site and testing on the other on the balanced accuracy of the different models.}
+    \includegraphics[width=0.8\textwidth]{figures/violinplot_site_effect}
+    \caption{Effect of training on one site and testing on the other on the balanced accuracy of the different models. Ordered by best to worst model of trained together}
     \label{fig:site_effect}
 \end{figure}
 
