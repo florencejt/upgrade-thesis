@@ -50,29 +50,49 @@ Finally, I will run the Fusilli pipeline on the data, and analyse the results.
 \subsubsection*{Extending work on applying Fusilli to MND prognosis prediction}
 
 In Chapter~\ref{fusilli_on_mnd}, I showed the first application of Fusilli to MND data.
-The next step is to extend this work by using more data from collaborations and the ALS Biomarkers Study, and by fine-tuning the parameters and architectures of the fusion models.
-I plan to do this alongside applying non-MND data to Fusilli, as described above.
+The next step is to extend this work by using more data from collaborations and the ALS Biomarkers Study, and by fine-tuning the parameters and architectures of the fusion models, in order to increase the accuracy of the predictions and more definitively assess the utility of multimodal data in MND prognosis prediction.
+I plan to do this work alongside applying Fusilli to non-MND data, as described above.
 
+The main additional feature to be added to the analysis would be neurofilament light chain (NfL) measurements from the ALS Biomarkers Study, which are currently too sparse to be used in the models so far, but samples are being analysed to increase the number of measurements available.
 
+Furthermore, collaborators in Jena are running their D50 model on the ALS Biomarkers Study ALSFRS-R data.
+Using the D50 will enable the estimation of the ALSFRS-R at the date the MRI was taken, which will allow us to use MRI data from further away from diagnosis alongside the clinical data.
+Moreover, we will obtain D50-derived parameters of disease aggressiveness and accumulation, which could be used as added features in the models.
+
+More brain measurements from recon-all, more options for what to include, could investigate a bit more what the best options are for including extracted features from the brain measurements
 
 \begin{itemize}
-    \item Extending the work in Chapter~\ref{fusilli_on_mnd}
-    \item Doing this alongside project 1
-    \item We're getting more data from collaborations and the ALS Biomarkers Study
-    \item Also getting D50 measurements from collaboration with Jena, possibly allowing us to use mri from further away from diagnosis if we can estimate the alsfrsr at the scan date
-    \item ALS Biomarkers study team are running analysis to get more NfL measurements from samples they still have
+%    \item Extending the work in Chapter~\ref{fusilli_on_mnd}
+%    \item Doing this alongside project 1
+%    \item We're getting more data from collaborations and the ALS Biomarkers Study
+%    \item Also getting D50 measurements from collaboration with Jena, possibly allowing us to use mri from further away from diagnosis if we can estimate the alsfrsr at the scan date
+%    \item ALS Biomarkers study team are running analysis to get more NfL measurements from samples they still have
     \item Fine tuning parameters and architectures of the fusion models as well
     \item Motivation: fluid biomarkers are more accessible than MRI etc.
     \item Feasibility: ALS Biomarkers Study etc.
 \end{itemize}
 
 \subsection{Effect of MRI preprocessing on Fusilli prognosis prediction}
-\begin{itemize}
-    \item Motivation: might be better to drill down rather than using whole brain, example papers: ..
-    \item Feasibility: Some methods - toolkits, etc.
-\end{itemize}
+
+Moving onto applying multimodal methods to actual images with clinical data.
+
+Looking at the effect of various image preprocessings.
+We showed that there is not consensus on the areas of the brain that are most important in MND, so we could look at the effect of different preprocessing pipelines on the performance of the models.
+
+Examples are focusing on cortical thickness, subcortical volumes, whole brain measurements, and also other preprocessing steps such as texture analysis.
+
+Deji is working on upscaling the clinical-grade scans to research-grade scans, which will allow us to use the scans in the models as whole-brain images and more easily apply these preprocessing steps.
+
+Some toolkits I am planning on using are: the texture analysis one from canada, recon-all, ...
+
+The quality of the inferences taken from this analysis will depend on the sample size of the data, because imaging is more expensive to process than clinical data, and a larger sample size would mitigate the less useful result of ``less features leads to less overfitting".
+
+If the sample size is not large enough, a contigency plan would be to focus on diseases that have more data available, such as Alzheimer's disease.
 
 \subsection{Final project options}
+
+The final project in this PhD will depend on the availability of data.
+We could either add more data modalities to the multimodal models, such as spinal MRI or features derived from radiological reports, or we could investigate the usefulness and sensitivity of the best-performing models on varying definitions of prognosis.
 
 \subsubsection*{Sensitive analysis of Fusilli prognosis prediction on varying prognosis definitions}
 
