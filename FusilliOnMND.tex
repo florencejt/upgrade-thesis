@@ -115,29 +115,66 @@ The short survival group had significantly larger volumes in the cerebrospinal f
 
 \section{Methods}
 
-Prediction task - split survival time on median.
-- Why did we do this? Small sample size so needed to split the data to get a reasonable number of patients in each group
-- Median survival time is 24 months which is a reasonable cut off for short and long survival going off of epidemiological studies of MND, 2 to 4 years after diagnosis
+We predicted categories of survival, short or long, by splitting the survival time at the median.
+The median was used, rather than a clinically relevant cut-off, as the sample size was small and having balanced classes reduces the risk of overfitting.
+Moreover, the median survival time in our data of 24 months is a reasonable cut-off for short and long survival in MND~\cite{hardiman2017amyotrophic}.
 
-What models
-- Fusilli tabular-tabular methods
-- Diagrams in the appendix
-- table of the models included, and a brief description of each, number of parameters
-- Why can't we use graph based models in fusilli: currently not set up to do external test set on them
-- Benchmark unimodal models
 
-Three experiments:
-- Using both sites together: Data split into training and testing: 20\% (n=22) kept back
-- Train on one site, test on the other: Essex trained on Milan, Milan trained on Essex. The other site is not used in the training at all
+The models used in this analysis are from Fusilli, a package developed in Chapter~\ref{fusilli_development} to compare the performance of different multimodal data fusion methods.
+We trained the models that do tabular-tabular fusion, meaning that they take two tabular datasets and combine them to predict the outcome.
+There are 10 tabular-tabular models in Fusilli, but we could not used the two graph-based models because the current version of Fusilli does not allow graph-based models to use held-out test sets.
+The architecture diagrams of the models are in Appendix~\ref{appendix:fusion_model_architectures}.
+Unimodal models were also trained as a benchmark for the multimodal models to investigate the added value of the multimodal data.
 
-Training set up
-- All the experiment's training sets used with K-fold cross validation - 5 folds - why? Small sample size so improving stability
-- The test data was run in each of the models' folds, then the predictions were aggregated and the performance metrics calculated on the aggregated predictions
-- Another method for improving stability is running repetitions of the training and evaluation process until the mean of the performance of the repetitions converges to a stable value (within 1\% of the main metric: balanced accuracy)
-- Early stopping on the validation fold: minimising the loss of the validation fold, patience of 5, minimum change of 0.001
+\begin{table}
+\centering
+\caption{Tabular-tabular fusion models used in this analysis, implemented using Fusilli.}
+\begin{tabular}{p{3cm}|p{7cm}|l}
+\textbf{Fusion Model} & \textbf{Description} & \textbf{Diagram} \\
+\hline
+Early Concatenation & The two modalities are concatenated before being input into a neural network. & Figure~\ref{fig:ConcatTabularData} \\ \hline
+Intermediate Concatenation~\cite{gaoReducingUncertaintyCancer2022} & The modalities are input into separate blocks of neural network layers, then the layers are concatenated and input into a final block of layers. & Figure~\ref{fig:ConcatTabularFeatureMaps} \\ \hline
+Decision Fusion & The two modalities are input into separate neural networks to obtain two prediction probabilities, and the probabilities are averaged to calculate the final output. & Figure~\ref{fig:TabularDecision} \\ \hline
+Channel-wise Attention~\cite{duanmuPredictionPathologicalComplete2020} & Separate neural network layers are used for both modalities, and the intermediate layer outputs (feature maps) of one modality are multiplied with the other modality's feature maps during training.~ & Figure~\ref{fig:TabularChannelwiseAttention} \\ \hline
+Crossmodal Attention~\cite{golovanevskyMultimodalAttentionbasedDeep2022} & Each modality through its own set of fully-connected layers. First, self attention is applied to each modality's intermediate feature maps, and then crossmodal attention is applied between the two modalities' feature maps. The output of the crossmodal attention is then passed through a fully-connected layer to make a prediction. & Figure~\ref{fig:TabularCrossmodalAttention} \\ \hline
+Activation Fusion~\cite{chenMDFNetApplicationMultimodal2023} & Similar to intermediate concatenation, instead of the feature maps being concatenated, they are multiplied together, and passed through tanh and sigmoid activations. The first tabular modality intermediate feature map is concatenated with the activation function output and then passed through fully-connected layers to make a prediction. & Figure~\ref{fig:ActivationFusion} \\ \hline
+Activation and Self-Attention~\cite{chenMDFNetApplicationMultimodal2023} & An extension to activation fusion: second tabular modality's first set of network layers include a self-attention mechanism, where the input data is multiplied with the feature maps before being fused through the activation function method. & Figure~\ref{fig:activationandselfattention} \\ \hline
+Multi-channel VAE~\cite{antelmiSparseMultiChannelVariational2019} & A joint lower-dimensional subspace is created from the two modalities using a variational autoencoder set-up. The latent space is then input into a set of fully-connected layers. & Figure~\ref{fig:MCVAE} \hline
+\end{tabular}
+\end{table}
 
-Metrics:
-- Table of metrics we're using and their definitions
+Three experiments were conducted with different training and testing splits.
+The first experiment mixed the two datasets together and extracted training and testing sets from the combined dataset.
+A held-out test set is data not used for training and shows how well the model generalises to new data.
+This analysis used 20\% ($n=22$) of the data as the test set.
+
+The final experiments used a leave-site-out approach, where the models were trained on one site and tested on the other.
+The second experiment was trained on the Ospeadale San Raffaele's MND cohort ($n=64$) and tested on the ALS Biomarkers Study ($n=46$), and the third experiment was trained on the ALS Biomarkers Study and tested on Ospedale San Raffaele's MND cohort.
+
+The models were trained using 5-fold cross-validation, where the data is split into 5 sets, and the model is trained on 4 of the sets and validated on the remaining set.
+The validation set is not used to train the model, but to test the performance of the model to see the training progress.
+Early stopping was used to prevent overfitting on the validation set, where the model stops training if the loss on the validation set does not improve for 5 rounds of training, or ``epochs".
+
+% metrics
+The performances metrics used to evaluate the models were balanced accuracy, area under the receiver operating characteristic curve (AUROC), precision, recall, and F1 score.
+Balanced accuracy is the average of the sensitivity and specificity of the model, and is used to account for class imbalance in the data.
+AUROC is the area under the receiver operating characteristic curve, which is a plot of the true positive rate against the false positive rate.
+A true positive in this analysis was a correct prediction of a long survivor, and a false positive was a short survivor predicted as a long survivor.
+Precision is the proportion of true positive predictions out of all positive predictions, and recall is the proportion of true positive predictions out of all actual positive samples.
+The F1 score is the harmonic mean of precision and recall, and is used to balance the two metrics.
+
+The cross-validation training resulted in 5 trained versions of each model.
+The held-out test set was input into each of the these trained models to obtain the predicted survival categories.
+The predicted survival categories from each fold were aggregated together to calculate the overall performance metrics for the model.
+
+
+% repetitions
+Due to the small sample size, initial experiments showed high variability in the model performances between reruns of the training and evaluation process.
+Therefore, we employed experiment repetitions to stabilise the performance metrics.
+The training and evaluation process was repeated until the mean of the performance of the repetitions for each model converged to a stable value (within 1\% of the main metric: balanced accuracy).
+
+After the repetition performances converged, the models were compared by using the distribution of the performance metrics over the repetitions, and ranked by the mean of the balanced accuracy on the test sets.
+
 
 \section{Results}
 \subsection{Training together}
@@ -234,6 +271,12 @@ Leave-site-out:
 - Early concatenation doesn't perform as well as it does when trained on both sites together, suggesting that it may be overfitting on the Milan data
 - Statistically significant differences between the sites in Table~\ref{tab:clinical_demographics_site} showed that the Milan patients had different clinical features to the Essex patients, which may have meant the results were ungeneralisable to ALS Biomarkers Study.
 - However, the overall results are similar to the trained together results, either suggesting that the models are generalisable to the ALS Biomarkers Study data or that model architecture is more important than the data used to train it.
+
+Comparing models: how much does the model architecture affect the performance
+- With more data in figure 5.1, the architecture does make a difference in the performance, ranging from around 55\% to 70\% balanced accuracy.
+- Looking at how the number of parameters (a proxy for model complexity) is correlated with test model performance, there was no statistically significant correlation between the two for the metrics used in this analysis, using pearsons r.
+- In figure 5.2, it looks like the data makes more of a difference in model performance than the model, especially when considering precision and recall.
+- with a larger sample size, the model architecture may make more of a difference in the performance of the models, once the overfitting on the validation set is reduced.
 
 \subsection{Limitations}
 \begin{itemize}
