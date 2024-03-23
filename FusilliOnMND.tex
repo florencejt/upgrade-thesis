@@ -129,7 +129,7 @@ Unimodal models were also trained as a benchmark for the multimodal models to in
 \begin{table}
 \centering
 \caption{Tabular-tabular fusion models used in this analysis, implemented using Fusilli.}
-\begin{tabular}{p{3cm}|p{7cm}|l}
+\begin{tabular}{|p{4cm}|p{6.5cm}|l|}
 \textbf{Fusion Model} & \textbf{Description} & \textbf{Diagram} \\
 \hline
 Early Concatenation & The two modalities are concatenated before being input into a neural network. & Figure~\ref{fig:ConcatTabularData} \\ \hline
@@ -139,7 +139,7 @@ Channel-wise Attention~\cite{duanmuPredictionPathologicalComplete2020} & Separat
 Crossmodal Attention~\cite{golovanevskyMultimodalAttentionbasedDeep2022} & Each modality through its own set of fully-connected layers. First, self attention is applied to each modality's intermediate feature maps, and then crossmodal attention is applied between the two modalities' feature maps. The output of the crossmodal attention is then passed through a fully-connected layer to make a prediction. & Figure~\ref{fig:TabularCrossmodalAttention} \\ \hline
 Activation Fusion~\cite{chenMDFNetApplicationMultimodal2023} & Similar to intermediate concatenation, instead of the feature maps being concatenated, they are multiplied together, and passed through tanh and sigmoid activations. The first tabular modality intermediate feature map is concatenated with the activation function output and then passed through fully-connected layers to make a prediction. & Figure~\ref{fig:ActivationFusion} \\ \hline
 Activation and Self-Attention~\cite{chenMDFNetApplicationMultimodal2023} & An extension to activation fusion: second tabular modality's first set of network layers include a self-attention mechanism, where the input data is multiplied with the feature maps before being fused through the activation function method. & Figure~\ref{fig:activationandselfattention} \\ \hline
-Multi-channel VAE~\cite{antelmiSparseMultiChannelVariational2019} & A joint lower-dimensional subspace is created from the two modalities using a variational autoencoder set-up. The latent space is then input into a set of fully-connected layers. & Figure~\ref{fig:MCVAE} \hline
+Multi-channel VAE~\cite{antelmiSparseMultiChannelVariational2019} & A joint lower-dimensional subspace is created from the two modalities using a variational autoencoder set-up. The latent space is then input into a set of fully-connected layers. & Figure~\ref{fig:MCVAE} \\ \hline
 \end{tabular}
 \end{table}
 
