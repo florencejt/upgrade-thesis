@@ -117,7 +117,7 @@ The short survival group had significantly larger volumes in the cerebrospinal f
 
 We predicted categories of survival, short or long, by splitting the survival time at the median.
 The median was used, rather than a clinically relevant cut-off, as the sample size was small and having balanced classes reduces the risk of overfitting.
-Moreover, the median survival time in our data of 24 months is a reasonable cut-off for short and long survival in MND~\cite{hardiman2017amyotrophic}.
+Moreover, the median survival time in our data of 24 months is a reasonable cut-off for short and long survival in MND~\cite{feldmanAmyotrophicLateralSclerosis2022}.
 
 
 The models used in this analysis are from Fusilli, a package developed in Chapter~\ref{fusilli_development} to compare the performance of different multimodal data fusion methods.
@@ -148,7 +148,6 @@ Three experiments were conducted with different training and testing splits.
 The first experiment mixed the two datasets together and extracted training and testing sets from the combined dataset.
 A held-out test set is data not used for training and shows how well the model generalises to new data.
 This analysis used 20\% ($n=22$) of the data as the test set.
-
 The final experiments used a leave-site-out approach, where the models were trained on one site and tested on the other.
 The second experiment was trained on the Ospeadale San Raffaele's MND cohort ($n=64$) and tested on the ALS Biomarkers Study ($n=46$), and the third experiment was trained on the ALS Biomarkers Study and tested on Ospedale San Raffaele's MND cohort.
 
@@ -173,7 +172,6 @@ The predicted survival categories from each fold were aggregated together to cal
 Due to the small sample size, initial experiments showed high variability in the model performances between reruns of the training and evaluation process.
 Therefore, we employed experiment repetitions to stabilise the performance metrics.
 The training and evaluation process was repeated until the mean of the performance of the repetitions for each model converged to a stable value (within 1\% of the main metric: balanced accuracy).
-
 After the repetition performances converged, the models were compared by using the distribution of the performance metrics over the repetitions, and ranked by the mean of the balanced accuracy on the test sets.
 
 
@@ -184,7 +182,8 @@ After the repetition performances converged, the models were compared by using t
     \centering
     \hspace*{-2cm}
     \includegraphics[width=1.2\linewidth]{figures/both_sites_together_balanced_accuracy_violin}
-    \caption{Balanced accuracies of test set and validation set when sites trained together.}
+    \caption{Balanced accuracies of test set and validation set when sites trained together.
+    Models were ranked from best to worst by their mean balanced accuracy on the test set.}
     \label{fig:trainedtogetherviolin}
 \end{figure}
 
@@ -212,20 +211,30 @@ Crossmodal Attention & 0.562 (0.028) & 0.610 (0.041) & 0.681 (0.025) & 0.720 (0.
 }
 \end{table}
 
+Table~\ref{tab:mnd_results} shows the test performances of the models as the means and standard deviations of the test metrics over the repetitions of training on both sites.
+The distributions of the test and validation balanced accuracies are shown in Figure~\ref{fig:trainedtogetherviolin}.
+Early concatenation performed the best with 70\% balanced accuracy and 81\% AUROC, and was the only multimodal model that performed better than the clinical unimodal model.
+The clinical unimodal model came second with 68\% balanced accuracy and 75\% AUROC, and the imaging unimodal model came eighth with 58\% balanced accuracy and 60\% AUROC.
 
-Results observations from the figure:
-- Figure~\ref{fig:trainedtogetherviolin} has the models ranked by their balanced accuracy on the test set on the left, and the corresponding validation set balanced accuracy on the right, aggregated over the 5 validation folds. Distributions that make the violin plots are over the repetitions of training on both sites.
-- Table~\ref{tab:mnd_results} shows the mean and standard deviations of the test metrics over the repetitions of training on both sites.
-- Early concatenation performed the best with 70\% balanced accuracy and 81\% AUROC, with uni-modal clinical data and the activation functions models also performing well.
-- The worst performing models had similar performed to each other at around 55\% accuracy: the attention models, imaging-only, and decision fusion.
+The right panel of Figure~\ref{fig:trainedtogetherviolin} shows the distributions of the validation balanced accuracies over the repetitions of training on both sites.
+A trend of the better test-performing models having validation accuracies with less variance was observed.
+Model overfitting could be seen with some models, such as intermediate concatenation and extracted volumes only, which showed high validation accuracy but much lower test accuracy.
 
-Validation results
-- Validation accuracies had a generally higher variance than the test accuracies, with the better test-performing models having validation accuracies with less spread.
+The metrics other than balanced accuracy showed that the precisions of the models were generally higher than the recalls, meaning that the models were better at accurately detecting short survivors than long survivors.
+
+%Results observations from the figure:
+%- Figure~\ref{fig:trainedtogetherviolin} has the models ranked by their balanced accuracy on the test set on the left, and the corresponding validation set balanced accuracy on the right, aggregated over the 5 validation folds. Distributions that make the violin plots are over the repetitions of training on both sites.
+%- Table~\ref{tab:mnd_results} shows the mean and standard deviations of the test metrics over the repetitions of training on both sites.
+%- Early concatenation performed the best with 70\% balanced accuracy and 81\% AUROC, with uni-modal clinical data and the activation functions models also performing well.
+%- The worst performing models had similar performed to each other at around 55\% accuracy: the attention models, imaging-only, and decision fusion.
+
+%Validation results
+%- Validation accuracies had a generally higher variance than the test accuracies, with the better test-performing models having validation accuracies with less spread.
 
 
-Results observations from the table:
-- Looking at the table, recall was above 50\% for only 4 out of the 10 models: imaging only, intermediate concatenation, early concatenation, and cross modal attention.
-- Means that the methods weren't very good at accurately detecting long survivors
+%Results observations from the table:
+%- Looking at the table, recall was above 50\% for only 4 out of the 10 models: imaging only, intermediate concatenation, early concatenation, and cross modal attention.
+%- Means that the methods weren't very good at accurately detecting long survivors
 
 
 \subsection{Leave-site-out analysis}
@@ -238,11 +247,12 @@ Results observations from the table:
     \label{fig:site_effect}
 \end{figure}
 
-- Figure~\ref{fig:site_effect} shows the balanced accuracy of the different models when trained on one site and tested on the other.
-- The models are ranked by their balanced accuracy when trained on both sites together.
-- Training on site one generally resulted in better performance than training on site two, when looking at overall balanced accuracy.
-- Training on ALS Biomarkers Study generally resulted in better precision, but worse recall
-- Similar ranking on the methods too, but early concatenation doesn't perform as well as it does when trained on both sites together.
+Figure~\ref{fig:site_effect} shows the effect of training on one site and testing on the other on the balanced accuracy, precision, and recall of the different models.
+The models were ordered by their balanced accuracy when trained on both sites together, for comparison with the first experiment.
+Training on the ALS Biomarkers Study generally resulted in better performance than training on Ospedale San Raffaele, when looking at overall balanced accuracy.
+When considering precision only, training on the ALS Biomarkers Study resulted in better performance, but when considering recall only, training on Ospedale San Raffaele resulted in better performance.
+
+The model performance ordering was similar to the first experiment, but early concatenation did not perform as well as it did when trained on both sites together.
 
 
 \section{Discussion}
