@@ -261,10 +261,8 @@ With increased sample size in the future, future work will be to look at the eff
 Furthermore, Figure~\ref{fig:tsne} showed the separability of the data in two dimensions using t-distributed stochastic neighbour embedding (TSNE) for clinical, imaging, and multimodal features.
 Fuzzy borders between long and short survivors were observed, suggesting that the data is not very separable in two dimensions, which may explain the lower performance of the models.
 
-% start with the biggest result:
 The only multimodal model that outperformed the clinical unimodal model in the both-site experiment was early concatenation, and it outperformed by a small margin of 2\% balanced accuracy and 6\% AUROC.
 This implied that clinical data was the most important for predicting survival in MND, and that the imaging data did not add much value to the prediction.
-%Early concatenation, also called ``early fusion", is one of the simplest ways to combine two modalities, where both types of data are concatenated before being input into a neural network.
 The low performance of most multimodal performance might suggest that features extracted from the imaging data were not useful for predicting prognosis.
 This was further corroborated by the low performance of the imaging unimodal model.
 However, the evidence of overfitting in the validation set of the both-site experiment suggests that the models were not able to learn the relationship between the features and the outcome, and were learning the noise in the data.
@@ -273,58 +271,49 @@ Therefore, it is possible with a higher sample size, that the value of the imagi
 
 Although each of the multimodal models had an 41 input features (the clinical and imaging features), the models had different numbers of learnable parameters, which define model complexity.
 Complex models typically require more data to train to a high generalisable performance and avoid overfitting.
+The intermediate concatenation model was the best performing model when measured by recall and F1 score.
+, and has more trainable parameters than the overall best model, early concatenation, with a total of 34,200 learnable parameters compared to 27,500 in early concatenation.
+Figure~\ref{fig:trainedtogetherviolin} showed that the intermediate concatenation model had the highest validation balanced accuracy of approximately 95\% in the both-site experiment, but the test balanced accuracy was only 60\%, suggesting overfitting to the training data.
+When correlating the number of learnable parameters with test performance, there was no statistically significant relationship between the two.
+However, model complexity can also be estimated by other factors, such as the architecture of the model.
+There was no clear relationship between model architecture and performance, but the two attention-based models performed the worst, which may suggest that attention mechanisms are not suited to the data in its current state.
 
+Training on one dataset and testing on the other was used to investigate the generalisability of the models to new data and to see the effect of lower training sample size on model performance.
+Unsurprisingly, the dataset with the higher sample size, Ospedale San Raffaele, performed better than the dataset with the lower sample size, the ALS Biomarkers Study.
+However, sample size may not have been the only factor affecting the model performance, as the ALS Biomarkers Study data came from three different sites, which may have introduced noise into the data.
+Figure~\ref{fig:site_effect} showed that the models trained on the ALS Biomarkers Study were better at detecting long survivors than the models trained on Ospedale San Raffaele.
+Although the two datasets did not have statistically significant differences patient survival times, the ALS Biomarkers Study had a higher proportion of long survivors than Ospedale San Raffaele, which may have led to the models being better at detecting long survivors when trained on the ALS Biomarkers Study data.
+It is difficult, however, to make definitive conclusions from this analysis because sample sizes of $n=64$ and $n=46$ are not sufficient for training deep learning models, especially when the number of features is high, as is the case with multimodal data.
 
-% a high ratio of features to samples is not good for training models, as the models can overfit to the training data
-% what is surprising, is that the early concatenation model has an feature dimension of the imaging and the clinical data, which is 41 features, which is a high ratio of features to samples, so why did it perform the best
-% potentially there is a confounding effect of small sample size to feature ratio, where the model is not able to learn the relationship between the features and the outcome, and the model is learning the noise in the data, which makes the complex models perform worse than the simple ones which aren't as able to learn the noise
-% higher sample size is needed to reduce the effect of overfitting on small samples and uncover the real relationship between complexity and performance, and the value of multimodal data in predicting prognosis
-
-% intermediate concatenation also performed well with the highest recall and F1 score.
-% Slightly more complex than early concatenation, with 34.2k learnable parameters compared to 27.5k in early concatenation.
-% This shows increased model complexity might explain t the validation balanced accuracy, where intermediate concatenation was one of the most overfit models with all validation accuracies between 90-100\% but the test balanced accuracy was 60\%.
-% Looking at the different metrics is important to see the overall performance of the models
-
-% improved precision over recall for 7 out of 10 of the models suggests that the models are better at detecting short survivors than long survivors.
-% why could this be? since the labels are balanced by splitting on the mean, the models should be equally good at detecting short and long survivors
-% further work should be done to see if the models are having a hard time to predict specific subjects that maybe have a specific feature that is hard to predict
-
-% generally, there was no clear relationship between architecture type and performance, but the two attention-based models performed the worst, which may suggest that attention mechanisms are not suited to the data in its current state
-
-
-Leave-site-out:
-- Training on the higher sample size site (Milan) performs better on balanced accuracy than training on the lower sample size site (ALS Biomarkers Study), which is expected.
-- Early concatenation doesn't perform as well as it does when trained on both sites together, suggesting that it may be overfitting on the Milan data
-- Statistically significant differences between the sites in Table~\ref{tab:clinical_demographics_site} showed that the Milan patients had different clinical features to the Essex patients, which may have meant the results were ungeneralisable to ALS Biomarkers Study.
-- However, the overall results are similar to the trained together results, either suggesting that the models are generalisable to the ALS Biomarkers Study data or that model architecture is more important than the data used to train it.
-- moreover, the als biomarkers study data came from 3 different sites, so the data is more heterogeneous than the Milan data, which came from one site
-- this may have led to noisy data in the als biomarkers study data, which may have affected the model performance when tested on milan
-- generally, sample sizes of 64 and 46 are not sufficient for training deep learning models, especially when the number of features is high, as in the imaging data
-- with more sites and higher sample sizes, doing leave-site-out analysis will be good to test the generalisability of models, and this is a proof of concept that differetn data leads to different outcomes, so it is important to test the models on different data
+Finally, the models were better at detecting short survivors than long survivors when trained on both datasets, as shown by the higher precision than recall in Table~\ref{tab:mnd_results} for 7 out of 10 of the models.
+It was unclear why this would be the case, as the labels were balanced by splitting on the median survival time, so the models should be equally good at detecting short and long survivors.
+Further investigation should be done to see if the models were failing to predict specific subjects or if there is another reason for the models' poor performance in detecting long survivors.
 
 \subsection{Limitations}
-\begin{itemize}
-    \item Limitations on sample size
-    \item Evaluating on validation set rather than a completely external test set
-    \item Predictive task of classification rather than regression: what if we used a regression task instead? Would that be more useful? It's a harder task so may require more data
-    \item Limitation on using extracted brain volumes rather than raw MRI: what if the regions we've chosen aren't the most important ones? Subcortical regions have shown to have a role in MND, but we haven't included them here. *Look this up - the thalamus stuff*. However, whole image may introduce bias because further progressed patients may have worse quality scans.
-    \item Two sites put together without harmonisation
-    \item Using whole ALSFRS-R rather than individual components - not possible to get with Milan data
-    \item Needs more hyperparameter tuning of the different models to see if they can be improved. Next steps would be to test different network architectures and hyperparameters to see if the results can be improved.
-\end{itemize}
+The largest limitation of this analysis was the small sample size, which may have led to the models overfitting to the training data and not generalising well to the test data.
+Multimodal models that are not based on deep learning were not included in this analysis, which may have performed better with the small sample size.
+Pancotti and colleagues found that deep learning models did not significantly improve prognostic predictive performance on clinical data~\cite{pancottiDeepLearningMethods2022}, but this may not be the case for multimodal data.
+Future work will compare the performance of deep learning models to non-deep learning models to see if the deep learning models are the best choice for this data.
+
+Another aspect to the small sample size is the lack of a completely external test set.
+Although the leave-site-out analysis was used to investigate the generalisability of the models to new data, the small sample sizes led to difficulty in concluding what was causing the differences in model performance.
+With the addition of more sites and more patients in the future, the generalisability of the models to new data can be more clearly understood.
+
+As the data in this chapter was also used in Chapter~\ref{cox_proportional_hazards_model}, many of the limitations in relation to the data were the same.
+The extracted brain volumes used in this analysis may not have been the most important features for predicting prognosis in MND.
+Although the volumes showed significant associations with survival in Chapter~\ref{cox_proportional_hazards_model}, performance may have been improved with more curated features that have shown prognostic value, such as more granular brain-stem volumes~\cite{milellaMedullaOblongataVolume2022} or cortical thicknesses~\cite{burghMultimodalLongitudinalStudy2020,dieckmannCorticalSubcorticalGrey2022}.
+The sample size in this analysis was too small to explore using the whole MRI image as input to the models, but this may be a useful next step to see if the models can learn more from the raw MRI data than the extracted volumes.
+
+Moreover, the clinical features could have been more granular, such as including the individual components of the ALSFRS-R, rather than the total score, which has shown to be useful in prognosis prediction~\cite{hothornRandomForest4LifeRandomForest2014}.
+Unfortunately, the Ospedale San Raffaele cohort did not have the individual components of the ALSFRS-R, so this was not possible in this analysis.
+
+Finally, no hyperparameter tuning was done in this analysis, which may have led to suboptimal model performance.
+Future work will look at improving model performance through optimising architecture features such as layer sizes and learning rates.
 
 \section{Conclusion}
-First look at multimodal data fusion in MND. What does it mean? What are the implications? What are the next steps?
-\begin{itemize}
-    \item If imaging + clinical is useful
-    \begin{itemize}
-        \item Let's add modalities
-        \item Let's mix up the imaging preprocessing: DTI? Sub-cortical segmentation?
-    \end{itemize}
-    \item If imaging + clinical isn't useful
-    \begin{itemize}
-        \item Let's swap out the imaging for other modalities
-        \item Let's try different machine learning models
-        \item Let's mix up the imaging preprocessing: DTI? Sub-cortical segmentation?
-    \end{itemize}
-\end{itemize}
+
+This chapter detailed a multimodal data fusion analysis of clinical and imaging data in MND prognosis prediction.
+Eight multimodal models were compared to each other and to unimodal models to see if the multimodal models could predict prognosis better than the unimodal models.
+The best performing model was early concatenation, which combined the clinical and imaging data before inputting it into a neural network.
+However, early concatenation was the only multimodal model that outperformed the clinical unimodal model, suggesting that the imaging data did not add much value to the prediction of prognosis in MND.
+Further work will look at the effect of including more sites and more patients in the analysis, as well as the effect of different imaging features on model performance.
