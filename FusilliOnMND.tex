@@ -5,7 +5,7 @@
 Only one deep learning model has been used to predict survival in MND through clinical data and neuroimaging data~\cite{vanderburghDeepLearningPredictions2017}.
 This lack of research in multimodal data fusion in MND makes it difficult to conclude whether multimodal data is useful in predicting survival in MND .
 Additionally, we have shown that many different multimodal data fusion methods have been developed for other research applications.
-In Chapter~\ref{fusilli_development}, we developed a package called Fusilli to compare the performance of multimodal data fusion methods, approximately half of which are designed to combine two tabular modalities.
+In Chapter~\ref{fusilli_development}, we developed a package called Fusilli to compare the performance of multimodal data fusion methods, approximately half of which are designed to combine two tabular modalities~\cite{townendFlorencejtFusilliFusilli2024}.
 
 In this chapter, we will use Fusilli to compare the performance of different tabular-tabular multimodal data fusion methods on predicting survival in MND patients using clinical and imaging extracted features data.
 The aims of this work are to, firstly, assess the effect of different data fusion model architectures on prognostic performance, and secondly, to assess the value of baseline clinical and neuroimaging data in MND prognosis prediction.
@@ -120,7 +120,7 @@ The median was used, rather than a clinically relevant cut-off, as the sample si
 Moreover, the median survival time in our data of 24 months is a reasonable cut-off for short and long survival in MND~\cite{feldmanAmyotrophicLateralSclerosis2022}.
 
 
-The models used in this analysis are from Fusilli, a package developed in Chapter~\ref{fusilli_development} to compare the performance of different multimodal data fusion methods.
+The models used in this analysis are from Fusilli, a package developed in Chapter~\ref{fusilli_development} to compare the performance of different multimodal data fusion methods~\cite{townendFlorencejtFusilliFusilli2024}.
 We trained the models that do tabular-tabular fusion, meaning that they take two tabular datasets and combine them to predict the outcome.
 There are 10 tabular-tabular models in Fusilli, but we could not used the two graph-based models because the current version of Fusilli does not allow graph-based models to use held-out test sets.
 The architecture diagrams of the models are in Appendix~\ref{appendix:fusion_model_architectures}.
@@ -258,6 +258,7 @@ Moreover, van der Burgh and colleagues used different imaging features: structur
 This difference in performance suggests that the imaging features used in this analysis may not be as useful for predicting prognosis as the imaging features used by van der Burgh and colleagues, or perhaps that survival in MND is easier to predict when split into three categories rather than two.
 However, their data included only ALS patients, rather than MND patients, which may have made the data more homogenous and easier to predict.
 With increased sample size in the future, future work will be to look at the effect of including non-ALS MND patients in the analysis, as opposed to only ALS patients, which is more common in previous studies.
+
 Furthermore, Figure~\ref{fig:tsne} showed the separability of the data in two dimensions using t-distributed stochastic neighbour embedding (TSNE) for clinical, imaging, and multimodal features.
 Fuzzy borders between long and short survivors were observed, suggesting that the data is not very separable in two dimensions, which may explain the lower performance of the models.
 

@@ -3,23 +3,43 @@
 
 \section{Summary and Conclusions}
 
+In this upgrade thesis, I have detailed the work I have done so far in my PhD: explored survival analysis in MND, developed a Python library called Fusilli for the machine learning methods I will apply to multimodal MND data, and applied Fusilli to MND data for prognosis prediction.
+
 \subsection{Cox model}
-\begin{itemize}
-    \item What have I done?
-    \item Why is it useful and novel?
-    \item What did I find out?
-    \item What are the implications?
-    \item What are the limitations?
-\end{itemize}
+
+Chapter~\ref{cox_proportional_hazards_model} showed the application of a Cox proportional hazards model to multimodal MND data, comprised of baseline clinical features and brain region volumes extracted from structural MRI near diagnosis.
+To my knowledge, combining clinical and MRI-derived features in survival analysis for MND has only been done in one other paper~\cite{querinSpinalCordMultiparametric2017}, which used spinal cord MRI data and a smaller sample size.
+The main contribution of this chapter was to show that the Cox model could be used to predict prognosis in MND, and that the resulting factors significantly affecting survival are changed when using clinical data, imaging data, or multimodal data.
+
+The main result was that when using clinical data and extracted brain region volumes from MRI, the most important factors affecting survival were the baseline ALSFRS-R score and the bilateral volume of the amygdala, which were protective of survival, and the ALS-subtype of MND and larger bilateral lateral ventricle volumes, which were detrimental to survival.
+The addition of MRI data to clinical information caused a change in the relevance of specific clinical variables within the model, which implied that the brain volumes derived from MRI scans included corresponding information to some clinical features.
+In contrast, depending simply on MRI data produced clinically unusual outcomes.
+The implications of these findings highlighted the importance of combining imaging data with clinical information for more meaningful survival analysis in MND.
+
 
 \subsection{Fusilli}
 
-In Chapter~\ref{fusilli_development}, I detailed the development of Fusilli, my Python library for easy comparison of multimodal data fusion methods.
-Even though Fusilli is now finished and released for anybody to use in their personal projects, for my future PhD chapters, using Fusilli will greatly speed up my analysis and experimentation.
+In Chapter~\ref{fusilli_development}, I showcased Fusilli, my Python library for easy comparison of multimodal data fusion methods, and the steps in its development.
+Fusilli is an open-source project, and therefore released for anybody to use in their personal projects.
+
+Key contributions of this chapter were the development of a library that has a catalogue of multimodal data fusion methods that are not limited by their underlying architecture, which is the general limitation of other similar works.
+Fusilli was received with interest by the machine learning community, and I have received feedback from other researchers who have used Fusilli in their own projects.
+
+For my future PhD chapters, using Fusilli will greatly speed up my analysis and experimentation.
 
 \subsection{Fusilli with MND data}
 
 My first experimentation with Fusilli for MND prognosis prediction is shown in Chapter~\ref{fusilli_on_mnd}.
+The experiment consisted of using baseline clinical data and extracted brain region volumes to predict whether a patient with survive for more or less than 24 months from diagnosis.
+Eight multimodal data fusion models, implemented in Fusilli, were compared to each other and to unimodal models.
+
+This experiment resulted in only one of the multimodal models outperforming the unimodal model that used only clinical data, when evalutaing with balanced accuracy.
+Inspection of the validation performance revealed that the models were overfitting to different degrees, and further hyperparameter tuning is needed to improve the models to be more generalisable.
+
+The implications of this were that, in its current form with a small sample size and limited hyperparameter tuning, Fusilli did not show a clear advantage of using multimodal data in MND prognosis prediction, and that imaging data may not have been as useful as clinical data in this task.
+
+Further investigation and experimentation is needed to determine the finality of these results.
+I hypothesise that with more data, better clinical characterisation, and more fine-grained imaging data, multimodal data fusion will prove to be a useful tool in MND prognosis prediction.
 
 \section{Future Work}
 
@@ -53,26 +73,21 @@ In Chapter~\ref{fusilli_on_mnd}, I showed the first application of Fusilli to MN
 The next step is to extend this work by using more data from collaborations and the ALS Biomarkers Study, and by fine-tuning the parameters and architectures of the fusion models, in order to increase the accuracy of the predictions and more definitively assess the utility of multimodal data in MND prognosis prediction.
 I plan to do this work alongside applying Fusilli to non-MND data, as described above.
 
-The main additional feature to be added to the analysis would be neurofilament light chain (NfL) measurements from the ALS Biomarkers Study, which are currently too sparse to be used in the models so far, but samples are being analysed to increase the number of measurements available.
+The first step in improving the models would be to examine our preprocessing and feature inclusion of clinical data.
+The main additional clinical feature to be added to the analysis would be neurofilament light chain (NfL) measurements from the ALS Biomarkers Study, which are currently too sparse to be used in the models so far, but samples are being analysed to increase the number of measurements available.
 
 Furthermore, collaborators in Jena are running their D50 model on the ALS Biomarkers Study ALSFRS-R data.
 Using the D50 will enable the estimation of the ALSFRS-R at the date the MRI was taken, which will allow us to use MRI data from further away from diagnosis alongside the clinical data.
+It will also allow us to investigate the effect on performance when preprocessing the ALSFRS-R data in different ways, such as using the raw scores, the slopes of the raw scores, which have shown promise in a recent paper~\cite{papaizEnsembleimbalancebasedClassificationAmyotrophic2024}, or the D50-estimated ALSFRS-R.
 Moreover, we will obtain D50-derived parameters of disease aggressiveness and accumulation, which could be used as added features in the models.
 
-More brain measurements from recon-all, more options for what to include, could investigate a bit more what the best options are for including extracted features from the brain measurements
+For the imaging data, we will obtain more fine-grained brain measurements from using the \texttt{recon-all} pipeline from FreeSurfer, and use feature selection methods and domain knowledge to decide which measurements to include in the models.
 
-\begin{itemize}
-%    \item Extending the work in Chapter~\ref{fusilli_on_mnd}
-%    \item Doing this alongside project 1
-%    \item We're getting more data from collaborations and the ALS Biomarkers Study
-%    \item Also getting D50 measurements from collaboration with Jena, possibly allowing us to use mri from further away from diagnosis if we can estimate the alsfrsr at the scan date
-%    \item ALS Biomarkers study team are running analysis to get more NfL measurements from samples they still have
-    \item Fine tuning parameters and architectures of the fusion models as well
-    \item Motivation: fluid biomarkers are more accessible than MRI etc.
-    \item Feasibility: ALS Biomarkers Study etc.
-\end{itemize}
+The expected outcomes of this work are more accurate predictions of MND prognosis, and a better understanding of the utility of multimodal data in MND prognosis prediction.
 
 \subsection{Effect of MRI preprocessing on Fusilli prognosis prediction}
+
+% to write
 
 Moving onto applying multimodal methods to actual images with clinical data.
 
@@ -84,12 +99,17 @@ Examples are focusing on cortical thickness, subcortical volumes, whole brain me
 Deji is working on upscaling the clinical-grade scans to research-grade scans, which will allow us to use the scans in the models as whole-brain images and more easily apply these preprocessing steps.
 
 Some toolkits I am planning on using are: the texture analysis one from canada, recon-all, ...
+- texture analysis: https://github.com/ajinkya-kulkarni/PyTextureAnalysis?tab=readme-ov-file
+- recon-all
+
 
 The quality of the inferences taken from this analysis will depend on the sample size of the data, because imaging is more expensive to process than clinical data, and a larger sample size would mitigate the less useful result of ``less features leads to less overfitting".
 
 If the sample size is not large enough, a contigency plan would be to focus on diseases that have more data available, such as Alzheimer's disease.
 
 \subsection{Final project options}
+
+% to write
 
 The final project in this PhD will depend on the availability of data.
 We could either add more data modalities to the multimodal models, such as spinal MRI or features derived from radiological reports, or we could investigate the usefulness and sensitivity of the best-performing models on varying definitions of prognosis.
