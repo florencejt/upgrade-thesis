@@ -5,7 +5,7 @@
 
 Many of the clinical and imaging features that were found to be associated with survival in Chapter~\ref{literature_review} were found using the Cox proportional hazards (CPH) model.
 CPH is a survival analysis model that is used to investigate the relationship between the time to an event and the factors that may influence it.
-As a first step in my investigation into the predictive power of clinical and imaging features in MND, I used a CPH model to investigate the relationship between the time to death and the clinical and neuroimaging features that were extracted from the ALS Biomarkers Study and Ospedale San Raffaele MND cohorts.
+As a first step in my investigation into the predictive power of clinical and imaging features in MND, I used a CPH model to investigate the relationship between time to death and baseline clinical and neuroimaging features.
 
 Previously, Querin and colleagues used a multivariable CPH to compare the predictive power of clinical and spinal cord imaging features in ALS in a cohort of 49 ALS patients, and concluded that spinal MRI measures were more predictive than clinical measures~\cite{querinSpinalCordMultiparametric2017}.
 In this chapter, univariable, unimodal multivariable, and multimodal multivariable CPH models were used to investigate the relationship between the time to death and the clinical and imaging features in a larger cohort of 125 MND patients.
@@ -14,12 +14,13 @@ The aim of this analysis was to see how multimodal data affects survival analysi
 \section{Data}
 
 Data from two studies was used for this survival analysis: ALS Biomarkers Study and Opsedale San Raffaele.
-Both of these datasets contain clinical information on MND patients and structural imaging conducted during their disease course.
+Both of these datasets contained clinical information on MND patients and structural imaging conducted during their disease course.
 
-The outcome of interest in this analysis is time to death, censored by date of censorship if recorded in the dataset or date of last data update if not.
-The Ospedale San Raffaele cohort defines their endpoint as death or tracheostomy, but the ALS Biomarkers Study only defines their endpoint as death.
+The outcome of interest in this analysis was time to death or time to censorship.
+Censored patients were those who were still alive at the end of the study period (or at the time of data download: 5th March 2024) or who were lost to follow-up before the end of the study period.
+The Ospedale San Raffaele cohort defined their endpoint as death or tracheostomy, but the ALS Biomarkers Study only defined their endpoint as death.
 
-The clinical features in this study are the patient's sex, baseline ALSFRS-R, diagnostic delay, age at diagnosis, site of onset (categorised as bulbar and non-bulbar), signs of FTD, and their MND subtype (categorised as ALS and non-ALS).
+The clinical features in this study were the patient's sex, baseline ALSFRS-R, diagnostic delay, age at diagnosis, site of onset (categorised as bulbar and non-bulbar), signs of FTD, and their MND subtype (categorised as ALS and non-ALS).
 These features were chosen for their clinical relevance to survival in MND and their availability in both datasets.
 
 Patients were excluded if they did not have a T1- or T2-weighted MRI within 12 months before or after an MND diagnosis.
@@ -40,7 +41,7 @@ The remaining regions were z-score normalised.
  Sex, n (\%)          & \\
  \hspace{5mm}Female & 55 (44.0)   \\
 \hspace{5mm}Male & 70 (56.0)   \\\hline
- ALSFRSr, mean (SD)                 & 38.9 (6.4)  \\\hline
+ ALSFRS-R, mean (SD)                 & 38.9 (6.4)  \\\hline
  Survival (months), mean (SD)         & 34.3 (27.3) \\\hline
  Diagnostic Delay (months), mean (SD)  & 13.6 (13.2) \\\hline
  Age at Diagnosis (years), mean (SD)  & 62.6 (11.4) \\\hline
@@ -62,7 +63,6 @@ The remaining regions were z-score normalised.
 
 The demographics and clinical characteristics of the patients who were included in the analysis are shown in Table~\ref{tab:coxdemographics}.
 Out of the 125 patients, 21 were censored and 104 died during the study period.
-Censored patients were those who were still alive at the end of the study period (or at the time of data download: 5th March 2024) or who were lost to follow-up before the end of the study period.
 
 \section{Methods}
 
@@ -72,7 +72,7 @@ A CPH model is expressed as
 \end{equation}
 where $t$ is the survival time, $h(t)$ is the hazard function, $\boldmath{X}$ are the variables investigated, $h_0(t)$ is the baseline hazard if all the variables were 0.
 The hazard ratios (HRs) are represented as $\beta$, with $\beta_1$ being the hazard ratio for the variable $X_1$.
-A HR larger than 1 indicates the variable is associated with a poorer prognosis, or increased risk of the event, which is death in this CPH application.
+A HR larger than 1 indicates the variable is associated with a poorer prognosis, or increased risk of the event, which is death.
 The assumption of proportional hazards is that each individual in the analysis has the same hazard function, but the hazard functions are scaled by a constant factor, which is not dependent on time.
 The Python package, lifelines, was used to implement the CPH models and to test the proportional hazards assumption~\cite{davidson-pilonLifelinesSurvivalAnalysis2019}.
 Since the aim of this analysis was to see how multimodal data affects survival analysis of MND, four models were run:
@@ -97,15 +97,15 @@ The quality of models fit to the data was assessed using the concordance index, 
 \input{tables/coxtables}
 
 Table~\ref{tab:allfeatures_cox} shows the HRs, confidence intervals, and significance $p$ values of the features in the univariable CPH, multivariable clinical CPH, multivariable imaging CPH, and multivariable multimodal CPH.
-The significantly harmful univariable factors are an older age of diagnosis (HR=1.48), co-presence of FTD (HR=1.58), having ALS MND (HR=2.40), and larger volumes in CSF (HR=1.40) and lateral ventricles (HR=1.58).
-Significantly protective factors include higher baseline ALSFRS-R (HR=0.70), a longer diagnostic delay (0.77), and larger volumes in the brain stem (HR=0.66), hippocampus (HR=0.59), amygdala (HR=0.59), thalamus (HR=0.78), caudate (HR=0.77), putamen (HR=0.72), pallidum (HR=0.75) and cerebellum cortex (HR=0.71).
+The significantly harmful univariable factors were an older age of diagnosis (HR=1.48), co-presence of FTD (HR=1.58), having ALS MND (HR=2.40), and larger volumes in CSF (HR=1.40) and lateral ventricles (HR=1.58).
+Significantly protective factors included higher baseline ALSFRS-R (HR=0.70), a longer diagnostic delay (0.77), and larger volumes in the brain stem (HR=0.66), hippocampus (HR=0.59), amygdala (HR=0.59), thalamus (HR=0.78), caudate (HR=0.77), putamen (HR=0.72), pallidum (HR=0.75) and cerebellum cortex (HR=0.71).
 The only features included that did not significantly affect survival were sex, bulbar site of onset, cerebral white matter volume, cerebellum white matter volume, and cerebral cortex volume.
 
 
 \subsection{Multivariable}
 
 \subsubsection{Clinical}
-When the clinical features were input into a multivariable CPH, baseline ALSFRS-R was a significant protective factor (HR=0.62), and ALS MND and older age at diagnosis were significantly harmful (HRs of 1.96 and 1.53). 
+The multivariable clinical CPH results found that baseline ALSFRS-R was a significant protective factor (HR=0.62), and ALS MND and older age at diagnosis were significantly harmful (HRs of 1.96 and 1.53).
 Diagnostic delay and co-presence of FTD were no longer significant in the multivariable CPH.
 
 The proportional hazards assumptions were broken by age at diagnosis ($p=0.002$) and diagnostic delay ($p=0.038$).
@@ -118,30 +118,31 @@ This fixed the broken proportional hazards assumptions and the same factors rema
 The multivariable imaging CPH resulted in three significant survival factors: lateral ventricles (harmful, HR=1.52), cerebral white matter (harmful, HR=2.35), and caudate (protective, HR=0.62).
 However, the cerebral white matter and CSF variables broke the CPH assumptions ($p=0.0325$ and $0.005$ respectively).
 
-When only the univariably-significant imaging factors are input into a multivariable CPH, more factors were significantly associated with survival, shown in Table~\ref{tab:unieatures_cox}.
+When only the univariably-significant imaging factors were input into a multivariable CPH, more factors were significantly associated with survival, shown in Table~\ref{tab:unieatures_cox}.
 Higher volumes of the brain stem (HR=0.67), amygdala (HR=0.65), and caudate (HR=0.64) were protective, and higher volumes of the CSF (HR=1.33), lateral ventricles (HR=1.63), and thalamus (HR=1.74) were harmful.
 
 \subsubsection{Multimodal}
 Only three factors were significant in the multimodal multivariable CPH: baseline ALSFRS-R (HR=0.68), ALS MND (HR=2.32), and cerebral white matter volume (HR=2.43).
 The proportional hazards assumption was broken by sex ($p=0.0069$), bulbar site of onset ($p=0.0298$), and cerebral white matter ($p=0.0497$).
 
-Screening input variables by their univariable significance resulted in a CPH that had no broken assumptions and four significant survival factors: two clinical and two imaging.
+Screening input variables by their univariable significance resulted in a CPH that had no broken assumptions and four significant survival factors.
 Higher baseline ALSFRS-R (HR=0.69) and larger amygdala volume (HR=0.62) were significantly protective, and ALS MND (HR=2.11) and larger lateral ventricle volume (HR=1.56) were significantly harmful.
 
 Table~\ref{tab:coxfitmetrics} shows the metrics of model fit for the multivariable CPH models.
-The multimodal multivariable models resulted in the best fit metrics, both when considering all the models and also when considering only the univariable-screened models and the ``all variable" models.
+The multimodal multivariable models produced the best fit metrics when all models were considered, as well as when only the univariable-screened models and the ''all variable" models were considered.
 
 \section{Discussion}
 
 
 The univariably-significant clinical factors in this analysis were generally consistent with the existing literature.
 However, having a bulbar site of onset was not significantly associated with survival, which was surprising, as bulbar onset is often associated with a poorer prognosis in MND and was found to be significant in a meta-analysis of survival factors~\cite{suPredictorsSurvivalPatients2021}.
-27.2\% of the patients in this analysis had a bulbar site of onset, which is consistent with the general MND population~\cite{feldmanAmyotrophicLateralSclerosis2022}, so it is unlikely that the lack of significance was due to a small sample size.
-Our analysis categorised patients as having a bulbar or non-bulbar site of onset, but a respiratory site of onset is associated with a poorer prognosis than bulbar onset and respiratory-onset patients would have been included with the non-bulbar patients~\cite{suPredictorsSurvivalPatients2021}, so it is possible that the lack of significance was due to the categorisation of the site of onset.
-Although, Papaiz and colleagues found that categorising the site of onset as bulbar or limb/spinal in their prognostic machine learning study was not one of the most important features for predicting short or long survival, and that an indication of respiratory involvement was even less informative~\cite{papaizEnsembleimbalancebasedClassificationAmyotrophic2024}.
+27.2\% of the patients in this analysis had a bulbar site of onset, which is consistent with the general MND population~\cite{feldmanAmyotrophicLateralSclerosis2022}, so it is unlikely that the lack of significance was due to a small sample size or a biased sample.
+Our analysis categorised patients as having a bulbar or non-bulbar site of onset, which included respiratory-onset patients in the non-bulbar category.
+Respiratory site of onset is associated with a poorer prognosis than bulbar onset~\cite{suPredictorsSurvivalPatients2021}, so it is possible that the lack of significance was due to the categorisation of the site of onset.
+Although, Papaiz and colleagues found that indications of respiratory involvement were less informative to predicting survival than bulbar onset in their machine learning study~\cite{papaizEnsembleimbalancebasedClassificationAmyotrophic2024}.
 Future work could investigate the relationship between the site of onset and survival in MND by using a more granular categorisation of the site of onset, such as bulbar, respiratory, and limb onset.
 
-However, in general, a univariable model is not the ideal model for survival analysis of a multi-factorial disease like MND, as it does not account for the effects of other variables on the outcome.
+However, in general, a univariable model was not the ideal model for survival analysis of a multi-factorial disease like MND, as it did not account for the relationships between features that could be influencing survival.
 
 \begin{figure}
     \centering
@@ -151,40 +152,39 @@ However, in general, a univariable model is not the ideal model for survival ana
 \end{figure}
 
 The multivariable models all resulted in broken proportional hazards assumptions, which were fixed by screening the input variables by their univariable significance.
-This approach is not without controversy, as it is possible that features that are not significant univariably are significant in the multivariable model.
+This approach is not without controversy, as it was possible that features that were not significant univariably could be significant in the multivariable model.
 However, we did not find this to be the case in our analysis, since the screened imaging and multimodal models resulted in more significant features than the unscreened models.
 
 The multivariable imaging model resulted in some clinically unintuitive results, such as reported significantly harmful effects of larger cerebral white matter volume and larger volume of the thalamus.
 In the univariable analysis, larger thalamus volume was significantly protective, and larger cerebral white matter volume was not significantly associated with survival.
 Moreover, previous work suggests that atrophy in the thalamus suggests faster disease progression, although this is not necessarily associated with survival~\cite{sendaStructuralMRICorrelates2017,dieckmannCorticalSubcorticalGrey2022}.
-By its nature, the regional brain volumes are highly correlated, which increases the risk of collinearity in the model.
+The regional brain volumes are highly correlated, which increases collinearity in the model.
 Collinearity can lead to unstable estimates of the coefficients, and possibly explain a variable effect switching from harmful to protective or vice versa.
 
 One way to mitigate the effect of collinearity in the model is to use dimensionality reduction techniques, such as principal component analysis (PCA), to reduce the number of features in the model.
 Westeneng and colleagues used this technique to group the brain into larger regions based on their principal components before applying to a survival analysis model~\cite{westenengSubcorticalStructuresAmyotrophic2015}.
 
 Diagnostic delay and FTD lost significance in the multivariable clinical model (both screened and unscreened) when age at diagnosis was included.
-This lost significance could be explained by the correlations in the clinical features, shown in Figure~\ref{fig:clinicalcorrelation}.
-In multivariable models, the features that are correlated with other features are less likely to be significant, because the effect of the correlated features is already accounted for by the significant features.
-Figure~\ref{fig:clinicalcorrelation} shows that age at diagnosis is the most positively correlated with FTD, which could explain why FTD lost significance in the clinical model when age at diagnosis was included, and age at diagnosis remained significant.
+This lost significance could be explained by the correlations in the clinical features, shown in Figure~\ref{fig:clinicalcorrelation} as heatmap of Pearson's correlation coefficients.
+In multivariable models, correlated features are less likely to be significant because their effect has already been accounted for by the significant features.
+Figure~\ref{fig:clinicalcorrelation} shows that age at diagnosis was the most positively correlated with FTD, which could explain why FTD lost significance in the clinical model when age at diagnosis was included, and age at diagnosis remained significant.
 Moreover, diagnostic delay is the most negatively correlated with ALS MND, which resulted in diagnostic delay losing significance, even though it was significant univariably.
 
-The presence of the amygdala in the final multimodal significant features is interesting, since brain regions which are more commonly associated with MND, such as the brain stem, were not significant.
+The presence of the amygdala in the final multimodal significant features was interesting, since brain regions which are more commonly associated with MND, such as the brain stem, were not significant.
 This could, again, be explained by the correlations between the features included in the model.
-Figure~\ref{fig:multimodalcorrelations} in the appendices shows that the most negative correlation between FTD and a brain region is with the amygdala (
-coefficient of -0.40), which could explain why FTD lost significance in the clinical model when the amygdala was included.
-Moreover, the brain stem is highly correlated with the amygdala (coefficient of 0.60), which could explain why the brain stem lost significance in the multimodal model, even though it is implicated in lower motor neuron degeneration in MND .
+Figure~\ref{fig:multimodalcorrelations} in the appendices showed that the most negative correlation between FTD and a brain region was with the amygdala (coefficient of -0.40), which could explain why FTD lost significance in the clinical model when the amygdala was included.
+Moreover, the brain stem was highly correlated with the amygdala (coefficient of 0.60), which could explain why the brain stem lost significance in the multimodal model, even though it was implicated in lower motor neuron degeneration in MND .
 
-Another example of this is that the age at diagnosis was not significant in the multimodal model, even though it was significant in the clinical model.
-Inspecting the correlations between the clinical features and the brain volumes found that age at diagnosis is correlated with lateral ventricle volume (coefficient of 0.49), which could explain why age at diagnosis lost significance in the multimodal model when lateral ventricle volume was included.
+Another example of this was that the age at diagnosis was not significant in the multimodal model, even though it was significant in the clinical model.
+Inspecting the correlations between the clinical features and the brain volumes found that age at diagnosis was correlated with lateral ventricle volume (coefficient of 0.49), which could explain why age at diagnosis lost significance in the multimodal model when lateral ventricle volume was included.
 
-The absence of these clinical variables in the imaging multivariable CPH may have led to the model picking up on brain structure not directly influencing survival, but markers of clinical features that are influencing survival.
-For example, older age at diagnosis, which is associated with brain atrophy, and FTD, which is associated with limbic atrophy leading to three limbic structures being found as significant: thalamus, amygdala, and caudate.
+The absence of these clinical variables in the imaging multivariable CPH may have led to the model picking up on brain structure not directly influencing survival, but markers of clinical features which influence survival.
+For example, older age at diagnosis, which is associated with brain atrophy, and FTD, which is associated with limbic atrophy, leading to three limbic structures being found as significant: thalamus, amygdala, and caudate.
 The multimodal CPH mitigated the effect of the model picking up on brain structure not directly influencing survival, because we included the clinical features that are influencing survival into the model as well.
-However, the trade-off was that the collinearity within the brain volumes but also between the brain volumes and the clinical features was high, which could mean that individual volumes are picked out as significant over clinical features and vice versa, even if both are influencing survival.
+However, the trade-off was that the collinearity was high, both within the brain volumes and also between the brain volumes and the clinical features, which could mean that individual volumes were picked out as significant over clinical features and vice versa, even if both were influencing survival.
 
-Finally the fit statistics in Table~\ref{tab:coxfitmetrics} show that the fit improved with multimodal features.
-Although adding more features to a survival model is likely to increase its fit metrics, AIC also considers the number of features in the model in its calculation, so it can be concluded that the multimodal features are adding more information to the model than the clinical or imaging features alone.
+Finally the fit statistics in Table~\ref{tab:coxfitmetrics} showed that the fit improved with multimodal features.
+Although adding more features to a survival model is likely to increase its fit metrics, AIC also considers the number of features in the model in its calculation, so it can be concluded that the multimodal features added more information to the model than the clinical or imaging features alone.
 
 %\begin{itemize}
 %    \item It could also be that the model is picking up on brain structure not directly influencing survival, but markers of clinical features that are influencing survival, such as older age at diagnosis, which is associated with brain atrophy, and FTD, which is associated with limbic atrophy.
@@ -207,7 +207,7 @@ Firstly, the sample size was relatively small ($n=125$), which could mean that t
 Moreover, the data came from two studies and multiple sites, and no harmonisation was performed to account for site-specific factors, although an argument could be made that removing site-specific factors could remove important information about the disease.
 Further work could be done to investigate the effect of the sites on the results, such as by including site as a variable in the model.
 
-Secondly, the scans were not generally taken at the same time as diagnosis, which could mean that the brain volumes are not representative of the patient's brain at the time when the clinical features were recorded.
+Secondly, the scans were not generally taken at the same time as diagnosis, which could mean that the brain volumes were not representative of the patient's brain at the time when the clinical features were recorded.
 MND is a fast-progressing disease and allowing for 12 months either side of diagnosis for including the scan is a wide window.
 However, this wide window was a trade-off between sample size and data quality.
 In the future, we aim to increase the sample size, which would allow us to look at scans taken closer to diagnosis to check the consistency of the results.
@@ -227,9 +227,9 @@ Although we did not find this to be the case, there are other ways to attempt to
 
 \section{Conclusion}
 
-In this chapter, we have shown that both brain region volumes and clinical features were significantly associated with survival in MND, and that including both data modalities in a survival model increased the model's fit metrics.
-The clinical features that were significantly associated with survival were consistent with the existing literature, but some of the imaging features were not, until the clinical features were included in the model.
-This suggests that incorporating imaging-derived features with clinical features is a valuable approach to survival analysis in MND, and that the multimodal model is more informative than the clinical or imaging models alone.
+In this chapter, we have shown that both brain region volumes and clinical features were significantly associated with survival in MND, and that including both data modalities in a survival model increased the quality of the model's fit to the data.
+The clinical features that were significantly associated with survival were consistent with the existing literature, but some of the imaging features were not, until the incorporation of clinical features.
+This suggests that incorporating imaging-derived features with clinical features was a valuable approach to survival analysis in MND, and that the multimodal model was more informative than the clinical or imaging models alone.
 
 The issues encountered during the analysis were likely due to the collinearity of the brain volumes and the correlations between the brain volumes and the clinical features.
 Future work will aim to address these issues by extending this analysis to include dimensionality reduction and improved clinical characterisation of the patients, as well as increased sample size.
