@@ -2,17 +2,17 @@
 \label{fusilli_development}
 
 The previous chapter explored multimodal data in a relatively simple setting of a survival analysis model.
-In the field of machine learning, multimodal data can be integrated as it was in the Cox model, by concatenating the data before inputting into the model, or by using more complex methods that aim to capture the relationships between the modalities.
-These techniques are known as multimodal data fusion.
+In the field of machine learning, multimodal data can be integrated as it was in the Cox model, by concatenating the data before inputting into the model, or by using more complex methods that aim to capture the potentially non-linear relationships between the modalities.
+These techniques fall under the umbrella of multimodal data fusion.
 
-This chapter discusses multimodal data fusion in more detail and describe the development of Fusilli, a Python package for multimodal data fusion experimentation and analysis.
+This chapter discusses multimodal data fusion in more detail and describes the development of Fusilli, a Python package for multimodal data fusion experimentation and analysis.
 
 \section{Introduction}
 
 Multimodal data fusion is the process of combining data from different sources to make predictions or decisions, often through the use of deep learning.
 The goal of combining different modalities is to improve the performance of a model by leveraging the relevant information from each modality and fusing them in a way that improves the model's performance.
 There are many research fields where multimodal data fusion is used, such as in agriculture to predict crop yields and detect diseases~\cite{s.s.gopiMultimodalMachineLearning2023, patilRiceFusionMultimodalityData2022}, in disaster management to analyse response scenarios from audio and social media posts~\cite{algiriyageMultisourceMultimodalData2021}, and in robotics to help direct the robots with multiple sensors~\cite{duanMultimodalSensorsMLBased2022}.
-Moreover, the types of models used in multimodal data fusion can vary a lot, from geometric deep learning to relatively simple neural network architectures~\cite{cuiDeepMultimodalFusion2022}.
+Moreover, the types of models used in multimodal data fusion can vary widely, from geometric deep learning to relatively simple neural network architectures~\cite{cuiDeepMultimodalFusion2022}.
 
 %In the context of my PhD, I am investigating multimodal data fusion for MND prognosis prediction.
 %There has been minimal research on deep learning for prognosis prediction in MND~\cite{pancottiDeepLearningMethods2022, mullerExplainableModelsDisease2021}, and only one model created for deep-learning based multimodal data fusion~\cite{vanderburghDeepLearningPredictions2017}.
@@ -21,20 +21,20 @@ Moreover, the types of models used in multimodal data fusion can vary a lot, fro
 %Therefore, with limited knowledge from literature on the best models for MND data, it is important to experiment with a wide variety of models to find the best one for the task.
 
 My PhD investigates multimodal data fusion for predicting MND prognosis, an area with minimal deep learning research~\cite{pancottiDeepLearningMethods2022, mullerExplainableModelsDisease2021} and only one model specially-created for deep-learning based multimodal data fusion~\cite{vanderburghDeepLearningPredictions2017}.
-Despite systematic reviews on the topic attempting qualitative comparison between models~\cite{cuiDeepMultimodalFusion2022, gaoSurveyDeepLearning2020, stahlschmidtMultimodalDeepLearning2022, yanDeepMultiviewLearning2021}, a lack of quantitative comparison necessitates experimentation with many models from other fields to identify the most effective for MND prognosis prediction.
+Despite systematic reviews on the topic attempting qualitative comparison between models in many areas of applications~\cite{cuiDeepMultimodalFusion2022, gaoSurveyDeepLearning2020, stahlschmidtMultimodalDeepLearning2022, yanDeepMultiviewLearning2021}, a lack of quantitative comparison necessitates experimentation with many models from other fields to identify the most effective for MND prognosis prediction.
 
 %Obtaining this wide variety of models to experiment with, however, is not a straightforward process for a number of reasons.
-%Firstly, the terminology used to describe what I have chosen to call ``multimodal data fusion`` varies widely, with terms such as but not limited to multi-view, cross-heterogeneous, multi-source, and integrated learning.
+%Firstly, the terminology used to describe what I have chosen to call ''multimodal data fusion'' varies widely, with terms such as but not limited to multi-view, cross-heterogeneous, multi-source, and integrated learning.
 %Secondly, the studies that introduce these models often do not include code for the reader to run the model.
 %Morever, when code is included, it is often written in different languages, with varying guidance, quality, and maintenance.
-However, acquring a diverse range of models for experimentation is made difficult by the use of variable terminology and the common absence of maintained, quality code available in studies.
+Acquring a diverse range of models for experimentation is made difficult by the use of inconsistent terminology and the common unavailability of maintained, quality code provided alongside studies.
 
 A way to address these problems is to create a curated collection of models for somebody interested in multimodal data fusion to consult.
-As far as I am aware, there are three Python packages that house collections of deep learning based data fusion models: ``Multi-view-AE''~\cite{aguilaMultiviewAEPythonPackage2023}, ``CCA-Zoo"~\cite{chapmanCCAZooCollectionRegularized2021}, and ``pytorch-widedeep"~\cite{zaurinPytorchwidedeepFlexiblePackage2023}.
-However, each of these packages only includes models with specific frameworks (autoencoders, CCA, and Google's ``wide and deep" models, respectively), which limits the variety of models available for comparison.
+As far as I am aware, there are three Python packages that house collections of deep learning based data fusion models: ''Multi-view-AE''~\cite{aguilaMultiviewAEPythonPackage2023}, ''CCA-Zoo''~\cite{chapmanCCAZooCollectionRegularized2021}, and ''pytorch-widedeep''~\cite{zaurinPytorchwidedeepFlexiblePackage2023}.
+However, each of these packages only includes models with specific frameworks (autoencoders, CCA, and Google's ''wide and deep'' models, respectively), which limits the variety of models available for comparison.
 
 Therefore, I aimed to develop a Python package for training and comparing multimodal data fusion models with any architecture.
-This Python package is named Fusilli, as a portmanteau of ``fuse easily".
+This Python package is named Fusilli, as a portmanteau of ''fuse easily''.
 Fusilli works by taking the user's multimodal data and training it on a variety of models, and then comparing the models' performances.
 
 \section{Development and Implementation}
@@ -64,7 +64,7 @@ Moreover, this would ensure that the package is useful for a wide range of users
 \vspace{0.3cm}
 
 \noindent\textbf{Support for two modalities}: The models in Fusilli will support data fusion between either two types of tabular data (e.g. clinical data and brain region volumes data) or between an image and tabular data (e.g. MRI images and clinical data).
-Again, for wide applicability, Fusilli should be able to handle two-dimensional and three-dimensional images, and tabular data of any size.
+For wide applicability, Fusilli should be able to handle two-dimensional and three-dimensional images, and tabular data of any size.
 
 \vspace{0.3cm}
 
@@ -75,9 +75,9 @@ From the literature, these are the most common tasks for multimodal data fusion,
 \subsection{Implementation}
 
 Fusilli was implemented in Python, using the PyTorch and PyTorch Lightning libraries for deep learning.
-This is because PyTorch is a popular library for deep learning, and is known for its flexibility and ease of use.
+PyTorch is a popular library for deep learning, and is known for its flexibility and ease of use.
 
-\noindent The user must specify:
+\noindent For a user to apply Fusilli to their own problem, they must specify:
 \begin{itemize}
   \setlength\itemsep{-0.5em}
     \item \textbf{Data}: The user's data, which must be in the form of a .csv file for tabular data, and .pt files for images.
@@ -87,14 +87,8 @@ This is because PyTorch is a popular library for deep learning, and is known for
 \end{itemize}
 
 \noindent The user can also specify experiment specifics, which are set to default values if not specified.
-These are:
-\begin{itemize}
-    \setlength\itemsep{-0.5em}
-    \item Training and validation data splits.
-    \item Maximum number of epochs to train for, including early stopping.
-    \item Any model hyperparameters or architectures that the user wants to modify.
-    \item Batch size.
-\end{itemize}
+Examples of experiment specifics include the training and validation data splits, the maximum number of epochs to train for, and the batch size.
+The user can also modify model hyperparameters and architectures.
 
 \noindent After the user has specified these, the user calls two functions in Fusilli to train the models:
 \begin{itemize}
@@ -124,8 +118,8 @@ Figure~\ref{fig:fusilli_taxonomy} is a diagram taken from the review, which show
         \textbf{Category} & \textbf{Description} \\ \hline
         \textbf{Operation-based} & Models that fuse data based on operations such as concatenation, addition, or multiplication. This can be done at any point in the model, such as at the input, hidden layers, or output. \\ \hline
         \textbf{Attention-based} & Models that use attention mechanisms to weight the importance of different modalities. \\ \hline
-        \textbf{Graph-based} & Models with a graph structure, such as graph convolutional networks. \\ \hline
-        \textbf{Subspace-based} & Models that project the data into a joint lower-dimensional space, possibly with deep learning methods such as autoencoders. \\ \hline
+        \textbf{Graph-based} & Models with a graph structure, such as graph convolutional networks, which capture the relationships between the data by treating them as nodes in a graph with edges connecting them representing the relationships. \\ \hline
+        \textbf{Subspace-based} & Models that project the data into a joint lower-dimensional space, for example with deep learning methods such as autoencoders. \\ \hline
         \textbf{Tensor-based} & Models that use tensor operations to fuse the data to capture inter- and intra-modality correlations. \\ \hline
     \end{tabular}
 \end{table}
@@ -149,7 +143,7 @@ Figure~\ref{fig:fusilli_taxonomy} is a diagram taken from the review, which show
 
 %Figure~\ref{fig:fusilli_taxonomy} shows the architecture-based taxonomy of multimodal data fusion models, taken from Cui et al.~\cite{cuiDeepMultimodalFusion2022}.
 
-Another common categorisation is ``early", ``intermediate", and ``late" fusion, which refers to the point in the model where the data is fused.
+Another common categorisation is ''early'', ''intermediate'', and ''late'' fusion, which refers to the point in the model where the data is fused.
 However, this categorisation is too simplistic for the variety of models architectures in Fusilli, and so the architecture-based taxonomy was chosen.
 
 More models were found in the literature than were included in Fusilli due to the time constraints of the project, but the models included in Fusilli were chosen based on their popularity, availability of code, and the variety of architectures they represent.
@@ -192,12 +186,12 @@ Moreover, unimodal benchmarks were included in Fusilli to allow for comparison b
 
 Fusilli version 1.0.0 was published on 30th November 2023, and has since been updated to version 1.2.3~\cite{townendFlorencejtFusilliFusilli2024}.
 Currently, Fusilli is under review for publication in the Journal of Open Source Software (JOSS).
-The package has been well-received on GitHub, having been favourited by 141 users and specially cloned by 12 users for their own modifications, which is a lot of attention for a package that has only been available for a few months.
+The package has been well-received on GitHub, having been favourited by 142 users and specially cloned by 12 users for their own modifications.
 Moreover, I wrote an article on Medium about Fusilli, which has been read by 257 people, and two articles have been written about Fusilli by other people.
 
 Fusilli is documented using Sphinx, a Python documentation generator.
 Figure~\ref{fig:fusillidocs} shows an overview of the documentation, which includes tutorials for getting started, guidance for more advanced users, example Python scripts which run the models on simple data, a guide for people to contribute their own models, and the source code documentations.
-The page ``Fusion Model Explanations", shown in Figure~\ref{fig:fusillidocs}B, has a diagram and a text explanation for each model in Fusilli, which is useful for users to understand and compare the models' architectures with a standardised diagram style.
+The page ''Fusion Model Explanations'', partly shown in Figure~\ref{fig:fusillidocs}B, has a diagram and a text explanation for each model in Fusilli, which is useful for users to understand and compare the models' architectures with a standardised diagram style.
 
 \begin{figure}
     \centering
@@ -211,7 +205,7 @@ The page ``Fusion Model Explanations", shown in Figure~\ref{fig:fusillidocs}B, h
 \end{figure}
 
 Figures~\ref{fig:fusillioutputs}A, B, and C show the figures output by Fusilli after training, validating, and comparing the models respectively.
-The format of the figures depends on the prediction task and the type of training used, with the figures shown being for a binary classification task with 5-fold cross validation.
+The format of the figures depends on the prediction task and the type of training used, with the figures shown being for a binary classification task with 5-fold cross validation training.
 If the user chooses to use train-test split training, the comparison figure is a bar chart instead of a violin plot.
 Additionally, if the user trains a regression model, the performance evaluation will be a scatter plot of the predicted values against the true values.
 
@@ -230,7 +224,7 @@ Additionally, if the user trains a regression model, the performance evaluation 
 
 \section{Discussion}
 
-Overall, Fusilli achieves the goals set out at the beginning of the project.
+Overall, Fusilli achieved the goals set out at the beginning of the project.
 It has had interest from both beginners and experts, and there has been interest from people in different fields, such as thermal imaging.
 Additionally, a hackathon project was run during the 2023 Centre for Medical Imaging Hackathon, where participants aimed to add new models to Fusilli, which was a success with two new models being added and more in development.
 
@@ -246,7 +240,7 @@ Finally, although the models included in Fusilli are popular and cover a wide va
 % Link to using fusilli on MND
 In conclusion, Fusilli is a Python package for multimodal data fusion experimentation and analysis, specifically tackling the problem of lack of ways to compare models and lack of standardisation in the field.
 I specifically made it for my PhD in fusing different data modalities in MND prognosis prediction.
-The next chapter will discuss the application of Fusilli to MND prognosis prediction, using tabular-tabular fusion of clinical information and brain region volumes.
+The next chapter will discuss the application of Fusilli to MND prognosis prediction, using fusion of clinical information and brain region volumes.
 % \begin{itemize}
 %     \item Fusilli is a Python package for multimodal data fusion experimentation and analysis, specifically tackling the problem of lack of ways to compare models and lack of standardisation in the field.
 %     \item I specifically made it for my PhD in fusing different data modalities in MND prognosis prediction
