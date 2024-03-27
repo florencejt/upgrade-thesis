@@ -79,7 +79,7 @@ Moreover, where the MND type was missing, it was assumed to be ALS, as it is the
      C9orf72                           & 7 (6.4)     & 3 (6.5)     & 4 (6.2)   & 1.000*     \\\hline
          ALS                         & 96 (87.3)   & 44 (95.7)   & 52 (81.2)   & $0.052\ddagger$     \\\hline
         \textbf{Continuous, mean (SD)}                              &             &            &             &           \\ \hline
-     ALSFRSr                             & 37.5 (7.2)  & 34.1 (8.4)  & 40.0 (5.0)  & \textbf{\ensuremath{<}0.001}\textdagger    \\\hline
+     ALSFRS-R                             & 37.5 (7.2)  & 34.1 (8.4)  & 40.0 (5.0)  & \textbf{\ensuremath{<}0.001}\textdagger    \\\hline
      \makecell[l]{Diagnostic Delay, mo}              & 12.5 (12.0) & 11.9 (10.2) & 12.8 (13.2) & 0.682*     \\\hline
      \makecell[l]{Age at Diagnosis, yr}                 & 63.2 (11.8) & 66.2 (12.1) & 61.1 (11.1) & \textbf{0.028}$\ddagger$     \\\hline
      \makecell[l]{PRB (points/month)}   & 1.4 (1.7)   & 1.9 (2.3)   & 1.0 (1.1)   & \textbf{0.017}$\ddagger$     \\\hline
@@ -257,7 +257,7 @@ This difference in performance suggests that the imaging features used in this a
 However, their data included only ALS patients, rather than MND patients, which may have made the data more homogenous and easier to predict.
 With increased sample size, future work will be to look at the effect of excluding patients who have an MND-subtype other than ALS, which is an common exclusion criteria in previous ML studies.
 
-Furthermore, Figure~\ref{fig:tsne} showed the separability of the data in two dimensions using t-distributed stochastic neighbour embedding (TSNE) for clinical, imaging, and multimodal features.
+Furthermore, Figure~\ref{fig:tsne} shows the separability of the data in two dimensions using t-distributed stochastic neighbour embedding (TSNE) for clinical, imaging, and multimodal features.
 Fuzzy borders between long and short survivors were observed, suggesting that the data was not very separable in two dimensions, which may explain the lower performance of all of the models.
 
 The only multimodal model that outperformed the clinical unimodal model in the both-site experiment was early concatenation, and it outperformed by a small margin of 2\% balanced accuracy and 6\% AUROC.
@@ -271,7 +271,7 @@ Therefore, it is possible with a higher sample size, that the value of the imagi
 Deep learning models have different numbers of learnable parameters, which define model complexity.
 Complex models typically require more data to train to a high generalisable performance and avoid overfitting.
 The intermediate concatenation model was the best performing model when measured by recall and F1 score, and has more trainable parameters than the overall best model, early concatenation, with a total of 34,200 learnable parameters compared to 27,500 in early concatenation.
-Figure~\ref{fig:trainedtogetherviolin} showed that the intermediate concatenation model had the highest validation balanced accuracy of approximately 95\% in the both-site experiment, but the test balanced accuracy was only 60\%, suggesting overfitting to the training data.
+Figure~\ref{fig:trainedtogetherviolin} shows that the intermediate concatenation model had the highest validation balanced accuracy of approximately 95\% in the both-site experiment, but the test balanced accuracy was only 60\%, suggesting overfitting to the training data.
 When correlating the number of learnable parameters with test performance, there was no statistically significant relationship between the two.
 However, model complexity can also be estimated by other factors, such as the architecture of the model.
 %There was no clear relationship between model architecture and performance, but t
@@ -280,7 +280,7 @@ The two attention-based models performed the worst, which may suggest that atten
 Training on one dataset and testing on the other was used to investigate the generalisability of the models to new data and to see the effect of lower training sample size on model performance.
 Unsurprisingly, the dataset with the higher sample size, Ospedale San Raffaele, performed better than the dataset with the lower sample size, the ALS Biomarkers Study.
 However, sample size may not have been the only factor affecting the model performance, as the ALS Biomarkers Study data came from three different sites, which may have introduced noise into the data.
-Figure~\ref{fig:site_effect} showed that the models trained on the ALS Biomarkers Study were better at detecting long survivors than the models trained on Ospedale San Raffaele.
+Figure~\ref{fig:site_effect} shows that the models trained on the ALS Biomarkers Study were better at detecting long survivors than the models trained on Ospedale San Raffaele.
 Although the two datasets did not have statistically significant differences in patient survival times, the ALS Biomarkers Study had a higher proportion of long survivors than Ospedale San Raffaele, which may have led to the models being better at detecting long survivors when trained on the ALS Biomarkers Study data.
 It is difficult, however, to make definitive conclusions from this analysis because sample sizes of $n=64$ and $n=46$ are not sufficient for training deep learning models, especially when the number of features is high, as is the case with multimodal data.
 
