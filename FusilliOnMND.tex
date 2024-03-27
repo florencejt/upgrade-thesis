@@ -7,29 +7,31 @@ This lack of research in multimodal data fusion in MND makes it difficult to con
 Additionally, we have shown that many different multimodal data fusion methods have been developed for other research applications.
 In Chapter~\ref{fusilli_development}, we developed a package called Fusilli to compare the performance of multimodal data fusion methods, approximately half of which are designed to combine two tabular modalities~\cite{townendFlorencejtFusilliFusilli2024}.
 
-In this chapter, we will use Fusilli to compare the performance of different tabular-tabular multimodal data fusion methods on predicting survival in MND patients using clinical and imaging extracted features data.
-The aims of this work are to, firstly, assess the effect of different data fusion model architectures on prognostic performance, and secondly, to assess the value of baseline clinical and neuroimaging data in MND prognosis prediction.
+In this chapter, we will use Fusilli to compare the performance of different multimodal data fusion methods on predicting survival in MND patients using clinical and imaging data.
+The aims of this work were to, firstly, assess the effect of different data fusion model architectures on prognostic performance, and secondly, to assess the value of baseline clinical and neuroimaging data in MND prognosis prediction.
 
 \section{Data}
 
 The data used in this analysis is from two studies: University College London Queen's Square Institute of Neurology's ALS Biomarkers Study~\cite{UKMNDCSG} and Ospedale San Raffaele's MND cohort.
 Both of these datasets contain clinical data from the diagnostic visit and brain MRI data.
 
-For patients to be included in the analysis, they must have a diagnosis of MND and have an outcome of interest (death or tracheostomy).
-In the ALS Biomarkers Study, the outcome of interest is death, whereas in the Ospedale San Raffaele's MND cohort, the outcome of interest is death or tracheostomy.
-Unfortunately, the Ospedale San Raffaele's MND cohort does not specify the date of death, so we have assumed that the date of death is the date of tracheostomy.
+For patients to be included in the analysis, they must have received a diagnosis of MND and had an outcome of interest (death or tracheostomy).
+In the ALS Biomarkers Study, the outcome of interest was death, whereas in the Ospedale San Raffaele's MND cohort, the outcome of interest was death or tracheostomy.
+Unfortunately, the Ospedale San Raffaele's MND cohort did not specify the date of death, so we have assumed that the date of death was the date of tracheostomy.
 
-Patients in this analysis must have non-missing data for age at diagnosis, sex, date of diagnosis, date of death, date of symptom onset, site of onset, and baseline ALSFRS-R .
-Additionally, patients must have a T1-weighted or T2-weighted MRI within 12 months before or after their date of diagnosis.
+Patients in this analysis must have had non-missing data for age at diagnosis, sex, date of diagnosis, date of death, date of symptom onset, site of onset, and baseline ALSFRS-R .
+Additionally, patients must have had a T1-weighted or T2-weighted MRI within 12 months before or after their date of diagnosis.
 
-The final dataset contains 110 MND patients.
+The final dataset contained 110 MND patients.
 The patients in the cohort were split into two groups based on the median survival time: short survival group (less than 24 months) and long survival group (more than 24 months).
+The median was used, rather than a clinically relevant cut-off, as the sample size was small and having balanced classes reduces the risk of overfitting.
+Moreover, the median survival time in our data of 24 months is a reasonable cut-off for short and long survival in MND~\cite{feldmanAmyotrophicLateralSclerosis2022}.
 
 \subsection{Clinical Data}
 
-The clinical variables chosen to be included in the analysis are based on the variables used in the ENCALS model~\cite{westenengPrognosisPatientsAmyotrophic2018} described in Chapter~\ref{literature_review}.
+The clinical variables chosen to be included in the analysis are based on the variables used in the ENCALS model~\cite{westenengPrognosisPatientsAmyotrophic2018}.
 El Escorial criteria and FVC were not included in the analysis as they were not available in the Ospedale San Raffaele's MND cohort.
-Features with missing data after the inclusion criteria were applied were features of FTD and presence of C9orf72 mutation.
+Features with missing data after applying the inclusion criteria were the co-presence of FTD and the C9orf72 mutation.
 Where these features were missing, they were assumed to be negative.
 Moreover, where the MND type was missing, it was assumed to be ALS, as it is the most common.
 
@@ -93,22 +95,23 @@ These differences are consistent with the literature on factors associated with 
 
 Table~\ref{tab:clinical_demographics_site} shows the group differences between the two data sites.
 The cohort from Ospedale San Raffaele had a significantly lower proportion of bulbar onset patients, a higher mean baseline ALSFRS-R score, a lower mean age at diagnosis, and a slower rate of decline in ALSFRS-R .
-These differences, in combination with survival factors suggested in the literature, suggest that the cohort from Ospedale San Raffaele have had less aggressive disease progression at diagnosis compared to the ALS Biomarkers Study cohort.
+These differences suggested that the cohort from Ospedale San Raffaele had on average less aggressive disease progression at diagnosis compared to the ALS Biomarkers Study cohort.
 
-Statistically significant differences between the sites: \textbf{List them here}
-Why didn't we do any site-specific analysis or correction?
-- Wanted to see how the model would perform in a real-world setting
-- Not enough data to do one site
+%Harmonisation of the clinical data was not performed, as the data was collected in a similar way at both sites.
+%Statistically significant differences between the sites: \textbf{List them here}
+%Why didn't we do any site-specific analysis or correction?
+%- Wanted to see how the model would perform in a real-world setting
+%- Not enough data to do one site
 
 \subsection{Imaging Data}
-The same segmentation pipeline used in Chapter~\ref{cox_proportional_hazards_model} was used for this analysis also: using SynthSeg to segment MRI conducted within 12 months before or after diagnosis.
+The same segmentation pipeline used in Chapter~\ref{cox_proportional_hazards_model} was used for this analysis: using SynthSeg to segment MRI conducted within 12 months before or after diagnosis.
 %Regional brain volumes were extracted from the MRI using SynthSeg~\cite{billotSynthSegDomainRandomisation2021}, a modality-agnostic deep-learning segmentation tool.
 %A modality agnostic tool was chosen to overcome the inconsistency in MRI protocols within the ALS Biomarkers Study and between the ALS Biomarkers Study and Ospedale San Raffaele's MND cohort.
 SynthSeg returns the volumes of 33 regions of the brain, which, apart from intra-cranial volume, were used as features in this analysis.
 The region volumes were z-score normalised across the entire cohort.
 
-The left and right volumes were summed to simplify the comparison of regional brain volumes between the long and short survival groups, but the left and right volumes were kept separate for the main analysis.
 Two-sample t-tests were used to compare the regional brain volumes between the long and short survival groups.
+The left and right volumes were summed to simplify the comparison of regional brain volumes, but were kept separate for the main machine learning analysis.
 The long survival group had significantly larger volumes in the cerebellum white matter and cortex, thalamus, caudate, putamen, pallidum, brain stem, hippocampus, amygdala, accumbens area, and ventral diencephalon.
 The short survival group had significantly larger volumes in the cerebrospinal fluid, 3rd ventricle, lateral ventricle, and inferior lateral ventricle.
 
@@ -116,13 +119,9 @@ The short survival group had significantly larger volumes in the cerebrospinal f
 \section{Methods}
 
 We predicted categories of survival, short or long, by splitting the survival time at the median.
-The median was used, rather than a clinically relevant cut-off, as the sample size was small and having balanced classes reduces the risk of overfitting.
-Moreover, the median survival time in our data of 24 months is a reasonable cut-off for short and long survival in MND~\cite{feldmanAmyotrophicLateralSclerosis2022}.
-
-
-The models used in this analysis are from Fusilli, a package developed in Chapter~\ref{fusilli_development} to compare the performance of different multimodal data fusion methods~\cite{townendFlorencejtFusilliFusilli2024}.
+The models used in this analysis are from Fusilli, a software package developed in Chapter~\ref{fusilli_development}, to compare the performance of different multimodal data fusion methods~\cite{townendFlorencejtFusilliFusilli2024}.
 We trained the models that do tabular-tabular fusion, meaning that they take two tabular datasets and combine them to predict the outcome.
-There are 10 tabular-tabular models in Fusilli, but we could not used the two graph-based models because the current version of Fusilli does not allow graph-based models to use held-out test sets.
+There are 10 of these models in Fusilli, but we could not used the two graph-based models because the current version of Fusilli does not allow graph-based models to use held-out test sets, which was part of this analysis design.
 The architecture diagrams of the models are in Appendix~\ref{appendix:fusion_model_architectures}.
 Unimodal models were also trained as a benchmark for the multimodal models to investigate the added value of the multimodal data.
 
@@ -145,15 +144,15 @@ Multi-channel VAE~\cite{antelmiSparseMultiChannelVariational2019} & A joint lowe
 \end{table}
 
 Three experiments were conducted with different training and testing splits.
-The first experiment mixed the two datasets together and extracted training and testing sets from the combined dataset.
+The first experiment used the data from the two studies together and extracted training and testing sets from the combined dataset.
 A held-out test set is data not used for training and shows how well the model generalises to new data.
 This analysis used 20\% ($n=22$) of the data as the test set.
 The final experiments used a leave-site-out approach, where the models were trained on one site and tested on the other.
 The second experiment was trained on the Ospeadale San Raffaele's MND cohort ($n=64$) and tested on the ALS Biomarkers Study ($n=46$), and the third experiment was trained on the ALS Biomarkers Study and tested on Ospedale San Raffaele's MND cohort.
 
 The models were trained using 5-fold cross-validation, where the data is split into 5 sets, and the model is trained on 4 of the sets and validated on the remaining set.
-The validation set is not used to train the model, but to test the performance of the model to see the training progress.
-Early stopping was used to prevent overfitting on the validation set, where the model stops training if the loss on the validation set does not improve for 5 rounds of training, or ``epochs".
+A validation set is not used to train the model, but to test the performance of the model to see the training progress.
+Early stopping was used to prevent overfitting on the validation set, where the model stopped training if the loss on the validation set does not improve for 5 rounds of training, or ``epochs".
 
 % metrics
 The performances metrics used to evaluate the models were balanced accuracy, area under the receiver operating characteristic curve (AUROC), precision, recall, and F1 score.
@@ -170,8 +169,8 @@ The predicted survival categories from each fold were aggregated together to cal
 
 % repetitions
 Due to the small sample size, initial experiments showed high variability in the model performances between reruns of the training and evaluation process.
-Therefore, we employed experiment repetitions to stabilise the performance metrics.
-The training and evaluation process was repeated until the mean of the performance of the repetitions for each model converged to a stable value (within 1\% of the main metric: balanced accuracy).
+Therefore, we employed experiment repetitions to obtain a more stable estimate of the model performance.
+The training and evaluation process was repeated until the mean of the performance of the repetitions for each model converged to within 1\% of the main metric, balanced accuracy.
 After the repetition performances converged, the models were compared by using the distribution of the performance metrics over the repetitions, and ranked by the mean of the balanced accuracy on the test sets.
 
 
@@ -217,10 +216,10 @@ Early concatenation performed the best with 70\% balanced accuracy and 81\% AURO
 The clinical unimodal model came second with 68\% balanced accuracy and 75\% AUROC, and the imaging unimodal model came eighth with 58\% balanced accuracy and 60\% AUROC.
 
 The right panel of Figure~\ref{fig:trainedtogetherviolin} shows the distributions of the validation balanced accuracies over the repetitions of training on both sites.
-A trend of the better test-performing models having validation accuracies with less variance was observed.
+A trend was observed where the best performing models in the test set had less variance in the validation set performance, suggesting that the models were not overfitting to the training data.
 Model overfitting could be seen with some models, such as intermediate concatenation and imaging only, which showed high validation accuracy but much lower test accuracy.
 
-The metrics other than balanced accuracy showed that the precisions of the models were generally higher than the recalls, meaning that the models were better at accurately detecting short survivors than long survivors.
+The precisions of the models were generally higher than the recalls, meaning that the models were better at accurately detecting short survivors than long survivors.
 
 \subsection{Leave-site-out analysis}
 
@@ -234,10 +233,10 @@ The metrics other than balanced accuracy showed that the precisions of the model
 
 Figure~\ref{fig:site_effect} shows the effect of training on one site and testing on the other on the balanced accuracy, precision, and recall of the different models.
 The models were ordered by their balanced accuracy when trained on both sites together, for comparison with the first experiment.
-The model performance ordering was similar to the first experiment, but early concatenation did not perform as well as it did when trained on both sites together.
-Training on the ALS Biomarkers Study generally resulted in better performance than training on Ospedale San Raffaele, when looking at overall balanced accuracy.
-When considering precision only, training on the ALS Biomarkers Study resulted in better performance, but when considering recall only, training on Ospedale San Raffaele resulted in better performance.
-
+The model performance ordering was similar to the first experiment, but early concatenation did not perform as well as when trained on both sites together.
+Training on the ALS Biomarkers Study generally resulted in worse performance than training on Ospedale San Raffaele, when looking at overall balanced accuracy.
+%When considering precision only, training on the ALS Biomarkers Study resulted in better performance, but when considering recall only, training on Ospedale San Raffaele resulted in better performance.
+The ALS Biomarkers Study-trained models were better at detecting long survivors than the Ospedale San Raffaele-trained models (higher precision), but the Ospedale San Raffaele-trained models were better at detecting short survivors (higher recall).
 
 \section{Discussion}
 
@@ -249,60 +248,59 @@ When considering precision only, training on the ALS Biomarkers Study resulted i
 \end{figure}
 
 K-fold cross validation and stability repetitions were used to try to improve the model performance and obtain a clearer picture of the relationsip between model type and performance.
-However, the highest model accuracy was 70\% and the highest AUROC was 81\%.
-Comparing these results to the most similar study,
+Even so, the highest model accuracy was 70\% and the highest AUROC was 81\%.
 The most similar study to this analysis used a multimodal deep learning model, most similar to the Fusilli intermediate concatenation model, to predict short, medium, and long survival categories in ALS with an accuracy of 84\%, trained on $n=83$ patients~\cite{vanderburghDeepLearningPredictions2017}.
 The models in our analysis were trained on $n=70$ patients.
 The lower performance of the models in this analysis could be due to the smaller sample size, the different outcome categories, or the different data used in the analysis.
 Moreover, van der Burgh and colleagues used different imaging features: structural connectivity matrices, and in addition to subcortical volumes, they used cortical thicknesses.
 This difference in performance suggests that the imaging features used in this analysis may not be as useful for predicting prognosis as the imaging features used by van der Burgh and colleagues, or perhaps that survival in MND is easier to predict when split into three categories rather than two.
 However, their data included only ALS patients, rather than MND patients, which may have made the data more homogenous and easier to predict.
-With increased sample size in the future, future work will be to look at the effect of including non-ALS MND patients in the analysis, as opposed to only ALS patients, which is more common in previous studies.
+With increased sample size, future work will be to look at the effect of excluding patients who have an MND-subtype other than ALS, which is an common exclusion criteria in previous ML studies.
 
 Furthermore, Figure~\ref{fig:tsne} showed the separability of the data in two dimensions using t-distributed stochastic neighbour embedding (TSNE) for clinical, imaging, and multimodal features.
-Fuzzy borders between long and short survivors were observed, suggesting that the data is not very separable in two dimensions, which may explain the lower performance of the models.
+Fuzzy borders between long and short survivors were observed, suggesting that the data was not very separable in two dimensions, which may explain the lower performance of all of the models.
 
 The only multimodal model that outperformed the clinical unimodal model in the both-site experiment was early concatenation, and it outperformed by a small margin of 2\% balanced accuracy and 6\% AUROC.
-This implied that clinical data was the most important for predicting survival in MND, and that the imaging data did not add much value to the prediction.
-The low performance of most multimodal performance might suggest that features extracted from the imaging data were not useful for predicting prognosis.
+This implies that clinical data was the most important for predicting survival in MND, and that the imaging data did not add much value to the prediction.
+Further corroborating this, the low performance of most multimodal models' performances might suggest that features extracted from the imaging data were not useful for predicting prognosis.
 This was further corroborated by the low performance of the imaging unimodal model.
 However, the evidence of overfitting in the validation set of the both-site experiment suggests that the models were not able to learn the relationship between the features and the outcome, and were learning the noise in the data.
-Since the imagign data had a larger number of features (32) compared to the clinical data (9), the models may have been overfitting to the imaging data, which may have led to the poor performance of the multimodal models.
+Since the imaging data had a larger number of features (32) compared to the clinical data (9), the models may have been overfitting to the imaging data, which may have led to the poor performance of the multimodal models.
 Therefore, it is possible with a higher sample size, that the value of the imaging data in predicting prognosis could be uncovered more clearly.
 
-Although each of the multimodal models had an 41 input features (the clinical and imaging features), the models had different numbers of learnable parameters, which define model complexity.
+Deep learning models have different numbers of learnable parameters, which define model complexity.
 Complex models typically require more data to train to a high generalisable performance and avoid overfitting.
-The intermediate concatenation model was the best performing model when measured by recall and F1 score.
-, and has more trainable parameters than the overall best model, early concatenation, with a total of 34,200 learnable parameters compared to 27,500 in early concatenation.
+The intermediate concatenation model was the best performing model when measured by recall and F1 score, and has more trainable parameters than the overall best model, early concatenation, with a total of 34,200 learnable parameters compared to 27,500 in early concatenation.
 Figure~\ref{fig:trainedtogetherviolin} showed that the intermediate concatenation model had the highest validation balanced accuracy of approximately 95\% in the both-site experiment, but the test balanced accuracy was only 60\%, suggesting overfitting to the training data.
 When correlating the number of learnable parameters with test performance, there was no statistically significant relationship between the two.
 However, model complexity can also be estimated by other factors, such as the architecture of the model.
-There was no clear relationship between model architecture and performance, but the two attention-based models performed the worst, which may suggest that attention mechanisms are not suited to the data in its current state.
+%There was no clear relationship between model architecture and performance, but t
+The two attention-based models performed the worst, which may suggest that attention mechanisms are not suited to the data in its current state.
 
 Training on one dataset and testing on the other was used to investigate the generalisability of the models to new data and to see the effect of lower training sample size on model performance.
 Unsurprisingly, the dataset with the higher sample size, Ospedale San Raffaele, performed better than the dataset with the lower sample size, the ALS Biomarkers Study.
 However, sample size may not have been the only factor affecting the model performance, as the ALS Biomarkers Study data came from three different sites, which may have introduced noise into the data.
 Figure~\ref{fig:site_effect} showed that the models trained on the ALS Biomarkers Study were better at detecting long survivors than the models trained on Ospedale San Raffaele.
-Although the two datasets did not have statistically significant differences patient survival times, the ALS Biomarkers Study had a higher proportion of long survivors than Ospedale San Raffaele, which may have led to the models being better at detecting long survivors when trained on the ALS Biomarkers Study data.
+Although the two datasets did not have statistically significant differences in patient survival times, the ALS Biomarkers Study had a higher proportion of long survivors than Ospedale San Raffaele, which may have led to the models being better at detecting long survivors when trained on the ALS Biomarkers Study data.
 It is difficult, however, to make definitive conclusions from this analysis because sample sizes of $n=64$ and $n=46$ are not sufficient for training deep learning models, especially when the number of features is high, as is the case with multimodal data.
 
 Finally, the models were better at detecting short survivors than long survivors when trained on both datasets, as shown by the higher precision than recall in Table~\ref{tab:mnd_results} for 7 out of 10 of the models.
-It was unclear why this would be the case, as the labels were balanced by splitting on the median survival time, so the models should be equally good at detecting short and long survivors.
+It was unclear why this would be the case, as the labels were balanced by splitting on the median survival time, so the models should have been equally good at detecting short and long survivors.
 Further investigation should be done to see if the models were failing to predict specific subjects or if there is another reason for the models' poor performance in detecting long survivors.
 
 \subsection{Limitations}
 The largest limitation of this analysis was the small sample size, which may have led to the models overfitting to the training data and not generalising well to the test data.
 Multimodal models that are not based on deep learning were not included in this analysis, which may have performed better with the small sample size.
-Pancotti and colleagues found that deep learning models did not significantly improve prognostic predictive performance on clinical data~\cite{pancottiDeepLearningMethods2022}, but this may not be the case for multimodal data.
-Future work will compare the performance of deep learning models to non-deep learning models to see if the deep learning models are the best choice for this data.
+There have been conflicting results on whether deep learning is the best technique for MND prognosis prediction with clinical data~\cite{pancottiDeepLearningMethods2022, papaizEnsembleimbalancebasedClassificationAmyotrophic2024}, although it has shown promise in multimodal settings~\cite{vanderburghDeepLearningPredictions2017, meierConnectomeBasedPropagation2020}
+Future work will compare the performances of deep learning models to non-deep learning models.
 
-Another aspect to the small sample size is the lack of a completely external test set.
+Another aspect to the small sample size was the lack of a completely external test set.
 Although the leave-site-out analysis was used to investigate the generalisability of the models to new data, the small sample sizes led to difficulty in concluding what was causing the differences in model performance.
 With the addition of more sites and more patients in the future, the generalisability of the models to new data can be more clearly understood.
 
 As the data in this chapter was also used in Chapter~\ref{cox_proportional_hazards_model}, many of the limitations in relation to the data were the same.
 The extracted brain volumes used in this analysis may not have been the most important features for predicting prognosis in MND.
-Although the volumes showed significant associations with survival in Chapter~\ref{cox_proportional_hazards_model}, performance may have been improved with more curated features that have shown prognostic value, such as more granular brain-stem volumes~\cite{milellaMedullaOblongataVolume2022} or cortical thicknesses~\cite{burghMultimodalLongitudinalStudy2020,dieckmannCorticalSubcorticalGrey2022}.
+Although the volumes showed significant associations with survival in Chapter~\ref{cox_proportional_hazards_model}, performance may be improved with more curated features that have shown prognostic value, such as more granular brain-stem volumes~\cite{milellaMedullaOblongataVolume2022} or cortical thicknesses~\cite{burghMultimodalLongitudinalStudy2020,dieckmannCorticalSubcorticalGrey2022}.
 The sample size in this analysis was too small to explore using the whole MRI image as input to the models, but this may be a useful next step to see if the models can learn more from the raw MRI data than the extracted volumes.
 
 Moreover, the clinical features could have been more granular, such as including the individual components of the ALSFRS-R, rather than the total score, which has shown to be useful in prognosis prediction~\cite{hothornRandomForest4LifeRandomForest2014}.
@@ -314,7 +312,7 @@ Future work will look at improving model performance through optimising architec
 \section{Conclusion}
 
 This chapter detailed a multimodal data fusion analysis of clinical and imaging data in MND prognosis prediction.
-Eight multimodal models were compared to each other and to unimodal models to see if the multimodal models could predict prognosis better than the unimodal models.
-The best performing model was early concatenation, which combined the clinical and imaging data before inputting it into a neural network.
+Eight multimodal models were compared to each other and to unimodal models.
+The best performing model was early concatenation, which combined the clinical and imaging data through simple concatenation before being input into a neural network.
 However, early concatenation was the only multimodal model that outperformed the clinical unimodal model, suggesting that the imaging data did not add much value to the prediction of prognosis in MND.
 Further work will look at the effect of including more sites and more patients in the analysis, as well as the effect of different imaging features on model performance.
