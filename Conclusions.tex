@@ -122,7 +122,7 @@ For the images themselves to be included as input into the models, the options f
 \setlength\itemsep{-0.5em}
     \item Texture analysis, which has been previously used in ALS imaging studies~\cite{ishaqueEvaluatingCerebralCorrelates2018, johnsQuantifyingChangesSusceptibility2019}.
     \item Voxel-based morphometry to extract density maps and do volumetric analysis using SPM (Statistical Parametric Mapping).
-    \item White matter hyperintensity segmentation through BaMoS (Fiford 2020).
+    \item White matter hyperintensity segmentation through BaMoS~\cite{fifordAutomatedWhiteMatter2020}
     \item Surface rendering with FreeSurfer to extract maps of the brain surface.
 \end{itemize}
 
@@ -130,7 +130,6 @@ After applying these preprocessing steps, we will use Fusilli to compare the per
 
 The quality of the inferences taken from this analysis will depend on the sample size of the data, because imaging is more expensive to process than clinical data.
 A larger sample size would reveal more about the importance of different brain regions in MND prognosis prediction, and would allow us to use more fine-grained imaging data in the models.
-
 If the sample size is not large enough, a contigency plan would be to focus on diseases that have more data available, such as Alzheimer's disease or frontotemporal dementia.
 
 The expected outcomes of this project are an understanding of the utility of different preprocessing steps for structural MRI data in MND prognosis prediction, and a better understanding of which areas of the brain are most important in MND prognosis prediction.
@@ -178,7 +177,7 @@ Radiological reports are text documents that describe the findings of a radiolog
 Natural language processing (NLP) can be used to extract features from these reports, such as the presence of certain words or phrases, the radiologist's opinion on the scan, and the radiologist's findings.
 
 These derived features could be included as a new data modality into multimodal prognostic models.
-Most of the studies using radiological reports for machine learning either focus on mining the reports for prediction labels to train models on (nowak 2023), or trying to predict the reports from the images or vice versa (pan 2024, gajbhiye 2022).
+Most of the studies using radiological reports for machine learning either focus on mining the reports for prediction labels to train models on~\cite{nowakDevelopmentImagebasedDecision2023}, or trying to predict the reports from the images or vice versa~\cite{panChestRadiologyReport2024, gajbhiyeTranslatingMedicalImage2022}.
 Using the reports as a data modality in multimodal models is a novel approach to incorporating the information contained in the reports into the models.
 
 This project would focus on adding features extracted from radiological reports to the multimodal models in Fusilli, and investigating if they add information to the models that is not present in the other data modalities.
