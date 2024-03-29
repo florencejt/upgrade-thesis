@@ -15,14 +15,24 @@
 
 \begin{abstract} % 300 word limit
 
-MND general information
+    Motor neuron disease (MND) is a rare neurodegenerative disease with no cure and clinically-heterogeneous progression and presentation.
+    The ability to predict prognosis is important for patient management and clinical trial design.
+    Most of the current prognostic models are based on clinical data.
+    However, neuroimaging data is also available for analysis and could provide additional information for prognosis prediction.
 
-Prognosis - what is it and motivation
+    This thesis explores the use of multimodal data for prognosis prediction in MND.
+    The aim was to improve the accuracy of survival prediction by combining clinical and neuroimaging data through machine learning techniques, known as multimodal data fusion.
 
-clinical and imaging data
+    Specifically, we investigated how multimodal data affects the outcomes of a simple survival analysis technique, the Cox proportional hazards model,revealing significant predictors of MND survival across both clinical and neuroimaging-derived variables.
+    Multimodal data led to improves the model's fit to the data and to clinically-relevant neuroimaging features being selected.
 
-work in thesis 
-- exploring how multimodal data affects survival analysis through CPH
+    We then explored how more complex machine learning models can be used to predict survival in MND, aiming to capture the complex relationships between the different data modalities through deep learning.
+    The architectures of multimodal deep learning models can vary significantly, and so we developed a Python library, Fusilli, as a tool for comparing different multimodal architectures for general predictive tasks.
+
+    Applying Fusilli to predict MND survival using both clinical and neuroimaging data, we compared eight multimodal models alongside unimodal ones.
+    Model architecture significantly influenced performance, with the best model achieving an area under the receiver operating characteristic curve of 0.81.
+
+    Future efforts will focus on enhancing experiments with larger sample sizes and refined patient characterisation, exploring diverse imaging-derived features' impact on model performance, integrating additional data modalities, and evaluating clinical applicability through various prognostic definitions.
 
 \end{abstract}
 
