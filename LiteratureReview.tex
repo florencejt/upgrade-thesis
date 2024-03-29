@@ -1,40 +1,40 @@
 \chapter{Literature Review}
 \label{literature_review}
 
-This chapter contains a review of literature on prognosis of MND, looking at both prognostic factors from various data types, and also attempts to predict prognosis using machine learning.
+This chapter contains a review of the literature on the prognosis of MND, looking at both prognostic factors from various data types, and also attempts to predict prognosis using machine learning.
 
 \section{Prognostic Factors}
 
 In the field of MND research, prognosis is often defined as survival time, but it can also be defined as the rate of progression of the disease, future functional ability, the future need for therapies, or a combination of these~\cite{papaizMachineLearningSolutions2022, tavazziArtificialIntelligenceStatistical2023}.
-In this section, we will review the literature on prognostic factors in MND, and we will group the factors into four categories: clinical, genetic, fluids, and imaging.
+In this section, we will review the literature on prognostic factors in MND, grouping the factors into four categories: clinical, genetic, fluids, and imaging.
 
 \subsection{Clinical}
 
 A large meta-analysis in 2021 collated research studies on non-genetic factors associated with survival risk in ALS~\cite{suPredictorsSurvivalPatients2021}.
 Hazard ratios (HRs), derived from Cox Proportional Hazards (CPH) models, were calculated for each factor which had at least 3 studies reporting on it.
-The authors conducted sensitivity analyses and heterogeneity analyses to assess the validity of their findings, and found them to be robust.
+The authors conducted sensitivity analyses and heterogeneity analyses to assess the validity of their findings and found them to be robust.
 
 % Factors that are pretty clearly associated with shorter survival
-Some of the factors associated with shorter survival in ALS are well established in the literature, and clinical information about how the disease first presents is a strong indicator of prognosis.
+Some of the factors associated with shorter survival in ALS are well-established in the literature, and clinical information about how the disease first presents is a strong indicator of prognosis.
 
 Firstly, an older age of symptom onset is associated with a higher risk of death~\cite{suPredictorsSurvivalPatients2021}.
-However, it is common in clinical records for the onset date to be the first date of the month or even the first day of the year if the patient cannot remember the exact date, which leads to age of onset being an imperfect measure.
+However, it is common in clinical records for the onset date to be the first date of the month or even the first day of the year if the patient cannot remember the exact date, which leads to the age of onset being an imperfect measure.
 
 A shorter delay between symptom onset and diagnosis is associated with shorter survival~\cite{suPredictorsSurvivalPatients2021}, with a shorter delay suggesting that the disease is fast-progressing and more obvious to clinicians to diagnose.
 A common way to categorise this delay is over or under one year, with a delay of less than one year being associated with shorter survival (HR=3.43) and the opposite for a delay of over a year (HR=0.39)~\cite{suPredictorsSurvivalPatients2021, gaoEpidemiologyFactorsPredicting2021}.
 
 % site of onset
 
-Both the site of symptom onset and the speed at which motor symptoms spreads to other sites are associated with survival.
-Compared to the most common onset site, spinal, Su and colleagues found that bulbar onset (HR=1.35) and respiratory onset (HR=2.2) are associated with shorter survival~\cite{suPredictorsSurvivalPatients2021}.
-A short interval between the first motor onset and the next site involvement is also associated with shorter survival~\cite{fujimura-kiyonoOnsetSpreadingPatterns2011a}, independent of the sites themselves.
+Both the site of symptom onset and the speed at which motor symptoms spread to other sites are associated with survival.
+Compared to the most common onset site (spinal), Su and colleagues found that bulbar onset (HR=1.35) and respiratory onset (HR=2.2) are associated with shorter survival~\cite{suPredictorsSurvivalPatients2021}.
+A short interval between the first motor onset and the next site involvement is also associated with shorter survival, independent of the sites themselves~\cite{fujimura-kiyonoOnsetSpreadingPatterns2011a}.
 % dementia
 
 Extra-motor symptoms such as executive dysfunction, the appearance of frontotemporal dementia (FTD), and non-specific dementia are associated with shorter survival and faster disease progression~\cite{suPredictorsSurvivalPatients2021, elaminExecutiveDysfunctionNegative2011}.
 % alsfrs and prb
 
 Both a smaller ALSFRS-R at diagnosis and a faster rate of ALSFRS-R decline are associated with short survival~\cite{suPredictorsSurvivalPatients2021}.
-The rate of decline in ALSFRS-R from onset to diagnosis is also called the progression rate to baseline, or PRB, and is calculated as
+The rate of decline in ALSFRS-R from onset to diagnosis is also called the progression rate to baseline (PRB), calculated as
 \begin{equation}
     PRB = \frac{48-\textnormal{ALSFRS-R}(t_{diag})}{t_{diag}-t_{onset}},
 \end{equation}\label{eq:PRB}
@@ -46,15 +46,15 @@ Finally, taking Riluzole is associated with longer survival (HR=0.80), and lower
 % more contentious factors with mixed findings
 Further from the well-known prognostic factors, the heterogeneity of MND leads to factors with mixed associations in the literature.
 % el escorial
-The El Escorial criteria, used to assist ALS diagnosis, assigns patients into categories associated with the confidence of the diagnosis, from ''definite'' to ''possible''~\cite{ludolphRevisionEscorialCriteria2015}.
-''Definite'' ALS patients have been found to progress faster than ''probable'' or ''possible'' patients in the meta-analysis and in another large multi-centre study~\cite{suPredictorsSurvivalPatients2021, westenengPrognosisPatientsAmyotrophic2018}.
+The El Escorial criteria is used to assist ALS diagnosis, assigning patients into categories associated with the confidence of the diagnosis, from ``definite'' to ``possible''~\cite{ludolphRevisionEscorialCriteria2015}.
+``Definite'' ALS patients have been found to progress faster than ``probable'' or ``possible'' patients in the meta-analysis and another large multi-centre study~\cite{suPredictorsSurvivalPatients2021, westenengPrognosisPatientsAmyotrophic2018}.
 However, in a large cohort of 1,809 Chinese patients, there was no significant relationship between El Escorial and survival~\cite{gaoEpidemiologyFactorsPredicting2021}.
 % bmi
 
 MND is frequently accompanied by rapid weight loss due to eating and swallowing difficulties, appetite loss, and muscle mass atrophy.
-A higher body-mass index (BMI) at diagnosis is associated with longer survival in the meta-analysis (HR=0.97)~\cite{suPredictorsSurvivalPatients2021}, also supported by smaller meta-analysis~\cite{dardiotisBodyMassIndex2018} and a large population study~\cite{gaoEpidemiologyFactorsPredicting2021}.
+A higher body mass index (BMI) at diagnosis was associated with longer survival in the meta-analysis (HR=0.97)~\cite{suPredictorsSurvivalPatients2021}, also supported by a smaller meta-analysis~\cite{dardiotisBodyMassIndex2018} and a large population study~\cite{gaoEpidemiologyFactorsPredicting2021}.
 On the other hand, some studies found that baseline BMI was not important, but rather the rate of BMI decline is a better prognostic factor, both years before disease onset~\cite{goutmanBodyMassIndex2023} and after diagnosis~\cite{jawaidDecreaseBodyMass2010}.
-More precise measures of body composition, such as MRI of the knees and diaphragm, have found that higher subcutaneous fat is associated with higher ALSFRS-R and slower rate of ALSFRS-R decline~\cite{lindauerAdiposeTissueDistribution2013}.
+More precise measures of body composition, such as MRI of the knees and diaphragm, have found that higher subcutaneous fat is associated with higher ALSFRS-R and a slower rate of ALSFRS-R decline~\cite{lindauerAdiposeTissueDistribution2013}.
 % statins
 
 %Statins, a drug that inhibits cholesterol synthesis, has been studied as a prognostic factor in MND.
@@ -73,10 +73,10 @@ Also associated with shorter survival is ATXN2, a CAG repeat expansion usually a
 \subsection{Prognostic Models}
 There are limited clinical tools for prognosis prediction in MND .
 The most common way for progression to be assessed is through the rate of decline of ALSFRS-R .
-Extrapolating this progression rate to predict future ALSFRS-R scores is called the ''pre-slope model'', but it is limited by the assumption that ALSFRS-R decline is linear.
+Extrapolating this progression rate to predict future ALSFRS-R scores is called the ``pre-slope model'', but it is limited by the assumption that ALSFRS-R decline is linear.
 
 The D50 model assumes ALSFRS-R decline is sigmoidal, and works by fitting a sigmoidal curve to a patient's ALSFRS-R timepoints, yielding an individualised prediction of future ALSFRS-R scores~\cite{poesenNeurofilamentMarkersALS2017, steinbachApplyingD50Disease2020}.
-''Disease aggressiveness'' and ''disease accumulation'' are two measures derived from the D50 model, which are the estimated rate of functional loss and the patient's position on the D50 curve independent of time, respectively.
+``Disease aggressiveness'' and ``disease accumulation'' are two measures derived from the D50 model, which are the estimated rate of functional loss and the patient's position on the D50 curve independent of time, respectively.
 
 A non-linear extension of the D50 model was proposed by Ramamoorthy and colleagues, where Gaussian processes are used to non-parametrically cluster patients into non-linear ALSFRS-R trajectories~\cite{ramamoorthyIdentifyingPatternsAmyotrophic2022}.
 They found that many of the patients in their cohort had non-linear ALSFRS-R trajectories, such as convex, concave, and sigmoidal.
@@ -98,10 +98,10 @@ The protective predictors are a longer diagnostic delay (HR=0.52) and a higher F
 
 Fluid biomarkers are measurements of proteins, metabolites, or other molecules in the blood/serum, cerebrospinal fluid (CSF), or urine that can be used to diagnose and monitor disease.
 
-From the meta-analysis of non-genetic progostic factors, higher levels of creatine kinase and creatinine in serum indicate longer survival~\cite{suPredictorsSurvivalPatients2021}.
+From the meta-analysis of non-genetic prognostic factors, higher levels of creatine kinase and creatinine in serum indicate longer survival~\cite{suPredictorsSurvivalPatients2021}.
 Whereas, higher levels of neurofilament light chain (NfL) in CSF (HR=6.8), NfL in serum (HR=3.7) and albumin in serum (HR=1.52) are harmful prognostic factors.
 
-The most studied fluid biomarker in ALS is NfL, a protein that is released into the CSF and blood during the process of neurodegeneration.
+The most well-studied fluid biomarker in ALS is NfL, a protein that is released into the CSF and blood during the process of neurodegeneration.
 Although NfL is best measured in CSF through an invasive and difficult procedure, it can also be measured through a simple blood test, albeit in lower concentrations.
 %NfL is best measured in CSF, and the CSF is extracted by performing a lumbar puncture on the patient, which is an invasive procedure and difficult to perform when the patient is further progressed in the disease~\cite{sturmeyBloodBiomarkersALS2022}.
 %However, NfL can also be measured in blood, although it is harder to detect because the concentration is lower than in CSF. This is also reflected in the hazard ratios for NfL in the meta-analysis, where the HR for NfL in CSF is higher than in serum.
@@ -109,13 +109,13 @@ Although NfL is best measured in CSF through an invasive and difficult procedure
 %NfL levels are elevated in ALS patients compared to healthy controls, but they are also elevated in other neurodegenerative diseases~\cite{huangLongitudinalBiomarkersAmyotrophic2020}.
 NfL levels rise presymptomatically in ALS~\cite{benatarValidationSerumNeurofilaments2020}, and the concentration of NfL plateaus around a year after symptom onset~\cite{benatarNeurofilamentsPresymptomaticALS2019, benatarValidationSerumNeurofilaments2020, thompsonMulticentreAppraisalAmyotrophic2022}.
 
-Higher baseline NfL concentration is associated with shorter survival, concluded from consensus of over 20 studies~\cite{irwinFluidBiomarkersAmyotrophic2024}.
+Higher baseline NfL concentration is associated with shorter survival, concluded from the consensus of over 20 studies~\cite{irwinFluidBiomarkersAmyotrophic2024}.
 Dreger and colleagues found that higher baseline NfL was significantly associated with higher disease aggressiveness, independent of disease accumulation, as estimated by the D50 model~\cite{dregerCerebrospinalFluidNeurofilament2021}.
 
 \subsection{Neuroimaging}
 Structural MRI is conducted during diagnosis to rule out mimic diseases, but it is not used for monitoring progression due to difficulties in scanning as the disease progresses.
 Consequently, the majority of imaging studies in MND are cross-sectional at baseline.
-This section will discuss the associations between brain imaging measures and prognosis in MND, with the caveat that the vast majority of these studies are only on ALS patients.
+This section will discuss the associations between brain imaging measures and prognosis in MND, with the caveat that the vast majority of these studies are only with ALS patients.
 
 ALS imaging studies often suffer from small sample sizes and inadequate patient characterisation, meaning that information on clinical phenotypes and genetic status is often missing, potentially affecting the significance of findings~\cite{bedeLessonsALSImaging2014}.
 Furthermore, many studies correlate brain imaging measures with ALSFRS-R, which is a measure dominated by the effects of lower motor neuron degeneration~\cite{bedeLessonsALSImaging2014}.
@@ -123,9 +123,9 @@ These limitations result in a large array of inconsistent findings in the litera
 In this section, we explore brain regions implicated in MND prognosis, grouped by their location in the brain.
 
 \subsubsection*{Whole-brain Measures}
-Two small studies ($N<35$) reported that lower total grey matter (GM) volume is associated with faster progression, while lower white matter (WM) volume showed no such association~\cite{elmendiliAssociationBrainUpper2023, bedeLongitudinalStructuralChanges2018}.
+Two small studies ($N<35$) reported that lower total grey matter (GM) volume was associated with faster progression, while lower white matter (WM) volume showed no such association~\cite{elmendiliAssociationBrainUpper2023, bedeLongitudinalStructuralChanges2018}.
 It was concluded that the GM changes occur after diagnosis, making them a potential biomarker for prognosis, and that the WM changes occur before diagnosis, making them a potential biomarker for early diagnosis~\cite{bedeLongitudinalStructuralChanges2018}.
-However, a study nearly double the size by Trojsi and colleagues found no differences in overall GM or WM damage between fast and slow progressors, both measured by structural MRI and by diffusion tensor imaging (DTI) metrics, such as fractional anisotropy (FA), mean diffusivity (MD), axial diffusivity (AD), and radial diffusivity (RD)~\cite{trojsiRestingStateFunctional2021}.
+However, a study of nearly double the size by Trojsi and colleagues found no differences in overall GM or WM damage between fast and slow progressors, both measured by structural MRI and by diffusion tensor imaging (DTI) metrics, such as fractional anisotropy (FA), mean diffusivity (MD), axial diffusivity (AD), and radial diffusivity (RD)~\cite{trojsiRestingStateFunctional2021}.
 Conversely, two separate studies found that lower overall FA is associated with faster progression~\cite{sendaStructuralMRICorrelates2017, baldaranovLongitudinalDiffusionTensor2017}.
 
 These findings highlight the inconsistency of results regarding whole-brain structural changes in ALS progression.
@@ -134,11 +134,11 @@ More studies have focused on specific brain regions and white matter tracts, whi
 \subsubsection*{Motor Cortex and Corticospinal Tract}
 MND, characterised by upper and lower motor neuron degeneration, affects the motor cortex and corticospinal tract (CST).
 The motor band sign is a hypointensity in the shape of a ribbon at the precentral gyrus.
-Both a higher baseline intensity and a large change over 18 months in the motor band sign has found to be associated poor prognosis, measured by shorter survival and faster disease progression respectively~\cite{rizzoDiagnosticPrognosticValue2020,bollHypointensityMotorCortex2019}.
+Both a higher baseline intensity and a large change over 18 months in the motor band sign have been associated with poor prognosis, measured by shorter survival and faster disease progression respectively~\cite{rizzoDiagnosticPrognosticValue2020,bollHypointensityMotorCortex2019}.
 
-Studies consistently show that higher FA in the CST and a slower rate of FA decline is associated with longer survival, slower progression, and greater baseline function~\cite{mullerLargescaleMulticentreCerebral2016, liBrainstemInvolvementAmyotrophic2021, agostaMRIPredictorsLongterm2010, menkeWidespreadGreyMatter2014, kalraProspectiveHarmonizedMulticenter2020}.
-High FA in tracts like the posterior limb of the internal capsule and right superior longitudinal fascicle is linked to better prognosis, similar to findings in the CST~\cite{grolezMRICervicalSpinal2018,menkeWidespreadGreyMatter2014}.
-Furthermore, disease aggressiveness, assessed by the D50 model, correlates with white matter density decreases in tracts connecting frontal, parietal, and occipital lobes, as well as with elevated MD and AD in the fronto-parietal tract~\cite{steinbachDiseaseAggressivenessSignatures2021}.
+Studies consistently showed that higher FA in the CST and a slower rate of FA decline are associated with longer survival, slower progression, and greater baseline function~\cite{mullerLargescaleMulticentreCerebral2016, liBrainstemInvolvementAmyotrophic2021, agostaMRIPredictorsLongterm2010, menkeWidespreadGreyMatter2014, kalraProspectiveHarmonizedMulticenter2020}.
+High FA in tracts like the posterior limb of the internal capsule and right superior longitudinal fascicle was linked to improved prognosis, similar to findings in the CST~\cite{grolezMRICervicalSpinal2018,menkeWidespreadGreyMatter2014}.
+Furthermore, disease aggressiveness, assessed by the D50 model, correlated with white matter density decreases in tracts connecting frontal, parietal, and occipital lobes, as well as with elevated MD and AD in the fronto-parietal tract~\cite{steinbachDiseaseAggressivenessSignatures2021}.
 
 \subsubsection*{Cortical Thickness}
 Cortical thickness (CT), measured as the distance between the pial surface and the grey-white matter boundary, has shown mixed associations with MND prognosis.
@@ -152,9 +152,9 @@ Cross-sectional data suggest low CT at baseline is associated with short surviva
 
 \subsubsection*{Subcortical Structures}
 
-Thalamic atrophy, especially in the right thalamus, correlates with disease aggressiveness and progression rate ~\cite{dieckmannCorticalSubcorticalGrey2022, johnsQuantifyingChangesSusceptibility2019}.
-Additionally, basal ganglia gray matter atrophy in the left caudate and right putamen is associated with faster progression~\cite{sendaStructuralMRICorrelates2017, agostaLongitudinalAssessmentGrey2009}.
-Initial smaller basal ganglia and amygdala volumes predict shorter survival, although significance diminishes with age of onset adjustment~\cite{westenengSubcorticalStructuresAmyotrophic2015}.
+Thalamic atrophy, especially in the right thalamus, correlated with disease aggressiveness and progression rate ~\cite{dieckmannCorticalSubcorticalGrey2022, johnsQuantifyingChangesSusceptibility2019}.
+Additionally, basal ganglia grey matter atrophy in the left caudate and right putamen was associated with faster progression~\cite{sendaStructuralMRICorrelates2017, agostaLongitudinalAssessmentGrey2009}.
+Initial smaller basal ganglia and amygdala volumes predicted shorter survival, although significance diminished with age of onset adjustment~\cite{westenengSubcorticalStructuresAmyotrophic2015}.
 Furthermore, texture changes in the basal ganglia and hippocampus, detected via DTI analysis, were notable in short-term survivors~\cite{ishaqueEvaluatingCerebralCorrelates2018}.
 
 The GM volumes of subcortical structures have been associated with cognitive impairment in other diseases~\cite{yiRelationSubcorticalGrey2016}.
@@ -165,8 +165,8 @@ Multiple studies have reported no associations between hippocampal volume~\cite{
 Measuring the hippocampus in other ways, Tae and colleagues found that the shape deviations of the right hippocampus are associated with progression rate~\cite{taeShapeAnalysisSubcortical2020}, and Stoppel and colleagues found that increased hippocampal activation in resting-state fMRI is associated with lower ALSFRS-R~\cite{stoppelStructuralFunctionalHallmarks2014}, albeit in small cohorts of 32 and 12 patients respectively.
 
 \subsubsection*{Frontal Lobe}
-Some studies in ALS prognosis have focused on the frontal and fronto-temporal lobes due to their known association with FTD.
-Fast disease progression has been associated with GM atrophy~\cite{sendaStructuralMRICorrelates2017}, decreased FA~\cite{sendaStructuralMRICorrelates2017,kalraProspectiveHarmonizedMulticenter2020}, and decrease functional connectivity~\cite{trojsiRestingStateFunctional2021} in the frontotemporal lobe.
+Some studies in ALS prognosis have focused on the frontal and frontotemporal lobes due to their known association with FTD.
+Fast disease progression has been associated with GM atrophy~\cite{sendaStructuralMRICorrelates2017}, decreased FA~\cite{sendaStructuralMRICorrelates2017,kalraProspectiveHarmonizedMulticenter2020}, and decreased functional connectivity~\cite{trojsiRestingStateFunctional2021} in the frontotemporal lobe.
 ALSFRS-R itself had no association with frontal areas FA~\cite{mullerLargescaleMulticentreCerebral2016} but had been correlated with reduced functional connectivity in the left sensorimotor cortex~\cite{agostaSensorimotorFunctionalConnectivity2011}.
 
 \subsubsection*{Ventricles}
@@ -174,13 +174,13 @@ Ventricles are enlarged when the brain atrophies, and larger ventricular volume 
 
 \subsubsection*{Brain Stem}
 It is expected that the brain stem would be a candidate prognostic marker in MND because it is involved in breathing regulation, and the most common cause of death in MND is respiratory failure.
-However, Steinbach and colleagues found that brain stem GM density has no affect on D50-estimated disease aggressiveness~\cite{steinbachApplyingD50Disease2020}, and no correlation between brain stem FA and ALSFRS-R was found in a study of 253 patients~\cite{mullerLargescaleMulticentreCerebral2016}.
-Although, in a smaller cohort of 60 ALS patients, baseline medulla oblongata volume significantly predicted short versus long survival~\cite{milellaMedullaOblongataVolume2022}.
+However, Steinbach and colleagues found that brain stem GM density has no effect on D50-estimated disease aggressiveness~\cite{steinbachApplyingD50Disease2020}, and no correlation between brain stem FA and ALSFRS-R was found in a study of 253 patients~\cite{mullerLargescaleMulticentreCerebral2016}.
+However, in a smaller cohort of 60 ALS patients, baseline medulla oblongata volume significantly predicted short versus long survival~\cite{milellaMedullaOblongataVolume2022}.
 
 \subsubsection*{Other measures}
 Other imaging measures have been linked to MND prognosis.
-Increased brain age, indicating accelerated brain aging, correlates with faster progression in ALS patients, particularly those with cognitive and behavioral impairment~\cite{hermannCognitiveBehaviouralNot2022}.
-Notably, significant brain age changes were observed only in ALS patients with cognitive and behavioral impairment, suggesting that overall changes in brain structure may be more pronounced in these individuals.
+Increased brain age, indicating accelerated brain ageing, correlated with faster progression in ALS patients, particularly those with cognitive and behavioural impairment~\cite{hermannCognitiveBehaviouralNot2022}.
+Notably, significant brain age changes were observed only in ALS patients with cognitive and behavioural impairment, suggesting that overall changes in brain structure may be more pronounced in these individuals.
 
 Magnetic resonance spectroscopy measures brain metabolite concentrations.
 Lower N-acetylaspartateto choline ratio in the primary motor cortex is associated with shorter survival, even after accounting for ALSFRS-R and FVC~\cite{kalraCerebralDegenerationPredicts2006}.
@@ -191,7 +191,7 @@ While findings from neuroimaging highlight the consistent involvement of various
 
 Imaging of the spinal cord can also be conducted during the differential diagnosis to rule out alternative pathologies~\cite{elmendiliSpinalCordImaging2019}.
 The spinal cord is difficult to image and is affected by many movement artefacts due to its small axial size and the proximity of the lungs and heart.
-Although it is usually qualitatively interpreted clinically, the cross section area (CSA) of the spinal cord has been quantitatively measured in a number of studies, and has been associated with prognosis in MND.
+Although it is usually qualitatively interpreted clinically, the cross-section area (CSA) of the spinal cord has been quantitatively measured in several studies, and has been associated with prognosis in MND.
 
 In a study of 43 ALS patients, Branco and colleagues found significant correlations between baseline ALSFRS-R and cervical spine CSA, and also between disease duration and CSA~\cite{brancoSpinalCordAtrophy2014}.
 Moreover, Grolez and colleagues found that a smaller reduction in cervical spine volume over 3 months is associated with longer survival in a study of 41 patients~\cite{grolezMRICervicalSpinal2018}.
@@ -224,7 +224,7 @@ However, in a study of 218 MND patients, including ALS, PLS, and PMA, the CSA of
 
 \section{Machine Learning for Prognosis}
 
-We have seen that prognostic factors have been identified in MND, and that there are a number of prognostic models that have been developed.
+We have seen that prognostic factors have been identified in MND, and that several prognostic models have been developed.
 However, the prognostic models are not widely used in clinical practice, and there is a need for more accurate and generalisable models to be developed.
 A potential solution to this problem is machine learning (ML), which is the use of algorithms to learn from data and make predictions or decisions.
 In this section, we discuss the literature on ML for MND prognosis using clinical and imaging data.
@@ -247,11 +247,11 @@ Although widely used in ML studies, the trials' inclusion and exclusion criteria
 % point of paragraph: challenge kicked off ML for prognosis properly, found that tree-based models performed the best, deep learning still not useful. however, unideal study
 According to the challenge findings, the best performing models were random forest and tree-based decision models~\cite{kuffnerCrowdsourcedAnalysisClinical2015}.
 Although, a post-challenge PRO-ACT study concluded that ensembles of classical ML models produced the best results~\cite{turabiehMachineLearningEmpowered2024}.
-Some unexpected findings emerged, such as a high variability in individual ALSFRS-R scores being a strong predictor of progression rate~\cite{hothornRandomForest4LifeRandomForest2014} and previously unidentified progression biomarkers such as blood pressures and uric acid.
+Some unexpected findings emerged, such as a high variability in individual ALSFRS-R scores being a strong predictor of progression rate~\cite{hothornRandomForest4LifeRandomForest2014} and previously unidentified progression biomarkers such as blood pressure and uric acid.
 %The challenge had 37 entries and the results were summarised by Küffner and colleagues~\cite{kuffnerCrowdsourcedAnalysisClinical2015}, who concluded that random forest and tree-based decision models performed the best in predicting future progression rate~\cite{hothornRandomForest4LifeRandomForest2014}.
 %By comparing models and results from the entries, some interesting findings emerged, such as high variability in individual ALSFRSr scores being a strong predictor of progression rate~\cite{hothornRandomForest4LifeRandomForest2014} and previously unidentified progression biomarkers such as blood pressures and uric acid.
 %Ensemble models, which are a combination of predictions from multiple models, have shown promise in the PRO-ACT data as well in a post-challenge study of 17 classical ML models ~\cite{turabiehMachineLearningEmpowered2024}.
-While a 2022 revisit employing deep learning models discovered comparable performance to classical ML~\cite{pancottiDeepLearningMethods2022}, deep learning models did outperform classical ML modelsin a study classifying short versus long survival using PRO-ACT data~\cite{papaizEnsembleimbalancebasedClassificationAmyotrophic2024} .
+While a 2022 revisit employing deep learning models discovered comparable performance to classical ML~\cite{pancottiDeepLearningMethods2022}, deep learning models did outperform classical ML models in a study classifying short versus long survival using PRO-ACT data~\cite{papaizEnsembleimbalancebasedClassificationAmyotrophic2024} .
 This discrepancy in deep learning performance may be due to the different tasks of predicting progression rate versus classifying short versus long survival, suggesting further data or tasks may be needed to demonstrate deep learning's benefits.
 
 % weird to predict a linear slope using ML, especially a slope over 9 months which smooths out a lot of the individual patient trajectories
@@ -269,7 +269,7 @@ Furthermore, random forests outperform the pre-slope model in predicting future 
 
 Predicting fast versus slow progression in MND is a common task where patients are labelled based on progression rates~\cite{ongPredictingFunctionalDecline2017, dinabduljabbarPredictingAmyotrophicLateral2023}.
 This task often outperforms predicting actual progression rates due to its less granular nature.
-Training separate models on patient subgroups has also shown to improve performance, either by stratifying on progression rate~\cite{piresPredictingNoninvasiveVentilation2018} or on deterioration pattern~\cite{halbersbergTemporalModelingDeterioration2019}.
+Training separate models on patient subgroups has also been shown to improve performance, either by stratifying on progression rate~\cite{piresPredictingNoninvasiveVentilation2018} or on deterioration pattern~\cite{halbersbergTemporalModelingDeterioration2019}.
 %Using this stratification as part of the model pipeline, Pires and colleagues found that they could improve prediction accuracy by training separate models for slow, medium, and fast progressing patients~\cite{piresPredictingNoninvasiveVentilation2018}.
 %Similarly, Halbersberg and colleagues clustered patients by ''deterioration patterns'', and trained separate classifiers for each cluster~\cite{halbersbergTemporalModelingDeterioration2019}.
 The success of these stratification approaches suggests that the heterogeneity of MND may be too great for a single model to predict progression rate accurately.
@@ -279,7 +279,7 @@ A more data-driven way of grouping patients is to use clustering, which is a typ
 Grollemund and colleagues used UMAP (uniform manifold approximation and projection) to reduce the dimensionality of patient data, and then coarsely divided the lower-dimensional space into tiers of 1-year survival risk~\cite{grollemundDevelopmentValidation1year2020}.
 They found that this approach outperformed random forest and logistic regression in predicting 1-year survival, even though the latent space had no knowledge of the survival times of the patients in the training data.
 
-Another goal in MND prognosis is to predict time to treatment, such as time to NIV or time to PEG (percutaneous endoscopic gastrostromy).
+Another goal in MND prognosis is to predict the time to treatment, such as time to NIV or time to PEG (percutaneous endoscopic gastrostomy).
 The IDPP Clef challenge focused on predicting risks of clinical events and timings in MND~\cite{guazzoOverviewIDPPCLEF2022}.
 The 4 resulting papers all found that it was comparatively simple to predict the risk of clinical events, but not the timings~\cite{brancoHierarchicalModellingALS2022, mannionPredictingRiskTime2022, trescatoBaselineMachineLearning2022, pancottiMultiEventSurvivalPrediction2022}.
 Other attempts at predicting time to treatment have focused on only predicting time to NIV~\cite{carreiroPrognosticModelsBased2015, pereiraPredictingAssistedVentilation2019}.
@@ -288,7 +288,7 @@ Predicting the assessment outcomes that lead to the decision to start treatment 
 
 % point of paragraph: machine learning approaches can be improved with explainability and setting logical rules, to make up for the small sample sizes
 Integrating logical rules and explainability methods enhances the clinical relevance of models in MND prognosis.
-Tavazzi and colleagues used a dynamic bayesian network to simulate disease course according to the MiToS staging system, incorporating clinical and biological logic into their model~\cite{tavazziPredictingFunctionalImpairment2022}.
+Tavazzi and colleagues used a dynamic Bayesian network to simulate disease course according to the MiToS staging system, incorporating clinical and biological logic into their model~\cite{tavazziPredictingFunctionalImpairment2022}.
 This allows the model to not only learn from the data, but also to be guided by clinical and biological sense, which should mitigate spurious conclusions after training.
 %Additionally, the graph structure of the model can be used to explore dependencies between variables, and to identify which variables are most important in predicting the future disease course.
 
@@ -319,7 +319,7 @@ Both of these studies have limited clinical usefulness, since it is not necessar
 Querin and colleagues used FA of the spinal cord and spinal cord atrophy to predict survival in a CPH model, and found that MRI parameters were more predictive than clinical features, albeit in a small cohort of 49 patients~\cite{querinSpinalCordMultiparametric2017}.
 
 In summary, imaging studies in MND have focused on diagnosis and disease understanding rather than prognosis prediction.
-Despite the many prognostic factors identified in neuroimaging studies, the limited sample sizes in MND imaging research limits the utility of imaging data alone.
+Despite the many prognostic factors identified in neuroimaging studies, the limited sample sizes in MND imaging research limit the utility of imaging data alone.
 
 \subsection{Multimodal}
 
@@ -361,7 +361,7 @@ This insight is an example of how multimodal data fusion can unveil more about t
 Deep learning can also be used to combine clinical and imaging data in a supervised manner.
 Van der Burgh and colleagues classified sporadic ALS patients into survival categories using clinical characteristics, structural MRI, and diffusion-weighted imaging features~\cite{vanderburghDeepLearningPredictions2017}, and a later extension added simulated TDP-43 accumulation levels~\cite{meierConnectomeBasedPropagation2020}.
 Their model comprised three unimodal neural networks trained separately and a fourth neural network integrating their outputs, showing significantly improved performance compared to unimodal models.
-Although, an innapropriate statistical test was used to compare the performance distributions.
+Although, an inappropriate statistical test was used to compare the performance distributions.
 An improved approach could involve training all neural networks together, allowing the intermediate weights and feature maps of the different modalities to interact.
 %An improvement that could be made to their data fusion method would be to train the 3 unimodal neural networks and the fourth neural network altogether, rather than training the unimodal models separately and then concatenating their outputs.
 %This would allow the model to learn more complex relationships between the data by allowing the intermediate weights and feature maps of the different modalities to interact.
@@ -369,4 +369,4 @@ An improved approach could involve training all neural networks together, allowi
 In conclusion, prognosis prediction in MND is a complex task with many different approaches and features that can be used.
 The literature is afflicted with small sample sizes, inconsistent findings, and unclear clinical relevance, but multimodal data fusion is a promising approach for MND prognosis, and has been shown to improve performance in some studies.
 The use of deep learning in multimodal data fusion is a promising future direction for MND prognosis, and could help to fully capture the complexity of the disease.
-Furthermore, there are many more multimodal data fusion methods that have not been explored in MND, such as graph neural networks and attention mechanisms, which could be key in accurately predicting MND prognosis.
+Furthermore, many more multimodal data fusion methods have not been explored in MND, such as graph neural networks and attention mechanisms, which could be key in accurately predicting MND prognosis.

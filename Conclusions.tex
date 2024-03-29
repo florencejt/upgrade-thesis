@@ -11,7 +11,7 @@ Chapter~\ref{cox_proportional_hazards_model} showed the application of a Cox pro
 To my knowledge, combining clinical and MRI-derived features in survival analysis for MND has only been done in one paper~\cite{querinSpinalCordMultiparametric2017}, which used spinal cord MRI data and a smaller sample size.
 %The main contribution of this chapter was to show that the Cox model could be used to predict prognosis in MND, and that the resulting factors significantly affecting survival are changed when using clinical data, imaging data, or multimodal data.
 
-The multimodal multivariable CPH resulted in two significantly protective factors: the baseline ALSFRS-R score and the bilateral volume of the amygdala, and two significantly harmful factors: the ALS-subtype of MND and and larger bilateral lateral ventricle volumes.
+The multimodal multivariable CPH resulted in two significantly protective factors: the baseline ALSFRS-R score and the bilateral volume of the amygdala, and two significantly harmful factors: the ALS subtype of MND and and larger bilateral lateral ventricle volumes.
 The addition of MRI data to clinical information caused a change in the relevance of specific clinical variables within the model, which implied that the brain volumes derived from MRI scans included corresponding information to some clinical features.
 In contrast, depending simply on MRI data produced clinically unusual outcomes.
 The implications of these findings highlighted the importance of combining imaging data with clinical information for more meaningful survival analysis in MND.
@@ -22,7 +22,7 @@ In Chapter~\ref{fusilli_development}, I showcased Fusilli, my Python library for
 Fusilli is an open-source project, and therefore released for anybody to use in their personal and professional projects.
 
 Key contributions of this chapter were the development of a library that has a catalogue of multimodal data fusion methods that are not limited by their underlying architecture, which is the general limitation of other similar works.
-Fusilli was received with interest by the machine learning community, and I have been given feedback from other researchers who have used Fusilli in their own projects.
+Fusilli was received with interest by the machine learning community, and I have been given feedback from other researchers who have used Fusilli in their projects.
 
 For my future PhD chapters, using Fusilli will greatly speed up my analysis and experimentation.
 
@@ -35,9 +35,9 @@ Eight multimodal data fusion models, implemented in Fusilli, were compared to ea
 This experiment resulted in only one of the multimodal models outperforming the unimodal model that used only clinical data.
 The validation performance revealed that the models were overfitting, and so further hyperparameter tuning is needed to improve the models to be more generalisable.
 
-In its current form with a small sample size and limited hyperparameter tuning, Fusilli did not show a clear advantage of using multimodal data in MND prognosis prediction, and that imaging data may not have been as useful as clinical data in this task.
+In its current form with a small sample size and limited hyperparameter tuning, Fusilli did not show a clear advantage of using multimodal data in MND prognosis prediction, and imaging data may not have been as useful as clinical data in this task.
 
-Further investigation and experimentation is needed to determine the finality of these results.
+Further investigation and experimentation are needed to determine the finality of these results.
 I hypothesise that with more data, better clinical characterisation, and more fine-grained imaging data, multimodal data fusion will prove to be a useful tool in MND prognosis prediction.
 
 \subsection{Outcomes}
@@ -71,7 +71,7 @@ I will also apply Fusilli to other multimodal medical datasets to complete the t
 \subsubsection*{Illustrating Fusilli capabilities with multimodal medical data}
 
 Although Chapter~\ref{fusilli_development} showed the whole development journey of Fusilli, a valuable addition to the narrative would be to show how Fusilli can be used in practice.
-My plan is to use Fusilli on two multimodal medical datasets.
+I plan to use Fusilli on two multimodal medical datasets.
 
 In terms of feasibility, I already have access to ADNI (Alzheimer's Disease Neuroimaging Initiative) and PPMI (Parkinson's Progression Markers Initiative) data for neurodegenerative diseases, and MIMIC CXR (Medical Information Mart for Intensive Care - Chest X-ray) data for critical care.
 
@@ -107,7 +107,7 @@ In this project, I aim to explore the different preprocessing steps that can be 
 A colleague is enhancing clinical MRI quality for ALS Biomarkers Study data via AI techniques, enabling us to use whole-brain images in models and to use preprocessing steps typically challenging with lower-quality clinical scans.
 
 % add methods to this
-Some examples of preprocessing steps that could be applied to the MRI data to extract tabular data are:
+Some examples of preprocessing steps that could be applied to the MRI data to extract tabular data are
 \begin{itemize}
 \setlength\itemsep{-0.5em}
     \item Further fine-grained extracted brain measurements from the \texttt{recon-all} pipeline from FreeSurfer.
@@ -115,7 +115,7 @@ Some examples of preprocessing steps that could be applied to the MRI data to ex
     \item Different atlases for brain region volume extraction.
 \end{itemize}
 
-For the images themselves to be included as input into the models, the options for extracting information from the scans could include:
+For the images themselves to be included as input into the models, the options for extracting information from the scans could include
 \begin{itemize}
 \setlength\itemsep{-0.5em}
     \item Texture analysis, which has been previously used in ALS imaging studies~\cite{ishaqueEvaluatingCerebralCorrelates2018, johnsQuantifyingChangesSusceptibility2019}.
@@ -128,7 +128,7 @@ For the images themselves to be included as input into the models, the options f
 We will use Fusilli to compare the performance of the models using various combinations of clinical and processed imaging data.
 The quality of the inferences taken from this analysis will depend on the sample size of the data, because imaging is more expensive to process than clinical data.
 A larger sample size would offer a clearer understanding of the importance of different brain regions in MND prognosis prediction, and would allow us to use more detailed imaging data in the models.
-If the sample size is not large enough, a contigency plan would be to focus on diseases that have more data available, such as Alzheimer's disease or frontotemporal dementia.
+If the sample size is not large enough, a contingency plan would be to focus on diseases that have more data available, such as Alzheimer's disease or frontotemporal dementia.
 
 The expected outcomes of this project are an understanding of the utility of different preprocessing steps for structural MRI data in MND prognosis prediction, and a better understanding of which areas of the brain are most important in MND prognosis prediction.
 
@@ -165,7 +165,7 @@ The project would look at its utility in the absence of other data modalities, a
 
 The feasibility of this study depends on the availability of spinal MRI.
 Some of the subjects in ALS Biomarkers Study have spinal cord MRI data, but it is not complete for all subjects.
-It is possible that future data collaborations might include spinal MRI data, which would make this project more feasible.
+Future data collaborations might include spinal MRI data, which would make this project more feasible.
 
 \subsubsection{Adding radiological report derived features to Fusilli prognosis prediction}
 

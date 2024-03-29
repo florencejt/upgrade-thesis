@@ -86,7 +86,7 @@ Since the aim of this analysis was to see how multimodal data affects survival a
 
 %The models we used were not stratified by any variables, as the sample size was relatively small and stratifying the model may lead to less informative results than just including the features and acknowledging the violation of the proportional hazards assumption.
 
-The CPH models estimated the hazard ratios and their 95\% confidence intervals for each variable, with significance level set at $p<0.05$.
+The CPH models estimated the hazard ratios and their 95\% confidence intervals for each variable, with the significance level set at $p<0.05$.
 
 The quality of models fit to the data was assessed using the concordance index, which is a measure of how well the model predicts the order of the survival times, and the Akaike Information Criterion (AIC), which is a measure of the model's goodness of fit balanced with its complexity.
 
@@ -109,7 +109,7 @@ The multivariable clinical CPH results found that baseline ALSFRS-R was a signif
 Diagnostic delay and co-presence of FTD were no longer significant in the multivariable CPH.
 
 The proportional hazards assumptions were broken by age at diagnosis ($p=0.002$) and diagnostic delay ($p=0.038$).
-In an effort to correct the broken assumptions, another multivariable CPH was fit with only the univariably-significant clinical factors.
+To correct the broken assumptions, another multivariable CPH was fit with only the univariably-significant clinical factors.
 Table~\ref{tab:unieatures_cox} shows the results from the univariable-screened CPH models.
 This fixed the broken proportional hazards assumptions and the same factors remained significant: high baseline ALSFRS-R (HR=0.64), age at diagnosis (HR=1.52), and ALS MND (HR=2.01).
 
@@ -135,7 +135,7 @@ The multimodal multivariable models produced the best fit metrics when all model
 
 The analysis revealed that clinically significant factors were largely consistent with established literature.
 However, it was unexpected that bulbar onset did not exhibit a significant association with survival, despite its typical association with poorer prognosis in MND.
-Although the sample size was representativen~\cite{feldmanAmyotrophicLateralSclerosis2022}, the categorising patients as having bulbar or non-bulbar onset may have obscured the relationship between site of onset and survival, as respiratory-onset patients were included in the non-bulbar category and typically exhibit a poorer prognosis than bulbar-onset patients~\cite{suPredictorsSurvivalPatients2021}.
+Although the sample size was representative~\cite{feldmanAmyotrophicLateralSclerosis2022}, the categorising patients as having bulbar or non-bulbar onset may have obscured the relationship between site of onset and survival, as respiratory-onset patients were included in the non-bulbar category and typically exhibit a poorer prognosis than bulbar-onset patients~\cite{suPredictorsSurvivalPatients2021}.
 %The univariably-significant clinical factors in this analysis were generally consistent with the existing literature.
 %However, having a bulbar site of onset was not significantly associated with survival, which was surprising, as bulbar onset is often associated with a poorer prognosis in MND and was found to be significant in a meta-analysis of survival factors~\cite{suPredictorsSurvivalPatients2021}.
 %27.2\% of the patients in this analysis had a bulbar site of onset, which is consistent with the general MND population~\cite{feldmanAmyotrophicLateralSclerosis2022}, so it is unlikely that the lack of significance was due to a small sample size or a biased sample.
@@ -204,7 +204,7 @@ However, high collinearity between brain volumes and clinical features could mea
 %The multimodal CPH mitigated the effect of the model picking up on brain structure not directly influencing survival, because we included the clinical features that are influencing survival into the model as well.
 %However, the trade-off was that the collinearity was high, both within the brain volumes and also between the brain volumes and the clinical features, which could mean that individual volumes were picked out as significant over clinical features and vice versa, even if both were influencing survival.
 
-Finally the fit statistics in Table~\ref{tab:coxfitmetrics} shows that the fit improved with multimodal features.
+Finally, the fit statistics in Table~\ref{tab:coxfitmetrics} show that the fit improved with multimodal features.
 Although adding more features to a survival model is likely to increase its fit metrics, AIC also considers the number of features in the model in its calculation, so it can be concluded that the multimodal features added more information to the model than the clinical or imaging features alone.
 
 %\begin{itemize}
@@ -237,7 +237,7 @@ The collinearity of the brain volumes introduced instability into the model.
 The summing of the left and right regions was done to mitigate this, but this could have also introduced information loss if the left and right regions were not equally important to survival.
 Future work to mitigate this further would be to implement dimensionality reduction techniques before inputting the brain volumes into the model.
 
-Finally, the univariable screening of the features could have introduced bias into the model, as it is possible that features that are not significant univariably are significant in the multivariable model.
+Finally, the univariable screening of the features could have introduced bias into the model, as features that are not significant univariably are significant in the multivariable model.
 Although we did not find this to be the case, there are other ways to attempt to fix the proportional hazards assumption, such as using time-dependent covariates or stratifying the model by a variable, and there are other ways to screen the features, such as using a LASSO regression to select the most important features.
 
 %Take home message:

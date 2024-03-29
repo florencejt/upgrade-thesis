@@ -17,7 +17,7 @@ Both of these datasets contain clinical data from the diagnostic visit and brain
 
 For patients to be included in the analysis, they must have received a diagnosis of MND and had an outcome of interest (death or tracheostomy).
 In the ALS Biomarkers Study, the outcome of interest was death, whereas in the Ospedale San Raffaele's MND cohort, the outcome of interest was death or tracheostomy.
-Unfortunately, the Ospedale San Raffaele's MND cohort did not specify the date of death, so we have assumed that the date of death was the date of tracheostomy.
+Unfortunately, the Ospedale San Raffaele's MND cohort did not specify the date of death, so we assumed that the date of death was the date of tracheostomy.
 
 Patients in this analysis must have had non-missing data for age at diagnosis, sex, date of diagnosis, date of death, date of symptom onset, site of onset, and baseline ALSFRS-R .
 Additionally, patients must have had a T1-weighted or T2-weighted MRI within 12 months before or after their date of diagnosis.
@@ -121,7 +121,7 @@ The short survival group had significantly larger volumes in the cerebrospinal f
 We predicted categories of survival, short or long, by splitting the survival time at the median.
 The models used in this analysis are from Fusilli, a software package developed in Chapter~\ref{fusilli_development}, to compare the performance of different multimodal data fusion methods~\cite{townendFlorencejtFusilliFusilli2024}.
 We trained the models that do tabular-tabular fusion, meaning that they take two tabular datasets and combine them to predict the outcome.
-There are 10 of these models in Fusilli, but we could not used the two graph-based models because the current version of Fusilli does not allow graph-based models to use held-out test sets, which was part of this analysis design.
+There are 10 of these models in Fusilli, but we could not use the two graph-based models because the current version of Fusilli does not allow graph-based models to use held-out test sets, which was part of this analysis design.
 The architecture diagrams of the models are in Appendix~\ref{appendix:fusion_model_architectures}.
 Unimodal models were also trained as a benchmark for the multimodal models to investigate the added value of the multimodal data.
 
@@ -152,10 +152,10 @@ The second experiment was trained on the Ospeadale San Raffaele's MND cohort ($n
 
 The models were trained using 5-fold cross-validation, where the data is split into 5 sets, and the model is trained on 4 of the sets and validated on the remaining set.
 A validation set is not used to train the model, but to test the performance of the model to see the training progress.
-Early stopping was used to prevent overfitting on the validation set, where the model stopped training if the loss on the validation set does not improve for 5 rounds of training, or ``epochs".
+Early stopping was used to prevent overfitting on the validation set, where the model stopped training if the loss on the validation set did not improve for 5 rounds of training, or ``epochs".
 
 % metrics
-The performances metrics used to evaluate the models were balanced accuracy, area under the receiver operating characteristic curve (AUROC), precision, recall, and F1 score.
+The performance metrics used to evaluate the models were balanced accuracy, area under the receiver operating characteristic curve (AUROC), precision, recall, and F1 score.
 Balanced accuracy is the average of the sensitivity and specificity of the model, and is used to account for class imbalance in the data.
 AUROC is the area under the receiver operating characteristic curve, which is a plot of the true positive rate against the false positive rate.
 A true positive in this analysis was a correct prediction of a long survivor, and a false positive was a short survivor predicted as a long survivor.
@@ -163,7 +163,7 @@ Precision is the proportion of true positive predictions out of all positive pre
 The F1 score is the harmonic mean of precision and recall, and is used to balance the two metrics.
 
 The cross-validation training resulted in 5 trained versions of each model.
-The held-out test set was input into each of the these trained models to obtain the predicted survival categories.
+The held-out test set was input into each of these trained models to obtain the predicted survival categories.
 The predicted survival categories from each fold were aggregated together to calculate the overall performance metrics for the model.
 
 
@@ -247,7 +247,7 @@ The ALS Biomarkers Study-trained models were better at detecting long survivors 
     \label{fig:tsne}
 \end{figure}
 
-K-fold cross validation and stability repetitions aimed to improve model performance and clarify the relationsip between model type and performance.
+K-fold cross validation and stability repetitions aimed to improve model performance and clarify the relationship between model type and performance.
 However, the highest model accuracy reached only 70\%, with the highest AUROC at 81\%.
 In contrast, a similar study achieved an 84\% accuracy using a multimodal deep learning model trained on a larger sample of 83 patients, compared to our 70 patients~\cite{vanderburghDeepLearningPredictions2017}.
 Differences in outcome categories and imaging features between studies may explain the performance gap.
@@ -306,7 +306,7 @@ Multimodal models that are not based on deep learning were not included in this 
 There have been conflicting results on whether deep learning is the best technique for MND prognosis prediction with clinical data~\cite{pancottiDeepLearningMethods2022, papaizEnsembleimbalancebasedClassificationAmyotrophic2024}, although it has shown promise in multimodal settings~\cite{vanderburghDeepLearningPredictions2017, meierConnectomeBasedPropagation2020}
 Future work will compare the performances of deep learning models to non-deep learning models.
 
-Another aspect to the small sample size was the lack of a completely external test set.
+Another aspect of the small sample size was the lack of a completely external test set.
 Although the leave-site-out analysis was used to investigate the generalisability of the models to new data, the small sample sizes led to difficulty in concluding what was causing the differences in model performance.
 With the addition of more sites and more patients in the future, the generalisability of the models to new data can be more clearly understood.
 

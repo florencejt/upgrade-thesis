@@ -16,7 +16,7 @@
 %Additionally, ALS affects 1.3 men for every woman~\cite{fontanaTimetrendEvolutionDeterminants2021}.
 
 Motor neuron disease (MND) is a fatal neurodegenerative condition affecting both upper (UMN) and lower motor neurons (LMN).
-It encompasses various subtypes, notably amyotrophic lateral sclerosis (ALS), which constitutes a 90\% of cases~\cite{filippiMotorNeuronDiseases2015}.
+It encompasses various subtypes, notably amyotrophic lateral sclerosis (ALS), which constitutes 90\% of cases~\cite{filippiMotorNeuronDiseases2015}.
 %Other subtypes include Progressive Spinal Muscular Atrophy (PMA), Primary Lateral Sclerosis (PLS), and Progressive Bulbar Palsy (PBP), characterised by varying degrees of UMN and LMN involvement.
 %Distinguishing between these subtypes during diagnosis is crucial due to their distinct prognoses and clinical presentations.
 %For instance, PLS tends to have a more favourable prognosis compared to ALS due to less respiratory involvement, offering the possibility of a normal lifespan~\cite{statlandPrimaryLateralSclerosis2015}.
@@ -32,7 +32,7 @@ However, with 10\% of sALS patients exhibiting fALS-associated mutations and a g
 %This hazy border between what differentiates the causes of sALS and fALS has led to the movement of recategorising ALS into ``genetically confirmed`` and ``non-genetically confirmed``~\cite{feldmanAmyotrophicLateralSclerosis2022}.
 As of 2022, there have been over 40 genes associated with ALS~\cite{goutmanRecentAdvancesDiagnosis2022a}, the most common of which is the C9orf72 hexanucleotide repeat expansion, which occurs in 5--15\% of fALS cases~\cite{vanesAmyotrophicLateralSclerosis2017}.
 %C9orf72 is not unique to ALS; it is also linked to increased risks of frontotemporal dementia, Parkinson's Disease, Huntingdon's Disease, Alzheimer's Disease, Schizophrenia, and bipolar disorder.
-Apart from genetic risks, there is investigation into environmental risk factors for ALS. A commonly-studied factor is intense physical exercise, including involvement in professional sports and military service~\cite{mckayMilitaryServiceRelated2021, lacortePhysicalActivityPhysical2016}.
+Apart from genetic risks, there are investigations into environmental risk factors for ALS. A commonly studied factor is intense physical exercise, including involvement in professional sports and military service~\cite{mckayMilitaryServiceRelated2021, lacortePhysicalActivityPhysical2016}.
 %, and there are multiple theories as to why this might be involvement in increased risk of developing ALS. ADD MORE HERE.
 
 
@@ -56,7 +56,7 @@ There is no definitive diagnostic test for MND, and each patient undergoes a tai
 One diagnostic aid is the El Escorial criteria, which categorises patients based on the spread of progressive weakness~\cite{ludolphRevisionEscorialCriteria2015}.
 %A diagnostic criteria was developed in GIVE THE DATE, called the El Escorial criteria (find a citation for this), which is used for patients with a history of progressive weakness that has spread.
 %Patients are categorised as possible, probable, probable (laboratory supported), or definite ALS.
-Diagnostic assessment currently does not include cognitive or behavioural changes, but tools are being developed and more commonly used in order to monitor these changes, such as Edinburgh Cognitive and Behavioural ALS Screen~\cite{abrahamsScreeningCognitionBehaviour2014}.
+Diagnostic assessment currently does not include cognitive or behavioural changes, but tools are being developed and more commonly used to monitor these changes, such as Edinburgh Cognitive and Behavioural ALS Screen~\cite{abrahamsScreeningCognitionBehaviour2014}.
 Due to the lengthy diagnostic process, general unawareness of MND symptoms, and varied speeds of symptom progression, the delay between symptom onset and diagnosis is on average 12 months, roughly halfway through the disease pathway~\cite{mitchellTimelinesDiagnosticEvaluation2010}.
 
 Disease progression is assessed using the ALSFRS-R (revised amyotrophic lateral sclerosis functional rating scale), a questionnaire evaluating patients' ability to perform disease-related functions, with scores ranging from 4 (normal function) to 0 (loss of function), yielding a total score ranging from 48 to 0~\cite{cedarbaumALSFRSRRevisedALS1999}.
@@ -71,7 +71,7 @@ In the UK, Riluzole is the primary treatment, potentially offering benefits in a
 Imaging, such as brain magnetic resonance imaging (MRI) and spinal MRI, is currently used in the diagnostic pathway to rule out mimicking diseases.
 Although not used for prognosis clinically, neuroimaging-derived measures have been shown to be associated with patient survival and progression~\cite{mullerLargescaleMulticentreCerebral2016,agostaMRIPredictorsLongterm2010}.
 In other diseases, machine learning (ML) has had great success in predicting prognosis from medical imaging data, including brain MRI~\cite{gerratyMachineLearningParkinson2023}.
-However, in MND, most ML studies do not use imaging data, and more work been conducted on using ML with clinical data for prognosis, with some success~\cite{grollemundMachineLearningAmyotrophic2019, papaizMachineLearningSolutions2022}.
+However, in MND, most ML studies do not use imaging data, and more work has been conducted on using ML with clinical data for prognosis, with some success~\cite{grollemundMachineLearningAmyotrophic2019, papaizMachineLearningSolutions2022}.
 There is a gap in the literature for using imaging data for MND prognosis prediction, and for combining imaging and clinical data for this purpose.
 
 The work presented in this thesis explores the creation of a machine learning model for MND prognosis prediction using clinical and imaging data from the diagnostic appointment.
@@ -80,14 +80,14 @@ The combination of clinical and imaging data is known as \textit{multimodal data
 \section{Motivation}
 
 
-Prognosis is the prediction of the course of a disease, and is important for both patients and clinicians.
-For patients, an accurate prognosis can help them to plan their lives and feel empowered to make decisions about their care~\cite{talbotClinicalToolPredicting2016, vaneenennaamDiscussingPersonalizedPrognosis2021}.
-For clinical use, prognosis can be used to stratify patients for clinical trials in order to investigate how different treatments affect different patient groups~\cite{berryImprovedStratificationALS2018}.
+Prognosis is the prediction of the course of a disease and is important for both patients and clinicians.
+For patients, an accurate prognosis can help them plan their lives and feel empowered to make decisions about their care~\cite{talbotClinicalToolPredicting2016, vaneenennaamDiscussingPersonalizedPrognosis2021}.
+For clinical use, prognosis can be used to stratify patients for clinical trials to investigate how different treatments affect different patient groups~\cite{berryImprovedStratificationALS2018}.
 Additionally, a predicted disease course could be used as an outcome measure for clinical trials~\cite{kiernanImprovingClinicalTrial2021}.
 
 Imaging from the diagnostic appointment is a potentially valuable source of data for prognosis prediction.
 Applying imaging for this purpose would not require any extra data collection, as it is already being taken for differential diagnosis.
-Morever, a baseline scan is easier for patients to undergo than a scan once their disease has progressed, due to the physical limitations of progressed MND .
+Moreover, a baseline scan is easier for patients to undergo than a scan once their disease has progressed, due to the physical limitations of progressed MND .
 
 % Combingin with clinical data is a good idea because there is already good evidence of clinical prognostic factors, and imaging could add to this in a data driven way
 Since MND is multifactorial and complex, investigating the value of all of the available data collected clinically for prognosis is a logical step.
@@ -108,10 +108,10 @@ The aims of this project are as follows:
 
 \begin{enumerate}[label=Aim \arabic*:]
     \item To identify factors that are associated with MND prognosis and assess the value of imaging in survival analysis.
-    \item To search the literature for multimodal data fusion methods and compare their performnace on MND prognosis prediction with clinical and imaging-derived features.
-    \item To investigate the added value of different imaging modalities and preprocessing methods, such as subregion segmentation, texture analysis, and whole brain analysis, in multimodal data fusion for MND prognosis prediction.
+    \item To search the literature for multimodal data fusion methods and compare their performance on MND prognosis prediction with clinical and imaging-derived features.
+    \item To investigate the added value of different imaging modalities and preprocessing methods, such as sub-region segmentation, texture analysis, and whole brain analysis, in multimodal data fusion for MND prognosis prediction.
     \item To develop the optimal multimodal data fusion model further by adding the capability to include more data modalities, such as fluid biomarkers and natural language processing (NLP) from radiological reports.
-    \item To assess how the performance of the proposed prognostic model compares to existing models and clinical prognostic factors, and to assess its suitability to different prognostic tasks, such as stratifying patients for clinical trials or predicting treatment need.
+    \item To assess how the performance of the proposed prognostic model compares to existing models and clinical prognostic factors, and to assess its suitability to different prognostic tasks, such as stratifying patients for clinical trials or predicting treatment needs.
 \end{enumerate}
 
 
