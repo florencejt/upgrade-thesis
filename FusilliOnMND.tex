@@ -247,46 +247,58 @@ The ALS Biomarkers Study-trained models were better at detecting long survivors 
     \label{fig:tsne}
 \end{figure}
 
-K-fold cross validation and stability repetitions were used to try to improve the model performance and obtain a clearer picture of the relationsip between model type and performance.
-Even so, the highest model accuracy was 70\% and the highest AUROC was 81\%.
-The most similar study to this analysis used a multimodal deep learning model, most similar to the Fusilli intermediate concatenation model, to predict short, medium, and long survival categories in ALS with an accuracy of 84\%, trained on $n=83$ patients~\cite{vanderburghDeepLearningPredictions2017}.
-The models in our analysis were trained on $n=70$ patients.
-The lower performance of the models in this analysis could be due to the smaller sample size, the different outcome categories, or the different data used in the analysis.
-Moreover, van der Burgh and colleagues used different imaging features: structural connectivity matrices, and in addition to subcortical volumes, they used cortical thicknesses.
-This difference in performance suggests that the imaging features used in this analysis may not be as useful for predicting prognosis as the imaging features used by van der Burgh and colleagues, or perhaps that survival in MND is easier to predict when split into three categories rather than two.
-However, their data included only ALS patients, rather than MND patients, which may have made the data more homogenous and easier to predict.
-With increased sample size, future work will be to look at the effect of excluding patients who have an MND-subtype other than ALS, which is an common exclusion criteria in previous ML studies.
+K-fold cross validation and stability repetitions aimed to improve model performance and clarify the relationsip between model type and performance.
+However, the highest model accuracy reached only 70\%, with the highest AUROC at 81\%.
+In contrast, a similar study achieved an 84\% accuracy using a multimodal deep learning model trained on a larger sample of 83 patients, compared to our 70 patients~\cite{vanderburghDeepLearningPredictions2017}.
+Differences in outcome categories and imaging features between studies may explain the performance gap.
+For instance, van der Burgh and colleagues used structural connectivity matrices and cortical thicknesses, potentially more effective for prognosis prediction.
+Moreover, their data focused solely on ALS patients, possibly resulting in a more homogeneous dataset conducive to prediction.
+Future investigations may benefit from excluding MND subtypes other than ALS, a common practice in prior machine learning studies, to further explore prognosis prediction with increased sample size.
 
-Furthermore, Figure~\ref{fig:tsne} shows the separability of the data in two dimensions using t-distributed stochastic neighbour embedding (TSNE) for clinical, imaging, and multimodal features.
-Fuzzy borders between long and short survivors were observed, suggesting that the data was not very separable in two dimensions, which may explain the lower performance of all of the models.
 
-The only multimodal model that outperformed the clinical unimodal model in the both-site experiment was early concatenation, and it outperformed by a small margin of 2\% balanced accuracy and 6\% AUROC.
-This implies that clinical data was the most important for predicting survival in MND, and that the imaging data did not add much value to the prediction.
-Further corroborating this, the low performance of most multimodal models' performances might suggest that features extracted from the imaging data were not useful for predicting prognosis.
-This was further corroborated by the low performance of the imaging unimodal model.
-However, the evidence of overfitting in the validation set of the both-site experiment suggests that the models were not able to learn the relationship between the features and the outcome, and were learning the noise in the data.
-Since the imaging data had a larger number of features (32) compared to the clinical data (9), the models may have been overfitting to the imaging data, which may have led to the poor performance of the multimodal models.
+%The most similar study to this analysis used a multimodal deep learning model, most similar to the Fusilli intermediate concatenation model, to predict short, medium, and long survival categories in ALS with an accuracy of 84\%, trained on $n=83$ patients~\cite{vanderburghDeepLearningPredictions2017}.
+%The models in our analysis were trained on $n=70$ patients.
+%The lower performance of the models in this analysis could be due to the smaller sample size, the different outcome categories, or the different data used in the analysis.
+%Moreover, van der Burgh and colleagues used different imaging features: structural connectivity matrices, and in addition to subcortical volumes, they used cortical thicknesses.
+%This difference in performance suggests that the imaging features used in this analysis may not be as useful for predicting prognosis as the imaging features used by van der Burgh and colleagues, or perhaps that survival in MND is easier to predict when split into three categories rather than two.
+%However, their data included only ALS patients, rather than MND patients, which may have made the data more homogenous and easier to predict.
+%With increased sample size, future work will be to look at the effect of excluding patients who have an MND-subtype other than ALS, which is an common exclusion criteria in previous ML studies.
+
+Figure~\ref{fig:tsne} illustrates the data separability in two dimensions using t-distributed stochastic neighbour embedding (TSNE) for clinical, imaging, and multimodal features.
+Fuzzy borders between long and short survivors indicate limited separability, potentially contributing to the lower model performance.
+
+In the both-site experiment, only the early concatenation multimodal model surpassed the clinical unimodal model, albeit marginally, with a 2\% balanced accuracy and 6\% AUROC improvement.
+This suggests clinical data's primary importance in predicting MND survival, with imaging data offering minimal value.
+The poor performance of most multimodal models and the imaging unimodal model further corroborated this.
+Moreover, evidence of overfitting in the validation set of the both-site experiment suggests that models struggled to discern meaningful relationships amidst data noise.
+With 32 features in imaging data compared to 9 in clinical data, the models overfitting to imaging data likely contributed to poor multimodal model performance.
+%This implies that clinical data was the most important for predicting survival in MND, and that the imaging data did not add much value to the prediction.
+%Further corroborating this, the low performance of most multimodal models' performances might suggest that features extracted from the imaging data were not useful for predicting prognosis.
+%This was further corroborated by the low performance of the imaging unimodal model.
+%However, the evidence of overfitting in the validation set of the both-site experiment suggests that the models were not able to learn the relationship between the features and the outcome, and were learning the noise in the data.
+%Since the imaging data had a larger number of features (32) compared to the clinical data (9), the models may have been overfitting to the imaging data, which may have led to the poor performance of the multimodal models.
 Therefore, it is possible with a higher sample size, that the value of the imaging data in predicting prognosis could be uncovered more clearly.
 
-Deep learning models have different numbers of learnable parameters, which define model complexity.
-Complex models typically require more data to train to a high generalisable performance and avoid overfitting.
-The intermediate concatenation model was the best performing model when measured by recall and F1 score, and has more trainable parameters than the overall best model, early concatenation, with a total of 34,200 learnable parameters compared to 27,500 in early concatenation.
-Figure~\ref{fig:trainedtogetherviolin} shows that the intermediate concatenation model had the highest validation balanced accuracy of approximately 95\% in the both-site experiment, but the test balanced accuracy was only 60\%, suggesting overfitting to the training data.
-When correlating the number of learnable parameters with test performance, there was no statistically significant relationship between the two.
-However, model complexity can also be estimated by other factors, such as the architecture of the model.
+
+Deep learning models vary in the number of learnable parameters, indicating their complexity.
+More complex models typically demand more data to train effectively and prevent overfitting.
+The intermediate concatenation model was the best performing model when measured by recall and F1 score, and has more trainable parameters than the overall best model, early concatenation, with 34,200 learnable parameters compared to 27,500 in early concatenation.
+%Figure~\ref{fig:trainedtogetherviolin} shows that the intermediate concatenation model had the highest validation balanced accuracy of approximately 95\% in the both-site experiment, but the test balanced accuracy was only 60\%, suggesting overfitting to the training data.
+In the both-site experiment, the intermediate concatenation model achieved the highest validation balanced accuracy at around 95\%, yet its test balanced accuracy was only 60\%, indicating overfitting to the training data.
+Although no statistically significant relationship was found between the number of learnable parameters and test performance, model complexity can also be inferred from architecture.
 %There was no clear relationship between model architecture and performance, but t
 The two attention-based models performed the worst, which may suggest that attention mechanisms are not suited to the data in its current state.
 
-Training on one dataset and testing on the other was used to investigate the generalisability of the models to new data and to see the effect of lower training sample size on model performance.
+Training on one dataset and testing on the other assessed model generalisability and the impact of reduced training sample size on performance.
 Unsurprisingly, the dataset with the higher sample size, Ospedale San Raffaele, performed better than the dataset with the lower sample size, the ALS Biomarkers Study.
-However, sample size may not have been the only factor affecting the model performance, as the ALS Biomarkers Study data came from three different sites, which may have introduced noise into the data.
+Moreover, the ALS Biomarkers Study data came from three different sites, which may have introduced noise into the data.
 Figure~\ref{fig:site_effect} shows that the models trained on the ALS Biomarkers Study were better at detecting long survivors than the models trained on Ospedale San Raffaele.
 Although the two datasets did not have statistically significant differences in patient survival times, the ALS Biomarkers Study had a higher proportion of long survivors than Ospedale San Raffaele, which may have led to the models being better at detecting long survivors when trained on the ALS Biomarkers Study data.
-It is difficult, however, to make definitive conclusions from this analysis because sample sizes of $n=64$ and $n=46$ are not sufficient for training deep learning models, especially when the number of features is high, as is the case with multimodal data.
+However, drawing definitive conclusions is challenging due to limited sample sizes of $n=64$ and $n=46$, especially when dealing with high-dimensional multimodal data, which may affect deep learning model training.
 
-Finally, the models were better at detecting short survivors than long survivors when trained on both datasets, as shown by the higher precision than recall in Table~\ref{tab:mnd_results} for 7 out of 10 of the models.
-It was unclear why this would be the case, as the labels were balanced by splitting on the median survival time, so the models should have been equally good at detecting short and long survivors.
-Further investigation should be done to see if the models were failing to predict specific subjects or if there is another reason for the models' poor performance in detecting long survivors.
+Most models exhibited higher precision than recall for short survivors compared to long survivors across both datasets, as indicated by Table~\ref{tab:mnd_results}.
+This discrepancy was unexpected, given the balanced labels achieved by splitting on the median survival time.
+Further investigation is warranted to determine whether the models are failing to predict specific subjects or if there are other factors contributing to their poor performance in detecting long survivors.
 
 \subsection{Limitations}
 The largest limitation of this analysis was the small sample size, which may have led to the models overfitting to the training data and not generalising well to the test data.
