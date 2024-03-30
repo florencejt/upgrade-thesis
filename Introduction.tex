@@ -39,14 +39,14 @@ Apart from genetic risks, there are investigations into environmental risk facto
 The primary symptom of MND is progressive motor loss in voluntary muscles~\cite{vanesAmyotrophicLateralSclerosis2017}.
 %, sparing involuntary movements like pupillary responses~\cite{vanesAmyotrophicLateralSclerosis2017}.
 This progressive motor loss can manifest as reduced limb movement, difficulty swallowing (dysphagia), difficulty speaking (dysarthria), and impaired respiratory function, which is usually the cause of death.
-At symptom onset, this motor loss is usually focused on one body segment, and the weakness spreads in a predictive pattern to the contralateral side in 85\% of patients~\cite{walhoutPatternsSymptomDevelopment2018}.
+At symptom onset, this motor loss is often focused on one body segment, and the weakness spreads in a predictive pattern to the contralateral side in 85\% of patients~\cite{walhoutPatternsSymptomDevelopment2018}.
 Ongoing research delves into the incomplete understanding of the neurodegenerative mechanism, particularly focusing on TDP-43 aggregation in the brain, a common feature in nearly all ALS cases~\cite{blokhuisProteinAggregationAmyotrophic2013}.
 
 Recently, there's been heightened attention on the cognitive and behavioural aspects of MND, affecting 35 to 50\% of ALS patients, with factors such as genetics and symptom onset site influencing their occurrence~\cite{yangRiskFactorsCognitive2021, chioALSPhenotypeInfluenced2020}.
 %Recently, there has been increased focus on the non-motor symptoms of MND: cognitive and behavioural changes.
 %These changes are recognised to occur in 35 to 50\% of ALS patients, and some patient characteristics such as genetic factors and site of symptom onset affect the likelihood of cognitive involvement~\cite{yangRiskFactorsCognitive2021, chioALSPhenotypeInfluenced2020}.
 FTD occurs in 15\% of ALS cases, and ALS-FTD is considered a spectrum because of the reciprocal links observed: 12.5\% of behavioural-variant FTD patients progress to ALS~\cite{strongAmyotrophicLateralSclerosis2017}.
-The most common behavioural symptoms affecting 10\% of ALS patients are apathy and loss of sympathy~\cite{abrahamsScreeningCognitionBehaviour2014}.
+The most common behavioural symptoms are apathy and loss of sympathy,  affecting 10\% of ALS patients~\cite{abrahamsScreeningCognitionBehaviour2014}.
 Other common symptoms are issues with language fluency, social cognition, and executive function~\cite{beeldmanCognitiveProfileALS2016}, although long-term and spatial memory are usually spared~\cite{crockfordALSspecificCognitiveBehavior2018}.
 Although these cognitive and behavioural symptoms are not the cause of death of MND patients, increased changes may signal faster disease progression and increased caregiver burden, so it is important to recognise and measure these changes clinically.
 
@@ -68,31 +68,31 @@ In the UK, Riluzole is the primary treatment, potentially offering benefits in a
 %Outside the UK, Edaravone shows promise in slowing disease progression but faces scrutiny regarding trial criteria and safety~\cite{witzelSafetyEffectivenessLongterm2022}.
 
 
-Imaging, such as brain magnetic resonance imaging (MRI) and spinal MRI, is currently used in the diagnostic pathway to rule out mimicking diseases.
+Imaging, such as brain magnetic resonance imaging (MRI) and spinal MRI, is used in the diagnostic pathway to rule out mimicking diseases.
 Although not used for prognosis clinically, neuroimaging-derived measures have been shown to be associated with patient survival and progression~\cite{mullerLargescaleMulticentreCerebral2016,agostaMRIPredictorsLongterm2010}.
 In other diseases, machine learning (ML) has had great success in predicting prognosis from medical imaging data, including brain MRI~\cite{gerratyMachineLearningParkinson2023}.
-However, in MND, most ML studies do not use imaging data, and more work has been conducted on using ML with clinical data for prognosis, with some success~\cite{grollemundMachineLearningAmyotrophic2019, papaizMachineLearningSolutions2022}.
+However, in MND, most ML studies do not use imaging data, and more work has been conducted on using ML with clinical data for prognosis with some success~\cite{grollemundMachineLearningAmyotrophic2019, papaizMachineLearningSolutions2022}.
 There is a gap in the literature for using imaging data for MND prognosis prediction, and for combining imaging and clinical data for this purpose.
 
 The work presented in this thesis explores the creation of a machine learning model for MND prognosis prediction using clinical and imaging data from the diagnostic appointment.
-The combination of clinical and imaging data is known as \textit{multimodal data fusion}, and is a growing area of machine learning research in the medical imaging field and beyond~\cite{cuiDeepMultimodalFusion2022, mohsenArtificialIntelligencebasedMethods2022}.
+The combination of clinical and imaging data is known as multimodal data fusion, and is a growing area of machine learning research in the medical imaging field and beyond~\cite{cuiDeepMultimodalFusion2022, mohsenArtificialIntelligencebasedMethods2022}.
 
 \section{Motivation}
 
 
-Prognosis is the prediction of the course of a disease and is important for both patients and clinicians.
+Prognosis is the prediction of the course of a disease.
 For patients, an accurate prognosis can help them plan their lives and feel empowered to make decisions about their care~\cite{talbotClinicalToolPredicting2016, vaneenennaamDiscussingPersonalizedPrognosis2021}.
 For clinical use, prognosis can be used to stratify patients for clinical trials to investigate how different treatments affect different patient groups~\cite{berryImprovedStratificationALS2018}.
 Additionally, a predicted disease course could be used as an outcome measure for clinical trials~\cite{kiernanImprovingClinicalTrial2021}.
 
 Imaging from the diagnostic appointment is a potentially valuable source of data for prognosis prediction.
-Applying imaging for this purpose would not require any extra data collection, as it is already being taken for differential diagnosis.
+Applying imaging for this purpose would not require any extra data collection, as it is already conducted for differential diagnosis.
 Moreover, a baseline scan is easier for patients to undergo than a scan once their disease has progressed, due to the physical limitations of progressed MND .
 
 % Combingin with clinical data is a good idea because there is already good evidence of clinical prognostic factors, and imaging could add to this in a data driven way
 Since MND is multifactorial and complex, investigating the value of all of the available data collected clinically for prognosis is a logical step.
 Clinical prognostic factors for MND are well established~\cite{suPredictorsSurvivalPatients2021}, but prognostic factors derived from imaging data are less well understood~\cite{bedeLessonsALSImaging2014}.
-Combining these known clinical factors with imaging data could provide a more accurate prognosis than using clinical or imaging factors alone, and could reveal or corroborate new prognostic factors that are not yet known.
+Combining these known clinical factors with imaging data could provide a more accurate prognosis than using clinical or imaging factors alone, and could reveal new or corroborate existing prognostic factors.
 ML techniques, especially deep learning, are well suited to this task because they are designed to find complex patterns in large datasets that traditional statistical methods may miss.
 
 %\begin{itemize}
@@ -107,11 +107,11 @@ ML techniques, especially deep learning, are well suited to this task because th
 The aims of this project are as follows:
 
 \begin{enumerate}[label=Aim \arabic*:]
-    \item To identify factors that are associated with MND prognosis and assess the value of imaging in survival analysis.
+    \item To identify factors that are associated with MND prognosis, both clinical and imaging, through survival analysis.
     \item To search the literature for multimodal data fusion methods and compare their performance on MND prognosis prediction with clinical and imaging-derived features.
-    \item To investigate the added value of different imaging modalities and preprocessing methods, such as sub-region segmentation, texture analysis, and whole brain analysis, in multimodal data fusion for MND prognosis prediction.
+    \item To investigate the added value of different imaging modalities and preprocessing methods for MND prognosis prediction.
     \item To develop the optimal multimodal data fusion model further by adding the capability to include more data modalities, such as fluid biomarkers and natural language processing (NLP) from radiological reports.
-    \item To assess how the performance of the proposed prognostic model compares to existing models and clinical prognostic factors, and to assess its suitability to different prognostic tasks, such as stratifying patients for clinical trials or predicting treatment needs.
+    \item To assess how the performance of the proposed prognostic model compares to existing models and clinical prognostic factors, and to assess its suitability to different prognostic tasks.
 \end{enumerate}
 
 

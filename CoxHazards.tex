@@ -4,12 +4,12 @@
 \section{Introduction}
 
 Many of the clinical and imaging features that were found to be associated with survival in Chapter~\ref{literature_review} were found using the Cox proportional hazards (CPH) model.
-CPH is a survival analysis model that is used to investigate the relationship between the time to an event and the factors that may influence it.
-As a first step in my investigation into the predictive power of clinical and imaging features in MND, I used a CPH model to investigate the relationship between time to death and baseline clinical and neuroimaging features.
+CPH is a survival analysis model that is used to investigate relationships between the time to an event and the factors that may influence it.
+As a first step in my investigation into the predictive power of clinical and imaging features in MND, I used a CPH model to investigate the relationship between time to death and baseline clinical and neuroimaging data.
 
-Previously, Querin and colleagues used a multivariable CPH to compare the predictive power of clinical and spinal cord imaging features in ALS in a cohort of 49 ALS patients, and concluded that spinal MRI measures were more predictive than clinical measures~\cite{querinSpinalCordMultiparametric2017}.
+% Previously, Querin and colleagues used a multivariable CPH to compare the predictive power of clinical and spinal cord imaging features in ALS in a cohort of 49 ALS patients, and concluded that spinal MRI measures were more predictive than clinical measures~\cite{querinSpinalCordMultiparametric2017}.
 In this chapter, univariable, unimodal multivariable, and multimodal multivariable CPH models were used to investigate the relationship between the time to death and the clinical and imaging features in a larger cohort of 125 MND patients.
-The aim of this analysis was to see how multimodal data affects survival analysis of MND, and to see if the imaging features were more predictive than the clinical features, as Querin and colleagues found.
+The aim of this analysis was to see how multimodal data affects survival analysis of MND, and to see if the imaging features were more predictive than the clinical features, as Querin and colleagues found in their CPH of spinal imaging features~\cite{querinSpinalCordMultiparametric2017}.
 
 \section{Data}
 
@@ -26,12 +26,12 @@ These features were chosen for their clinical relevance to survival in MND and t
 Patients were excluded if they did not have a T1- or T2-weighted MRI within 12 months before or after an MND diagnosis.
 Regional brain volumes were extracted from the MRI using SynthSeg~\cite{billotSynthSegDomainRandomisation2021}, a modality-agnostic deep-learning segmentation tool.
 A modality agnostic tool was chosen to overcome the inconsistency in MRI protocols within the ALS Biomarkers Study and between the ALS Biomarkers Study and Ospedale San Raffaele's MND cohort.
-The dimensionality of the 33 regions was reduced to 12 by summing right and left regions and choosing regions relevant to MND pathology.
+The 33 resulting regional volumes were reduced to 12 by summing right and left regions relevant to MND pathology.
 The remaining regions were z-score normalised.
 
 \begin{table}
 \centering
-\caption{Demographics and clinical characteristics of the patients included in the analysis. ALSFRS-R: ALS Functional Rating Scale-Revised.}
+\caption[Demographics and clinical characteristics of the patients included in the Cox proportional hazards model analysis.]{Demographics and clinical characteristics of the patients included in the analysis. \textbf{Acronyms:} ALS = amyotrophic lateral sclerosis, ALSFRS-R = amyotrophic lateral sclerosis functional rating scale - revised.}
 \label{tab:coxdemographics}
 \begin{tabular}{|ll|}
 \hline
@@ -75,7 +75,7 @@ The hazard ratios (HRs) are represented as $\beta$, with $\beta_1$ being the haz
 A HR larger than 1 indicates the variable is associated with a poorer prognosis, or increased risk of the event, which is death.
 The assumption of proportional hazards is that each individual in the analysis has the same hazard function, but the hazard functions are scaled by a constant factor, which is not dependent on time.
 The Python package, lifelines, was used to implement the CPH models and to test the proportional hazards assumption~\cite{davidson-pilonLifelinesSurvivalAnalysis2019}.
-Since the aim of this analysis was to see how multimodal data affects survival analysis of MND, four models were run:
+Four models were run to assess how multimodal data affects survival analysis of MND:
 \begin{enumerate}
 \setlength\itemsep{-0.5em}
     \item \textbf{Univariable model}: each feature was tested individually to see if it was associated with survival without adjusting for other features.
@@ -97,15 +97,15 @@ The quality of models fit to the data was assessed using the concordance index, 
 \input{tables/coxtables}
 
 Table~\ref{tab:allfeatures_cox} shows the HRs, confidence intervals, and significance $p$ values of the features in the univariable CPH, multivariable clinical CPH, multivariable imaging CPH, and multivariable multimodal CPH.
-The significantly harmful univariable factors were an older age of diagnosis (HR=1.48), co-presence of FTD (HR=1.58), having ALS MND (HR=2.40), and larger volumes in CSF (HR=1.40) and lateral ventricles (HR=1.58).
-Significantly protective factors included higher baseline ALSFRS-R (HR=0.70), a longer diagnostic delay (0.77), and larger volumes in the brain stem (HR=0.66), hippocampus (HR=0.59), amygdala (HR=0.59), thalamus (HR=0.78), caudate (HR=0.77), putamen (HR=0.72), pallidum (HR=0.75) and cerebellum cortex (HR=0.71).
+The significantly harmful univariable factors were an older age of diagnosis, co-presence of FTD, having the ALS MND subtype, and larger volumes in CSF and lateral ventricles.
+Significantly protective factors included higher baseline ALSFRS-R, a longer diagnostic delay, and larger volumes in the brain stem, hippocampus, amygdala, thalamus, caudate, putamen, pallidum and cerebellum cortex.
 The only features included that did not significantly affect survival were sex, bulbar site of onset, cerebral white matter volume, cerebellum white matter volume, and cerebral cortex volume.
 
 
 \subsection{Multivariable}
 
 \subsubsection{Clinical}
-The multivariable clinical CPH results found that baseline ALSFRS-R was a significant protective factor (HR=0.62), and ALS MND and older age at diagnosis were significantly harmful (HRs of 1.96 and 1.53).
+The multivariable clinical CPH results found that baseline ALSFRS-R was a significant protective factor, and ALS MND and older age at diagnosis were significantly harmful.
 Diagnostic delay and co-presence of FTD were no longer significant in the multivariable CPH.
 
 The proportional hazards assumptions were broken by age at diagnosis ($p=0.002$) and diagnostic delay ($p=0.038$).
@@ -115,7 +115,8 @@ This fixed the broken proportional hazards assumptions and the same factors rema
 
 
 \subsubsection{Imaging}
-The multivariable imaging CPH resulted in three significant survival factors: lateral ventricles (harmful, HR=1.52), cerebral white matter (harmful, HR=2.35), and caudate (protective, HR=0.62).
+The multivariable imaging CPH resulted in three significant survival factors.
+Harmful factors were larger volumes of lateral ventricles and cerebral white matter, whereas larger caudate volume was protective.
 However, the cerebral white matter and CSF variables broke the CPH assumptions ($p=0.0325$ and $0.005$ respectively).
 
 When only the univariably-significant imaging factors were input into a multivariable CPH, more factors were significantly associated with survival, shown in Table~\ref{tab:unieatures_cox}.
@@ -129,13 +130,13 @@ Screening input variables by their univariable significance resulted in a CPH th
 Higher baseline ALSFRS-R (HR=0.69) and larger amygdala volume (HR=0.62) were significantly protective, and ALS MND (HR=2.11) and larger lateral ventricle volume (HR=1.56) were significantly harmful.
 
 Table~\ref{tab:coxfitmetrics} shows the metrics of model fit for the multivariable CPH models.
-The multimodal multivariable models produced the best fit metrics when all models were considered, as well as when only the univariable-screened models and the ''all variable" models were considered.
+The multimodal multivariable models produced the best fit metrics when all variables were considered, as well as when only the univariable-significant variables were considered.
 
 \section{Discussion}
 
 The analysis revealed that clinically significant factors were largely consistent with established literature.
 However, it was unexpected that bulbar onset did not exhibit a significant association with survival, despite its typical association with poorer prognosis in MND.
-Although the sample size was representative~\cite{feldmanAmyotrophicLateralSclerosis2022}, the categorising patients as having bulbar or non-bulbar onset may have obscured the relationship between site of onset and survival, as respiratory-onset patients were included in the non-bulbar category and typically exhibit a poorer prognosis than bulbar-onset patients~\cite{suPredictorsSurvivalPatients2021}.
+Categorising patients as having bulbar or non-bulbar onset may have obscured the relationship between site of onset and survival, as respiratory-onset patients were included in the non-bulbar category and typically exhibit a poorer prognosis than bulbar-onset patients~\cite{suPredictorsSurvivalPatients2021}.
 %The univariably-significant clinical factors in this analysis were generally consistent with the existing literature.
 %However, having a bulbar site of onset was not significantly associated with survival, which was surprising, as bulbar onset is often associated with a poorer prognosis in MND and was found to be significant in a meta-analysis of survival factors~\cite{suPredictorsSurvivalPatients2021}.
 %27.2\% of the patients in this analysis had a bulbar site of onset, which is consistent with the general MND population~\cite{feldmanAmyotrophicLateralSclerosis2022}, so it is unlikely that the lack of significance was due to a small sample size or a biased sample.
@@ -144,12 +145,12 @@ Although the sample size was representative~\cite{feldmanAmyotrophicLateralScler
 %Although, Papaiz and colleagues found that indications of respiratory involvement were less informative to predicting survival than bulbar onset in their machine learning study~\cite{papaizEnsembleimbalancebasedClassificationAmyotrophic2024}.
 Future work could investigate the relationship between the site of onset and survival in MND by using a more granular categorisation of the site of onset, such as bulbar, respiratory, and limb onset.
 
-However, in general, a univariable model was not the ideal model for survival analysis of a multi-factorial disease like MND, as it did not account for the relationships between features that could be influencing survival.
+In general, a univariable model is not the ideal model for survival analysis of a multi-factorial disease like MND, as it does not account for the relationships between features that could be influencing survival.
 
 \begin{figure}
     \centering
     \includegraphics[width=0.75\linewidth]{figures/clinical_correlation}
-    \caption{Correlation between the clinical features input into the Cox proportional hazards survival model, as calculated by Pearson's correlation coefficient.}
+    \caption[Correlations between the clinical variables of $n=125$ MND patients, as calculated by Pearson's correlation coefficient.]{Correlations between the clinical variables of $n=125$ MND patients, as calculated by Pearson's correlation coefficient. \textbf{Acronyms:} FTD = frontotemporal dementia, ALS = amyotrophic lateral sclerosis, ALSFRS-R = amyotrophic lateral sclerosis functional rating scale - revised.}
     \label{fig:clinicalcorrelation}
 \end{figure}
 
@@ -157,12 +158,12 @@ However, in general, a univariable model was not the ideal model for survival an
 %This approach is not without controversy, as it was possible that features that were not significant univariably could be significant in the multivariable model.
 %However, we did not find this to be the case in our analysis, since the screened imaging and multimodal models resulted in more significant features than the unscreened models.
 The multivariable models initially violated proportional hazards assumptions, rectified by screening input variables based on their univariable significance.
-While this method may be controversial due to the potential significance of univariate features in multivariate models, our analysis found the screened imaging and multimodal models to yield more significant features than unscreened ones.
+While this method may be controversial due to the potential significance of non-significant univariable features in multivariate models, our analysis found the screened imaging and multimodal models yielded more significant features than unscreened ones.
 
 The multivariable imaging model revealed unexpected findings, including harmful effects associated with larger cerebral white matter and thalamus volumes.
 In contrast, the univariable analysis showed protective effects of larger thalamus volume and no significant association with survival for larger cerebral white matter volume.
-Additionally, previous studies indicate that thalamic atrophy may suggest faster disease progression, though not necessarily linked to survival~\cite{sendaStructuralMRICorrelates2017,dieckmannCorticalSubcorticalGrey2022}.
-High correlations among regional brain volumes exacerbate collinearity issues, potentially leading to unstable coefficient estimates and variable effects.
+Additionally, previous studies indicated that thalamic atrophy suggested faster disease progression, though not necessarily linked to survival~\cite{sendaStructuralMRICorrelates2017,dieckmannCorticalSubcorticalGrey2022}.
+High correlations among regional brain volumes exacerbated collinearity issues, potentially leading to unstable coefficient estimates and variable effects.
 One approach to address collinearity is dimensionality reduction, such as principal component analysis (PCA), as employed by Westeneng and colleagues to group brain regions before survival analysis~\cite{westenengSubcorticalStructuresAmyotrophic2015}.
 %
 %The multivariable imaging model resulted in some clinically unintuitive results, such as reported significantly harmful effects of larger cerebral white matter volume and larger volume of the thalamus.
@@ -177,7 +178,7 @@ One approach to address collinearity is dimensionality reduction, such as princi
 Diagnostic delay and FTD lost significance in the multivariable clinical model (both screened and unscreened) when age at diagnosis was included, possibly due to correlations among clinical features, shown in Figure~\ref{fig:clinicalcorrelation}.
 %This lost significance could be explained by the correlations in the clinical features, shown in Figure~\ref{fig:clinicalcorrelation} as heatmap of Pearson's correlation coefficients.
 For instance, age at diagnosis was strongly positively correlated with FTD, leading to its loss of significance in the presence of age at diagnosis, which remained significant.
-Similarly, diagnostic delay, most negatively correlated with ALS MND, lost significance despite its univariate significance.
+Similarly, diagnostic delay, most negatively correlated with ALS MND, lost significance despite its univariable significance.
 
 
 %In multivariable models, correlated features are less likely to be significant because their effect has already been accounted for by the significant features.
@@ -237,7 +238,7 @@ The collinearity of the brain volumes introduced instability into the model.
 The summing of the left and right regions was done to mitigate this, but this could have also introduced information loss if the left and right regions were not equally important to survival.
 Future work to mitigate this further would be to implement dimensionality reduction techniques before inputting the brain volumes into the model.
 
-Finally, the univariable screening of the features could have introduced bias into the model, as features that are not significant univariably are significant in the multivariable model.
+Finally, the univariable screening of the features could have introduced bias into the model, as features that are not significant univariably could have been significant in the multivariable model.
 Although we did not find this to be the case, there are other ways to attempt to fix the proportional hazards assumption, such as using time-dependent covariates or stratifying the model by a variable, and there are other ways to screen the features, such as using a LASSO regression to select the most important features.
 
 %Take home message:

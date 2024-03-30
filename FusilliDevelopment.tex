@@ -20,8 +20,8 @@ Moreover, the types of models used in multimodal data fusion can vary widely, fr
 %There have been systematic reviews on the topic of data fusion that compare models, but only qualitatively~\cite{cuiDeepMultimodalFusion2022, gaoSurveyDeepLearning2020, stahlschmidtMultimodalDeepLearning2022, yanDeepMultiviewLearning2021}.
 %Therefore, with limited knowledge from literature on the best models for MND data, it is important to experiment with a wide variety of models to find the best one for the task.
 
-My PhD investigates multimodal data fusion for predicting MND prognosis, an area with minimal deep learning research~\cite{pancottiDeepLearningMethods2022, mullerExplainableModelsDisease2021} and only one model specially created for deep-learning based multimodal data fusion~\cite{vanderburghDeepLearningPredictions2017}.
-Despite systematic reviews on the topic attempting qualitative comparison between models in many areas of applications~\cite{cuiDeepMultimodalFusion2022, gaoSurveyDeepLearning2020, stahlschmidtMultimodalDeepLearning2022, yanDeepMultiviewLearning2021}, a lack of quantitative comparison necessitates experimentation with many models from other fields to identify the most effective for MND prognosis prediction.
+My PhD investigates predicting MND prognosis, an area with minimal deep learning research~\cite{pancottiDeepLearningMethods2022, mullerExplainableModelsDisease2021} and only one model specially created for deep-learning based multimodal data fusion~\cite{vanderburghDeepLearningPredictions2017}.
+Despite systematic reviews on multimodal data fusion attempting qualitative comparison between models in many areas of applications~\cite{cuiDeepMultimodalFusion2022, gaoSurveyDeepLearning2020, stahlschmidtMultimodalDeepLearning2022, yanDeepMultiviewLearning2021}, a lack of quantitative comparison necessitates experimentation with many models from other fields to identify the most effective for MND prognosis prediction.
 
 %Obtaining this wide variety of models to experiment with, however, is not a straightforward process for a number of reasons.
 %Firstly, the terminology used to describe what I have chosen to call ''multimodal data fusion'' varies widely, with terms such as but not limited to multi-view, cross-heterogeneous, multi-source, and integrated learning.
@@ -30,11 +30,11 @@ Despite systematic reviews on the topic attempting qualitative comparison betwee
 Acquiring a diverse range of models for experimentation is made difficult by the use of inconsistent terminology and the common unavailability of maintained, quality code provided alongside studies.
 
 A way to address these problems is to create a curated collection of models for somebody interested in multimodal data fusion to consult.
-As far as I am aware, there are three Python packages that house collections of deep learning based data fusion models: ''Multi-view-AE''~\cite{aguilaMultiviewAEPythonPackage2023}, ''CCA-Zoo''~\cite{chapmanCCAZooCollectionRegularized2021}, and ''pytorch-widedeep''~\cite{zaurinPytorchwidedeepFlexiblePackage2023}.
-However, each of these packages only includes models with specific frameworks (autoencoders, CCA, and Google's ''wide and deep'' models, respectively), which limits the variety of models available for comparison.
+As far as I am aware, there are three Python packages that house collections of deep learning based data fusion models: ``Multi-view-AE''~\cite{aguilaMultiviewAEPythonPackage2023}, ``CCA-Zoo''~\cite{chapmanCCAZooCollectionRegularized2021}, and ``pytorch-widedeep''~\cite{zaurinPytorchwidedeepFlexiblePackage2023}.
+However, each of these packages only includes models with specific frameworks (autoencoders, CCA, and Google's ``wide and deep'' models, respectively), which limits the variety of models available for comparison.
 
 Therefore, I aimed to develop a Python package for training and comparing multimodal data fusion models with any architecture.
-This Python package is named Fusilli, as a portmanteau of ''fuse easily''.
+This Python package is named Fusilli, as a portmanteau of ``fuse easily''.
 Fusilli works by taking the user's multimodal data and training it on a variety of models, and then comparing the models' performances.
 
 \section{Development and Implementation}
@@ -52,7 +52,6 @@ Testing, which is the process of writing code to check that the package works as
 
 \noindent\textbf{Beginner-friendly and expert-friendly}:  Fusilli should be beginner-friendly, with users able to compare the different models without needing expertise in deep learning or Python programming.
 This would make it different from other similar packages, which require the user to set up their own experiments.
-
 On the other hand, Fusilli should also be expert-friendly, with users who are more capable of being able to change the training parameters, modify the models, and access the trained models for further experiments.
 
 \vspace{0.3cm}
@@ -111,7 +110,7 @@ Figure~\ref{fig:fusilli_taxonomy} is a diagram taken from the review, which show
 
 \begin{table}
     \centering
-    \caption{Descriptions of data fusion model categories used in Fusilli, first proposed by Cui and colleagues~\cite{cuiDeepMultimodalFusion2022}.}
+    \caption[Descriptions of data fusion model categories used in Fusilli.]{Descriptions of data fusion model categories used in Fusilli, first proposed by Cui and colleagues~\cite{cuiDeepMultimodalFusion2022}.}
     \label{tab:fusilli_taxonomy}
     \begin{tabular}{|p{0.25\textwidth}p{0.7\textwidth}|}
         \hline
@@ -137,7 +136,7 @@ Figure~\ref{fig:fusilli_taxonomy} is a diagram taken from the review, which show
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{figures/cui_diagram}
-    \caption{Cui and colleagues' diagram of the architecture-based taxonomy of multimodal data fusion models used in Fusilli~\cite{cuiDeepMultimodalFusion2022}.}
+    \caption[Diagrams of the categories of the multimodal fusion models in Fusilli.]{Cui and colleagues' diagram of the architecture-based taxonomy of multimodal data fusion models used in Fusilli~\cite{cuiDeepMultimodalFusion2022}.}
     \label{fig:fusilli_taxonomy}
 \end{figure}
 
@@ -146,14 +145,11 @@ Figure~\ref{fig:fusilli_taxonomy} is a diagram taken from the review, which show
 Another common categorisation is ''early'', ''intermediate'', and ''late'' fusion, which refers to the point in the model where the data is fused.
 However, this categorisation is too simplistic for the variety of model architectures in Fusilli, and so the architecture-based taxonomy was chosen.
 
-More models were found in the literature than were included in Fusilli due to the time constraints of the project, but the models included in Fusilli were chosen based on their popularity, availability of code, and the variety of architectures they represent.
-Moreover, unimodal benchmarks were included in Fusilli to allow for comparison between the multimodal models and unimodal models.
-
 \begin{table}[!ht]
-    \caption{A list of the models included in Fusilli v1.2.3, categorised by their fusion method and modalities.
-    References are included where applicable, although the Fusilli implementation is not a direct copy of the referenced model, and may have been modified to fit the package's requirements.
+    \caption[The models included in Fusilli $v1.2.3$, categorised by their fusion method and modalities.]{The models included in Fusilli $v1.2.3$, categorised by their fusion method and modalities.
+    References are included where applicable. The Fusilli implementation is not a direct copy of the referenced model, and may have been modified to fit the package's requirements.
     \textbf{Acronyms}: GNN = Graph Neural Network, MCVAE = Multi-Channel Variational Autoencoder.}
-    \label{}
+    \label{tab:fusillimodelslist}
     \centering
     \begin{tabular}{|p{8cm}ll|}
         \hline
@@ -182,6 +178,12 @@ Moreover, unimodal benchmarks were included in Fusilli to allow for comparison b
     \end{tabular}
 \end{table}
 
+More models were found in the literature than were included in Fusilli due to the time constraints of the project, but the models included in Fusilli were chosen based on their popularity, availability of code, and the variety of architectures they represent.
+Moreover, unimodal benchmarks were included in Fusilli to allow for comparison between the multimodal models and unimodal models.
+Table~\ref{tab:fusillimodelslist} shows the models implemented in Fusilli, along with their fusion categories and references.
+
+
+
 \section{Results}
 
 Fusilli version 1.0.0 was published on 30th November 2023 and has since been updated to version 1.2.3~\cite{townendFlorencejtFusilliFusilli2024}.
@@ -196,10 +198,10 @@ The page ''Fusion Model Explanations'', partly shown in Figure~\ref{fig:fusillid
 \begin{figure}
     \centering
     \includegraphics[width=1\linewidth]{figures/fusilli_documentation}
-    \caption{Overview of the Fusilli documentation. \\
+    \caption[Overview of the Fusilli documentation.]{Overview of the Fusilli documentation. \\
     \textbf{A}: The home page of the documentation, showing the logo and the diagram explaining Fusilli's purpose.\\
-    \textbf{B}: Two examples of the fusion model explanations, complete with diagram and description with reference to source paper. \\
-    \textbf{C}: The sidebar of the Fusilli documentation showing all the pages available.
+    \textbf{B}: Two examples of the fusion model explanations, complete with diagram and description with reference to the source paper, where applicable. \\
+    \textbf{C}: The sidebar of the Fusilli documentation showing all the pages available, categorised into pages on getting started, further guidance for advanced users, tutorials on how to use Fusilli, guidance on contributing and templates for adding models, and the API references with explanations of the source code.
     }
     \label{fig:fusillidocs}
 \end{figure}
@@ -213,7 +215,7 @@ Additionally, if the user trains a regression model, the performance evaluation 
 \begin{figure}
     \centering
     \includegraphics[width=1\linewidth]{figures/fusilli_outputs}
-    \caption{Fusion model training, evaluation, and comparison figures output by Fusilli. \\
+    \caption[Fusion model training, evaluation, and comparison figures output by Fusilli.]{Fusion model training, evaluation, and comparison figures output by Fusilli. \\
     \textbf{A}: The training and validation loss curves for an individual model.\\
     \textbf{B}: Performance evaluation of a model which was trained on a binary task with 5-fold cross validation. Both the validation performances of each fold and the overall performance from the aggregated folds are shown. \\
     \textbf{C}: Comparison of the models' performances on the validation data. The violin plot distributions are the distributions of the fold performances when using k-fold cross validation. If train-test split training is used, the comparison figure is a bar chart.

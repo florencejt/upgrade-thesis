@@ -5,7 +5,7 @@
 
 In this upgrade thesis, I have outlined the work I have done so far in my PhD: explored survival analysis in MND, developed a Python library called Fusilli for comparing multimodal machine learning methods, and applied Fusilli to MND data for prognosis prediction.
 
-\subsection{Cox model}
+\subsection{Cox proportional hazards}
 
 Chapter~\ref{cox_proportional_hazards_model} showed the application of a Cox proportional hazards model to multimodal MND data, comprised of baseline clinical features and brain region volumes extracted from structural MRI.
 To my knowledge, combining clinical and MRI-derived features in survival analysis for MND has only been done in one paper~\cite{querinSpinalCordMultiparametric2017}, which used spinal cord MRI data and a smaller sample size.
@@ -16,7 +16,7 @@ The addition of MRI data to clinical information caused a change in the relevanc
 In contrast, depending simply on MRI data produced clinically unusual outcomes.
 The implications of these findings highlighted the importance of combining imaging data with clinical information for more meaningful survival analysis in MND.
 
-\subsection{Fusilli}
+\subsection{Fusilli development}
 
 In Chapter~\ref{fusilli_development}, I showcased Fusilli, my Python library for easy comparison of multimodal data fusion methods, and the steps in its development.
 Fusilli is an open-source project, and therefore released for anybody to use in their personal and professional projects.
@@ -26,7 +26,7 @@ Fusilli was received with interest by the machine learning community, and I have
 
 For my future PhD chapters, using Fusilli will greatly speed up my analysis and experimentation.
 
-\subsection{Fusilli with MND data}
+\subsection{Fusilli for MND prognosis prediction}
 
 My first experimentation with Fusilli for MND prognosis prediction is shown in Chapter~\ref{fusilli_on_mnd}.
 The experiment consisted of using baseline clinical data and extracted brain region volumes to predict whether a patient with survive for more or less than 24 months from diagnosis.

@@ -12,8 +12,8 @@ The aims of this work were to, firstly, assess the effect of different data fusi
 
 \section{Data}
 
-The data used in this analysis is from two studies: University College London Queen's Square Institute of Neurology's ALS Biomarkers Study~\cite{UKMNDCSG} and Ospedale San Raffaele's MND cohort.
-Both of these datasets contain clinical data from the diagnostic visit and brain MRI data.
+The data used in this analysis was from two studies: University College London Queen's Square Institute of Neurology's ALS Biomarkers Study~\cite{UKMNDCSG} and Ospedale San Raffaele's MND cohort.
+Both of these datasets contained clinical data from the diagnostic visit and brain MRI data.
 
 For patients to be included in the analysis, they must have received a diagnosis of MND and had an outcome of interest (death or tracheostomy).
 In the ALS Biomarkers Study, the outcome of interest was death, whereas in the Ospedale San Raffaele's MND cohort, the outcome of interest was death or tracheostomy.
@@ -22,14 +22,13 @@ Unfortunately, the Ospedale San Raffaele's MND cohort did not specify the date o
 Patients in this analysis must have had non-missing data for age at diagnosis, sex, date of diagnosis, date of death, date of symptom onset, site of onset, and baseline ALSFRS-R .
 Additionally, patients must have had a T1-weighted or T2-weighted MRI within 12 months before or after their date of diagnosis.
 
-The final dataset contained 110 MND patients.
-The patients in the cohort were split into two groups based on the median survival time: short survival group (less than 24 months) and long survival group (more than 24 months).
+The final dataset contained 110 MND patients split into two groups based on the median survival time: short survival group (less than 24 months) and long survival group (more than 24 months).
 The median was used, rather than a clinically relevant cut-off, as the sample size was small and having balanced classes reduces the risk of overfitting.
-Moreover, the median survival time in our data of 24 months is a reasonable cut-off for short and long survival in MND~\cite{feldmanAmyotrophicLateralSclerosis2022}.
+Moreover, 24 months was a reasonable cut-off for short and long survival in MND~\cite{feldmanAmyotrophicLateralSclerosis2022}.
 
 \subsection{Clinical Data}
 
-The clinical variables chosen to be included in the analysis are based on the variables used in the ENCALS model~\cite{westenengPrognosisPatientsAmyotrophic2018}.
+The clinical variables chosen to be included in the analysis were based on the variables used in the ENCALS model~\cite{westenengPrognosisPatientsAmyotrophic2018}.
 El Escorial criteria and FVC were not included in the analysis as they were not available in the Ospedale San Raffaele's MND cohort.
 Features with missing data after applying the inclusion criteria were the co-presence of FTD and the C9orf72 mutation.
 Where these features were missing, they were assumed to be negative.
@@ -38,8 +37,8 @@ Moreover, where the MND type was missing, it was assumed to be ALS, as it is the
 
 \begin{table}
     \centering
-    \caption{Differences in clinical demographics between the long and short survival groups. PRB is progression rate to baseline, calculated as the rate of decline of ALSFRS-R between symptom onset and diagnosis.\\
-    *Chi-square test, \textdagger Fisher's exact test, $\ddagger$ Two-sample t-test.}
+    \caption[Demographic and clinical differences between long and short motor neuron disease survival groups.]{Motor neuron disease patients who survive for over 24 months from diagnosis had significantly smaller rates of FTD (frontotemporal dementia), longer diagnostic delays, younger ages of diagnosis, and slower PRBs (progression rates to baseline) of their ALSFRS-R (amyotrophic lateral sclerosis functional rating scale - revised).\\
+    *Chi-square test, $\ddagger$ Two-sample t-test, \textdagger Fisher's exact test.}
     \label{tab:clinical_demographics}
     \begin{tabular}{|p{4.3cm}|llll|}
     \hline
@@ -63,9 +62,8 @@ Moreover, where the MND type was missing, it was assumed to be ALS, as it is the
 
 \begin{table}
     \centering
-    \caption{Differences in clinical demographics between the two data sites: the ALS Biomarkers Study from University College London and Ospedale San Raffaele.
-    PRB is progression rate to baseline, calculated as the rate of decline of ALSFRS-R between symptom onset and diagnosis.\\
-    *Chi-square test, \textdagger Fisher's exact test, $\ddagger$ Two-sample t-test.}
+    \caption[Demographic and clinical differences between motor neuron disease patients in the ALS Biomarkers Study from University College London and Ospedale San Raffaele.]{Statistical differences in clinical demographics between the two data sets for Fusilli analysis: the ALS Biomarkers Study from University College London and Ospedale San Raffaele. Motor neuron disease patients from Ospedale San Raffaele showed significantly less severe clinical presentation in their PRB (progression rate to baseline), sites of onset, ALSFRS-R (amyotrophic lateral sclerosis functional rating scale - revised), and ages of diagnosis.
+    *Chi-square test, $\ddagger$ Two-sample t-test, \textdagger Fisher's exact test.}
     \label{tab:clinical_demographics_site}
     \begin{tabular}{|p{4.3cm}|llll|}
     \hline
@@ -90,7 +88,7 @@ Moreover, where the MND type was missing, it was assumed to be ALS, as it is the
 
 Table~\ref{tab:clinical_demographics} shows the clinical features included in this analysis and statistical differences between the long and short survival groups.
 The longer survival group had significantly fewer patients with FTD, a longer diagnostic delay, a younger age at diagnosis, and a slower rate of decline in ALSFRS-R .
-These differences are consistent with the literature on factors associated with survival in MND~\cite{suPredictorsSurvivalPatients2021}.
+These differences were consistent with the literature on factors associated with survival in MND~\cite{suPredictorsSurvivalPatients2021}.
 
 
 Table~\ref{tab:clinical_demographics_site} shows the group differences between the two data sites.
@@ -107,11 +105,11 @@ These differences suggested that the cohort from Ospedale San Raffaele had on av
 The same segmentation pipeline used in Chapter~\ref{cox_proportional_hazards_model} was used for this analysis: using SynthSeg to segment MRI conducted within 12 months before or after diagnosis.
 %Regional brain volumes were extracted from the MRI using SynthSeg~\cite{billotSynthSegDomainRandomisation2021}, a modality-agnostic deep-learning segmentation tool.
 %A modality agnostic tool was chosen to overcome the inconsistency in MRI protocols within the ALS Biomarkers Study and between the ALS Biomarkers Study and Ospedale San Raffaele's MND cohort.
-SynthSeg returns the volumes of 33 regions of the brain, which, apart from intra-cranial volume, were used as features in this analysis.
+SynthSeg returns the volumes of 33 regions of the brain, which, apart from intracranial volume, were used as features in this analysis.
 The region volumes were z-score normalised across the entire cohort.
 
 Two-sample t-tests were used to compare the regional brain volumes between the long and short survival groups.
-The left and right volumes were summed to simplify the comparison of regional brain volumes, but were kept separate for the main machine learning analysis.
+The left and right volumes were summed to simplify the comparison of regional brain volumes, but were kept separate for the main ML analysis.
 The long survival group had significantly larger volumes in the cerebellum white matter and cortex, thalamus, caudate, putamen, pallidum, brain stem, hippocampus, amygdala, accumbens area, and ventral diencephalon.
 The short survival group had significantly larger volumes in the cerebrospinal fluid, 3rd ventricle, lateral ventricle, and inferior lateral ventricle.
 
@@ -119,15 +117,15 @@ The short survival group had significantly larger volumes in the cerebrospinal f
 \section{Methods}
 
 We predicted categories of survival, short or long, by splitting the survival time at the median.
-The models used in this analysis are from Fusilli, a software package developed in Chapter~\ref{fusilli_development}, to compare the performance of different multimodal data fusion methods~\cite{townendFlorencejtFusilliFusilli2024}.
-We trained the models that do tabular-tabular fusion, meaning that they take two tabular datasets and combine them to predict the outcome.
+The models used in this analysis are from Fusilli, a software package developed in Chapter~\ref{fusilli_development}~\cite{townendFlorencejtFusilliFusilli2024}.
+We trained the tabular-tabular fusion model, meaning that they take two tabular datasets and combine them to predict the outcome.
 There are 10 of these models in Fusilli, but we could not use the two graph-based models because the current version of Fusilli does not allow graph-based models to use held-out test sets, which was part of this analysis design.
 The architecture diagrams of the models are in Appendix~\ref{appendix:fusion_model_architectures}.
 Unimodal models were also trained as a benchmark for the multimodal models to investigate the added value of the multimodal data.
 
 \begin{table}
 \centering
-\caption{Tabular-tabular fusion models used in this analysis, implemented using Fusilli.}
+\caption{The eight fusion models used for predicting survival categories in motor neuron disease patients, implemented in Fusilli for combining two tabular modalities.}
 \begin{tabular}{|p{4cm}|p{7cm}|l|}
 \hline
 \textbf{Fusion Model} & \textbf{Description} & \textbf{Diagram} \\
@@ -181,14 +179,13 @@ After the repetition performances converged, the models were compared by using t
     \centering
     \hspace*{-2cm}
     \includegraphics[width=1.2\linewidth]{figures/both_sites_together_balanced_accuracy_violin}
-    \caption{Balanced accuracies of test set and validation set when sites trained together.
-    Models were ranked from best to worst by their mean balanced accuracy on the test set.}
+    \caption[Distributions of balanced accuracies of test sets and validation sets on predicting short versus long survival in motor neuron disease patients from both datasets: ALS Biomarkers Study and Ospedale San Raffaele.]{Early Concatenation was the best performing model on a held-out test set for predicting short versus long survival in motor neuron disease patients. Distributions of balanced accuracies of test set (left) and validation set (right) when data from ALS Biomarkers Study and Ospedale San Raffaele was pooled to form the train and test sets, ranked from best to worst. The distributions were formed of the aggregated K-fold cross validation test metrics for the stability repetitions. \textbf{Acronyms:} VAE = variational autoencoder.}
     \label{fig:trainedtogetherviolin}
 \end{figure}
 
 \begin{table}[h]
 \centering
-\caption{Means and standard deviations of test metrics over repetitions of training on both sites. Bold is the best metric model.}
+\caption[Performance metrics on predicting short versus long survival in motor neuron disease patients from both datasets: ALS Biomarkers Study and Ospedale San Raffaele.]{Means and standard deviations of metrics calculated on the held-out test sets of the stability repetitions. Data from ALS Biomarkers Study and Ospedale San Raffaele was pooled to form the train and test sets. The best performing model within that metric is bolded. \textbf{Acronyms:} AUROC = area under the receiver operating characteristic, VAE = variational autoencoder. } 
 \label{tab:mnd_results}
 \resizebox{\columnwidth}{!}{%
 \begin{tabular}{lrrrrr}
@@ -227,7 +224,7 @@ The precisions of the models were generally higher than the recalls, meaning tha
     \centering
     \hspace*{-2cm}
     \includegraphics[width=1.2\textwidth]{figures/violinplot_site_effect}
-    \caption{Effect of training on one site and testing on the other on the balanced accuracy, precision, and recall of the different models. Ordered by best to worst balanced accuracy of trained together.}
+    \caption[Effect of training on one site and testing on the other on the balanced accuracy, precision, and recall of the different models.]{Models trained on Site 1 (Ospedale San Raffaele) have higher balanced accuracies when tested on Site 2 (ALS Biomarkers Study) than the other way around. Effect of training on one site and testing on the other on the balanced accuracy, precision, and recall of the different models. The models were ordered by their test set balanced accuracies from Figure~\ref{fig:trainedtogetherviolin}. \textbf{Acronyms:} VAE = variational autoencoder.}
     \label{fig:site_effect}
 \end{figure}
 
@@ -243,7 +240,7 @@ The ALS Biomarkers Study-trained models were better at detecting long survivors 
 \begin{figure}
     \centering
     \includegraphics[width=0.9\textwidth]{figures/tsne_plot}
-    \caption{TSNE with two components of the clinical, imaging, and multimodal data, split by survival category to illustrate the separability of the data.}
+    \caption[Two-dimensional representation of the separation between long and short surviving motor neuron disease patients with clinical, imaging, and multimodal data.]{Motor neuron patients surviving \textcolor{red}{more} and \textcolor{blue}{less} than 24 months from diagnosis were not entirely separable when dimensionality-reduced to two components with TSNE (t-distributed Stochastic Neighbor Embedding). The original data was formed of clinical (left), imaging (middle), and multimodal data (right).}
     \label{fig:tsne}
 \end{figure}
 
